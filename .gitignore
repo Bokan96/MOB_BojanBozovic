@@ -73,3 +73,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Voodoo proprietary assets (briefing, references, test docs)
+/[Vv]oodoo [Aa]ssets/
+
+# Luna Playworks build output
+/[Ll]una[Tt]emp/
