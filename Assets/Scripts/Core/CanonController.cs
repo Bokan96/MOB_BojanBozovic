@@ -1,25 +1,37 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // Added for New Input System support
+using UnityEngine.InputSystem;
 
 namespace Core
 {
+    /// <summary>
+    /// Handles the player's canon movement and provides input state for shooting.
+    /// This is the foundation of the player's interaction.
+    /// </summary>
     public class CanonController : MonoBehaviour
     {
         [Header("Movement Settings")]
-        [Tooltip("How fast the canon follows the finger/mouse")]
-        public float moveSpeed = 5f;
-        [Tooltip("Maximum distance from the center on the X axis")]
-        public float limitX = 3f;
+        [Tooltip("How fast the canon slides to follow the pointer")]
+        public float moveSpeed = 15f;
+        [Tooltip("Horizontal clamp limits")]
+        public float limitX = 4f;
 
-        private Camera mainCamera;
-        private bool isDragging = false;
+        [Header("Input State (Read-only)")]
+        [SerializeField] private bool _isPressing = false;
+        
+        private Camera _mainCamera;
+
+        /// <summary>
+        /// Public property to check if the player is currently holding down.
+        /// Other scripts (like Spawner) will check this.
+        /// </summary>
+        public bool IsPressing => _isPressing;
 
         private void Start()
         {
-            mainCamera = Camera.main;
-            if (mainCamera == null)
+            _mainCamera = Camera.main;
+            if (_mainCamera == null)
             {
-                Debug.LogError("Main Camera not found! Make sure your camera is tagged 'MainCamera'.");
+                Debug.LogError("[CanonController] No Main Camera found in scene!");
             }
         }
 
@@ -30,42 +42,32 @@ namespace Core
 
         private void HandleInput()
         {
-            // Check if pointer exists (mouse or touch)
+            // Support for New Input System Pointer (Mouse/Touch)
             if (Pointer.current == null) return;
 
-            // Start/End drag based on pointer press state
-            isDragging = Pointer.current.press.isPressed;
+            _isPressing = Pointer.current.press.isPressed;
 
-            if (isDragging)
+            if (_isPressing)
             {
-                MoveCanon();
+                MoveToPosition(Pointer.current.position.ReadValue());
             }
         }
 
-        private void MoveCanon()
+        private void MoveToPosition(Vector2 screenPosition)
         {
-            // Get screen position from the pointer
-            Vector2 screenPos = Pointer.current.position.ReadValue();
-            
-            // Create a mathematical plane at the canon's Y height, facing upwards
+            // Cast a ray to the ground plane (Y=transform.position.y)
             Plane groundPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
-            
-            // Cast a ray from the camera through the pointer position
-            Ray ray = mainCamera.ScreenPointToRay(screenPos);
+            Ray ray = _mainCamera.ScreenPointToRay(screenPosition);
 
-            // Find where the ray hits the plane
             if (groundPlane.Raycast(ray, out float enter))
             {
-                Vector3 hitPoint = ray.GetPoint(enter);
+                Vector3 worldPoint = ray.GetPoint(enter);
 
-                // We only care about the X position, keep the canon's original Y and Z
-                Vector3 targetPosition = new Vector3(hitPoint.x, transform.position.y, transform.position.z);
-
-                // Clamp the X position so it doesn't fall off the platform
-                targetPosition.x = Mathf.Clamp(targetPosition.x, -limitX, limitX);
-
-                // Smoothly interpolate towards the target position
-                transform.position = Vector3.Lerp(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+                // Smoothly follow the X position
+                float targetX = Mathf.Clamp(worldPoint.x, -limitX, limitX);
+                Vector3 targetPos = new Vector3(targetX, transform.position.y, transform.position.z);
+                
+                transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
             }
         }
     }
