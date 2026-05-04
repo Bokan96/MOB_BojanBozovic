@@ -13,7 +13,7 @@ namespace Core
         public float limitX = 3f;
 
         [Header("Shooting")]
-        // public MobSpawner mobSpawner; // We'll add this back in the next step
+        public Mobs.MobSpawner mobSpawner;
         public Transform shootPoint;
 
         private Camera cam;
@@ -46,10 +46,10 @@ namespace Core
             }
 
             // --- SHOOT ---
-            // if (mobSpawner != null && shootPoint != null)
-            // {
-            //     mobSpawner.TryShoot(shootPoint.position);
-            // }
+            if (mobSpawner != null && shootPoint != null)
+            {
+                mobSpawner.TryShoot();
+            }
         }
     }
 }
