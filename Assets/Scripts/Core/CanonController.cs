@@ -1,74 +1,55 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Core
 {
     /// <summary>
-    /// Handles the player's canon movement and provides input state for shooting.
-    /// This is the foundation of the player's interaction.
+    /// Controls the player's cannon. Handles horizontal movement.
+    /// Hold touch/mouse to move. Release to stop.
     /// </summary>
     public class CanonController : MonoBehaviour
     {
-        [Header("Movement Settings")]
-        [Tooltip("How fast the canon slides to follow the pointer")]
-        public float moveSpeed = 15f;
-        [Tooltip("Horizontal clamp limits")]
-        public float limitX = 4f;
+        [Header("Movement")]
+        public float moveSpeed = 5f;
+        public float limitX = 3f;
 
-        [Header("Input State (Read-only)")]
-        [SerializeField] private bool _isPressing = false;
-        
-        private Camera _mainCamera;
+        [Header("Shooting")]
+        // public MobSpawner mobSpawner; // We'll add this back in the next step
+        public Transform shootPoint;
 
-        /// <summary>
-        /// Public property to check if the player is currently holding down.
-        /// Other scripts (like Spawner) will check this.
-        /// </summary>
-        public bool IsPressing => _isPressing;
+        private Camera cam;
 
         private void Start()
         {
-            _mainCamera = Camera.main;
-            if (_mainCamera == null)
-            {
-                Debug.LogError("[CanonController] No Main Camera found in scene!");
-            }
+            cam = Camera.main;
         }
 
         private void Update()
         {
-            HandleInput();
-        }
+            // Use legacy Input because Luna's web compiler supports it perfectly.
+            // (The New Input System package causes CS0234 errors in Luna builds).
+            bool held = Input.GetMouseButton(0);
 
-        private void HandleInput()
-        {
-            // Support for New Input System Pointer (Mouse/Touch)
-            if (Pointer.current == null) return;
+            if (!held) return;
 
-            _isPressing = Pointer.current.press.isPressed;
+            // --- MOVE ---
+            Vector3 screenPos = Input.mousePosition;
+            Plane plane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
+            Ray ray = cam.ScreenPointToRay(screenPos);
 
-            if (_isPressing)
+            if (plane.Raycast(ray, out float dist))
             {
-                MoveToPosition(Pointer.current.position.ReadValue());
+                Vector3 hit = ray.GetPoint(dist);
+                float targetX = Mathf.Clamp(hit.x, -limitX, limitX);
+                Vector3 pos = transform.position;
+                pos.x = Mathf.Lerp(pos.x, targetX, moveSpeed * Time.deltaTime);
+                transform.position = pos;
             }
-        }
 
-        private void MoveToPosition(Vector2 screenPosition)
-        {
-            // Cast a ray to the ground plane (Y=transform.position.y)
-            Plane groundPlane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
-            Ray ray = _mainCamera.ScreenPointToRay(screenPosition);
-
-            if (groundPlane.Raycast(ray, out float enter))
-            {
-                Vector3 worldPoint = ray.GetPoint(enter);
-
-                // Smoothly follow the X position
-                float targetX = Mathf.Clamp(worldPoint.x, -limitX, limitX);
-                Vector3 targetPos = new Vector3(targetX, transform.position.y, transform.position.z);
-                
-                transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
-            }
+            // --- SHOOT ---
+            // if (mobSpawner != null && shootPoint != null)
+            // {
+            //     mobSpawner.TryShoot(shootPoint.position);
+            // }
         }
     }
 }
