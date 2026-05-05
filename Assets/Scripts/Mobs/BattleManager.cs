@@ -11,6 +11,12 @@ namespace Mobs
     {
         public static BattleManager Instance { get; private set; }
 
+        /// <summary>
+        /// Read-only access to active player mobs. Used by Gate scripts for
+        /// mathematical trigger-zone checks (no physics colliders needed).
+        /// </summary>
+        public System.Collections.Generic.IReadOnlyList<Mob> PlayerMobs => _activePlayerMobs;
+
         public float collisionRadius = 0.6f;
         private float _sqrCollisionRadius;
 

@@ -14,7 +14,7 @@ namespace Mobs
         public Mob mobPrefab;
 
         [Header("Settings")]
-        public int poolSize = 40;
+        public int poolSize = 200; // Increased to support Multiplier Gates
         public int burstCount = 3;
         public float burstSpread = 0.5f;
         public float mobSpeed = 8f;
@@ -39,6 +39,19 @@ namespace Mobs
                 m.gameObject.SetActive(false);
                 _pool.Enqueue(m);
             }
+        }
+
+        /// <summary>
+        /// Public method for Gates (like MultiplierGate and PipeGate) to spawn extra mobs.
+        /// </summary>
+        public Mob SpawnMob(Vector3 position, float speed)
+        {
+            Mob mob = GetMob();
+            if (mob != null)
+            {
+                mob.Activate(position, speed, RecycleMob, isEnemy: false);
+            }
+            return mob;
         }
 
         public bool TryShoot()
