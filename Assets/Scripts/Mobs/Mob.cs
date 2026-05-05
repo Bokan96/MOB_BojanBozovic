@@ -15,7 +15,9 @@ namespace Mobs
         private bool _isEnemy;
         private System.Action<Mob> _onRecycle;
 
-        private const float BOOST_DURATION = 2.5f; // 0.4s of "shot" speed
+        public bool IsActive => _active;
+
+        private const float BOOST_DURATION = 0.4f; // 0.4s of "shot" speed
         private const float MAX_Z = 30f;
 
         public void Activate(Vector3 position, float speed, System.Action<Mob> recycleCallback, bool isEnemy = false)
@@ -29,12 +31,27 @@ namespace Mobs
             _onRecycle = recycleCallback;
             _active = true;
             gameObject.SetActive(true);
+
+            // Register for collision detection
+            if (BattleManager.Instance != null)
+            {
+                BattleManager.Instance.RegisterMob(this, _isEnemy);
+            }
         }
 
         public void Recycle()
         {
+            if (!_active) return; // Prevent double-recycling
+            
             _active = false;
             gameObject.SetActive(false);
+
+            // Unregister from collision detection
+            if (BattleManager.Instance != null)
+            {
+                BattleManager.Instance.UnregisterMob(this, _isEnemy);
+            }
+
             _onRecycle?.Invoke(this);
         }
 
