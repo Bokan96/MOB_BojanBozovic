@@ -44,12 +44,12 @@ namespace Mobs
         /// <summary>
         /// Public method for Gates (like MultiplierGate and PipeGate) to spawn extra mobs.
         /// </summary>
-        public Mob SpawnMob(Vector3 position, float speed)
+        public Mob SpawnMob(Vector3 position, float speed, bool applyBoost = true)
         {
             Mob mob = GetMob();
             if (mob != null)
             {
-                mob.Activate(position, speed, RecycleMob, isEnemy: false);
+                mob.Activate(position, speed, RecycleMob, isEnemy: false, applyBoost: applyBoost);
             }
             return mob;
         }

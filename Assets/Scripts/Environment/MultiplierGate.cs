@@ -65,17 +65,19 @@ namespace Environment
             for (int i = 0; i < multiplierAmount; i++)
             {
                 float offsetX = startX + (i * spacing);
-                // Center the spread exactly on the mob that triggered the gate
-                // This ensures they share the exact same global Y and Z axis!
-                Vector3 spawnPos = mob.transform.position + new Vector3(offsetX, 0f, 0f);
+                // Target global X for this specific mob in the spread
+                float targetGlobalX = mob.transform.position.x + offsetX;
                 
-                // Spawn using the cannon's configured mob speed
-                Mob newMob = mobSpawner.SpawnMob(spawnPos, mobSpawner.mobSpeed);
+                // Spawn without the cannon speed boost, at the EXACT position of the original mob
+                Mob newMob = mobSpawner.SpawnMob(mob.transform.position, mobSpawner.mobSpeed, applyBoost: false);
                 
-                // CRITICAL: Tell the gate to ignore this newly spawned mob so it doesn't 
-                // trigger the gate again and cause an infinite spawning loop!
                 if (newMob != null)
                 {
+                    // Trigger the smooth horizontal spread animation
+                    newMob.ActivateSpread(targetGlobalX);
+
+                    // CRITICAL: Tell the gate to ignore this newly spawned mob so it doesn't 
+                    // trigger the gate again and cause an infinite spawning loop!
                     IgnoreMob(newMob);
                 }
             }

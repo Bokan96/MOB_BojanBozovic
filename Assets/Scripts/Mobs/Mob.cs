@@ -14,23 +14,41 @@ namespace Mobs
         private bool _active;
         private bool _isEnemy;
         private System.Action<Mob> _onRecycle;
+        
+        private Vector3 _baseScale;
+
+        private void Awake()
+        {
+            // Capture the prefab's original scale so we don't force it to Vector3.one
+            _baseScale = transform.localScale;
+        }
+
+        // Spread animation state
+        private bool _isSpreading;
+        private float _spreadTargetX;
+        private float _startSpreadX;
+        private float _spreadTimer;
 
         public bool IsActive => _active;
 
-        private const float BOOST_DURATION = 0.4f; // 0.4s of "shot" speed
+        private const float BOOST_DURATION = 2f;
         private const float MAX_Z = 30f;
 
-        public void Activate(Vector3 position, float speed, System.Action<Mob> recycleCallback, bool isEnemy = false)
+        public void Activate(Vector3 position, float speed, System.Action<Mob> recycleCallback, bool isEnemy = false, bool applyBoost = true)
         {
             transform.position = position;
             _targetSpeed = speed;
-            _currentSpeed = speed * 4f; // Start 3.5x faster for "kick"
+            _currentSpeed = applyBoost ? speed * 4f : speed; // Only boost if shot from cannon
             _lerpTimer = 0f;
+            _isSpreading = false;
 
             _isEnemy = isEnemy;
             _onRecycle = recycleCallback;
             _active = true;
             gameObject.SetActive(true);
+
+            // Start at 0.6x scale for the pop-in effect
+            transform.localScale = _baseScale * 0.6f;
 
             // Register for collision detection
             if (BattleManager.Instance != null)
@@ -55,22 +73,54 @@ namespace Mobs
             _onRecycle?.Invoke(this);
         }
 
+        /// <summary>
+        /// Smoothly slides the mob horizontally to a target global X position while moving forward.
+        /// </summary>
+        public void ActivateSpread(float targetGlobalX)
+        {
+            _isSpreading = true;
+            _spreadTargetX = targetGlobalX;
+            _startSpreadX = transform.position.x;
+            _spreadTimer = 0f;
+        }
+
         private void Update()
         {
             if (!_active) return;
 
-            // Handle speed decay (Fast out of cannon -> Walk speed)
+            // Handle speed decay & scale pop (Fast out of cannon -> Walk speed)
             if (_lerpTimer < BOOST_DURATION)
             {
                 _lerpTimer += Time.deltaTime;
-                // Cubic easing out feels more "shot-like" than a linear Lerp
-                float t = _lerpTimer / BOOST_DURATION;
+                
+                // Cubic easing out for speed
+                float t = Mathf.Clamp01(_lerpTimer / BOOST_DURATION);
                 float easedT = 1f - Mathf.Pow(1f - t, 3f); 
                 _currentSpeed = Mathf.Lerp(_currentSpeed, _targetSpeed, easedT);
+
+                // Scale animation (Linear over 0.2 seconds, from 0.6x to 1.0x)
+                float scaleT = Mathf.Clamp01(_lerpTimer / 0.2f); 
+                float currentScaleMult = Mathf.Lerp(0.6f, 1f, scaleT);
+                transform.localScale = _baseScale * currentScaleMult;
             }
             else
             {
                 _currentSpeed = _targetSpeed;
+                transform.localScale = _baseScale;
+            }
+
+            // Handle Horizontal Spread (from Multiplier Gate)
+            if (_isSpreading)
+            {
+                _spreadTimer += Time.deltaTime;
+                float spreadT = Mathf.Clamp01(_spreadTimer / 0.25f); // 0.25s duration to spread
+                float easedSpreadT = 1f - Mathf.Pow(1f - spreadT, 3f); // Ease out cubic
+                
+                Vector3 pos = transform.position;
+                pos.x = Mathf.Lerp(_startSpreadX, _spreadTargetX, easedSpreadT);
+                transform.position = pos;
+
+                if (spreadT >= 1f) _isSpreading = false;
             }
 
             // Player moves +Z (forward), Enemy moves -Z (backward)

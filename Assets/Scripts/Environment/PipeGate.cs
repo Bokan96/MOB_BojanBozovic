@@ -55,7 +55,8 @@ namespace Environment
                     // 1. Spawn the mob at the end point
                     if (mobSpawner != null)
                     {
-                        Mob newMob = mobSpawner.SpawnMob(pipeEndPoint.position, mobSpawner.mobSpeed);
+                        // Spawn at the exit without the cannon speed boost
+                        Mob newMob = mobSpawner.SpawnMob(pipeEndPoint.position, mobSpawner.mobSpeed, applyBoost: false);
                         if (newMob != null)
                         {
                             // In case the end point is still somehow inside the gate bounds,
