@@ -22,6 +22,7 @@ namespace Mobs
         private MaterialPropertyBlock _mpb;
         private float _timer;
         private int _currentFrame;
+        private float _randomFps;
 
         // Cached for performance
         private static readonly int MainTexST = Shader.PropertyToID("_MainTex_ST");
@@ -36,6 +37,10 @@ namespace Mobs
         {
             // Randomize start frame so not all mobs animate perfectly in sync
             _currentFrame = Random.Range(0, frameCount);
+            
+            // Randomize playback speed slightly (between 80% and 120%) for variety
+            _randomFps = fps * Random.Range(0.8f, 1.2f);
+            
             _timer = 0f;
             ApplyFrame();
         }
@@ -43,7 +48,7 @@ namespace Mobs
         private void Update()
         {
             _timer += Time.deltaTime;
-            float frameDuration = 1f / fps;
+            float frameDuration = 1f / _randomFps;
 
             if (_timer >= frameDuration)
             {

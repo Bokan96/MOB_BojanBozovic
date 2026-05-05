@@ -41,16 +41,19 @@ namespace Mobs
             }
         }
 
-        public void TryShoot()
+        public bool TryShoot()
         {
-            if (Time.time < _nextFireTime) return;
+            if (Time.time < _nextFireTime) return false;
             
             _nextFireTime = Time.time + Mathf.Max(fireInterval, 0.15f);
+            bool fired = false;
 
             for (int i = 0; i < burstCount; i++)
             {
                 Mob mob = GetMob();
                 if (mob == null) break;
+
+                fired = true;
 
                 // Fan out on the X axis
                 float xOffset = 0f;
@@ -65,6 +68,8 @@ namespace Mobs
                 // isEnemy is false because these are shot from the player cannon
                 mob.Activate(pos, mobSpeed, RecycleMob, isEnemy: false);
             }
+
+            return fired;
         }
 
         private Mob GetMob()

@@ -24,15 +24,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.inputsystem": {
-      "version": "1.19.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.uielements": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.playworks.upp": {
       "version": "file:../../../Users/Boki/Downloads/7.2.0/scripts",
       "depth": 0,
