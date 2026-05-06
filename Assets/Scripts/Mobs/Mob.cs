@@ -15,12 +15,18 @@ namespace Mobs
         private bool _isEnemy;
         private System.Action<Mob> _onRecycle;
         
-        private Vector3 _baseScale;
+        private Vector3 _originalScale; // Set once in Awake, never modified
+        private Vector3 _baseScale;     // Reset every Activate(); MakeBig() multiplies this
+
+        // Big Mob / HP system
+        private int _hitPoints;
+        private bool _isBigMob;
 
         private void Awake()
         {
             // Capture the prefab's original scale so we don't force it to Vector3.one
-            _baseScale = transform.localScale;
+            _originalScale = transform.localScale;
+            _baseScale = _originalScale;
         }
 
         // Spread animation state
@@ -30,9 +36,11 @@ namespace Mobs
         private float _spreadTimer;
 
         public bool IsActive => _active;
+        public bool IsBigMob => _isBigMob;
 
         private const float BOOST_DURATION = 2f;
         private const float MAX_Z = 30f;
+        private const float BIG_MOB_SCALE_MULTIPLIER = 2.5f;
 
         public void Activate(Vector3 position, float speed, System.Action<Mob> recycleCallback, bool isEnemy = false, bool applyBoost = true)
         {
@@ -41,6 +49,9 @@ namespace Mobs
             _currentSpeed = applyBoost ? speed * 4f : speed; // Only boost if shot from cannon
             _lerpTimer = 0f;
             _isSpreading = false;
+            _hitPoints = 1;
+            _isBigMob = false;
+            _baseScale = _originalScale; // Reset to original in case this was previously a Big Mob
 
             _isEnemy = isEnemy;
             _onRecycle = recycleCallback;
@@ -55,6 +66,34 @@ namespace Mobs
             {
                 BattleManager.Instance.RegisterMob(this, _isEnemy);
             }
+        }
+
+        /// <summary>
+        /// Configures this mob as a Big Mob with extra HP and larger scale.
+        /// Must be called immediately after Activate().
+        /// </summary>
+        public void MakeBig(int hitPoints)
+        {
+            _hitPoints = hitPoints;
+            _isBigMob = true;
+            // Override the base scale for this instance so all animations use the big size
+            _baseScale = _baseScale * BIG_MOB_SCALE_MULTIPLIER;
+            transform.localScale = _baseScale * 0.6f; // Re-apply pop-in at the big scale
+        }
+
+        /// <summary>
+        /// Called by BattleManager when this mob collides with an opponent.
+        /// Decrements HP. Returns true if the mob is still alive.
+        /// </summary>
+        public bool TakeHit()
+        {
+            _hitPoints--;
+            if (_hitPoints <= 0)
+            {
+                Recycle();
+                return false; // Dead
+            }
+            return true; // Still alive
         }
 
         public void Recycle()

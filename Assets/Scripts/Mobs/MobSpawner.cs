@@ -20,6 +20,12 @@ namespace Mobs
         public float mobSpeed = 8f;
         public float fireInterval = 0.35f;
 
+        /// <summary>
+        /// Fired every time the cannon successfully shoots a burst.
+        /// Subscribers (like FeverBar) use this to track shot progress.
+        /// </summary>
+        public static System.Action OnPlayerMobShot;
+
         private Queue<Mob> _pool = new Queue<Mob>();
         private float _nextFireTime;
 
@@ -80,6 +86,11 @@ namespace Mobs
                 
                 // isEnemy is false because these are shot from the player cannon
                 mob.Activate(pos, mobSpeed, RecycleMob, isEnemy: false);
+            }
+
+            if (fired)
+            {
+                OnPlayerMobShot?.Invoke();
             }
 
             return fired;

@@ -18,7 +18,12 @@ namespace Mobs
         public System.Collections.Generic.IReadOnlyList<Mob> PlayerMobs => _activePlayerMobs;
 
         public float collisionRadius = 0.6f;
+        
+        [Tooltip("Wider collision radius for Big Mobs (they're visually larger)")]
+        public float bigMobCollisionRadius = 1.2f;
+        
         private float _sqrCollisionRadius;
+        private float _sqrBigMobCollisionRadius;
 
         // Using simple Lists. We use a "swap-and-pop" method for O(1) removal.
         private List<Mob> _activePlayerMobs = new List<Mob>(200);
@@ -28,6 +33,7 @@ namespace Mobs
         {
             Instance = this;
             _sqrCollisionRadius = collisionRadius * collisionRadius;
+            _sqrBigMobCollisionRadius = bigMobCollisionRadius * bigMobCollisionRadius;
         }
 
         public void RegisterMob(Mob mob, bool isEnemy)
@@ -60,18 +66,28 @@ namespace Mobs
                 
                 Vector3 pPos = pMob.transform.position;
 
+                // Big Mobs use a wider collision radius
+                float sqrRadius = pMob.IsBigMob ? _sqrBigMobCollisionRadius : _sqrCollisionRadius;
+
                 for (int e = _activeEnemyMobs.Count - 1; e >= 0; e--)
                 {
                     Mob eMob = _activeEnemyMobs[e];
                     if (!eMob.IsActive) continue;
 
                     // Pure mathematical distance check (sqrMagnitude avoids expensive square root calculation)
-                    if ((pPos - eMob.transform.position).sqrMagnitude < _sqrCollisionRadius)
+                    if ((pPos - eMob.transform.position).sqrMagnitude < sqrRadius)
                     {
-                        // Collision detected! Destroy (recycle) both.
-                        pMob.Recycle();
+                        // Enemy always dies on contact
                         eMob.Recycle();
-                        break; // Player mob is dead, stop checking enemies for this player mob
+
+                        // Player mob takes a hit — Big Mobs survive multiple hits
+                        bool playerSurvived = pMob.TakeHit();
+
+                        if (!playerSurvived)
+                        {
+                            break; // Player mob is dead, stop checking enemies for this one
+                        }
+                        // If survived (Big Mob), continue checking more enemies this frame
                     }
                 }
             }
