@@ -35,6 +35,11 @@ namespace Mobs
         private float _startSpreadX;
         private float _spreadTimer;
 
+        // Y Landing animation state
+        private bool _isLerpingY;
+        private float _startY;
+        private float _targetY;
+
         public bool IsActive => _active;
         public bool IsBigMob => _isBigMob;
 
@@ -42,7 +47,7 @@ namespace Mobs
         private const float MAX_Z = 30f;
         private const float BIG_MOB_SCALE_MULTIPLIER = 2.5f;
 
-        public void Activate(Vector3 position, float speed, System.Action<Mob> recycleCallback, bool isEnemy = false, bool applyBoost = true)
+        public void Activate(Vector3 position, float speed, System.Action<Mob> recycleCallback, bool isEnemy = false, bool applyBoost = true, bool doYLerp = false, float targetY = 0f)
         {
             transform.position = position;
             _targetSpeed = speed;
@@ -52,6 +57,13 @@ namespace Mobs
             _hitPoints = 1;
             _isBigMob = false;
             _baseScale = _originalScale; // Reset to original in case this was previously a Big Mob
+
+            _isLerpingY = doYLerp;
+            if (doYLerp)
+            {
+                _startY = position.y;
+                _targetY = targetY;
+            }
 
             _isEnemy = isEnemy;
             _onRecycle = recycleCallback;
@@ -141,11 +153,30 @@ namespace Mobs
                 float scaleT = Mathf.Clamp01(_lerpTimer / 0.2f); 
                 float currentScaleMult = Mathf.Lerp(0.6f, 1f, scaleT);
                 transform.localScale = _baseScale * currentScaleMult;
+
+                // Y Landing animation
+                if (_isLerpingY)
+                {
+                    Vector3 pos = transform.position;
+                    // Landing happens a bit faster than full speed decay for a snappy feel
+                    float landT = Mathf.Clamp01(_lerpTimer / (BOOST_DURATION * 0.5f)); 
+                    float easedLandT = 1f - Mathf.Pow(1f - landT, 3f);
+                    pos.y = Mathf.Lerp(_startY, _targetY, easedLandT);
+                    transform.position = pos;
+                }
             }
             else
             {
                 _currentSpeed = _targetSpeed;
                 transform.localScale = _baseScale;
+                
+                if (_isLerpingY)
+                {
+                    Vector3 pos = transform.position;
+                    pos.y = _targetY;
+                    transform.position = pos;
+                    _isLerpingY = false;
+                }
             }
 
             // Handle Horizontal Spread (from Multiplier Gate)

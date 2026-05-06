@@ -11,11 +11,15 @@ namespace Mobs
     {
         [Header("References")]
         public Transform shootPoint;
+        [Tooltip("Optional. If set, mobs will lerp down to this Y position when shot.")]
+        public Transform landingPointMob;
         public Mob mobPrefab;
 
         [Header("Big Mob")]
         [Tooltip("Prefab for the Big Mob (uses Big Minion sprite)")]
         public Mob bigMobPrefab;
+        [Tooltip("Optional. If set, Big Mobs will lerp down to this Y position when shot.")]
+        public Transform landingPointBigMob;
         public int bigMobPoolSize = 5;
         public int bigMobHitPoints = 10;
 
@@ -105,8 +109,11 @@ namespace Mobs
 
                 Vector3 pos = shootPoint.position + new Vector3(xOffset, 0f, 0f);
                 
+                bool doYLerp = landingPointMob != null;
+                float targetY = doYLerp ? landingPointMob.position.y : 0f;
+
                 // isEnemy is false because these are shot from the player cannon
-                mob.Activate(pos, mobSpeed, RecycleMob, isEnemy: false);
+                mob.Activate(pos, mobSpeed, RecycleMob, isEnemy: false, applyBoost: true, doYLerp: doYLerp, targetY: targetY);
             }
 
             if (fired)
@@ -124,8 +131,11 @@ namespace Mobs
         {
             if (_bigMobPool.Count == 0) return null;
 
+            bool doYLerp = applyBoost && landingPointBigMob != null;
+            float targetY = doYLerp ? landingPointBigMob.position.y : 0f;
+
             Mob mob = _bigMobPool.Dequeue();
-            mob.Activate(position, mobSpeed, RecycleBigMob, isEnemy: false, applyBoost: applyBoost);
+            mob.Activate(position, mobSpeed, RecycleBigMob, isEnemy: false, applyBoost: applyBoost, doYLerp: doYLerp, targetY: targetY);
             mob.MakeBig(bigMobHitPoints);
             return mob;
         }

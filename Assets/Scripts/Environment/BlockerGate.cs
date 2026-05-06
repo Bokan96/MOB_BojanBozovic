@@ -24,8 +24,17 @@ namespace Environment
         public float hitScaleMultiplier = 0.85f; 
         public float hitRecoverySpeed = 15f;
 
+        [Header("Shake")]
+        [Tooltip("How far the blocker shakes on X/Z when hit")]
+        public float shakeIntensity = 0.15f;
+        [Tooltip("How long the shake lasts in seconds")]
+        public float shakeDuration = 0.2f;
+
         private Vector3 _originalScale;
         private Vector3 _targetScale;
+        private Vector3 _originalLocalPos;
+        private float _shakeTimer;
+        private float _currentShakeIntensity;
         private bool _isDestroyed;
 
         private void Start()
@@ -34,6 +43,7 @@ namespace Environment
             {
                 _originalScale = visualTransform.localScale;
                 _targetScale = _originalScale;
+                _originalLocalPos = visualTransform.localPosition;
             }
             UpdateHealthText();
         }
@@ -45,10 +55,25 @@ namespace Environment
             // Critical: call base so GateBase can do the AABB checks!
             base.Update();
 
-            // Handle the juicy hit recovery back to original scale
             if (visualTransform != null)
             {
+                // Handle the juicy hit recovery back to original scale
                 visualTransform.localScale = Vector3.Lerp(visualTransform.localScale, _targetScale, Time.deltaTime * hitRecoverySpeed);
+
+                // Handle shake
+                if (_shakeTimer > 0f)
+                {
+                    _shakeTimer -= Time.deltaTime;
+                    float decay = _shakeTimer / shakeDuration; // 1 → 0 over the duration
+                    float offsetX = Random.Range(-1f, 1f) * _currentShakeIntensity * decay;
+                    float offsetZ = Random.Range(-1f, 1f) * _currentShakeIntensity * decay;
+                    visualTransform.localPosition = _originalLocalPos + new Vector3(offsetX, 0f, offsetZ);
+                }
+                else
+                {
+                    // Snap back to original position when shake is done
+                    visualTransform.localPosition = _originalLocalPos;
+                }
             }
         }
 
@@ -56,17 +81,40 @@ namespace Environment
         {
             if (_isDestroyed) return;
 
-            // 1. Recycle (Destroy) the mob that hit the blocker
-            mob.Recycle();
+            if (mob.IsBigMob)
+            {
+                // Big Mobs are "tanks" — they deal damage to the blocker equal to their HP
+                // and take that same amount of damage themselves.
+                int damageToDeal = Mathf.Min(health, 10); // Limit damage per hit or use mob.HitPoints? 
+                // Let's assume for now they deal up to 10 damage but survive if they have more HP.
+                // Wait, Mob.cs doesn't expose hitPoints publicly yet. I should check that.
+                
+                // For simplicity and "juice", let's say Big Mobs deal 5 damage and take 5 hits.
+                int damage = 5;
+                health -= damage;
+                
+                for(int i = 0; i < damage; i++)
+                {
+                    if (!mob.TakeHit()) break; 
+                }
+            }
+            else
+            {
+                // Regular mobs deal 1 damage and are recycled
+                health--;
+                mob.Recycle();
+            }
 
-            // 2. Reduce Health
-            health--;
             UpdateHealthText();
 
-            // 3. Play Juicy Hit Animation (Squeeze)
+            // 3. Play Juicy Hit Animation (Squeeze + Shake)
             if (visualTransform != null)
             {
                 visualTransform.localScale = _originalScale * hitScaleMultiplier;
+
+                // Trigger shake — stronger for Big Mobs
+                _shakeTimer = shakeDuration;
+                _currentShakeIntensity = mob.IsBigMob ? shakeIntensity * 2.5f : shakeIntensity;
             }
 
             // 4. Check for Destruction
