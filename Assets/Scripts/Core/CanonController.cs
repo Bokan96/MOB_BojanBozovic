@@ -22,6 +22,7 @@ namespace Core
 
         private readonly Vector3 _baseScale = Vector3.one;
         private readonly Vector3 _recoilScale = new Vector3(1.1f, 1.1f, 1.1f);
+        private readonly Vector3 _bigRecoilScale = new Vector3(1.3f, 0.7f, 1.3f); // Exaggerated squash for Big Mob
 
         private Camera cam;
 
@@ -33,6 +34,7 @@ namespace Core
         private void Update()
         {
             bool held = Input.GetMouseButton(0);
+            bool released = Input.GetMouseButtonUp(0);
 
             if (held)
             {
@@ -60,6 +62,24 @@ namespace Core
                             cannonHead.localScale = _recoilScale;
                         }
                     }
+                }
+            }
+
+            // --- BIG MOB ON RELEASE ---
+            if (released && UI.FeverBar.Instance != null && UI.FeverBar.Instance.IsFull)
+            {
+                if (mobSpawner != null && shootPoint != null)
+                {
+                    mobSpawner.SpawnBigMob(shootPoint.position);
+
+                    // Heavy recoil for the big shot
+                    if (cannonHead != null)
+                    {
+                        cannonHead.localScale = _bigRecoilScale;
+                    }
+
+                    // Reset the fever bar so it can fill again
+                    UI.FeverBar.Instance.ResetBar();
                 }
             }
 

@@ -13,6 +13,12 @@ namespace Mobs
         public Transform shootPoint;
         public Mob mobPrefab;
 
+        [Header("Big Mob")]
+        [Tooltip("Prefab for the Big Mob (uses Big Minion sprite)")]
+        public Mob bigMobPrefab;
+        public int bigMobPoolSize = 5;
+        public int bigMobHitPoints = 10;
+
         [Header("Settings")]
         public int poolSize = 200; // Increased to support Multiplier Gates
         public int burstCount = 3;
@@ -27,11 +33,12 @@ namespace Mobs
         public static System.Action OnPlayerMobShot;
 
         private Queue<Mob> _pool = new Queue<Mob>();
+        private Queue<Mob> _bigMobPool = new Queue<Mob>();
         private float _nextFireTime;
 
         private void Start()
         {
-            // Pre-allocate the pool
+            // Pre-allocate the normal mob pool
             for (int i = 0; i < poolSize; i++)
             {
                 Mob m = Instantiate(mobPrefab, transform);
@@ -44,6 +51,20 @@ namespace Mobs
                 
                 m.gameObject.SetActive(false);
                 _pool.Enqueue(m);
+            }
+
+            // Pre-allocate the Big Mob pool
+            if (bigMobPrefab != null)
+            {
+                for (int i = 0; i < bigMobPoolSize; i++)
+                {
+                    Mob m = Instantiate(bigMobPrefab, transform);
+                    foreach(var col in m.GetComponentsInChildren<Collider>()) Destroy(col);
+                    var rb = m.GetComponent<Rigidbody>();
+                    if (rb != null) Destroy(rb);
+                    m.gameObject.SetActive(false);
+                    _bigMobPool.Enqueue(m);
+                }
             }
         }
 
@@ -96,6 +117,19 @@ namespace Mobs
             return fired;
         }
 
+        /// <summary>
+        /// Spawns a Big Mob. Called by CanonController when Fever Bar is full, or by Multiplier Gates.
+        /// </summary>
+        public Mob SpawnBigMob(Vector3 position, bool applyBoost = true)
+        {
+            if (_bigMobPool.Count == 0) return null;
+
+            Mob mob = _bigMobPool.Dequeue();
+            mob.Activate(position, mobSpeed, RecycleBigMob, isEnemy: false, applyBoost: applyBoost);
+            mob.MakeBig(bigMobHitPoints);
+            return mob;
+        }
+
         private Mob GetMob()
         {
             if (_pool.Count > 0) return _pool.Dequeue();
@@ -105,6 +139,11 @@ namespace Mobs
         private void RecycleMob(Mob mob)
         {
             _pool.Enqueue(mob);
+        }
+
+        private void RecycleBigMob(Mob mob)
+        {
+            _bigMobPool.Enqueue(mob);
         }
     }
 }

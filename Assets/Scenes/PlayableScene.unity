@@ -1024,7 +1024,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 2133135376}
   mobPrefab: {fileID: 3913811062165563210, guid: f0176ed8b28ef1a4c84a7c347bb8b85a, type: 3}
-  poolSize: 40
+  bigMobPrefab: {fileID: 3913811062165563210, guid: d5fbda3bed35764478a3e1c3fb680ae8, type: 3}
+  bigMobPoolSize: 10
+  bigMobHitPoints: 10
+  poolSize: 80
   burstCount: 1
   burstSpread: 0.5
   mobSpeed: 4
@@ -1057,7 +1060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisionRadius: 0.6
-  bigMobCollisionRadius: 1.2
+  bigMobCollisionRadius: 1
 --- !u!1 &1580440641
 GameObject:
   m_ObjectHideFlags: 0

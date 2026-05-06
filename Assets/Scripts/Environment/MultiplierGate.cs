@@ -55,11 +55,16 @@ namespace Environment
             {
                 visualTransform.localScale = _originalScale * bumpScaleMultiplier;
             }
-
+            
+            bool isBig = mob.IsBigMob;
+            
             // Calculate spacing for an even horizontal line
-            float spacing = 0.4f; // Distance between each spawned mob
+            float spacing = isBig ? 0.7f : 0.4f; // Distance between each spawned mob
             float totalWidth = (multiplierAmount - 1) * spacing;
             float startX = -(totalWidth / 2f);
+
+            // Check if the entering mob is a Big Mob to preserve the type
+            
 
             // Spawn the extra mobs
             for (int i = 0; i < multiplierAmount; i++)
@@ -68,8 +73,10 @@ namespace Environment
                 // Target global X for this specific mob in the spread
                 float targetGlobalX = mob.transform.position.x + offsetX;
                 
-                // Spawn without the cannon speed boost, at the EXACT position of the original mob
-                Mob newMob = mobSpawner.SpawnMob(mob.transform.position, mobSpawner.mobSpeed, applyBoost: false);
+                // Spawn the appropriate type without the cannon speed boost
+                Mob newMob = isBig 
+                    ? mobSpawner.SpawnBigMob(mob.transform.position, applyBoost: false)
+                    : mobSpawner.SpawnMob(mob.transform.position, mobSpawner.mobSpeed, applyBoost: false);
                 
                 if (newMob != null)
                 {

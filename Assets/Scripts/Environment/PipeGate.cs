@@ -31,6 +31,7 @@ namespace Environment
         {
             public GameObject visual;
             public float timer;
+            public bool isBigMob;
         }
 
         private List<ActiveCircle> _activeCircles = new List<ActiveCircle>();
@@ -56,7 +57,11 @@ namespace Environment
                     if (mobSpawner != null)
                     {
                         // Spawn at the exit without the cannon speed boost
-                        Mob newMob = mobSpawner.SpawnMob(pipeEndPoint.position, mobSpawner.mobSpeed, applyBoost: false);
+                        // Preserve the type (Normal or Big)
+                        Mob newMob = circle.isBigMob
+                            ? mobSpawner.SpawnBigMob(pipeEndPoint.position, applyBoost: false)
+                            : mobSpawner.SpawnMob(pipeEndPoint.position, mobSpawner.mobSpeed, applyBoost: false);
+
                         if (newMob != null)
                         {
                             // In case the end point is still somehow inside the gate bounds,
@@ -82,6 +87,9 @@ namespace Environment
 
         protected override void OnMobEntered(Mob mob)
         {
+            // Capture if it was a big mob before recycling
+            bool isBig = mob.IsBigMob;
+
             // 1. The mob disappears into the pipe (recycle it to the pool)
             mob.Recycle();
 
@@ -92,7 +100,8 @@ namespace Environment
                 _activeCircles.Add(new ActiveCircle 
                 { 
                     visual = newCircle, 
-                    timer = 0f 
+                    timer = 0f,
+                    isBigMob = isBig
                 });
             }
         }
