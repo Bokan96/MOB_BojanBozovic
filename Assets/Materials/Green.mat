@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Green
-  m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 9e7ac9c0f4c7ebb43b0f3d79993b11d3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -68,10 +68,17 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _GradientOffset: 0.5
+    - _GradientScale: 1.5
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutlineWidth: 0
     - _Parallax: 0.02
+    - _RimIntensity: 0.2
+    - _RimPower: 3
+    - _ShadowStrength: 0.35
+    - _ShadowThreshold: 0.1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -79,6 +86,10 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.20064259, g: 1, b: 0, a: 1}
+    - _ColorBottom: {r: 0.1764706, g: 0.54901963, b: 0.23529412, a: 1}
+    - _ColorTop: {r: 0.43529412, g: 0.8117647, b: 0.29803923, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0.079999976, g: 0.079999976, b: 0.11999995, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
