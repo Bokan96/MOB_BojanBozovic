@@ -20,15 +20,23 @@ namespace Core
         public Transform cannonHead;
         public float springSpeed = 25f;
 
+        [Header("Juice - Wheels")]
+        [Tooltip("Drag all 4 wheel GameObjects here. They will rotate on Z proportional to cannon movement.")]
+        public Transform[] wheels;
+        [Tooltip("Degrees per unit of horizontal movement speed.")]
+        public float wheelRotationSpeed = 120f;
+
         private readonly Vector3 _baseScale = Vector3.one;
         private readonly Vector3 _recoilScale = new Vector3(1.1f, 1.1f, 1.1f);
         private readonly Vector3 _bigRecoilScale = new Vector3(1.3f, 0.7f, 1.3f); // Exaggerated squash for Big Mob
 
         private Camera cam;
+        private float _prevX;
 
         private void Start()
         {
             cam = Camera.main;
+            _prevX = transform.position.x;
         }
 
         private void Update()
@@ -87,6 +95,22 @@ namespace Core
             if (cannonHead != null)
             {
                 cannonHead.localScale = Vector3.Lerp(cannonHead.localScale, _baseScale, Time.deltaTime * springSpeed);
+            }
+
+            // --- WHEEL ROTATION ---
+            // Measure how much the cannon moved this frame on X
+            float deltaX = transform.position.x - _prevX;
+            _prevX = transform.position.x;
+
+            if (wheels != null && Mathf.Abs(deltaX) > 0.0001f)
+            {
+                // Moving right → wheels roll forward (+Z spin), left → backward (-Z spin)
+                float rotAmount = -deltaX * wheelRotationSpeed;
+                foreach (Transform wheel in wheels)
+                {
+                    if (wheel != null)
+                        wheel.Rotate(0f, 0f, rotAmount, Space.Self);
+                }
             }
         }
     }
