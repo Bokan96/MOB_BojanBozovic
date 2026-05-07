@@ -21,7 +21,7 @@ namespace Environment
         public ParticleSystem destructionVfx;
         
         [Tooltip("How much to shrink/squeeze when hit by a mob")]
-        public float hitScaleMultiplier = 0.85f; 
+        public float hitScaleMultiplier = 0.9f; 
         public float hitRecoverySpeed = 15f;
 
         [Header("Shake")]
@@ -83,20 +83,10 @@ namespace Environment
 
             if (mob.IsBigMob)
             {
-                // Big Mobs are "tanks" — they deal damage to the blocker equal to their HP
-                // and take that same amount of damage themselves.
-                int damageToDeal = Mathf.Min(health, 10); // Limit damage per hit or use mob.HitPoints? 
-                // Let's assume for now they deal up to 10 damage but survive if they have more HP.
-                // Wait, Mob.cs doesn't expose hitPoints publicly yet. I should check that.
-                
-                // For simplicity and "juice", let's say Big Mobs deal 5 damage and take 5 hits.
-                int damage = 5;
-                health -= damage;
-                
-                for(int i = 0; i < damage; i++)
-                {
-                    if (!mob.TakeHit()) break; 
-                }
+                // Big Mobs are "tanks" — they deal damage to the blocker equal to their current HP
+                // and then disappear (recycle).
+                health -= mob.HitPoints;
+                mob.Recycle();
             }
             else
             {
@@ -110,7 +100,8 @@ namespace Environment
             // 3. Play Juicy Hit Animation (Squeeze + Shake)
             if (visualTransform != null)
             {
-                visualTransform.localScale = _originalScale * hitScaleMultiplier;
+                float multiplier = mob.IsBigMob ? 0.75f : hitScaleMultiplier;
+                visualTransform.localScale = _originalScale * multiplier;
 
                 // Trigger shake — stronger for Big Mobs
                 _shakeTimer = shakeDuration;

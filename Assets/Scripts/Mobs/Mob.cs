@@ -42,6 +42,7 @@ namespace Mobs
 
         public bool IsActive => _active;
         public bool IsBigMob => _isBigMob;
+        public int HitPoints => _hitPoints;
 
         private const float BOOST_DURATION = 2f;
         private const float MAX_Z = 30f;
