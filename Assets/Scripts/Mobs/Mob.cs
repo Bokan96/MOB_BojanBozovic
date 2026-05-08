@@ -67,6 +67,11 @@ namespace Mobs
         private const float MAX_Z = 30f;
         private const float BIG_MOB_SCALE_MULTIPLIER = 2.5f;
 
+        // Overlap settings — pushes overlapping mobs forward into a line
+        private const float OVERLAP_MIN_DIST = 0.5f;
+        private const float OVERLAP_MIN_DIST_BIG = 1.0f;
+        private const float OVERLAP_PUSH_SPEED = 20f;
+
         public void Activate(Vector3 position, float speed, System.Action<Mob> recycleCallback, bool isEnemy = false, bool applyBoost = true, bool doYLerp = false, float targetY = 0f)
         {
             transform.position = position;
@@ -371,6 +376,62 @@ namespace Mobs
             if (z > MAX_Z || z < 0)
             {
                 Recycle();
+                return;
+            }
+
+            // Strictly push overlapping friendly mobs forward on the Z axis
+            if (!_isEnemy && !_isEnteringPipe && BattleManager.Instance != null)
+            {
+                ApplyOverlapNudge();
+            }
+        }
+
+        /// <summary>
+        /// Checks for overlapping friendly mobs and nudges the one in front strictly forward.
+        /// If perfectly aligned, uses InstanceID as a tie-breaker to form a line.
+        /// </summary>
+        private void ApplyOverlapNudge()
+        {
+            var playerMobs = BattleManager.Instance.PlayerMobs;
+            Vector3 myPos = transform.position;
+            float nudgeZ = 0f;
+
+            for (int i = 0; i < playerMobs.Count; i++)
+            {
+                Mob other = playerMobs[i];
+                if (other == this || !other.IsActive) continue;
+
+                Vector3 otherPos = other.transform.position;
+
+                float dx = Mathf.Abs(myPos.x - otherPos.x);
+                float dz = Mathf.Abs(myPos.z - otherPos.z);
+                
+                float effectiveMinDist = (_isBigMob || other.IsBigMob) ? OVERLAP_MIN_DIST_BIG : OVERLAP_MIN_DIST;
+
+                if (dx < effectiveMinDist && dz < effectiveMinDist)
+                {
+                    // They are overlapping! We only want to push one of them forward.
+                    // The one that is already slightly ahead gets pushed further ahead.
+                    bool iAmAhead = myPos.z > otherPos.z;
+                    
+                    // If they are exactly on the same Z (e.g. spawned same frame), break the tie
+                    if (Mathf.Abs(myPos.z - otherPos.z) < 0.001f)
+                    {
+                        iAmAhead = this.GetInstanceID() > other.GetInstanceID();
+                    }
+
+                    if (iAmAhead)
+                    {
+                        // The closer they are on Z, the harder we push them forward
+                        float overlapZ = effectiveMinDist - dz;
+                        nudgeZ += overlapZ * OVERLAP_PUSH_SPEED * Time.deltaTime;
+                    }
+                }
+            }
+
+            if (nudgeZ > 0.001f)
+            {
+                transform.position += new Vector3(0f, 0f, nudgeZ);
             }
         }
     }

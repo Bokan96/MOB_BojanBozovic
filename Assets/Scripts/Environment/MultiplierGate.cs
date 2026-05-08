@@ -135,7 +135,7 @@ namespace Environment
             bool isBig = mob.IsBigMob;
             
             // Calculate spacing for an even horizontal line
-            float spacing = isBig ? 0.7f : 0.4f; // Distance between each spawned mob
+            float spacing = isBig ? 0.9f : 0.5f; // Distance between each spawned mob
             float totalWidth = (multiplierAmount - 1) * spacing;
             float startX = -(totalWidth / 2f);
 
@@ -146,8 +146,9 @@ namespace Environment
             for (int i = 0; i < multiplierAmount; i++)
             {
                 float offsetX = startX + (i * spacing);
-                // Target global X for this specific mob in the spread
-                float targetGlobalX = mob.transform.position.x + offsetX;
+                
+                // Target global X for this specific mob in the spread, clamped to track bounds [-3, 3]
+                float targetGlobalX = Mathf.Clamp(mob.transform.position.x + offsetX, -3f, 3f);
                 
                 // Spawn the appropriate type without the cannon speed boost
                 Mob newMob = isBig 

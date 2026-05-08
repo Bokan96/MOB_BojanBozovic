@@ -69,18 +69,44 @@ namespace Mobs
 
         private void SpawnEnemies()
         {
+            List<float> spawnedXPositions = new List<float>();
+
             for (int i = 0; i < spawnCountPerInterval; i++)
             {
                 if (_pool.Count == 0) break; // Pool exhausted
                 
+                // --- Self-balancing weighted random spread with overlap prevention ---
+                float targetX = 0f;
+                bool validPositionFound = false;
+                
+                // Attempt to find a position that is at least 0.5 units away from other mobs spawned this interval
+                for (int attempt = 0; attempt < 10; attempt++)
+                {
+                    targetX = GenerateBalancedX(spawnPoint.position.x);
+                    validPositionFound = true;
+                    
+                    foreach (float prevX in spawnedXPositions)
+                    {
+                        if (Mathf.Abs(targetX - prevX) < 0.5f)
+                        {
+                            validPositionFound = false;
+                            break;
+                        }
+                    }
+                    
+                    if (validPositionFound) break;
+                }
+                
+                spawnedXPositions.Add(targetX);
+
                 Mob mob = _pool.Dequeue();
 
-                // All mobs spawn at the exact same origin
+                // All mobs spawn at the exact same origin, but we add a tiny Z jitter
+                // to prevent exact Z-clipping as they emerge
                 Vector3 spawnPos = spawnPoint.position;
+                spawnPos.z += Random.Range(-0.2f, 0.2f);
+                
                 mob.Activate(spawnPos, mobSpeed, RecycleMob, isEnemy: true);
-
-                // --- Self-balancing weighted random spread ---
-                float targetX = GenerateBalancedX(spawnPos.x);
                 mob.ActivateSpread(targetX);
             }
         }
