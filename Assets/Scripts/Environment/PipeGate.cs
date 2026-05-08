@@ -26,6 +26,13 @@ namespace Environment
         [Tooltip("Fixed X rotation of the circle so it faces the camera as it travels. 50 is a good starting point.")]
         public float cameraFacingXRotation = 50f;
 
+        [Header("Exit Behavior")]
+        [Tooltip("Optional. If set, mobs exiting the pipe will immediately start following this transform instead of walking straight.")]
+        public Transform followTargetOnExit;
+        
+        [Tooltip("Optional custom speed for the mob while following the exit target. Leave at 0 to use normal walking speed.")]
+        public float followSpeedOnExit = 0f;
+
         // Simple class to track active circles
         private class ActiveCircle
         {
@@ -68,6 +75,12 @@ namespace Environment
                             // In case the end point is still somehow inside the gate bounds,
                             // tell the gate to ignore this mob so it doesn't get sucked back in!
                             IgnoreMob(newMob);
+
+                            // Auto-follow logic on exit
+                            if (followTargetOnExit != null)
+                            {
+                                newMob.StartFollowing(followTargetOnExit, followSpeedOnExit);
+                            }
                         }
                     }
 

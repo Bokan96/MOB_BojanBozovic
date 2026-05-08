@@ -21,6 +21,7 @@ namespace Mobs
         // Big Mob / HP system
         private int _hitPoints;
         private bool _isBigMob;
+        private bool _applyBoost;
 
         private void Awake()
         {
@@ -53,9 +54,14 @@ namespace Mobs
         private float _pipeEnterDuration;
         private System.Action _onPipeEnterComplete;
 
+        // Follow animation state
+        private bool _isFollowing;
+        private Transform _followTarget;
+
         public bool IsActive => _active;
         public bool IsBigMob => _isBigMob;
         public int HitPoints => _hitPoints;
+        public bool IsEnemy => _isEnemy;
 
         private const float BOOST_DURATION = 2f;
         private const float MAX_Z = 30f;
@@ -73,6 +79,8 @@ namespace Mobs
             _baseScale = _originalScale; // Reset to original in case this was previously a Big Mob
             _isDying = false;
             _isEnteringPipe = false;
+            _isFollowing = false;
+            _followTarget = null;
 
             _isLerpingY = doYLerp;
             if (doYLerp)
@@ -85,9 +93,19 @@ namespace Mobs
             _onRecycle = recycleCallback;
             _active = true;
             gameObject.SetActive(true);
+            
+            _applyBoost = applyBoost;
 
-            // Start at 0.6x scale for the pop-in effect
-            transform.localScale = _baseScale * 0.6f;
+            if (_applyBoost)
+            {
+                // Start at 0.6x scale for the pop-in effect
+                transform.localScale = _baseScale * 0.6f;
+            }
+            else
+            {
+                // Immediately set to full scale if no boost (e.g. exiting pipe)
+                transform.localScale = _baseScale;
+            }
 
             // Register for collision detection
             if (BattleManager.Instance != null)
@@ -106,7 +124,15 @@ namespace Mobs
             _isBigMob = true;
             // Override the base scale for this instance so all animations use the big size
             _baseScale = _baseScale * BIG_MOB_SCALE_MULTIPLIER;
-            transform.localScale = _baseScale * 0.6f; // Re-apply pop-in at the big scale
+            
+            if (_applyBoost)
+            {
+                transform.localScale = _baseScale * 0.6f; // Re-apply pop-in at the big scale
+            }
+            else
+            {
+                transform.localScale = _baseScale;
+            }
         }
 
         /// <summary>
@@ -189,6 +215,25 @@ namespace Mobs
             }
         }
 
+        /// <summary>
+        /// Commands the mob to stop its normal forward movement and instead constantly move towards a specific Transform.
+        /// </summary>
+        public void StartFollowing(Transform target, float customSpeed = -1f)
+        {
+            if (!_active || _isDying) return;
+
+            _isFollowing = true;
+            _followTarget = target;
+
+            if (customSpeed > 0f)
+            {
+                _targetSpeed = customSpeed;
+                _currentSpeed = customSpeed;
+                // If it was still boosting, stop the boost so it doesn't fight the custom speed
+                _applyBoost = false; 
+            }
+        }
+
         private void Update()
         {
             if (!_active) return;
@@ -243,42 +288,46 @@ namespace Mobs
             }
 
             // Handle speed decay & scale pop (Fast out of cannon -> Walk speed)
-            if (_lerpTimer < BOOST_DURATION)
+            if (_applyBoost)
             {
-                _lerpTimer += Time.deltaTime;
-                
-                // Cubic easing out for speed
-                float t = Mathf.Clamp01(_lerpTimer / BOOST_DURATION);
-                float easedT = 1f - Mathf.Pow(1f - t, 3f); 
-                _currentSpeed = Mathf.Lerp(_currentSpeed, _targetSpeed, easedT);
-
-                // Scale animation (Linear over 0.2 seconds, from 0.6x to 1.0x)
-                float scaleT = Mathf.Clamp01(_lerpTimer / 0.2f); 
-                float currentScaleMult = Mathf.Lerp(0.6f, 1f, scaleT);
-                transform.localScale = _baseScale * currentScaleMult;
-
-                // Y Landing animation
-                if (_isLerpingY)
+                if (_lerpTimer < BOOST_DURATION)
                 {
-                    Vector3 pos = transform.position;
-                    // Landing happens a bit faster than full speed decay for a snappy feel
-                    float landT = Mathf.Clamp01(_lerpTimer / (BOOST_DURATION * 0.5f)); 
-                    float easedLandT = 1f - Mathf.Pow(1f - landT, 3f);
-                    pos.y = Mathf.Lerp(_startY, _targetY, easedLandT);
-                    transform.position = pos;
+                    _lerpTimer += Time.deltaTime;
+                    
+                    // Cubic easing out for speed
+                    float t = Mathf.Clamp01(_lerpTimer / BOOST_DURATION);
+                    float easedT = 1f - Mathf.Pow(1f - t, 3f); 
+                    _currentSpeed = Mathf.Lerp(_currentSpeed, _targetSpeed, easedT);
+
+                    // Scale animation (Linear over 0.2 seconds, from 0.6x to 1.0x)
+                    float scaleT = Mathf.Clamp01(_lerpTimer / 0.2f); 
+                    float currentScaleMult = Mathf.Lerp(0.6f, 1f, scaleT);
+                    transform.localScale = _baseScale * currentScaleMult;
+
+                    // Y Landing animation
+                    if (_isLerpingY)
+                    {
+                        Vector3 pos = transform.position;
+                        // Landing happens a bit faster than full speed decay for a snappy feel
+                        float landT = Mathf.Clamp01(_lerpTimer / (BOOST_DURATION * 0.5f)); 
+                        float easedLandT = 1f - Mathf.Pow(1f - landT, 3f);
+                        pos.y = Mathf.Lerp(_startY, _targetY, easedLandT);
+                        transform.position = pos;
+                    }
                 }
-            }
-            else
-            {
-                _currentSpeed = _targetSpeed;
-                transform.localScale = _baseScale;
-                
-                if (_isLerpingY)
+                else
                 {
-                    Vector3 pos = transform.position;
-                    pos.y = _targetY;
-                    transform.position = pos;
-                    _isLerpingY = false;
+                    _currentSpeed = _targetSpeed;
+                    transform.localScale = _baseScale;
+                    _applyBoost = false;
+                    
+                    if (_isLerpingY)
+                    {
+                        Vector3 pos = transform.position;
+                        pos.y = _targetY;
+                        transform.position = pos;
+                        _isLerpingY = false;
+                    }
                 }
             }
 
@@ -296,9 +345,26 @@ namespace Mobs
                 if (spreadT >= 1f) _isSpreading = false;
             }
 
-            // Player moves +Z (forward), Enemy moves -Z (backward)
-            float direction = _isEnemy ? -1f : 1f;
-            transform.position += new Vector3(0f, 0f, direction * _currentSpeed * Time.deltaTime);
+            if (_isFollowing)
+            {
+                if (_followTarget != null)
+                {
+                    // Move towards the target at the current speed
+                    transform.position = Vector3.MoveTowards(transform.position, _followTarget.position, _currentSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    // If target is missing, stop following
+                    _isFollowing = false;
+                }
+                // Skip the standard forward movement
+            }
+            else
+            {
+                // Player moves +Z (forward), Enemy moves -Z (backward)
+                float direction = _isEnemy ? -1f : 1f;
+                transform.position += new Vector3(0f, 0f, direction * _currentSpeed * Time.deltaTime);
+            }
 
             // Clean up if they run way off-screen
             float z = transform.position.z;
