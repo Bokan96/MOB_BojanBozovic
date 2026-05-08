@@ -232,6 +232,11 @@ namespace Core
             _flareActive = true;
             _flareTimer = 0f;
             muzzleFlare.enabled = true;
+
+            // Randomize Z rotation for variation on every shot
+            Vector3 euler = muzzleFlare.transform.localEulerAngles;
+            euler.z = Random.Range(0f, 360f);
+            muzzleFlare.transform.localEulerAngles = euler;
         }
 
         private void UpdateMuzzleFlare()

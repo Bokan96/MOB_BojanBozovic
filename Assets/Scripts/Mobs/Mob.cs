@@ -45,6 +45,14 @@ namespace Mobs
         private float _deathTimer;
         private const float DEATH_DURATION = 0.15f;
 
+        // Pipe entry animation state
+        private bool _isEnteringPipe;
+        private Vector3 _pipeStartPos;
+        private Vector3 _pipeTargetPos;
+        private float _pipeEnterTimer;
+        private float _pipeEnterDuration;
+        private System.Action _onPipeEnterComplete;
+
         public bool IsActive => _active;
         public bool IsBigMob => _isBigMob;
         public int HitPoints => _hitPoints;
@@ -64,6 +72,7 @@ namespace Mobs
             _isBigMob = false;
             _baseScale = _originalScale; // Reset to original in case this was previously a Big Mob
             _isDying = false;
+            _isEnteringPipe = false;
 
             _isLerpingY = doYLerp;
             if (doYLerp)
@@ -158,6 +167,28 @@ namespace Mobs
             _spreadTimer = 0f;
         }
 
+        /// <summary>
+        /// Sucks the mob into a specific target point (like a pipe entrance) over a duration,
+        /// bypassing standard forward movement, then triggers a callback.
+        /// </summary>
+        public void EnterPipe(Vector3 targetPos, float duration, System.Action onComplete)
+        {
+            if (!_active || _isDying || _isEnteringPipe) return;
+
+            _isEnteringPipe = true;
+            _pipeStartPos = transform.position;
+            _pipeTargetPos = targetPos;
+            _pipeEnterTimer = 0f;
+            _pipeEnterDuration = duration;
+            _onPipeEnterComplete = onComplete;
+
+            // Stop colliding with enemies while being sucked into the pipe
+            if (BattleManager.Instance != null)
+            {
+                BattleManager.Instance.UnregisterMob(this, _isEnemy);
+            }
+        }
+
         private void Update()
         {
             if (!_active) return;
@@ -181,6 +212,34 @@ namespace Mobs
                     Recycle();
                 }
                 return; // Skip normal movement while exploding
+            }
+
+            if (_isEnteringPipe)
+            {
+                _pipeEnterTimer += Time.deltaTime;
+                float t = Mathf.Clamp01(_pipeEnterTimer / _pipeEnterDuration);
+                
+                // Ease out cubic
+                float easedT = 1f - Mathf.Pow(1f - t, 3f);
+                
+                Vector3 pos = transform.position;
+                
+                // Only lerp the X position towards the pipe center
+                pos.x = Mathf.Lerp(_pipeStartPos.x, _pipeTargetPos.x, easedT);
+                
+                // Keep moving forward on the Z axis normally
+                float zDirection = _isEnemy ? -1f : 1f;
+                pos.z += zDirection * _currentSpeed * Time.deltaTime;
+                
+                transform.position = pos;
+                transform.localScale = Vector3.Lerp(_baseScale, _baseScale * 0.5f, easedT);
+
+                if (t >= 1f)
+                {
+                    _isEnteringPipe = false;
+                    _onPipeEnterComplete?.Invoke();
+                }
+                return; // Skip normal movement while being sucked in
             }
 
             // Handle speed decay & scale pop (Fast out of cannon -> Walk speed)

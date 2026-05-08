@@ -90,22 +90,45 @@ namespace Environment
 
         protected override void OnMobEntered(Mob mob)
         {
-            // Capture if it was a big mob before recycling
+            // Capture if it was a big mob
             bool isBig = mob.IsBigMob;
 
-            // 1. The mob disappears into the pipe (recycle it to the pool)
-            mob.Recycle();
-
-            // 2. Spawn a circle visual to represent the mob traveling inside
-            if (circlePrefab != null && pathPoints.Count >= 2)
+            if (pathPoints.Count > 0)
             {
-                GameObject newCircle = Instantiate(circlePrefab, pathPoints[0].position, pathPoints[0].rotation);
-                _activeCircles.Add(new ActiveCircle 
-                { 
-                    visual = newCircle, 
-                    timer = 0f,
-                    isBigMob = isBig
+                // Suck the mob towards the first path point over a short duration
+                mob.EnterPipe(pathPoints[0].position, 0.15f, () => 
+                {
+                    // 1. The mob disappears into the pipe (recycle it to the pool)
+                    mob.Recycle();
+
+                    // 2. Spawn a circle visual to represent the mob traveling inside
+                    if (circlePrefab != null && pathPoints.Count >= 2)
+                    {
+                        GameObject newCircle = Instantiate(circlePrefab, pathPoints[0].position, pathPoints[0].rotation);
+                        
+                        // Fix sorting: Force the circle to render just before the transparent pipe (Queue 3000)
+                        // This prevents it from popping in front of the pipe based on distance sorting.
+                        foreach(var renderer in newCircle.GetComponentsInChildren<Renderer>())
+                        {
+                            if (renderer != null && renderer.material != null)
+                            {
+                                renderer.material.renderQueue = 2999;
+                            }
+                        }
+
+                        _activeCircles.Add(new ActiveCircle 
+                        { 
+                            visual = newCircle, 
+                            timer = 0f,
+                            isBigMob = isBig
+                        });
+                    }
                 });
+            }
+            else
+            {
+                // Fallback if no path points are set
+                mob.Recycle();
             }
         }
 

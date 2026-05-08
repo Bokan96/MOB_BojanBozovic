@@ -32,7 +32,15 @@ Shader "Custom/ToonGradientTransparent"
         ZWrite Off
 
         // ===========================================
-        // PASS 1: Main Toon Gradient
+        // PASS 1: Inverted Hull Outline (Disabled for Transparency)
+        // ===========================================
+        // An inverted hull outline draws the inside/back walls of the mesh.
+        // On a transparent object, you look through the front wall and see the entire
+        // dark back wall, which acts like a solid dark curtain that hides objects inside!
+        // For clean transparent glass, we rely on the Rim Highlight instead.
+
+        // ===========================================
+        // PASS 2: Main Toon Gradient (Front faces)
         // ===========================================
         Pass
         {
@@ -99,54 +107,6 @@ Shader "Custom/ToonGradientTransparent"
             {
                 fixed3 col = i.color + _RimColor.rgb * i.rim;
                 return fixed4(col, _Alpha);
-            }
-            ENDCG
-        }
-
-        // ===========================================
-        // PASS 2: Inverted Hull Outline
-        // ===========================================
-        Pass
-        {
-            Name "OUTLINE"
-            Tags { "LightMode"="Always" }
-            Cull Front
-            ZWrite Off
-            Offset 1, 1
-
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma target 3.0
-
-            #include "UnityCG.cginc"
-
-            float _OutlineWidth;
-            fixed4 _OutlineColor;
-            float _Alpha;
-
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float3 normal : NORMAL;
-            };
-
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-            };
-
-            v2f vert(appdata v)
-            {
-                v2f o;
-                float3 expanded = v.vertex.xyz + v.normal * _OutlineWidth;
-                o.pos = UnityObjectToClipPos(float4(expanded, 1.0));
-                return o;
-            }
-
-            fixed4 frag(v2f i) : SV_Target
-            {
-                return fixed4(_OutlineColor.rgb, _Alpha * _OutlineColor.a);
             }
             ENDCG
         }
