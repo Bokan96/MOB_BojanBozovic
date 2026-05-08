@@ -6,6 +6,10 @@ namespace Mobs
     /// <summary>
     /// Spawns enemy mobs that move towards the player.
     /// Uses object pooling and strips colliders to maximize performance.
+    /// 
+    /// All mobs spawn at the same origin point and then spread out horizontally
+    /// using a self-balancing weighted random. Mobs gravitate towards the center
+    /// and shift away from whichever side is overcrowded ("water flow" behaviour).
     /// </summary>
     public class EnemySpawner : MonoBehaviour
     {
@@ -17,11 +21,25 @@ namespace Mobs
         public int poolSize = 60;
         public float spawnInterval = 1.0f;
         public int spawnCountPerInterval = 2;
-        public float spawnSpread = 0.5f;
         public float mobSpeed = 6f;
+
+        [Header("Spread Behaviour")]
+        [Tooltip("Maximum distance from center a mob can spread to.")]
+        public float maxSpreadWidth = 3f;
+        [Tooltip("How strongly mobs are pulled towards center (higher = tighter center cluster).")]
+        [Range(0.5f, 4f)]
+        public float centerBias = 1.5f;
+        [Tooltip("How aggressively the system corrects when one side is overcrowded (0 = none).")]
+        [Range(0f, 2f)]
+        public float balanceStrength = 0.8f;
 
         private Queue<Mob> _pool = new Queue<Mob>();
         private float _nextSpawnTime;
+
+        // Running average of recent spawn X positions for self-balancing.
+        // Positive = too many on the right, negative = too many on the left.
+        private float _runningBias;
+        private const float BIAS_DECAY = 0.92f; // How quickly old bias fades (0-1)
 
         private void Start()
         {
@@ -57,19 +75,45 @@ namespace Mobs
                 
                 Mob mob = _pool.Dequeue();
 
-                // Fan out on the X axis
-                float xOffset = 0f;
-                if (spawnCountPerInterval > 1)
-                {
-                    float t = (float)i / (spawnCountPerInterval - 1);
-                    xOffset = Mathf.Lerp(-spawnSpread, spawnSpread, t);
-                }
+                // All mobs spawn at the exact same origin
+                Vector3 spawnPos = spawnPoint.position;
+                mob.Activate(spawnPos, mobSpeed, RecycleMob, isEnemy: true);
 
-                Vector3 pos = spawnPoint.position + new Vector3(xOffset, 0f, 0f);
-                
-                // isEnemy is true because these are shot from the enemy tower
-                mob.Activate(pos, mobSpeed, RecycleMob, isEnemy: true);
+                // --- Self-balancing weighted random spread ---
+                float targetX = GenerateBalancedX(spawnPos.x);
+                mob.ActivateSpread(targetX);
             }
+        }
+
+        /// <summary>
+        /// Generates a random X position that:
+        /// 1. Gravitates towards the center (Gaussian-like distribution via centerBias).
+        /// 2. Shifts away from whichever side has been overcrowded recently.
+        /// </summary>
+        private float GenerateBalancedX(float originX)
+        {
+            // Generate a center-biased random value in [-1, 1].
+            // By averaging multiple Random.Range calls we get a bell-curve shape.
+            // centerBias controls how tight the cluster is.
+            float raw = 0f;
+            int samples = Mathf.Max(1, Mathf.RoundToInt(centerBias * 2f));
+            for (int s = 0; s < samples; s++)
+            {
+                raw += Random.Range(-1f, 1f);
+            }
+            raw /= samples; // Averaging pulls values towards 0 (center)
+
+            // Apply balance correction: shift away from the overcrowded side
+            float correction = -_runningBias * balanceStrength;
+            raw = Mathf.Clamp(raw + correction, -1f, 1f);
+
+            // Map [-1, 1] to world X
+            float targetX = originX + raw * maxSpreadWidth;
+
+            // Update the running bias tracker (exponential moving average)
+            _runningBias = _runningBias * BIAS_DECAY + raw * (1f - BIAS_DECAY);
+
+            return targetX;
         }
 
         private void RecycleMob(Mob mob)

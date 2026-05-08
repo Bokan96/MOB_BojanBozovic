@@ -25,11 +25,11 @@ Shader "Custom/ToonGradientTransparent"
 
     SubShader
     {
-        Tags { "RenderType"="Transparent" "Queue"="Transparent+50" }
+        Tags { "RenderType"="Transparent" "Queue"="Transparent-100" }
         LOD 100
         
         Blend SrcAlpha OneMinusSrcAlpha
-        ZWrite Off
+        ZWrite On
 
         // ===========================================
         // PASS 1: Main Toon Gradient

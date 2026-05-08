@@ -243,7 +243,7 @@ namespace Mobs
 
             // Clean up if they run way off-screen
             float z = transform.position.z;
-            if (z > MAX_Z || z < -MAX_Z)
+            if (z > MAX_Z || z < 0)
             {
                 Recycle();
             }

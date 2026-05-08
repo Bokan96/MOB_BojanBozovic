@@ -1,5 +1,6 @@
 using UnityEngine;
 using Mobs;
+using TMPro;
 
 namespace Environment
 {
@@ -39,8 +40,14 @@ namespace Environment
         public float bumpScaleMultiplier = 1.15f;
         public float bumpRecoverySpeed = 15f;
         
+        [Tooltip("The TextMeshPro object to pop when a mob passes through")]
+        public TextMeshPro multiplierText;
+        public float textPopScaleMultiplier = 1.3f;
+        public float textPopRecoverySpeed = 10f;
+        
         private Vector3 _originalScale;
         private Vector3 _targetScale;
+        private Vector3 _originalTextScale;
         
         private float _startX;
         private float _pingPongTimer;
@@ -53,6 +60,11 @@ namespace Environment
             {
                 _originalScale = visualTransform.localScale;
                 _targetScale = _originalScale;
+            }
+
+            if (multiplierText != null)
+            {
+                _originalTextScale = multiplierText.transform.localScale;
             }
         }
 
@@ -92,6 +104,12 @@ namespace Environment
             {
                 visualTransform.localScale = Vector3.Lerp(visualTransform.localScale, _targetScale, Time.deltaTime * bumpRecoverySpeed);
             }
+
+            // Handle text pop recovery
+            if (multiplierText != null)
+            {
+                multiplierText.transform.localScale = Vector3.Lerp(multiplierText.transform.localScale, _originalTextScale, Time.deltaTime * textPopRecoverySpeed);
+            }
         }
 
         protected override void OnMobEntered(Mob mob)
@@ -102,6 +120,12 @@ namespace Environment
             if (visualTransform != null)
             {
                 visualTransform.localScale = _originalScale * bumpScaleMultiplier;
+            }
+
+            // Trigger text pop animation instantly
+            if (multiplierText != null)
+            {
+                multiplierText.transform.localScale = _originalTextScale * textPopScaleMultiplier;
             }
             
             bool isBig = mob.IsBigMob;
