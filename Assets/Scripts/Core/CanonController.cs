@@ -27,8 +27,8 @@ namespace Core
         public float wheelRotationSpeed = 120f;
 
         [Header("Juice - Movement Smoke")]
-        [Tooltip("Single Particle System placed between the wheels. Emission scales with movement speed.")]
-        public ParticleSystem movementSmoke;
+        [Tooltip("One ParticleSystem per wheel pair (e.g. front and rear). All emit together based on speed.")]
+        public ParticleSystem[] movementSmokes;
         [Tooltip("Maximum particles-per-second emitted at full speed.")]
         public float smokeMaxEmission = 40f;
         [Tooltip("Minimum movement speed (units/sec) before smoke starts emitting.")]
@@ -127,21 +127,21 @@ namespace Core
             float speed = Mathf.Abs(deltaX) / Time.deltaTime; // units per second
             debugCurrentSpeed = speed;
 
-            if (movementSmoke != null)
+            if (movementSmokes != null)
             {
-                var emission = movementSmoke.emission;
+                bool shouldEmit = speed >= smokeMinSpeed;
+                float rate = shouldEmit
+                    ? Mathf.Lerp(0f, smokeMaxEmission, Mathf.Clamp01(speed / moveSpeed))
+                    : 0f;
 
-                if (speed >= smokeMinSpeed)
+                foreach (var smoke in movementSmokes)
                 {
-                    emission.rateOverTime = Mathf.Lerp(0f, smokeMaxEmission, Mathf.Clamp01(speed / moveSpeed));
+                    if (smoke == null) continue;
+                    var emission = smoke.emission;
+                    emission.rateOverTime = rate;
 
-                    if (!movementSmoke.isPlaying)
-                        movementSmoke.Play();
-                }
-                else
-                {
-                    // Below threshold — cut emission, let existing particles die naturally
-                    emission.rateOverTime = 0f;
+                    if (shouldEmit && !smoke.isPlaying)
+                        smoke.Play();
                 }
             }
         }
