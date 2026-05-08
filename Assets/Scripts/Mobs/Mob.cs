@@ -40,6 +40,11 @@ namespace Mobs
         private float _startY;
         private float _targetY;
 
+        // Death animation state
+        private bool _isDying;
+        private float _deathTimer;
+        private const float DEATH_DURATION = 0.15f;
+
         public bool IsActive => _active;
         public bool IsBigMob => _isBigMob;
         public int HitPoints => _hitPoints;
@@ -58,6 +63,7 @@ namespace Mobs
             _hitPoints = 1;
             _isBigMob = false;
             _baseScale = _originalScale; // Reset to original in case this was previously a Big Mob
+            _isDying = false;
 
             _isLerpingY = doYLerp;
             if (doYLerp)
@@ -100,13 +106,29 @@ namespace Mobs
         /// </summary>
         public bool TakeHit()
         {
+            if (_isDying) return false;
+
             _hitPoints--;
             if (_hitPoints <= 0)
             {
-                Recycle();
+                Die();
                 return false; // Dead
             }
             return true; // Still alive
+        }
+
+        public void Die()
+        {
+            if (_isDying || !_active) return;
+            
+            _isDying = true;
+            _deathTimer = 0f;
+
+            // Unregister from collision immediately so it stops hitting things while playing the death animation
+            if (BattleManager.Instance != null)
+            {
+                BattleManager.Instance.UnregisterMob(this, _isEnemy);
+            }
         }
 
         public void Recycle()
@@ -116,8 +138,8 @@ namespace Mobs
             _active = false;
             gameObject.SetActive(false);
 
-            // Unregister from collision detection
-            if (BattleManager.Instance != null)
+            // Unregister from collision detection (if it wasn't already unregistered by Die())
+            if (!_isDying && BattleManager.Instance != null)
             {
                 BattleManager.Instance.UnregisterMob(this, _isEnemy);
             }
@@ -139,6 +161,27 @@ namespace Mobs
         private void Update()
         {
             if (!_active) return;
+
+            if (_isDying)
+            {
+                _deathTimer += Time.deltaTime;
+                float t = Mathf.Clamp01(_deathTimer / DEATH_DURATION);
+                
+                // Pop explode: scale up slightly then squash to 0 rapidly
+                float scaleT;
+                if (t < 0.5f) {
+                    scaleT = Mathf.Lerp(1f, 1.4f, t * 2f);
+                } else {
+                    scaleT = Mathf.Lerp(1.4f, 0f, (t - 0.5f) * 2f);
+                }
+                transform.localScale = _baseScale * scaleT;
+
+                if (t >= 1f)
+                {
+                    Recycle();
+                }
+                return; // Skip normal movement while exploding
+            }
 
             // Handle speed decay & scale pop (Fast out of cannon -> Walk speed)
             if (_lerpTimer < BOOST_DURATION)

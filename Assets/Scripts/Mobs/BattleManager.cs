@@ -77,8 +77,8 @@ namespace Mobs
                     // Pure mathematical distance check (sqrMagnitude avoids expensive square root calculation)
                     if ((pPos - eMob.transform.position).sqrMagnitude < sqrRadius)
                     {
-                        // Enemy always dies on contact
-                        eMob.Recycle();
+                        // Enemy always dies on contact (1 HP)
+                        eMob.Die();
 
                         // Player mob takes a hit — Big Mobs survive multiple hits
                         bool playerSurvived = pMob.TakeHit();
