@@ -9,6 +9,23 @@ namespace Environment
     /// </summary>
     public class MultiplierGate : GateBase
     {
+        public enum MovementType
+        {
+            Linear,
+            SineInOut,
+            CubicInOut
+        }
+
+        [Header("Movement")]
+        [Tooltip("If true, the gate will ping-pong along the X axis.")]
+        public bool isMovable = false;
+        [Tooltip("The destination X position. Starts from its initial position.")]
+        public float finalX = 3f;
+        [Tooltip("How fast the gate moves back and forth.")]
+        public float moveSpeed = 1f;
+        [Tooltip("The easing function for movement. CubicInOut keeps it at edges longer.")]
+        public MovementType movementType = MovementType.CubicInOut;
+
         [Header("Multiplier Settings")]
         [Tooltip("How many extra mobs to spawn when one enters")]
         public int multiplierAmount = 2;
@@ -24,9 +41,14 @@ namespace Environment
         
         private Vector3 _originalScale;
         private Vector3 _targetScale;
+        
+        private float _startX;
+        private float _pingPongTimer;
 
         private void Start()
         {
+            _startX = transform.position.x;
+
             if (visualTransform != null)
             {
                 _originalScale = visualTransform.localScale;
@@ -36,6 +58,32 @@ namespace Environment
 
         protected override void Update()
         {
+            if (isMovable)
+            {
+                _pingPongTimer += Time.deltaTime * moveSpeed;
+                // Mathf.PingPong bounces between 0 and 1
+                float t = Mathf.PingPong(_pingPongTimer, 1f);
+                float easedT = t;
+                
+                switch (movementType)
+                {
+                    case MovementType.SineInOut:
+                        easedT = -(Mathf.Cos(Mathf.PI * t) - 1f) / 2f;
+                        break;
+                    case MovementType.CubicInOut:
+                        easedT = t < 0.5f ? 4f * t * t * t : 1f - Mathf.Pow(-2f * t + 2f, 3f) / 2f;
+                        break;
+                    case MovementType.Linear:
+                    default:
+                        easedT = t;
+                        break;
+                }
+
+                Vector3 pos = transform.position;
+                pos.x = Mathf.Lerp(_startX, finalX, easedT);
+                transform.position = pos;
+            }
+
             // Critical: call base so GateBase can do the AABB checks!
             base.Update();
 
