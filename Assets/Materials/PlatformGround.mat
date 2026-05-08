@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PlatformGround
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: fb90c9ea576373848986c747a29d5146, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -68,10 +68,18 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _GradientOffset: -0.66
+    - _GradientScale: 4.38
+    - _GridScale: 2.33
+    - _GridTop: 1
+    - _GridWidth: 0.051
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutlineWidth: 0.0044
     - _Parallax: 0.02
+    - _ShadowStrength: 0.298
+    - _ShadowThreshold: -0.102
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -79,6 +87,10 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorBottom: {r: 0.34999996, g: 0.39999998, b: 0.27999997, a: 1}
+    - _ColorTop: {r: 0.54999995, g: 0.62, b: 0.45, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GridColor: {r: 0.45557263, g: 0.5, b: 0.3938679, a: 1}
+    - _OutlineColor: {r: 0.079999976, g: 0.079999976, b: 0.11999995, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

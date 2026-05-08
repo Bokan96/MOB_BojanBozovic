@@ -16,7 +16,7 @@ namespace Mobs
         public int rows = 1;
 
         [Header("Playback")]
-        public float fps = 12f;
+        public float fps = 24f;
 
         private Renderer _renderer;
         private MaterialPropertyBlock _mpb;

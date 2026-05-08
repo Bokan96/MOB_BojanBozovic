@@ -26,6 +26,18 @@ namespace Core
         [Tooltip("Degrees per unit of horizontal movement speed.")]
         public float wheelRotationSpeed = 120f;
 
+        [Header("Juice - Movement Smoke")]
+        [Tooltip("Single Particle System placed between the wheels. Emission scales with movement speed.")]
+        public ParticleSystem movementSmoke;
+        [Tooltip("Maximum particles-per-second emitted at full speed.")]
+        public float smokeMaxEmission = 40f;
+        [Tooltip("Minimum movement speed (units/sec) before smoke starts emitting.")]
+        public float smokeMinSpeed = 1f;
+
+        [Header("Debug (Read Only)")]
+        [Tooltip("Current cannon movement speed in units/sec. Watch this at runtime to tune smokeMinSpeed.")]
+        public float debugCurrentSpeed;
+
         private readonly Vector3 _baseScale = Vector3.one;
         private readonly Vector3 _recoilScale = new Vector3(1.1f, 1.1f, 1.1f);
         private readonly Vector3 _bigRecoilScale = new Vector3(1.3f, 0.7f, 1.3f); // Exaggerated squash for Big Mob
@@ -98,18 +110,38 @@ namespace Core
             }
 
             // --- WHEEL ROTATION ---
-            // Measure how much the cannon moved this frame on X
             float deltaX = transform.position.x - _prevX;
             _prevX = transform.position.x;
 
             if (wheels != null && Mathf.Abs(deltaX) > 0.0001f)
             {
-                // Moving right → wheels roll forward (+Z spin), left → backward (-Z spin)
                 float rotAmount = -deltaX * wheelRotationSpeed;
                 foreach (Transform wheel in wheels)
                 {
                     if (wheel != null)
                         wheel.Rotate(0f, 0f, rotAmount, Space.Self);
+                }
+            }
+
+            // --- MOVEMENT SMOKE ---
+            float speed = Mathf.Abs(deltaX) / Time.deltaTime; // units per second
+            debugCurrentSpeed = speed;
+
+            if (movementSmoke != null)
+            {
+                var emission = movementSmoke.emission;
+
+                if (speed >= smokeMinSpeed)
+                {
+                    emission.rateOverTime = Mathf.Lerp(0f, smokeMaxEmission, Mathf.Clamp01(speed / moveSpeed));
+
+                    if (!movementSmoke.isPlaying)
+                        movementSmoke.Play();
+                }
+                else
+                {
+                    // Below threshold — cut emission, let existing particles die naturally
+                    emission.rateOverTime = 0f;
                 }
             }
         }
