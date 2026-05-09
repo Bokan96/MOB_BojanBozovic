@@ -34,6 +34,18 @@ namespace Environment
         [Tooltip("The spawner reference to pull extra mobs from")]
         public MobSpawner mobSpawner;
 
+        [Header("Spread Variance")]
+        [Tooltip("Max half-width of the spread zone (world units). Mobs will land within this range of the original mob's X.")]
+        public float spreadWidth = 2.0f;
+        [Tooltip("How strongly mobs cluster toward the center. Higher = tighter group (matches EnemySpawner centerBias).")]
+        [Range(0.5f, 4f)]
+        public float centerBias = 1.5f;
+        [Tooltip("How aggressively the spread corrects when one side is getting overcrowded.")]
+        [Range(0f, 2f)]
+        public float balanceStrength = 0.6f;
+        [Tooltip("Hard minimum spacing between any two spawned mobs (world units).")]
+        public float minSpacing = 0.35f;
+
         [Header("Juice & Animation")]
         [Tooltip("The visual transform to scale for the bump animation (e.g. the 3D model/quad)")]
         public Transform visualTransform;
@@ -51,6 +63,10 @@ namespace Environment
         
         private float _startX;
         private float _pingPongTimer;
+
+        // Running spread bias — mirrors EnemySpawner._runningBias
+        private float _spreadBias;
+        private const float BIAS_DECAY = 0.85f;
 
         private void Start()
         {
@@ -131,43 +147,93 @@ namespace Environment
             {
                 multiplierText.transform.localScale = _originalTextScale * textPopScaleMultiplier;
             }
+
+            if (Core.AudioManager.Instance != null)
+            {
+                Core.AudioManager.Instance.PlayGateMultiply();
+            }
+
+            if (Core.GameManager.Instance != null)
+            {
+                Core.GameManager.Instance.TrackGatePassed();
+                Core.GameManager.Instance.TrackMobMultiplied();
+            }
             
             bool isBig = mob.IsBigMob;
-            
-            // Calculate spacing for an even horizontal line
-            float spacing = isBig ? 0.9f : 0.5f; // Distance between each spawned mob
-            float totalWidth = (multiplierAmount - 1) * spacing;
-            float startX = -(totalWidth / 2f);
 
-            // Check if the entering mob is a Big Mob to preserve the type
-            
+            // Gather weighted-random target X positions for all spawned mobs
+            // Uses the same bell-curve + balance-correction approach as EnemySpawner
+            var spawnedXPositions = new System.Collections.Generic.List<float>(multiplierAmount);
 
-            // Spawn the extra mobs
             for (int i = 0; i < multiplierAmount; i++)
             {
-                float offsetX = startX + (i * spacing);
-                
-                // Target global X for this specific mob in the spread, clamped to track bounds [-3, 3]
-                float targetGlobalX = Mathf.Clamp(mob.transform.position.x + offsetX, -3f, 3f);
-                
-                // Spawn the appropriate type without the cannon speed boost
-                Mob newMob = isBig 
+                float targetX = GenerateSpreadX(mob.transform.position.x, isBig);
+
+                // Rejection sampling: try up to 8 times to respect minSpacing
+                for (int attempt = 0; attempt < 8; attempt++)
+                {
+                    bool tooClose = false;
+                    foreach (float prev in spawnedXPositions)
+                    {
+                        if (Mathf.Abs(targetX - prev) < minSpacing)
+                        {
+                            tooClose = true;
+                            break;
+                        }
+                    }
+                    if (!tooClose) break;
+                    targetX = GenerateSpreadX(mob.transform.position.x, isBig);
+                }
+
+                spawnedXPositions.Add(targetX);
+            }
+
+            // Spawn all mobs at the calculated positions
+            for (int i = 0; i < spawnedXPositions.Count; i++)
+            {
+                Mob newMob = isBig
                     ? mobSpawner.SpawnBigMob(mob.transform.position, applyBoost: false)
                     : mobSpawner.SpawnMob(mob.transform.position, mobSpawner.mobSpeed, applyBoost: false);
-                
+
                 if (newMob != null)
                 {
-                    // Trigger the smooth horizontal spread animation
-                    newMob.ActivateSpread(targetGlobalX);
+                    newMob.ActivateSpread(spawnedXPositions[i]);
 
-                    // CRITICAL: Tell the gate to ignore this newly spawned mob so it doesn't 
-                    // trigger the gate again and cause an infinite spawning loop!
+                    // CRITICAL: Permanently ignore all freshly spawned mobs so the gate
+                    // can never be re-triggered by them, even if nudged backward.
                     IgnoreMob(newMob);
                 }
             }
 
-            // Recycle the original mob so it is cleanly replaced by the evenly spaced array
+            // Recycle the original mob — it is replaced by the spread array
             mob.Recycle();
+        }
+
+        /// <summary>
+        /// Generates a weighted-random global X position for a spawned mob.
+        /// Bell-curve distribution (via averaging) + running bias correction.
+        /// Mirrors the logic in EnemySpawner.GenerateBalancedX.
+        /// </summary>
+        private float GenerateSpreadX(float originX, bool isBig)
+        {
+            // Bell-curve: average multiple uniform samples → tends toward center
+            float raw = 0f;
+            int samples = Mathf.Max(1, Mathf.RoundToInt(centerBias * 2f));
+            for (int s = 0; s < samples; s++)
+                raw += Random.Range(-1f, 1f);
+            raw /= samples;
+
+            // Nudge away from the overcrowded side
+            float correction = -_spreadBias * balanceStrength;
+            raw = Mathf.Clamp(raw + correction, -1f, 1f);
+
+            // Update running bias (exponential moving average)
+            _spreadBias = _spreadBias * BIAS_DECAY + raw * (1f - BIAS_DECAY);
+
+            // Big mobs need tighter clustering (40% less spread) to avoid stacking
+            float effectiveWidth = isBig ? spreadWidth * 0.6f : spreadWidth;
+
+            return Mathf.Clamp(originX + raw * effectiveWidth, -3f, 3f);
         }
     }
 }

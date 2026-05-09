@@ -144,6 +144,11 @@ namespace Core
 
                         // Trigger muzzle flare on normal shots
                         TriggerMuzzleFlare();
+
+                        if (AudioManager.Instance != null)
+                        {
+                            AudioManager.Instance.PlayCannonFire();
+                        }
                     }
                 }
             }
@@ -154,6 +159,11 @@ namespace Core
                 if (mobSpawner != null && shootPoint != null)
                 {
                     mobSpawner.SpawnBigMob(shootPoint.position);
+
+                    if (AudioManager.Instance != null)
+                    {
+                        AudioManager.Instance.PlayFeverActivate();
+                    }
 
                     // Heavy recoil for the big shot (scale squash)
                     if (cannonHead != null)

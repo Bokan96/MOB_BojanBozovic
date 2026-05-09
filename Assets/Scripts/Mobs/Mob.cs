@@ -28,6 +28,13 @@ namespace Mobs
             // Capture the prefab's original scale so we don't force it to Vector3.one
             _originalScale = transform.localScale;
             _baseScale = _originalScale;
+
+            // Ensure mobs render on top of UI elements like TextMeshPro (which is set to 3050)
+            var sr = GetComponentInChildren<SpriteRenderer>();
+            if (sr != null && sr.sharedMaterial != null)
+            {
+                sr.sharedMaterial.renderQueue = 3060;
+            }
         }
 
         // Spread animation state
@@ -69,8 +76,9 @@ namespace Mobs
 
         // Overlap settings — pushes overlapping mobs forward into a line
         private const float OVERLAP_MIN_DIST = 0.5f;
-        private const float OVERLAP_MIN_DIST_BIG = 1.0f;
+        private const float OVERLAP_MIN_DIST_BIG = 0.6f;  // Was 1.0f — reduced 40% so big mobs don't rocket forward
         private const float OVERLAP_PUSH_SPEED = 20f;
+        private const float OVERLAP_PUSH_SPEED_BIG = 5f;  // Was implicit 20f — much gentler for big mobs
 
         public void Activate(Vector3 position, float speed, System.Action<Mob> recycleCallback, bool isEnemy = false, bool applyBoost = true, bool doYLerp = false, float targetY = 0f)
         {
@@ -149,6 +157,12 @@ namespace Mobs
             if (_isDying) return false;
 
             _hitPoints--;
+            
+            if (_isBigMob && _hitPoints > 0)
+            {
+                transform.localScale = _baseScale * 0.8f;
+            }
+
             if (_hitPoints <= 0)
             {
                 Die();
@@ -163,6 +177,11 @@ namespace Mobs
             
             _isDying = true;
             _deathTimer = 0f;
+
+            if (Core.AudioManager.Instance != null)
+            {
+                Core.AudioManager.Instance.PlayMobDeath();
+            }
 
             // Unregister from collision immediately so it stops hitting things while playing the death animation
             if (BattleManager.Instance != null)
@@ -183,6 +202,8 @@ namespace Mobs
             {
                 BattleManager.Instance.UnregisterMob(this, _isEnemy);
             }
+
+            Environment.GateBase.ClearMobFromAllGates(this);
 
             _onRecycle?.Invoke(this);
         }
@@ -242,6 +263,12 @@ namespace Mobs
         private void Update()
         {
             if (!_active) return;
+
+            // Recover scale from TakeHit punch if it's a big mob
+            if (_isBigMob && !_isDying && !_applyBoost && transform.localScale.x < _baseScale.x)
+            {
+                transform.localScale = Vector3.Lerp(transform.localScale, _baseScale, Time.deltaTime * 10f);
+            }
 
             if (_isDying)
             {
@@ -424,7 +451,8 @@ namespace Mobs
                     {
                         // The closer they are on Z, the harder we push them forward
                         float overlapZ = effectiveMinDist - dz;
-                        nudgeZ += overlapZ * OVERLAP_PUSH_SPEED * Time.deltaTime;
+                        float pushSpeed = (_isBigMob || other.IsBigMob) ? OVERLAP_PUSH_SPEED_BIG : OVERLAP_PUSH_SPEED;
+                        nudgeZ += overlapZ * pushSpeed * Time.deltaTime;
                     }
                 }
             }

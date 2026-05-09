@@ -19,6 +19,18 @@ namespace Environment
 
         // Keep track of mobs that have already triggered this gate
         private HashSet<Mob> _triggeredMobs = new HashSet<Mob>();
+        
+        private static List<GateBase> _allGates = new List<GateBase>();
+
+        protected virtual void Awake()
+        {
+            _allGates.Add(this);
+        }
+
+        protected virtual void OnDestroy()
+        {
+            _allGates.Remove(this);
+        }
 
         protected virtual void Update()
         {
@@ -52,15 +64,6 @@ namespace Environment
                         OnMobEntered(mob);
                     }
                 }
-                else
-                {
-                    // If it's outside bounds, remove it from tracked mobs so that if this
-                    // same mob object is recycled and shot again, it can trigger the gate anew.
-                    if (_triggeredMobs.Contains(mob))
-                    {
-                        _triggeredMobs.Remove(mob);
-                    }
-                }
             }
         }
 
@@ -78,6 +81,20 @@ namespace Environment
             if (mob != null)
             {
                 _triggeredMobs.Add(mob);
+            }
+        }
+
+        /// <summary>
+        /// Clears a mob from all gate tracking so it can trigger gates again when recycled.
+        /// </summary>
+        public static void ClearMobFromAllGates(Mob mob)
+        {
+            foreach (var gate in _allGates)
+            {
+                if (gate != null)
+                {
+                    gate._triggeredMobs.Remove(mob);
+                }
             }
         }
 

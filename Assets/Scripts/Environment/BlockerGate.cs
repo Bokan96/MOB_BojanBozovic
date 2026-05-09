@@ -127,6 +127,11 @@ namespace Environment
         {
             _isDestroyed = true;
 
+            if (Core.AudioManager.Instance != null)
+            {
+                Core.AudioManager.Instance.PlayBlockDestroy();
+            }
+
             // Play VFX if assigned
             if (destructionVfx != null)
             {

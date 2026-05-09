@@ -6,7 +6,7 @@ Shader "Custom/ToonGradient"
         _ColorTop ("Top Color", Color) = (0.85, 0.9, 0.95, 1)
         _ColorBottom ("Bottom Color", Color) = (0.55, 0.6, 0.7, 1)
         _GradientScale ("Gradient Scale", Range(0.1, 10.0)) = 1.5
-        _GradientOffset ("Gradient Y Offset", Range(-3, 3)) = 0.5
+        _GradientOffset ("Gradient Y Offset", Range(-10, 3)) = 0.5
 
         [Header(Toon Shading)]
         _ShadowStrength ("Shadow Strength", Range(0, 1)) = 0.35
