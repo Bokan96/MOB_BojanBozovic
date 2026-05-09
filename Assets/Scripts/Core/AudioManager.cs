@@ -25,6 +25,7 @@ namespace Core
         public AudioClip pipeEnterClip;
         public AudioClip pipeExitClip;
         public AudioClip backgroundMusicClip;
+        public AudioClip loseClip;
 
         [Header("Pitch Variation (Juice)")]
         [Tooltip("Random pitch variation for cannon fire")]
@@ -118,6 +119,9 @@ namespace Core
         public void PlayTowerDestroy() { PlaySound(towerDestroyClip); }
         
         public void PlayFeverActivate() { PlaySound(feverActivateClip, 1f, 1.1f, 1.2f); }
+        
+
+        public void PlayLoseSound() { PlaySound(loseClip, 1f, 1f, 1f); }
         
         public void PlayBlockDestroy() 
         { 

@@ -67,6 +67,10 @@ namespace Core
         [Tooltip("ParticleSystem for the big smoke burst. Reuses the existing Smoke material.")]
         public ParticleSystem bigShotSmoke;
 
+        [Header("Lose Sequence")]
+        [Tooltip("ParticleSystem to play when the cannon explodes (e.g. DestructionSmokePuff).")]
+        public ParticleSystem destructionVfx;
+
         [Header("Hook Animation")]
         [Tooltip("The frame rig transform that gets rotated 90° on Y at start and lerps back during the hook.")]
         public Transform cannonFrameRig;
@@ -591,6 +595,42 @@ namespace Core
             {
                 UI.UIManager.Instance.ShowTutorial();
             }
+        }
+
+        public void ExplodeAndDie()
+        {
+            if (destructionVfx != null)
+            {
+                ParticleSystem vfxInstance = Instantiate(destructionVfx, transform.position, Quaternion.Euler(-90f, 0f, 0f));
+                vfxInstance.Play();
+                Destroy(vfxInstance.gameObject, 3f);
+            }
+
+            if (Core.AudioManager.Instance != null)
+            {
+                Core.AudioManager.Instance.PlayTowerDestroy();
+            }
+
+            StartCoroutine(ShrinkAndDestroyRoutine());
+        }
+
+        private System.Collections.IEnumerator ShrinkAndDestroyRoutine()
+        {
+            float elapsed = 0f;
+            float duration = 0.25f; // Fast, juicy shrink
+            Vector3 startScale = transform.localScale;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                float eased = t * t * t; // Cubic ease in
+                transform.localScale = Vector3.Lerp(startScale, Vector3.zero, eased);
+                yield return null;
+            }
+
+            transform.localScale = Vector3.zero;
+            gameObject.SetActive(false);
         }
 
 #if UNITY_EDITOR

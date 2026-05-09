@@ -98,7 +98,7 @@ namespace Core
             }
         }
 
-        public void LoseGame()
+        public void LoseGame(Mobs.Mob offendingMob = null)
         {
             if (hasEnded) return;
             hasEnded = true;
@@ -107,11 +107,62 @@ namespace Core
             Luna.Unity.LifeCycle.GameEnded();
             #endif
 
-            if (UI.UIManager.Instance != null)
-            {
-                UI.UIManager.Instance.ShowLoseCTA();
-            }
+            // Play fail sound immediately
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayLoseSound();
+
+            // Stop cannon input straight away
+            if (_cannon != null)
+                _cannon.enabled = false;
+
+            StartCoroutine(LoseSequenceRoutine(offendingMob));
         }
+
+        private System.Collections.IEnumerator LoseSequenceRoutine(Mobs.Mob offendingMob)
+        {
+            // 1. Unregister the offending mob from battle so it stops dying/being hit
+            if (offendingMob != null && Mobs.BattleManager.Instance != null)
+                Mobs.BattleManager.Instance.UnregisterMob(offendingMob, isEnemy: true);
+
+            // 2. Drive mob toward the cannon (preserving mob's own Y)
+            if (offendingMob != null && _cannon != null)
+            {
+                Vector3 cannonPos = _cannon.transform.position;
+                float chargeSpeed = 10f;
+                float arrivalSqrDist = 1.5f * 1.5f;
+
+                // Freeze mob's own movement so we can drive it manually
+                offendingMob.StartCharge();
+
+                while (offendingMob != null && offendingMob.gameObject.activeSelf)
+                {
+                    Vector3 mobPos = offendingMob.transform.position;
+                    Vector3 target = new Vector3(cannonPos.x, mobPos.y, cannonPos.z);
+
+                    if ((mobPos - target).sqrMagnitude <= arrivalSqrDist)
+                        break;
+
+                    offendingMob.transform.position = Vector3.MoveTowards(mobPos, target, chargeSpeed * Time.deltaTime);
+                    yield return null;
+                }
+            }
+
+            // 3. Small dramatic pause before the boom
+            yield return new WaitForSeconds(0.2f);
+
+            // 4. Explode the cannon
+            if (_cannon != null)
+                _cannon.ExplodeAndDie();
+
+            // 5. Wait for smoke to clear
+            yield return new WaitForSeconds(1.5f);
+
+            // 6. Show the Lose CTA
+            if (UI.UIManager.Instance != null)
+                UI.UIManager.Instance.ShowLoseCTA();
+        }
+
+
 
         public void InstallGame()
         {

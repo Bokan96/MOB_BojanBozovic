@@ -21,6 +21,10 @@ namespace Mobs
         
         [Tooltip("Wider collision radius for Big Mobs (they're visually larger)")]
         public float bigMobCollisionRadius = 1.2f;
+
+        [Header("Lose Condition")]
+        [Tooltip("If any enemy mob's Z position is less than or equal to this, the player loses.")]
+        public float loseZThreshold = 1f;
         
         private float _sqrCollisionRadius;
         private float _sqrBigMobCollisionRadius;
@@ -58,6 +62,25 @@ namespace Mobs
 
         private void Update()
         {
+            if (Core.GameManager.Instance != null && Core.GameManager.Instance.hasEnded) return;
+
+            // 1. Check Lose Condition (Iterate over enemies)
+            for (int e = _activeEnemyMobs.Count - 1; e >= 0; e--)
+            {
+                Mob eMob = _activeEnemyMobs[e];
+                if (!eMob.IsActive) continue;
+
+                if (eMob.transform.position.z <= loseZThreshold)
+                {
+                    if (Core.GameManager.Instance != null)
+                    {
+                        Core.GameManager.Instance.LoseGame(eMob);
+                    }
+                    return;
+                }
+            }
+
+            // 2. Collision Detection
             // We iterate backwards because mobs might be removed (recycled) during the loop
             for (int p = _activePlayerMobs.Count - 1; p >= 0; p--)
             {

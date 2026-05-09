@@ -22,6 +22,7 @@ namespace Mobs
         private int _hitPoints;
         private bool _isBigMob;
         private bool _applyBoost;
+        private bool _isCharging; // Set true by GameManager during the lose sequence
 
         // Visual Hit Flash — uses direct material instance (MPB doesn't work with custom sprite shaders)
         private SpriteRenderer _spriteRenderer;
@@ -101,6 +102,11 @@ namespace Mobs
         public bool IsBigMob => _isBigMob;
         public int HitPoints => _hitPoints;
         public bool IsEnemy => _isEnemy;
+
+        /// <summary>
+        /// Freezes the mob's own movement so GameManager can drive it manually during the lose sequence.
+        /// </summary>
+        public void StartCharge() => _isCharging = true;
 
         private const float BOOST_DURATION = 2f;
         private const float MAX_Z = 30f;
@@ -446,6 +452,12 @@ namespace Mobs
                 transform.position = pos;
 
                 if (spreadT >= 1f) _isSpreading = false;
+            }
+
+            if (_isCharging)
+            {
+                // Movement is fully controlled externally — skip everything
+                return;
             }
 
             if (_isFollowing)
