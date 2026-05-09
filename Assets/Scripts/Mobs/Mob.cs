@@ -23,17 +23,49 @@ namespace Mobs
         private bool _isBigMob;
         private bool _applyBoost;
 
+        // Visual Hit Flash — uses direct material instance (MPB doesn't work with custom sprite shaders)
+        private SpriteRenderer _spriteRenderer;
+        private Material _matInstance;
+        private Color _originalTopColor;
+        private Color _originalBottomColor;
+        private bool _isFlashing;
+        private float _flashTimer;
+        private const float FLASH_DURATION = 0.08f; 
+
         private void Awake()
         {
             // Capture the prefab's original scale so we don't force it to Vector3.one
             _originalScale = transform.localScale;
             _baseScale = _originalScale;
+        }
 
-            // Ensure mobs render on top of UI elements like TextMeshPro (which is set to 3050)
-            var sr = GetComponentInChildren<SpriteRenderer>();
-            if (sr != null && sr.sharedMaterial != null)
+        private void EnsureMaterialCached()
+        {
+            if (_matInstance != null) return;
+
+            Renderer targetRenderer = null;
+            
+            // Search including inactive children
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>(true);
+            if (_spriteRenderer != null)
             {
-                sr.sharedMaterial.renderQueue = 3060;
+                targetRenderer = _spriteRenderer;
+            }
+            else
+            {
+                // Fallback to MeshRenderer in case it's a Quad/Mesh-based sprite
+                targetRenderer = GetComponentInChildren<MeshRenderer>(true);
+            }
+
+            if (targetRenderer != null && targetRenderer.sharedMaterial != null)
+            {
+                _matInstance = targetRenderer.material;
+                _matInstance.renderQueue = 3060;
+
+                if (_matInstance.HasProperty("_ColorTop"))
+                    _originalTopColor = _matInstance.GetColor("_ColorTop");
+                if (_matInstance.HasProperty("_ColorBottom"))
+                    _originalBottomColor = _matInstance.GetColor("_ColorBottom");
             }
         }
 
@@ -94,6 +126,16 @@ namespace Mobs
             _isEnteringPipe = false;
             _isFollowing = false;
             _followTarget = null;
+            
+            // Reset flash state
+            _isFlashing = false;
+            if (_matInstance != null)
+            {
+                if (_matInstance.HasProperty("_ColorTop"))
+                    _matInstance.SetColor("_ColorTop", _originalTopColor);
+                if (_matInstance.HasProperty("_ColorBottom"))
+                    _matInstance.SetColor("_ColorBottom", _originalBottomColor);
+            }
 
             _isLerpingY = doYLerp;
             if (doYLerp)
@@ -160,7 +202,10 @@ namespace Mobs
             
             if (_isBigMob && _hitPoints > 0)
             {
+                EnsureMaterialCached();
                 transform.localScale = _baseScale * 0.8f;
+                _isFlashing = true;
+                _flashTimer = 0f;
             }
 
             if (_hitPoints <= 0)
@@ -268,6 +313,32 @@ namespace Mobs
             if (_isBigMob && !_isDying && !_applyBoost && transform.localScale.x < _baseScale.x)
             {
                 transform.localScale = Vector3.Lerp(transform.localScale, _baseScale, Time.deltaTime * 10f);
+            }
+
+            // Hit flash animation — direct material instance manipulation
+            if (_isFlashing)
+            {
+                EnsureMaterialCached();
+                if (_matInstance != null)
+                {
+                    _flashTimer += Time.deltaTime;
+                    float t = Mathf.Clamp01(_flashTimer / FLASH_DURATION);
+                    
+                    // Instant red at t=0, smoothly fade back to original
+                    float curve = 1f - t;
+                    Color currentTop = Color.Lerp(_originalTopColor, Color.red, curve);
+                    Color currentBottom = Color.Lerp(_originalBottomColor, Color.red, curve);
+                    
+                    _matInstance.SetColor("_ColorTop", currentTop);
+                    _matInstance.SetColor("_ColorBottom", currentBottom);
+
+                    if (t >= 1f)
+                    {
+                        _isFlashing = false;
+                        _matInstance.SetColor("_ColorTop", _originalTopColor);
+                        _matInstance.SetColor("_ColorBottom", _originalBottomColor);
+                    }
+                }
             }
 
             if (_isDying)
