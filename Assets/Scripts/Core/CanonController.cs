@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Core
@@ -60,6 +61,26 @@ namespace Core
         [Tooltip("ParticleSystem for the big smoke burst. Reuses the existing Smoke material.")]
         public ParticleSystem bigShotSmoke;
 
+        [Header("Hook Animation")]
+        [Tooltip("The frame rig transform that gets rotated 90° on Y at start and lerps back during the hook.")]
+        public Transform cannonFrameRig;
+        [Tooltip("How far back on the Z-axis the cannon starts during the hook.")]
+        public float hookZDistance = 8f;
+        [Tooltip("Duration of the hook entrance animation in seconds.")]
+        public float hookDuration = 2f;
+        [Tooltip("If true, the main camera is parented to the cannon during the hook so it follows the movement.")]
+        public bool hookAttachCamera = true;
+        [Tooltip("Degrees per second the wheels rotate on Z during the hook slide.")]
+        public float hookWheelRotationSpeed = 70f;
+        [Tooltip("Duration of the camera smoothly transitioning back to its original position.")]
+        public float hookCameraTransitionDuration = 0.8f;
+        [Tooltip("Optional: Assign a camera or transform here to define where the main camera starts during the hook. If null, uses the values below.")]
+        public Transform hookCameraStartMarker;
+        [Tooltip("World position the camera starts at during the hook (used if marker is null).")]
+        public Vector3 hookCameraStartPos = new Vector3(0.0f, 7.17f, -3.69f);
+        [Tooltip("World rotation the camera starts at during the hook (used if marker is null).")]
+        public Quaternion hookCameraStartRot = new Quaternion(0.3267505f, 0.0f, 0.0f, 0.9451107f);
+
         [Header("Debug (Read Only)")]
         [Tooltip("Current cannon movement speed in units/sec. Watch this at runtime to tune smokeMinSpeed.")]
         public float debugCurrentSpeed;
@@ -85,6 +106,17 @@ namespace Core
         private Vector3 _cannonBodyBaseLocalPos;
         private bool _recoilReturning; // false = pushing back, true = returning
 
+        // Hook animation state
+        /// <summary>True once the hook intro animation has finished and the player can interact.</summary>
+        [HideInInspector] public bool hookComplete = false;
+        private Vector3 _hookTargetPos;
+        private Quaternion _hookTargetFrameRot;
+        private Vector3 _hookStartPos;
+        private Quaternion _hookStartFrameRot;
+        private Transform _cameraOriginalParent;
+        private Vector3 _cameraOriginalWorldPos;
+        private Quaternion _cameraOriginalWorldRot;
+
         private void Start()
         {
             cam = Camera.main;
@@ -109,10 +141,58 @@ namespace Core
             {
                 feverReadyParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             }
+
+            // ── Hook Animation Setup ──
+            // Cache the cannon's designed scene position as the target
+            _hookTargetPos = transform.position;
+
+            // Parent the camera to the cannon so it follows the hook movement
+            // This happens BEFORE we move the cannon to its start offset
+            if (hookAttachCamera && cam != null)
+            {
+                _cameraOriginalParent = cam.transform.parent;
+                _cameraOriginalWorldPos = cam.transform.position;
+                _cameraOriginalWorldRot = cam.transform.rotation;
+                
+                if (hookCameraStartMarker != null)
+                {
+                    cam.transform.position = hookCameraStartMarker.position;
+                    cam.transform.rotation = hookCameraStartMarker.rotation;
+                }
+                else
+                {
+                    cam.transform.position = hookCameraStartPos;
+                    cam.transform.rotation = hookCameraStartRot;
+                }
+                cam.transform.SetParent(transform, true);
+            }
+
+            // Cache the frame rig's designed rotation as the target
+            if (cannonFrameRig != null)
+            {
+                _hookTargetFrameRot = cannonFrameRig.localRotation;
+
+                // Start the frame rig rotated 90° on Y
+                Vector3 startEuler = cannonFrameRig.localEulerAngles;
+                startEuler.y += 90f;
+                _hookStartFrameRot = Quaternion.Euler(startEuler);
+                cannonFrameRig.localRotation = _hookStartFrameRot;
+            }
+
+            // Move the cannon backward along Z
+            _hookStartPos = _hookTargetPos - new Vector3(0f, 0f, hookZDistance);
+            transform.position = _hookStartPos;
+            _prevX = transform.position.x;
+
+            // Start the hook animation coroutine
+            StartCoroutine(HookAnimationRoutine());
         }
 
         private void Update()
         {
+            // Block all player input during the hook intro animation
+            if (!hookComplete) return;
+
             bool held = Input.GetMouseButton(0);
             bool released = Input.GetMouseButtonUp(0);
 
@@ -366,5 +446,107 @@ namespace Core
             bigShotSmoke.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             bigShotSmoke.Play();
         }
+
+        // ==================== HOOK ANIMATION ====================
+
+        /// <summary>
+        /// Intro hook: cannon slides forward along Z while the frame rig
+        /// rotates from 90° back to its original Y rotation. Camera follows.
+        /// On completion the camera is detached and the tutorial hand appears.
+        /// </summary>
+        private IEnumerator HookAnimationRoutine()
+        {
+            float elapsed = 0f;
+
+            // Phase 1: Slide forward along Z
+            while (elapsed < hookDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / hookDuration);
+                float eased = Mathf.SmoothStep(0f, 1f, t);
+
+                // Lerp cannon position forward along Z
+                transform.position = Vector3.Lerp(_hookStartPos, _hookTargetPos, eased);
+
+                // Spin wheels during the slide
+                if (wheels != null)
+                {
+                    float rotAmount = hookWheelRotationSpeed * Time.deltaTime;
+                    foreach (Transform wheel in wheels)
+                    {
+                        if (wheel != null)
+                            wheel.Rotate(0f, 0f, -rotAmount, Space.Self);
+                    }
+                }
+
+                yield return null;
+            }
+
+            // Snap to final position
+            transform.position = _hookTargetPos;
+            _prevX = _hookTargetPos.x;
+
+            // Phase 2: Rotate the frame rig back (Sequential, only after slide)
+            if (cannonFrameRig != null)
+            {
+                elapsed = 0f;
+                float rotDuration = 0.5f;
+                while (elapsed < rotDuration)
+                {
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.Clamp01(elapsed / rotDuration);
+                    float eased = Mathf.SmoothStep(0f, 1f, t);
+
+                    cannonFrameRig.localRotation = Quaternion.Slerp(
+                        _hookStartFrameRot, _hookTargetFrameRot, eased);
+
+                    yield return null;
+                }
+                cannonFrameRig.localRotation = _hookTargetFrameRot;
+            }
+
+            // Phase 3: Smoothly transition camera back to its original position/rotation
+            if (hookAttachCamera && cam != null)
+            {
+                cam.transform.SetParent(_cameraOriginalParent, true);
+                Vector3 currentCamPos = cam.transform.position;
+                Quaternion currentCamRot = cam.transform.rotation;
+                
+                elapsed = 0f;
+                while (elapsed < hookCameraTransitionDuration)
+                {
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.Clamp01(elapsed / hookCameraTransitionDuration);
+                    float eased = Mathf.SmoothStep(0f, 1f, t);
+                    
+                    cam.transform.position = Vector3.Lerp(currentCamPos, _cameraOriginalWorldPos, eased);
+                    cam.transform.rotation = Quaternion.Slerp(currentCamRot, _cameraOriginalWorldRot, eased);
+                    
+                    yield return null;
+                }
+                cam.transform.position = _cameraOriginalWorldPos;
+                cam.transform.rotation = _cameraOriginalWorldRot;
+            }
+
+            // Mark hook as complete — unlocks Update() input processing
+            hookComplete = true;
+
+            // Show the tutorial hand now that the cannon has arrived
+            if (UI.UIManager.Instance != null)
+            {
+                UI.UIManager.Instance.ShowTutorial();
+            }
+        }
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (hookCameraStartMarker != null)
+            {
+                hookCameraStartPos = hookCameraStartMarker.position;
+                hookCameraStartRot = hookCameraStartMarker.rotation;
+            }
+        }
+#endif
     }
 }

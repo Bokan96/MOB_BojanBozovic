@@ -10,6 +10,13 @@ namespace Core
         public bool hasStarted = false;
         public bool hasEnded = false;
 
+        [Header("Spawners")]
+        [Tooltip("These game objects will be disabled on start and enabled once the player interacts with the game.")]
+        #if LUNA_PLAYWORKS
+        [Luna.Unity.HideInPlayground]
+        #endif
+        [SerializeField] private GameObject[] delayedSpawners;
+
         [Header("Luna Playground Parameters")]
         public float MobSpeed = 6f;
         public float SpawnInterval = 1f;
@@ -23,8 +30,18 @@ namespace Core
             Instance = this;
         }
 
+        private CanonController _cannon;
+
         private void Start()
         {
+            if (delayedSpawners != null)
+            {
+                foreach (var spawner in delayedSpawners)
+                {
+                    if (spawner != null) spawner.SetActive(false);
+                }
+            }
+
             #if LUNA_PLAYWORKS
             Luna.Unity.LifeCycle.GameStarted();
             Luna.Unity.LifeCycle.LevelStarted();
@@ -33,6 +50,13 @@ namespace Core
 
         private void Update()
         {
+            // Lazy-cache cannon reference
+            if (_cannon == null)
+                _cannon = FindObjectOfType<CanonController>();
+
+            // Don't allow game start until the hook intro animation is done
+            if (_cannon != null && !_cannon.hookComplete) return;
+
             if (!hasStarted && Input.GetMouseButtonDown(0))
             {
                 hasStarted = true;
@@ -40,6 +64,14 @@ namespace Core
                 if (UI.UIManager.Instance != null)
                 {
                     UI.UIManager.Instance.HideTutorial();
+                }
+
+                if (delayedSpawners != null)
+                {
+                    foreach (var spawner in delayedSpawners)
+                    {
+                        if (spawner != null) spawner.SetActive(true);
+                    }
                 }
             }
         }
@@ -59,11 +91,10 @@ namespace Core
             }
             
             // Cannon lerp forward
-            CanonController canon = FindObjectOfType<CanonController>();
-            if (canon != null)
+            if (_cannon != null)
             {
-                canon.enabled = false; // Stop player from shooting/moving
-                StartCoroutine(LerpCannonForward(canon.transform));
+                _cannon.enabled = false; // Stop player from shooting/moving
+                StartCoroutine(LerpCannonForward(_cannon.transform));
             }
         }
 

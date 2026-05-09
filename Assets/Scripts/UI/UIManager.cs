@@ -1,11 +1,16 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
     public class UIManager : MonoBehaviour
     {
         public static UIManager Instance { get; private set; }
+
+        [Header("Tutorial Background")]
+        [Tooltip("The Image used as the tutorial text background. Its alpha will fade in first.")]
+        public Image tutorialTextBG;
 
         [Header("Tutorial Hand")]
         [Tooltip("The tutorial hand GameObject (must be inside a Canvas with an RectTransform).")]
@@ -41,10 +46,19 @@ namespace UI
         public GameObject loseCTA;
 
         private Coroutine _handRoutine;
-        
+
         private Vector2 _originalArrowLeftPos;
         private Vector2 _originalArrowRightPos;
         private bool _tutorialActive;
+        private bool _arrowsAnimating; // true during the intro pop, suppresses Update ping-pong movement
+
+        // Cached original values captured in Awake
+        private Color _bgOriginalColor;
+        private Vector3 _textOriginalScale;
+        private Vector3 _arrowLeftOriginalScale;
+        private Vector3 _arrowRightOriginalScale;
+        private Vector3 _handOriginalScale;
+        private Vector2 _handOriginalPos;
 
         private void Awake()
         {
@@ -56,30 +70,49 @@ namespace UI
             if (tutorialArrowLeft != null) _originalArrowLeftPos = tutorialArrowLeft.anchoredPosition;
             if (tutorialArrowRight != null) _originalArrowRightPos = tutorialArrowRight.anchoredPosition;
 
-            ShowTutorial();
+            // Cache original colours and scales from scene values
+            if (tutorialTextBG != null)
+            {
+                _bgOriginalColor = tutorialTextBG.color;
+            }
+            if (tutorialText != null)
+            {
+                _textOriginalScale = tutorialText.transform.localScale;
+            }
+            if (tutorialArrowLeft != null)
+            {
+                _arrowLeftOriginalScale = tutorialArrowLeft.localScale;
+            }
+            if (tutorialArrowRight != null)
+            {
+                _arrowRightOriginalScale = tutorialArrowRight.localScale;
+            }
+            if (tutorialHand != null)
+            {
+                _handOriginalScale = tutorialHand.localScale;
+                _handOriginalPos = tutorialHand.anchoredPosition;
+            }
+
+            // Tutorial starts hidden — it will be shown by CanonController
+            // after the hook entrance animation completes.
+            HideAllTutorialImmediate();
         }
 
         private void Update()
         {
-            if (_tutorialActive)
+            if (_tutorialActive && !_arrowsAnimating)
             {
-                // Ping-pong Arrows
+                // Ping-pong Arrows position
                 if (tutorialArrowLeft != null || tutorialArrowRight != null)
                 {
-                    // Ping pong between 0 and 1
                     float arrowT = Mathf.PingPong(Time.time * arrowMoveSpeed, 1f);
                     float easedArrowT = arrowT < 0.5f ? 4f * arrowT * arrowT * arrowT : 1f - Mathf.Pow(-2f * arrowT + 2f, 3f) / 2f;
 
                     if (tutorialArrowLeft != null)
-                    {
-                        // Move inward (to the right, +X)
                         tutorialArrowLeft.anchoredPosition = _originalArrowLeftPos + new Vector2(arrowMoveDistance * easedArrowT, 0f);
-                    }
+
                     if (tutorialArrowRight != null)
-                    {
-                        // Move inward (to the left, -X)
                         tutorialArrowRight.anchoredPosition = _originalArrowRightPos + new Vector2(-arrowMoveDistance * easedArrowT, 0f);
-                    }
                 }
             }
         }
@@ -88,19 +121,8 @@ namespace UI
 
         public void ShowTutorial()
         {
-            if (tutorialHand != null)
-            {
-                tutorialHand.gameObject.SetActive(true);
-
-                if (_handRoutine != null) StopCoroutine(_handRoutine);
-                _handRoutine = StartCoroutine(HandAnimation());
-            }
-
-            if (tutorialText != null) tutorialText.SetActive(true);
-            if (tutorialArrowLeft != null) tutorialArrowLeft.gameObject.SetActive(true);
-            if (tutorialArrowRight != null) tutorialArrowRight.gameObject.SetActive(true);
-            
-            _tutorialActive = true;
+            if (_handRoutine != null) StopCoroutine(_handRoutine);
+            _handRoutine = StartCoroutine(TutorialIntroSequence());
         }
 
         public void HideTutorial()
@@ -111,11 +133,7 @@ namespace UI
                 _handRoutine = null;
             }
 
-            if (tutorialHand != null) tutorialHand.gameObject.SetActive(false);
-            if (tutorialText != null) tutorialText.SetActive(false);
-            if (tutorialArrowLeft != null) tutorialArrowLeft.gameObject.SetActive(false);
-            if (tutorialArrowRight != null) tutorialArrowRight.gameObject.SetActive(false);
-            
+            HideAllTutorialImmediate();
             _tutorialActive = false;
         }
 
@@ -135,38 +153,182 @@ namespace UI
                 Core.GameManager.Instance.InstallGame();
         }
 
-        // ──────────────── HAND ANIMATION ────────────────
+        // ──────────────── HELPERS ────────────────
 
-        private IEnumerator HandAnimation()
+        private void HideAllTutorialImmediate()
         {
-            // Phase 1: Slide from screen center (0, 0) → pingPongCenter
-            Vector2 startPos = Vector2.zero;
-            float elapsed = 0f;
+            if (tutorialTextBG != null)
+            {
+                Color c = _bgOriginalColor;
+                c.a = 0f;
+                tutorialTextBG.color = c;
+                tutorialTextBG.gameObject.SetActive(false);
+            }
+            if (tutorialText != null)
+            {
+                tutorialText.transform.localScale = Vector3.zero;
+                tutorialText.SetActive(false);
+            }
+            if (tutorialArrowLeft != null)
+            {
+                tutorialArrowLeft.localScale = Vector3.zero;
+                tutorialArrowLeft.gameObject.SetActive(false);
+            }
+            if (tutorialArrowRight != null)
+            {
+                tutorialArrowRight.localScale = Vector3.zero;
+                tutorialArrowRight.gameObject.SetActive(false);
+            }
+            if (tutorialHand != null)
+            {
+                tutorialHand.localScale = Vector3.zero;
+                tutorialHand.gameObject.SetActive(false);
+            }
+        }
 
+        // ──────────────── TUTORIAL INTRO SEQUENCE ────────────────
+
+        /// <summary>
+        /// Full sequential tutorial intro:
+        /// 1. BG fades in (0.3s)
+        /// 2. Text + Arrows scale in simultaneously (0.3s)
+        /// 3. Hand pops in (scale 0 → overshoot → target) and then immediately starts ping-pong
+        /// </summary>
+        private IEnumerator TutorialIntroSequence()
+        {
+            _tutorialActive = true;
+            _arrowsAnimating = true;
+
+            // ── Step 1: Fade in BG ──
+            if (tutorialTextBG != null)
+            {
+                tutorialTextBG.gameObject.SetActive(true);
+                Color start = _bgOriginalColor; start.a = 0f;
+                tutorialTextBG.color = start;
+
+                float elapsed = 0f;
+                float dur = 0.3f;
+                while (elapsed < dur)
+                {
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.Clamp01(elapsed / dur);
+                    Color c = _bgOriginalColor;
+                    c.a = Mathf.Lerp(0f, _bgOriginalColor.a, t);
+                    tutorialTextBG.color = c;
+                    yield return null;
+                }
+                tutorialTextBG.color = _bgOriginalColor;
+            }
+
+            // ── Step 2: Scale in Text + Arrows simultaneously (0.3s) ──
+            if (tutorialText != null)
+            {
+                tutorialText.SetActive(true);
+                tutorialText.transform.localScale = Vector3.zero;
+            }
+            if (tutorialArrowLeft != null)
+            {
+                tutorialArrowLeft.gameObject.SetActive(true);
+                tutorialArrowLeft.localScale = Vector3.zero;
+            }
+            if (tutorialArrowRight != null)
+            {
+                tutorialArrowRight.gameObject.SetActive(true);
+                tutorialArrowRight.localScale = Vector3.zero;
+            }
+
+            {
+                float elapsed = 0f;
+                float dur = 0.3f;
+                while (elapsed < dur)
+                {
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.Clamp01(elapsed / dur);
+                    // Cubic ease-out gives a snappy pop feel
+                    float eased = 1f - Mathf.Pow(1f - t, 3f);
+
+                    if (tutorialText != null)
+                        tutorialText.transform.localScale = Vector3.Lerp(Vector3.zero, _textOriginalScale, eased);
+                    if (tutorialArrowLeft != null)
+                        tutorialArrowLeft.localScale = Vector3.Lerp(Vector3.zero, _arrowLeftOriginalScale, eased);
+                    if (tutorialArrowRight != null)
+                        tutorialArrowRight.localScale = Vector3.Lerp(Vector3.zero, _arrowRightOriginalScale, eased);
+
+                    yield return null;
+                }
+                // Snap to exact final scales
+                if (tutorialText != null) tutorialText.transform.localScale = _textOriginalScale;
+                if (tutorialArrowLeft != null) tutorialArrowLeft.localScale = _arrowLeftOriginalScale;
+                if (tutorialArrowRight != null) tutorialArrowRight.localScale = _arrowRightOriginalScale;
+            }
+
+            // ── Step 3: Hand pop-in and slide ──
+            // Arrow ping-pong can now run freely in Update
+            _arrowsAnimating = false;
+            
+            // This coroutine now handles both scaling up and sliding to the center
+            yield return StartCoroutine(HandPingPongLoop());
+        }
+
+        // ──────────────── HAND ANIMATION (PING-PONG) ────────────────
+
+        private IEnumerator HandPingPongLoop()
+        {
+            if (tutorialHand == null) yield break;
+
+            // Phase 1: Slide from current editor pos → pingPongCenter
+            // AND scale up from 0 → overshoot → target (halved duration)
+            Vector2 startPos = _handOriginalPos;
+            float elapsed = 0f;
+            Vector3 overshoot = _handOriginalScale * 1.25f;
+            float scaleDuration = introSlideDuration * 0.5f; // Scaling is twice as fast
+
+            tutorialHand.gameObject.SetActive(true);
             tutorialHand.anchoredPosition = startPos;
+            tutorialHand.localScale = Vector3.zero;
+            tutorialHand.localRotation = Quaternion.identity;
 
             while (elapsed < introSlideDuration)
             {
                 elapsed += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsed / introSlideDuration);
-                // Cubic ease-out so it decelerates as it arrives
-                float eased = 1f - Mathf.Pow(1f - t, 3f);
-                tutorialHand.anchoredPosition = Vector2.Lerp(startPos, pingPongCenter, eased);
+                float tScale = Mathf.Clamp01(elapsed / scaleDuration);
+                
+                // Position movement
+                float easedPos = 1f - Mathf.Pow(1f - t, 3f);
+                tutorialHand.anchoredPosition = Vector2.Lerp(startPos, pingPongCenter, easedPos);
+
+                // Scale pop-in (0 -> overshoot -> target)
+                Vector3 scale;
+                if (tScale < 0.6f)
+                {
+                    float subT = tScale / 0.6f;
+                    float easedScale = 1f - Mathf.Pow(1f - subT, 2f); 
+                    scale = Vector3.Lerp(Vector3.zero, overshoot, easedScale);
+                }
+                else
+                {
+                    float subT = Mathf.Clamp01((tScale - 0.6f) / 0.4f);
+                    float easedScale = Mathf.SmoothStep(0f, 1f, subT);
+                    scale = Vector3.Lerp(overshoot, _handOriginalScale, easedScale);
+                }
+                tutorialHand.localScale = scale;
+
                 yield return null;
             }
 
             tutorialHand.anchoredPosition = pingPongCenter;
+            tutorialHand.localScale = _handOriginalScale;
 
             // Phase 2: Ping-pong between (+X, Y) and (-X, Y) forever
-            // pingPongCenter = (X, Y) → mirror = (-X, Y)
             Vector2 posRight = pingPongCenter;
             Vector2 posLeft  = new Vector2(-pingPongCenter.x, pingPongCenter.y);
 
             float pingPongTimer = 0f;
-            bool goingLeft = true; // starts by sweeping left
-            
-            float startZRot = 0f; // Initially starts straight
-            float targetZRot = pingPongRotationZ; // Moving left first -> +25
+            bool goingLeft = true;
+
+            float startZRot = 0f;
+            float targetZRot = pingPongRotationZ;
 
             while (true)
             {
@@ -178,24 +340,19 @@ namespace UI
                     ? Vector2.Lerp(posRight, posLeft, eased)
                     : Vector2.Lerp(posLeft, posRight, eased);
 
-                // Rotation over the first 1/5th of the movement
                 float rotDuration = pingPongDuration / 5f;
                 float rotT = Mathf.Clamp01(pingPongTimer / rotDuration);
-                
-                // Cubic ease in-out for rotation
                 float easedRot = rotT < 0.5f ? 4f * rotT * rotT * rotT : 1f - Mathf.Pow(-2f * rotT + 2f, 3f) / 2f;
                 float currentZRot = Mathf.Lerp(startZRot, targetZRot, easedRot);
-                
+
                 tutorialHand.localRotation = Quaternion.Euler(0f, 0f, currentZRot);
 
                 if (t >= 1f)
                 {
-                    // Snap to target and reverse
                     tutorialHand.anchoredPosition = goingLeft ? posLeft : posRight;
                     goingLeft = !goingLeft;
                     pingPongTimer = 0f;
-                    
-                    // Setup rotation for the new direction
+
                     startZRot = currentZRot;
                     targetZRot = goingLeft ? pingPongRotationZ : -pingPongRotationZ;
                 }

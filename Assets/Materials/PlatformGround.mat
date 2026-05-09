@@ -68,8 +68,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GradientOffset: -0.66
-    - _GradientScale: 4.38
+    - _GradientOffset: -0.91
+    - _GradientScale: 5.5
     - _GradientShift: 0
     - _GridScale: 2.33
     - _GridTop: 1
@@ -82,7 +82,7 @@ Material:
     - _RimIntensity: 0
     - _RimPower: 8
     - _ShadowOffset: 0.3
-    - _ShadowStrength: 0.298
+    - _ShadowStrength: 0.589
     - _ShadowThreshold: -0.102
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
