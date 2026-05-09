@@ -141,14 +141,43 @@ namespace Environment
             // Play VFX if assigned
             if (destructionVfx != null)
             {
-                // Unparent it so it doesn't get disabled when we hide the blocker GameObject
-                destructionVfx.transform.SetParent(null);
-                destructionVfx.Play();
-                // Clean up the particle object after it finishes
-                Destroy(destructionVfx.gameObject, 3f); 
+                // Instantiate a clone of the prefab at our current position
+                ParticleSystem vfxInstance = Instantiate(destructionVfx, transform.position, Quaternion.identity);
+                vfxInstance.Play();
+                
+                // Destroying a scene clone is perfectly fine in Luna. 
+                // The error was because the code previously tried to destroy the Prefab Asset itself!
+                Destroy(vfxInstance.gameObject, 3f); 
             }
 
-            // Hide the entire blocker game object, revealing whatever is behind it
+            // Instead of instantly hiding, let's shrink it smoothly
+            if (visualTransform != null)
+            {
+                StartCoroutine(ShrinkAndDestroyRoutine(visualTransform));
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
+        private System.Collections.IEnumerator ShrinkAndDestroyRoutine(Transform targetTransform)
+        {
+            float elapsed = 0f;
+            float duration = 0.25f; // Super fast juicy shrink
+            Vector3 startScale = targetTransform.localScale;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                // Ease In Back curve for a nice "pop" shrinking effect
+                float eased = t * t * t; 
+                targetTransform.localScale = Vector3.Lerp(startScale, Vector3.zero, eased);
+                yield return null;
+            }
+
+            targetTransform.localScale = Vector3.zero;
             gameObject.SetActive(false);
         }
     }

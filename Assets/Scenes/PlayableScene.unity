@@ -544,7 +544,7 @@ MonoBehaviour:
   health: 100
   visualTransform: {fileID: 1749296004}
   healthText: {fileID: 2036319932}
-  destructionVfx: {fileID: 0}
+  destructionVfx: {fileID: 2328671961319390428, guid: e9994dce638d026408b177f1810121eb, type: 3}
   hitScaleMultiplier: 0.9
   hitRecoverySpeed: 10
   shakeIntensity: 0.01
@@ -17135,93 +17135,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1580440642}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1606002017
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1606002019}
-  - component: {fileID: 1606002018}
-  m_Layer: 0
-  m_Name: cannon_progressbar_fill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!212 &1606002018
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606002017}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8931e9f76bc5fda4a8caff18fa7b8a0f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.32, y: 1.4}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &1606002019
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606002017}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0661595, y: -4.8108816, z: 5.188108}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1613637513
 GameObject:
   m_ObjectHideFlags: 0
@@ -22728,7 +22641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2178cd35306cd3d48b7ba4c247e2645e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.15
+      value: 0.15621
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2178cd35306cd3d48b7ba4c247e2645e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24038,6 +23951,12 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5f5e9e795c173484d9e5763637e9698d, type: 2}
+  - {fileID: 2100000, guid: 13dae3ee8dd477c4e9853bf750b490ec, type: 2}
+  - {fileID: 2100000, guid: 9e5805901d014fc4aac1e8af08524c73, type: 2}
+  - {fileID: 2100000, guid: 8303b2ef23e2bbf47a1cd5db51292f3c, type: 2}
+  - {fileID: 2100000, guid: 13dae3ee8dd477c4e9853bf750b490ec, type: 2}
+  - {fileID: 2100000, guid: 5f5e9e795c173484d9e5763637e9698d, type: 2}
+  - {fileID: 2100000, guid: 5f5e9e795c173484d9e5763637e9698d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24153,7 +24072,7 @@ GameObject:
   - component: {fileID: 543450652268334312}
   - component: {fileID: 3469287838399824719}
   m_Layer: 0
-  m_Name: EnemySpawner
+  m_Name: EnemyTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24391,7 +24310,7 @@ MonoBehaviour:
   zDepth: 3
   currentHP: 50
   healthText: {fileID: 2012820997}
-  destructionParticles: {fileID: 0}
+  destructionParticles: {fileID: 2328671961319390428, guid: e9994dce638d026408b177f1810121eb, type: 3}
   towerMesh: {fileID: 5507564729412642989}
   hitPunchScale: 0.85
   springSpeed: 18
@@ -24435,7 +24354,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415082603507915033}
-  m_Mesh: {fileID: -8255370291340154554, guid: 231025fbe71f17746a2ac52200890d59, type: 3}
+  m_Mesh: {fileID: -8255370291340154554, guid: bdc2a283deb7139419f47bde1ceeb1b3, type: 3}
 --- !u!4 &5285153421228133561
 Transform:
   m_ObjectHideFlags: 0
@@ -24741,4 +24660,3 @@ SceneRoots:
   - {fileID: 543450652268334312}
   - {fileID: 2097896746}
   - {fileID: 1990307976}
-  - {fileID: 1606002019}
