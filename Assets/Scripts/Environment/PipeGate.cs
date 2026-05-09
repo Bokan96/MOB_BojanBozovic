@@ -60,6 +60,11 @@ namespace Environment
                 if (t >= 1f)
                 {
                     // Reached the end!
+                    if (Core.AudioManager.Instance != null)
+                    {
+                        Core.AudioManager.Instance.PlayPipeExit();
+                    }
+
                     // 1. Spawn the mob at the end point
                     if (mobSpawner != null && pathPoints.Count > 0)
                     {
@@ -108,6 +113,11 @@ namespace Environment
 
             if (pathPoints.Count > 0)
             {
+                if (Core.AudioManager.Instance != null)
+                {
+                    Core.AudioManager.Instance.PlayPipeEnter();
+                }
+
                 // Suck the mob towards the first path point over a short duration
                 mob.EnterPipe(pathPoints[0].position, 0.15f, () => 
                 {

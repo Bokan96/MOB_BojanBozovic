@@ -108,7 +108,13 @@ namespace Environment
                 _currentShakeIntensity = mob.IsBigMob ? shakeIntensity * 2.5f : shakeIntensity;
             }
 
-            // 4. Check for Destruction
+            // 4. Play Damaged Sound
+            if (Core.AudioManager.Instance != null)
+            {
+                Core.AudioManager.Instance.PlayTowerDamaged();
+            }
+
+            // 5. Check for Destruction
             if (health <= 0)
             {
                 DestroyBlocker();

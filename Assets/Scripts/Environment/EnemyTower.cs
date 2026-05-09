@@ -63,7 +63,7 @@ namespace Environment
 
             if (Core.AudioManager.Instance != null)
             {
-                // Play a generic hit or if there's a specific damage sound. For now use mob death or a tower hit sound if added later.
+                Core.AudioManager.Instance.PlayTowerDamaged();
             }
 
             if (currentHP <= 0)
