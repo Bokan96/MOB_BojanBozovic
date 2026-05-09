@@ -21,7 +21,7 @@ namespace Mobs
         [Tooltip("Optional. If set, Big Mobs will lerp down to this Y position when shot.")]
         public Transform landingPointBigMob;
         public int bigMobPoolSize = 5;
-        public int bigMobHitPoints = 10;
+        public int bigMobHitPoints = 5;
 
         [Header("Settings")]
         public int poolSize = 200; // Increased to support Multiplier Gates
@@ -42,6 +42,11 @@ namespace Mobs
 
         private void Start()
         {
+            if (Core.GameManager.Instance != null)
+            {
+                bigMobHitPoints = Core.GameManager.Instance.BigMobHP;
+            }
+
             // Pre-allocate the normal mob pool
             for (int i = 0; i < poolSize; i++)
             {

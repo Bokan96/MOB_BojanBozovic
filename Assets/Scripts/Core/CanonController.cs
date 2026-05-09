@@ -47,6 +47,12 @@ namespace Core
         [Tooltip("ParticleSystem on the cannon that sparkles when fever bar is full.")]
         public ParticleSystem feverReadyParticles;
 
+        [Header("Juice - Fever Material")]
+        [Tooltip("Renderer to pulse color on when fever is ready. Usually the cannon head.")]
+        public Renderer cannonHeadRenderer;
+        public Color feverTopColor = Color.yellow;
+        public float feverColorPulseSpeed = 5f;
+
         [Header("Juice - Big Shot Recoil")]
         [Tooltip("The root transform of the cannon to push backward on local Z.")]
         public Transform cannonBody;
@@ -99,6 +105,10 @@ namespace Core
 
         // Fever tracking
         private bool _wasFeverFull;
+        private Material _cannonHeadMaterial;
+        private Color _originalTopColor;
+        private float _feverPulseTimer;
+        private bool _isFeverMaterialActive;
 
         // Big shot Z recoil state
         private bool _isRecoiling;
@@ -140,6 +150,20 @@ namespace Core
             if (feverReadyParticles != null)
             {
                 feverReadyParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            }
+
+            // Setup Fever Material
+            if (cannonHeadRenderer != null)
+            {
+                _cannonHeadMaterial = cannonHeadRenderer.material;
+                if (_cannonHeadMaterial.HasProperty("_ColorTop"))
+                {
+                    _originalTopColor = _cannonHeadMaterial.GetColor("_ColorTop");
+                }
+                else
+                {
+                    _originalTopColor = Color.white; // Fallback
+                }
             }
 
             // ── Hook Animation Setup ──
@@ -373,6 +397,37 @@ namespace Core
             {
                 // No longer full — stop particles
                 feverReadyParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            }
+
+            // Material pulse logic
+            if (feverFull)
+            {
+                _feverPulseTimer += Time.deltaTime * feverColorPulseSpeed;
+                float pingPong = Mathf.PingPong(_feverPulseTimer, 1f); // 0 to 1
+                Color targetColor = Color.Lerp(_originalTopColor, feverTopColor, pingPong);
+                
+                if (_cannonHeadMaterial != null && _cannonHeadMaterial.HasProperty("_ColorTop"))
+                {
+                    _cannonHeadMaterial.SetColor("_ColorTop", targetColor);
+                }
+                _isFeverMaterialActive = true;
+            }
+            else if (_isFeverMaterialActive && _cannonHeadMaterial != null && _cannonHeadMaterial.HasProperty("_ColorTop"))
+            {
+                // Smoothly transition back to original color
+                Color currentColor = _cannonHeadMaterial.GetColor("_ColorTop");
+                Color newColor = Color.Lerp(currentColor, _originalTopColor, Time.deltaTime * 10f);
+                _cannonHeadMaterial.SetColor("_ColorTop", newColor);
+                
+                // Stop updating when close enough
+                if (Mathf.Abs(newColor.r - _originalTopColor.r) < 0.01f && 
+                    Mathf.Abs(newColor.g - _originalTopColor.g) < 0.01f && 
+                    Mathf.Abs(newColor.b - _originalTopColor.b) < 0.01f)
+                {
+                    _cannonHeadMaterial.SetColor("_ColorTop", _originalTopColor);
+                    _isFeverMaterialActive = false;
+                    _feverPulseTimer = 0f;
+                }
             }
 
             _wasFeverFull = feverFull;

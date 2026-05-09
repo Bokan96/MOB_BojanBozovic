@@ -6,6 +6,7 @@ namespace Environment
     public class EnemyTower : GateBase
     {
         public int currentHP = 20;
+        public TMPro.TextMeshPro healthText;
         
         [Header("Juice")]
         public ParticleSystem destructionParticles;
@@ -25,6 +26,16 @@ namespace Environment
             {
                 // Optionally get HP from Luna parameters if desired
                 // currentHP = (int)Core.GameManager.Instance.TowerHP;
+            }
+
+            UpdateHealthText();
+        }
+
+        private void UpdateHealthText()
+        {
+            if (healthText != null)
+            {
+                healthText.text = currentHP.ToString();
             }
         }
 
@@ -60,6 +71,8 @@ namespace Environment
             {
                 towerMesh.localScale = _baseScale * hitPunchScale;
             }
+
+            UpdateHealthText();
 
             if (Core.AudioManager.Instance != null)
             {
