@@ -6205,7 +6205,7 @@ MonoBehaviour:
   poolSize: 60
   spawnInterval: 0.1
   spawnCountPerInterval: 2
-  mobSpeed: 2
+  mobSpeed: 3
   maxSpreadWidth: 1
   centerBias: 0.5
   balanceStrength: 2
@@ -19196,7 +19196,11 @@ MonoBehaviour:
   MultiplierAmount: 2
   FeverShotsRequired: 20
   BigMobHP: 5
-  BlockerHP: 10
+  BlockerHP: 350
+  CannonMoveSpeed: 5
+  FireRate: 0.2
+  TowerHP: 50
+  EnemySpawnInterval: 0.1
 --- !u!1 &1580440641
 GameObject:
   m_ObjectHideFlags: 0

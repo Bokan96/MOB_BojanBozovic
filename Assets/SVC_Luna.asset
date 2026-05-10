@@ -668,7 +668,7 @@ MonoBehaviour:
       "\L\u2025": []
   _includedShaderVariants: []
   _excludedShaderVariants: []
-  version: 698
+  version: 752
   _shaderParsedShaders:
   - ParsedSubShaders:
     - Index: 0

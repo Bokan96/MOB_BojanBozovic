@@ -23,6 +23,10 @@ namespace Core
         public int FeverShotsRequired = 20;
         public int BigMobHP = 5;
         public int BlockerHP = 10;
+        public float CannonMoveSpeed = 5f;
+        public float FireRate = 0.35f;
+        public int TowerHP = 20;
+        public float EnemySpawnInterval = 1f;
 
         private void Awake()
         {
@@ -195,13 +199,22 @@ namespace Core
             Luna.Unity.Playable.InstallFullGame();
         }
 
+        // ── Luna Analytics (Debounced) ──
+        private float _lastGatePassedTime;
+        private float _lastMobMultipliedTime;
+        private const float ANALYTICS_COOLDOWN = 0.5f;
+
         public void TrackGatePassed()
         {
+            if (Time.time - _lastGatePassedTime < ANALYTICS_COOLDOWN) return;
+            _lastGatePassedTime = Time.time;
             Luna.Unity.Analytics.LogEvent("gate_passed", 0);
         }
 
         public void TrackMobMultiplied()
         {
+            if (Time.time - _lastMobMultipliedTime < ANALYTICS_COOLDOWN) return;
+            _lastMobMultipliedTime = Time.time;
             Luna.Unity.Analytics.LogEvent("mob_multiplied", 0);
         }
 

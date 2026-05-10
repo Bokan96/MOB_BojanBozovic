@@ -24,8 +24,7 @@ namespace Environment
 
             if (Core.GameManager.Instance != null)
             {
-                // Optionally get HP from Luna parameters if desired
-                // currentHP = (int)Core.GameManager.Instance.TowerHP;
+                currentHP = Core.GameManager.Instance.TowerHP;
             }
 
             UpdateHealthText();

@@ -43,6 +43,12 @@ namespace Mobs
 
         private void Start()
         {
+            // Pull A/B testable values from GameManager
+            if (Core.GameManager.Instance != null)
+            {
+                spawnInterval = Core.GameManager.Instance.EnemySpawnInterval;
+            }
+
             // Pre-allocate the pool
             for (int i = 0; i < poolSize; i++)
             {

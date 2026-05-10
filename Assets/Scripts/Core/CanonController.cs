@@ -134,6 +134,12 @@ namespace Core
 
         private void Start()
         {
+            // Pull A/B testable values from GameManager
+            if (GameManager.Instance != null)
+            {
+                moveSpeed = GameManager.Instance.CannonMoveSpeed;
+            }
+
             cam = Camera.main;
             _prevX = transform.position.x;
 
