@@ -70,26 +70,28 @@ Material:
     - _GlossyReflections: 1
     - _GradientOffset: 0.5
     - _GradientScale: 1.5
+    - _HighlightThreshold: 0.5
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 0
+    - _OutlineWidth: 0.0147
     - _Parallax: 0.02
-    - _RimIntensity: 0.2
+    - _RimIntensity: 0.191
     - _RimPower: 3
-    - _ShadowStrength: 0.35
-    - _ShadowThreshold: 0.1
+    - _ShadowThreshold: 0.353
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _ColorBottom: {r: 0.7529412, g: 0.22352941, b: 0.16862746, a: 1}
-    - _ColorTop: {r: 1, g: 0.41960785, b: 0.41960785, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorBottom: {r: 0.7830189, g: 0, b: 0.06382131, a: 1}
+    - _ColorTop: {r: 1, g: 0.19862822, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MidTint: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
     - _OutlineColor: {r: 0.079999976, g: 0.079999976, b: 0.11999995, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowTint: {r: 0.41224635, g: 0.41224635, b: 0.4528302, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

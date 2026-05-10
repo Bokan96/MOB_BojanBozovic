@@ -23743,6 +23743,10 @@
                     {
                         "name": "TriggerVictoryCelebration",
                         "excluded": false
+                    },
+                    {
+                        "name": "FreezeAllMobs",
+                        "excluded": true
                     }
                 ]
             },
@@ -29641,6 +29645,14 @@
                     {
                         "name": "StopMusic",
                         "excluded": false
+                    },
+                    {
+                        "name": "StartDriveSound",
+                        "excluded": false
+                    },
+                    {
+                        "name": "StopDriveSound",
+                        "excluded": false
                     }
                 ]
             },
@@ -29767,6 +29779,14 @@
                     {
                         "name": "HandPingPongLoop",
                         "excluded": false
+                    },
+                    {
+                        "name": "PulseDownloadButton",
+                        "excluded": true
+                    },
+                    {
+                        "name": "FadeOutPersistentCTA",
+                        "excluded": true
                     }
                 ]
             },

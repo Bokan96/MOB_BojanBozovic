@@ -44,6 +44,14 @@ namespace UI
         [Tooltip("Gradient for the fill meter color based on how full it is.")]
         public Gradient fillGradient;
 
+        [Header("Offscreen Clamping")]
+        [Tooltip("Cannon X at which UI starts shifting right")]
+        public float cannonXStartClamp = -1.4f;
+        [Tooltip("Cannon X at which UI reaches max shift")]
+        public float cannonXEndClamp = -2.3f;
+        [Tooltip("Maximum pixels to shift the UI to the right")]
+        public float maxUiShift = 37f;
+
         private float _targetFill;
         private float _currentFill;
         private bool _isFull;
@@ -137,10 +145,10 @@ namespace UI
             if (_cannon != null)
             {
                 float cannonX = _cannon.transform.position.x;
-                // t=0 when cannon >= -1.4, t=1 when cannon <= -2.3
-                float t = Mathf.InverseLerp(-1.4f, -2.3f, cannonX);
-                // Shift UI right by up to 37 pixels (-197 to -160)
-                float shiftX = Mathf.Lerp(0f, 37f, t);
+                // t=0 when cannon >= start, t=1 when cannon <= end
+                float t = Mathf.InverseLerp(cannonXStartClamp, cannonXEndClamp, cannonX);
+                // Shift UI right by up to maxUiShift pixels
+                float shiftX = Mathf.Lerp(0f, maxUiShift, t);
 
                 if (barVisualTransform != null)
                 {

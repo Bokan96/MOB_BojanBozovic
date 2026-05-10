@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wheel
-  m_Shader: {fileID: 4800000, guid: 9d8e7a43e50b3774e87346afa06c5edf, type: 3}
+  m_Name: Ground
+  m_Shader: {fileID: 4800000, guid: 9e7ac9c0f4c7ebb43b0f3d79993b11d3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -68,40 +68,30 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GradientOffset: 0.13
-    - _GradientScale: 2
-    - _GridScale: 17.2
-    - _GridTop: 1
-    - _GridWidth: 0.075
-    - _HubRadius: 0.12
-    - _LineWidth: 0.15
+    - _GradientOffset: -0.93
+    - _GradientScale: 10
+    - _HighlightThreshold: 0.5
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 0.0076
+    - _OutlineWidth: 0.0147
     - _Parallax: 0.02
-    - _RimWidth: 0.08
-    - _ShadowStrength: 0.221
-    - _ShadowThreshold: 0.061
+    - _RimIntensity: 0.191
+    - _RimPower: 3
+    - _ShadowThreshold: 0.353
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpokeCount: 5
-    - _SpokeWidth: 0.12
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.11999995, g: 0.11999995, b: 0.12999997, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorBottom: {r: 0, g: 0, b: 0, a: 1}
-    - _ColorInner: {r: 0.45, g: 0.45, b: 0.52, a: 1}
-    - _ColorOuter: {r: 0.24999997, g: 0.24999997, b: 0.29999998, a: 1}
-    - _ColorTop: {r: 0, g: 0, b: 0, a: 1}
+    - _ColorBottom: {r: 0.36445352, g: 0.5944656, b: 0.735849, a: 1}
+    - _ColorTop: {r: 0.0993236, g: 0.6792453, b: 0.10614624, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _GridColor: {r: 0.35676178, g: 0.2823959, b: 0.3584906, a: 1}
-    - _HubColor: {r: 0.14999998, g: 0.14999998, b: 0.17999998, a: 1}
+    - _MidTint: {r: 0.9339623, g: 0.5066305, b: 0.5066305, a: 1}
     - _OutlineColor: {r: 0.079999976, g: 0.079999976, b: 0.11999995, a: 1}
-    - _RimColor: {r: 0.09999997, g: 0.09999997, b: 0.11999995, a: 1}
-    - _SpokeColor: {r: 0.11999995, g: 0.11999995, b: 0.14999998, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowTint: {r: 0.24283554, g: 0.39083028, b: 0.4811321, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -96,7 +96,8 @@ namespace Mobs
         public void StartCharge() => _isCharging = true;
 
         private const float BOOST_DURATION = 2f;
-        private const float MAX_Z = 30f;
+        private const float MAX_Z = 20f;
+        private const float MIN_Z = -2f;
         private const float BIG_MOB_SCALE_MULTIPLIER = 2.5f;
 
         // Overlap settings — pushes overlapping mobs forward into a line
@@ -539,7 +540,7 @@ namespace Mobs
 
             // Clean up if they run way off-screen
             float z = transform.position.z;
-            if (z > MAX_Z || z < 0)
+            if (z > MAX_Z || z < MIN_Z)
             {
                 Recycle();
                 return;

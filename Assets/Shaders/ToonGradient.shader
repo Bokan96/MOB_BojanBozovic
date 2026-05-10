@@ -9,8 +9,10 @@ Shader "Custom/ToonGradient"
         _GradientOffset ("Gradient Y Offset", Range(-10, 3)) = 0.5
 
         [Header(Toon Shading)]
-        _ShadowStrength ("Shadow Strength", Range(0, 1)) = 0.35
-        _ShadowThreshold ("Shadow Threshold", Range(-1, 1)) = 0.1
+        _MidTint ("Mid-Tone Tint", Color) = (0.75, 0.75, 0.75, 1)
+        _ShadowTint ("Shadow Tint", Color) = (0.5, 0.5, 0.55, 1)
+        _HighlightThreshold ("Highlight Threshold", Range(-1, 1)) = 0.5
+        _ShadowThreshold ("Shadow Threshold", Range(-1, 1)) = 0.0
 
         [Header(Rim Highlight)]
         _RimColor ("Rim Color", Color) = (1, 1, 1, 1)
@@ -47,14 +49,16 @@ Shader "Custom/ToonGradient"
             fixed4 _ColorBottom;
             float _GradientScale;
             float _GradientOffset;
-            float _ShadowStrength;
+            fixed4 _MidTint;
+            fixed4 _ShadowTint;
+            float _HighlightThreshold;
             float _ShadowThreshold;
             fixed4 _RimColor;
             float _RimPower;
             float _RimIntensity;
 
-            // Hardcoded fake light direction (top-right-front) — no actual light needed
-            static const float3 LIGHT_DIR = normalize(float3(0.4, 0.9, 0.3));
+            // Light from Top-Left-Front (perfect for 3/4 perspective cubes)
+            static const float3 LIGHT_DIR = normalize(float3(-0.4, 0.8, -0.4));
 
             struct appdata
             {
@@ -78,12 +82,18 @@ Shader "Custom/ToonGradient"
                 float gradT = saturate(v.vertex.y * _GradientScale + _GradientOffset);
                 fixed3 gradientCol = lerp(_ColorBottom.rgb, _ColorTop.rgb, gradT);
 
-                // --- Toon shading (fake directional light, 2-step) ---
+                // --- Toon shading (fake directional light, 3-step) ---
                 float3 wNormal = normalize(UnityObjectToWorldNormal(v.normal));
                 float NdotL = dot(wNormal, LIGHT_DIR);
-                float toon = smoothstep(_ShadowThreshold - 0.05, _ShadowThreshold + 0.05, NdotL);
-                fixed3 shadowTint = fixed3(1.0 - _ShadowStrength, 1.0 - _ShadowStrength, 1.0 - _ShadowStrength);
-                o.color = gradientCol * lerp(shadowTint, fixed3(1,1,1), toon);
+                
+                // 3 discrete light bands
+                float toonMid = smoothstep(_ShadowThreshold - 0.05, _ShadowThreshold + 0.05, NdotL);
+                float toonHigh = smoothstep(_HighlightThreshold - 0.05, _HighlightThreshold + 0.05, NdotL);
+
+                fixed3 midColor = lerp(_ShadowTint.rgb, _MidTint.rgb, toonMid);
+                fixed3 finalLight = lerp(midColor, fixed3(1,1,1), toonHigh);
+
+                o.color = gradientCol * finalLight;
 
                 // --- Rim highlight ---
                 float3 wPos = mul(unity_ObjectToWorld, v.vertex).xyz;
