@@ -111,6 +111,8 @@ namespace Core
             if (UI.UIManager.Instance != null)
             {
                 UI.UIManager.Instance.ShowWinCTA();
+                // Show the tutorial hand again as requested for the "next level"
+                UI.UIManager.Instance.ShowTutorial();
             }
 
             Luna.Unity.LifeCycle.GameEnded();
@@ -134,6 +136,10 @@ namespace Core
 
         private System.Collections.IEnumerator LoseSequenceRoutine(Mobs.Mob offendingMob)
         {
+            // Freeze all mobs in the scene immediately
+            if (Mobs.BattleManager.Instance != null)
+                Mobs.BattleManager.Instance.FreezeAllMobs();
+
             // 1. Unregister the offending mob from battle so it stops dying/being hit
             if (offendingMob != null && Mobs.BattleManager.Instance != null)
                 Mobs.BattleManager.Instance.UnregisterMob(offendingMob, isEnemy: true);

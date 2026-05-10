@@ -667,8 +667,26 @@ MonoBehaviour:
     keywords:
       "\L\u2025": []
   _includedShaderVariants: []
-  _excludedShaderVariants: []
-  version: 752
+  _excludedShaderVariants:
+  - shaderCompilerPlatform: 5
+    shader: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 1
+    keywords:
+      "\L\u2025":
+      - _SUNDISK_SIMPLE
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 1
+    keywords:
+      "\L\u2025":
+      - _SUNDISK_SIMPLE
+  version: 767
   _shaderParsedShaders:
   - ParsedSubShaders:
     - Index: 0
@@ -2757,6 +2775,51 @@ MonoBehaviour:
       keywords:
         "\L\u2025":
         - _ALPHABLEND_ON
+  - ParsedSubShaders:
+    - Index: 0
+      Passes:
+      - Shader: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+        ShaderVariants: []
+        DefinedKeywords:
+          "\L\u2025": []
+        KeywordGroups: []
+        KeywordsMinimalCardinality: 0
+        ContainsInvalidVariant: 0
+        VariantStructures: []
+        CompilationErrors: []
+        HasDepthReader: 0
+        Id: 0
+        SubShaderIndex: 0
+        SerializedObjectId: 0
+        Tags:
+        - Key: PreviewType
+          Value: Skybox
+        - Key: QUEUE
+          Value: Background
+        - Key: RenderType
+          Value: Background
+        UsePass:
+          shader: 
+          pass: 
+        GrabPassTextureName: 
+        PlatformMask: -1
+      Shader: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+      Tags:
+      - Key: PreviewType
+        Value: Skybox
+      - Key: QUEUE
+        Value: Background
+      - Key: RenderType
+        Value: Background
+    Shader: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+    ShaderPath: Resources/unity_builtin_extra
+    ShaderDefinedKeywords:
+    - _SUNDISK_HIGH_QUALITY
+    - _SUNDISK_NONE
+    - _SUNDISK_SIMPLE
+    fallbackShader: {fileID: 0}
+    CompilationErrors: []
+    Variants: []
   - ParsedSubShaders:
     - Index: 0
       Passes:
@@ -8688,4 +8751,4 @@ MonoBehaviour:
       keywords:
         "\L\u2025": []
   _modifiedShaders: []
-  invalidShaders: 0
+  invalidShaders: 1

@@ -9,7 +9,8 @@ namespace Environment
         public TMPro.TextMeshPro healthText;
         
         [Header("Juice")]
-        public ParticleSystem destructionParticles;
+        [Tooltip("The ParticleSystem that is already in the scene (child of the tower). We play this instead of instantiating to avoid Luna crashes.")]
+        public ParticleSystem destructionVfxInstance;
         public Transform towerMesh;
         public float hitPunchScale = 0.9f;
         public float springSpeed = 20f;
@@ -26,6 +27,10 @@ namespace Environment
             {
                 currentHP = Core.GameManager.Instance.TowerHP;
             }
+
+            // Ensure the VFX instance starts stopped
+            if (destructionVfxInstance != null)
+                destructionVfxInstance.Stop();
 
             UpdateHealthText();
         }
@@ -88,12 +93,7 @@ namespace Environment
         {
             _isDestroyed = true;
 
-            // Cache the position BEFORE disabling, so VFX spawns at the right spot
-            Vector3 towerPos = transform.position;
-
             // ── CRITICAL: Do game-state changes FIRST ──
-            // Luna can silently crash on Instantiate/ParticleSystem calls,
-            // which would abort the method and prevent WinGame from ever firing.
             if (Core.AudioManager.Instance != null)
             {
                 Core.AudioManager.Instance.PlayTowerDestroy();
@@ -105,22 +105,33 @@ namespace Environment
                 Core.GameManager.Instance.WinGame();
             }
 
-            // Immediately disable the entire tower
-            gameObject.SetActive(false);
+            // Immediately disable the tower visuals and collider
+            // We don't disable the whole gameObject immediately because the VFX might be a child
+            if (towerMesh != null) towerMesh.gameObject.SetActive(false);
+            if (healthText != null) healthText.gameObject.SetActive(false);
+            
+            Collider col = GetComponent<Collider>();
+            if (col != null) col.enabled = false;
 
-            // ── BEST-EFFORT: Spawn smoke VFX after everything critical is done ──
-            if (destructionParticles != null)
+            // ── BEST-EFFORT: Play the pre-existing VFX ──
+            if (destructionVfxInstance != null)
             {
                 try
                 {
-                    ParticleSystem vfxInstance = Instantiate(destructionParticles, towerPos, Quaternion.identity);
-                    vfxInstance.Play();
+                    // Unparent so it doesn't get disabled if we eventually disable the tower
+                    destructionVfxInstance.transform.SetParent(null);
+                    destructionVfxInstance.Play();
+                    // Destroy the loose particle object after it's done
+                    Destroy(destructionVfxInstance.gameObject, 3f);
                 }
                 catch (System.Exception e)
                 {
                     Debug.LogError("Luna VFX Exception in DestroyTower: " + e.Message);
                 }
             }
+
+            // Deactivate the tower logic object
+            gameObject.SetActive(false);
         }
     }
 }

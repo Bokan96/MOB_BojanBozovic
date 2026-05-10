@@ -44,9 +44,11 @@ namespace UI
         [Header("End Screens")]
         public GameObject winCTA;
         public GameObject loseCTA;
+        public RectTransform loseDownloadButton;
         public GameObject persistentCTA;
 
         private Coroutine _handRoutine;
+        private Coroutine _loseAnimationRoutine;
 
         private Vector2 _originalArrowLeftPos;
         private Vector2 _originalArrowRightPos;
@@ -60,6 +62,7 @@ namespace UI
         private Vector3 _arrowRightOriginalScale;
         private Vector3 _handOriginalScale;
         private Vector2 _handOriginalPos;
+        private Vector3 _downloadButtonOriginalScale;
 
         private void Awake()
         {
@@ -93,6 +96,11 @@ namespace UI
             {
                 _handOriginalScale = tutorialHand.localScale;
                 _handOriginalPos = tutorialHand.anchoredPosition;
+            }
+
+            if (loseDownloadButton != null)
+            {
+                _downloadButtonOriginalScale = loseDownloadButton.localScale;
             }
 
             // Tutorial starts hidden — it will be shown by CanonController
@@ -143,11 +151,11 @@ namespace UI
         {
             if (winCTA != null)
             {
-                StartCoroutine(ScalePopInRoutine(winCTA));
+                StartCoroutine(ScalePopInRoutine(winCTA, 1.0f));
             }
         }
 
-        private IEnumerator ScalePopInRoutine(GameObject ctaObject)
+        private IEnumerator ScalePopInRoutine(GameObject ctaObject, float targetScale)
         {
             ctaObject.SetActive(true);
             ctaObject.transform.localScale = Vector3.zero;
@@ -163,15 +171,68 @@ namespace UI
                 float c = t - 1f;
                 float eased = c * c * ((1.70158f + 1f) * c + 1.70158f) + 1f;
 
-                ctaObject.transform.localScale = Vector3.one * eased;
+                ctaObject.transform.localScale = Vector3.one * (eased * targetScale);
                 yield return null;
             }
-            ctaObject.transform.localScale = Vector3.one;
+            ctaObject.transform.localScale = Vector3.one * targetScale;
+
+            // If this is the Lose CTA, start the button pulse
+            if (ctaObject == loseCTA && loseDownloadButton != null)
+            {
+                _loseAnimationRoutine = StartCoroutine(PulseDownloadButton());
+            }
+        }
+
+        private IEnumerator PulseDownloadButton()
+        {
+            if (loseDownloadButton == null) yield break;
+
+            float pulseSpeed = 4f;
+            float pulseScale = 1.05f;
+            Vector3 baseScale = loseDownloadButton.localScale;
+
+            while (true)
+            {
+                float t = Mathf.PingPong(Time.time * pulseSpeed, 1f);
+                float easedT = Mathf.SmoothStep(0f, 1f, t);
+                loseDownloadButton.localScale = Vector3.Lerp(baseScale, baseScale * pulseScale, easedT);
+                yield return null;
+            }
         }
 
         public void ShowLoseCTA()
         {
-            if (loseCTA != null) loseCTA.SetActive(true);
+            if (loseCTA != null)
+            {
+                StartCoroutine(ScalePopInRoutine(loseCTA, 0.9f));
+                
+                if (persistentCTA != null)
+                {
+                    StartCoroutine(FadeOutPersistentCTA());
+                }
+            }
+        }
+
+        private IEnumerator FadeOutPersistentCTA()
+        {
+            if (persistentCTA == null) yield break;
+
+            CanvasGroup group = persistentCTA.GetComponent<CanvasGroup>();
+            if (group == null) group = persistentCTA.AddComponent<CanvasGroup>();
+
+            float elapsed = 0f;
+            float duration = 0.5f;
+            float startAlpha = group.alpha;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                group.alpha = Mathf.Lerp(startAlpha, 0f, elapsed / duration);
+                yield return null;
+            }
+
+            group.alpha = 0f;
+            persistentCTA.SetActive(false);
         }
 
         public void OnCTAClicked()

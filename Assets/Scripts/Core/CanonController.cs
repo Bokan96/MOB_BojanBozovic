@@ -522,6 +522,11 @@ namespace Core
         /// </summary>
         private IEnumerator HookAnimationRoutine()
         {
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.StartDriveSound();
+            }
+
             float elapsed = 0f;
 
             // Phase 1: Slide forward along Z
@@ -551,6 +556,11 @@ namespace Core
             // Snap to final position
             transform.position = _hookTargetPos;
             _prevX = _hookTargetPos.x;
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.StopDriveSound();
+            }
 
             // Phase 2: Rotate the frame rig back (Sequential, only after slide)
             if (cannonFrameRig != null)
@@ -698,6 +708,11 @@ namespace Core
             float duration = 2f;
             elapsed = 0f;
 
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.StartDriveSound();
+            }
+
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
@@ -718,6 +733,11 @@ namespace Core
                 yield return null;
             }
             transform.position = endPos;
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.StopDriveSound();
+            }
 
             // Phase 3: Rotate the frame rig back to initial
             if (cannonFrameRig != null)

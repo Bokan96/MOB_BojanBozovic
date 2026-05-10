@@ -69,6 +69,21 @@ namespace Mobs
         }
 
 
+        public void FreezeAllMobs()
+        {
+            // StartCharge stops normal movement and allows them to be driven manually,
+            // or just stay frozen if they aren't driven manually.
+            for (int i = 0; i < _activePlayerMobs.Count; i++)
+            {
+                if (_activePlayerMobs[i].IsActive) _activePlayerMobs[i].StartCharge();
+            }
+            for (int i = 0; i < _activeEnemyMobs.Count; i++)
+            {
+                if (_activeEnemyMobs[i].IsActive) _activeEnemyMobs[i].StartCharge();
+            }
+        }
+
+
         private void Update()
         {
             if (Core.GameManager.Instance != null && Core.GameManager.Instance.hasEnded) return;

@@ -26,6 +26,7 @@ namespace Core
         public AudioClip pipeExitClip;
         public AudioClip backgroundMusicClip;
         public AudioClip loseClip;
+        public AudioClip introDriveClip;
 
         [Header("Pitch Variation (Juice)")]
         [Tooltip("Random pitch variation for cannon fire")]
@@ -53,6 +54,8 @@ namespace Core
         private float _lastPipeEnterTime;
         private float _lastPipeExitTime;
 
+        private AudioSource _driveSource;
+
         private void Awake()
         {
             Instance = this;
@@ -74,6 +77,15 @@ namespace Core
                 _musicSource.volume = 0.4f; // Keep music volume balanced
                 _musicSource.playOnAwake = true;
                 _musicSource.Play();
+            }
+
+            if (introDriveClip != null)
+            {
+                _driveSource = gameObject.AddComponent<AudioSource>();
+                _driveSource.clip = introDriveClip;
+                _driveSource.loop = true;
+                _driveSource.volume = 0.6f;
+                _driveSource.playOnAwake = false;
             }
         }
 
@@ -163,6 +175,23 @@ namespace Core
             if (Time.time - _lastPipeExitTime < pipeSoundCooldown) return;
             _lastPipeExitTime = Time.time;
             PlaySound(pipeExitClip, 0.8f, 0.9f, 1.1f); 
+        }
+
+        public void StartDriveSound()
+        {
+            if (_driveSource != null && !_driveSource.isPlaying)
+            {
+                _driveSource.pitch = Random.Range(0.95f, 1.05f);
+                _driveSource.Play();
+            }
+        }
+
+        public void StopDriveSound()
+        {
+            if (_driveSource != null && _driveSource.isPlaying)
+            {
+                _driveSource.Stop();
+            }
         }
     }
 }
