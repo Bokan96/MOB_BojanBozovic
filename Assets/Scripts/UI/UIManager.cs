@@ -204,7 +204,7 @@ namespace UI
         {
             if (loseCTA != null)
             {
-                StartCoroutine(ScalePopInRoutine(loseCTA, 0.9f));
+                StartCoroutine(ScalePopInRoutine(loseCTA, 0.8f));
                 
                 if (persistentCTA != null)
                 {
