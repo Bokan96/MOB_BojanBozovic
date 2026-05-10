@@ -48,8 +48,11 @@ namespace Environment
             // Backwards iteration in case a mob is recycled during processing
             for (int i = playerMobs.Count - 1; i >= 0; i--)
             {
+                // Safety check: if the list shrank (e.g. victory celebration cleared it), skip or break
+                if (i >= playerMobs.Count) continue;
+
                 Mob mob = playerMobs[i];
-                if (!mob.IsActive) continue;
+                if (mob == null || !mob.IsActive) continue;
 
                 Vector3 mobPos = mob.transform.position;
 

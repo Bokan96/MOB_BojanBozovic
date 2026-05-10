@@ -103,11 +103,11 @@ namespace Core
             // Wait for cannon animation to finish (1s delay + 3.5s animation)
             yield return new WaitForSeconds(3.5f);
 
-            // Win CTA is no longer shown at the end, relying on persistent CTA instead.
-            // if (UI.UIManager.Instance != null)
-            // {
-            //     UI.UIManager.Instance.ShowWinCTA();
-            // }
+            // Show the Win CTA on the whole screen as requested
+            if (UI.UIManager.Instance != null)
+            {
+                UI.UIManager.Instance.ShowWinCTA();
+            }
 
             Luna.Unity.LifeCycle.GameEnded();
         }

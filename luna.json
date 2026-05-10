@@ -22636,11 +22636,11 @@
                     },
                     {
                         "name": "PlayVictoryAnimation",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "VictoryAnimationRoutine",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "DestroyAfterRoutine",
@@ -23742,7 +23742,7 @@
                     },
                     {
                         "name": "TriggerVictoryCelebration",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -23838,11 +23838,11 @@
                     },
                     {
                         "name": "CelebrateAndDie",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "CelebrateRoutine",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "EnterPipe",
@@ -29666,11 +29666,11 @@
                     },
                     {
                         "name": "WinGame",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "WinSequenceRoutine",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "LoseGame",
@@ -29694,7 +29694,7 @@
                     },
                     {
                         "name": "TrackTowerDestroyed",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -29801,10 +29801,6 @@
                     {
                         "name": "DestroyTower",
                         "excluded": false
-                    },
-                    {
-                        "name": "ShrinkAndDestroyRoutine",
-                        "excluded": true
                     }
                 ]
             },

@@ -40,9 +40,15 @@ namespace UI
         public float pulseScale = 1.08f;
         public float pulseSpeed = 12f;
 
+        [Header("Gradient (Red to Green)")]
+        [Tooltip("Gradient for the fill meter color based on how full it is.")]
+        public Gradient fillGradient;
+
+        private float _targetFill;
         private float _currentFill;
         private bool _isFull;
         private Vector3 _barBaseScale;
+        private bool _isVisible;
 
         /// <summary>
         /// Returns true when the bar is completely full and the player can release for Big Mob.
@@ -64,24 +70,36 @@ namespace UI
             Mobs.MobSpawner.OnPlayerMobShot -= HandlePlayerShot;
         }
 
+        private Vector3 _barOriginalLocalPos;
+        private Vector3 _textOriginalLocalPos;
+        private Core.CanonController _cannon;
+
         private void Start()
         {
+            _targetFill = 0f;
             _currentFill = 0f;
             _isFull = false;
+            _isVisible = false;
+
+            _cannon = FindObjectOfType<Core.CanonController>();
 
             if (fillImage != null)
             {
                 fillImage.fillAmount = 0f;
+                if (fillGradient != null) fillImage.color = fillGradient.Evaluate(0f);
             }
 
             if (releaseTextObject != null)
             {
+                _textOriginalLocalPos = releaseTextObject.transform.localPosition;
                 releaseTextObject.SetActive(false);
             }
 
             if (barVisualTransform != null)
             {
+                _barOriginalLocalPos = barVisualTransform.localPosition;
                 _barBaseScale = barVisualTransform.localScale;
+                barVisualTransform.gameObject.SetActive(false); // Hide during intro
             }
 
             // Auto-calculate fillPerShot from shotsToFill for convenience
@@ -93,7 +111,53 @@ namespace UI
 
         private void Update()
         {
-            // Juicy pulse animation when the bar is full
+            // 1. Check if we should reveal the fever bar (after intro completes)
+            if (!_isVisible && Core.GameManager.Instance != null && Core.GameManager.Instance.hasStarted)
+            {
+                _isVisible = true;
+                if (barVisualTransform != null) barVisualTransform.gameObject.SetActive(true);
+            }
+
+            // 2. Smoothly lerp the fill amount (duration ~0.05s)
+            if (_currentFill != _targetFill)
+            {
+                // To finish in roughly 0.05s, lerp very fast
+                _currentFill = Mathf.MoveTowards(_currentFill, _targetFill, Time.deltaTime / 0.1f);
+                if (fillImage != null)
+                {
+                    fillImage.fillAmount = _currentFill;
+                    if (fillGradient != null)
+                    {
+                        fillImage.color = fillGradient.Evaluate(_currentFill);
+                    }
+                }
+            }
+
+            // 3. UI Offscreen clamping logic (counteracts cannon movement leftwards)
+            if (_cannon != null)
+            {
+                float cannonX = _cannon.transform.position.x;
+                // t=0 when cannon >= -1.4, t=1 when cannon <= -2.3
+                float t = Mathf.InverseLerp(-1.4f, -2.3f, cannonX);
+                // Shift UI right by up to 37 pixels (-197 to -160)
+                float shiftX = Mathf.Lerp(0f, 37f, t);
+
+                if (barVisualTransform != null)
+                {
+                    Vector3 barPos = _barOriginalLocalPos;
+                    barPos.x += shiftX;
+                    barVisualTransform.localPosition = barPos;
+                }
+
+                if (releaseTextObject != null)
+                {
+                    Vector3 textPos = _textOriginalLocalPos;
+                    textPos.x += shiftX;
+                    releaseTextObject.transform.localPosition = textPos;
+                }
+            }
+
+            // 4. Juicy pulse animation when the bar is full
             if (_isFull && barVisualTransform != null)
             {
                 // Gentle breathing pulse using a sine wave
@@ -112,14 +176,9 @@ namespace UI
         {
             if (_isFull) return; // Already full, waiting for release
 
-            _currentFill = Mathf.Clamp01(_currentFill + fillPerShot);
+            _targetFill = Mathf.Clamp01(_targetFill + fillPerShot);
 
-            if (fillImage != null)
-            {
-                fillImage.fillAmount = _currentFill;
-            }
-
-            if (_currentFill >= 1f)
+            if (_targetFill >= 1f)
             {
                 _isFull = true;
 
@@ -136,12 +195,14 @@ namespace UI
         /// </summary>
         public void ResetBar()
         {
+            _targetFill = 0f;
             _currentFill = 0f;
             _isFull = false;
 
             if (fillImage != null)
             {
                 fillImage.fillAmount = 0f;
+                if (fillGradient != null) fillImage.color = fillGradient.Evaluate(0f);
             }
 
             if (releaseTextObject != null)

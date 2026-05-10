@@ -35,7 +35,7 @@ namespace Environment
         {
             if (healthText != null)
             {
-                healthText.text = currentHP.ToString();
+                healthText.text = Mathf.Max(0, currentHP).ToString();
             }
         }
 
@@ -88,14 +88,13 @@ namespace Environment
         private void DestroyTower()
         {
             _isDestroyed = true;
-            
-            if (destructionParticles != null)
-            {
-                ParticleSystem vfxInstance = Instantiate(destructionParticles, transform.position, Quaternion.identity);
-                vfxInstance.Play();
-                Destroy(vfxInstance.gameObject, 3f);
-            }
 
+            // Cache the position BEFORE disabling, so VFX spawns at the right spot
+            Vector3 towerPos = transform.position;
+
+            // ── CRITICAL: Do game-state changes FIRST ──
+            // Luna can silently crash on Instantiate/ParticleSystem calls,
+            // which would abort the method and prevent WinGame from ever firing.
             if (Core.AudioManager.Instance != null)
             {
                 Core.AudioManager.Instance.PlayTowerDestroy();
@@ -107,34 +106,22 @@ namespace Environment
                 Core.GameManager.Instance.WinGame();
             }
 
-            // Smooth shrink instead of instant pop
-            if (towerMesh != null)
-            {
-                StartCoroutine(ShrinkAndDestroyRoutine(towerMesh));
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-        }
-
-        private System.Collections.IEnumerator ShrinkAndDestroyRoutine(Transform targetTransform)
-        {
-            float elapsed = 0f;
-            float duration = 0.25f; // Fast, juicy shrink
-            Vector3 startScale = targetTransform.localScale;
-
-            while (elapsed < duration)
-            {
-                elapsed += Time.deltaTime;
-                float t = Mathf.Clamp01(elapsed / duration);
-                float eased = t * t * t; // Cubic ease in
-                targetTransform.localScale = Vector3.Lerp(startScale, Vector3.zero, eased);
-                yield return null;
-            }
-
-            targetTransform.localScale = Vector3.zero;
+            // Immediately disable the entire tower
             gameObject.SetActive(false);
+
+            // ── BEST-EFFORT: Spawn smoke VFX after everything critical is done ──
+            if (destructionParticles != null)
+            {
+                try
+                {
+                    ParticleSystem vfxInstance = Instantiate(destructionParticles, towerPos, Quaternion.identity);
+                    vfxInstance.Play();
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError("Luna VFX Exception in DestroyTower: " + e.Message);
+                }
+            }
         }
     }
 }

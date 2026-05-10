@@ -126,12 +126,9 @@ namespace Core
             if (_musicSource != null)
             {
                 _musicSource.Stop();
-                _musicSource.loop = false;
-                _musicSource.clip = loseClip;
-                _musicSource.volume = 1f;
-                _musicSource.pitch = 1f;
-                _musicSource.Play();
             }
+            // Play lose sound on a generic pooled source so it isn't cut off if StopMusic is called again
+            PlaySound(loseClip, 1f, 1f, 1f);
         }
         
         public void StopMusic()
