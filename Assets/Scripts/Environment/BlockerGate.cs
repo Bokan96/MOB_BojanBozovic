@@ -45,6 +45,13 @@ namespace Environment
                 _targetScale = _originalScale;
                 _originalLocalPos = visualTransform.localPosition;
             }
+
+            // Pull A/B testable values from GameManager
+            if (Core.GameManager.Instance != null)
+            {
+                health = Core.GameManager.Instance.RightBlockerHP;
+            }
+
             UpdateHealthText();
         }
 

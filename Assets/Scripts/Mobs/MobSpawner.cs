@@ -45,8 +45,8 @@ namespace Mobs
             if (Core.GameManager.Instance != null)
             {
                 bigMobHitPoints = Core.GameManager.Instance.BigMobHP;
-                mobSpeed = Core.GameManager.Instance.MobSpeed;
-                fireInterval = Core.GameManager.Instance.FireRate;
+                mobSpeed = Core.GameManager.Instance.FriendlyMobSpeed;
+                fireInterval = Core.GameManager.Instance.CannonFireRate;
             }
 
             // Pre-allocate the normal mob pool

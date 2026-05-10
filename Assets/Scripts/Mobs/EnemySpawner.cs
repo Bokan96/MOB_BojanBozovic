@@ -46,7 +46,8 @@ namespace Mobs
             // Pull A/B testable values from GameManager
             if (Core.GameManager.Instance != null)
             {
-                spawnInterval = Core.GameManager.Instance.EnemySpawnInterval;
+                spawnInterval = Core.GameManager.Instance.EnemySpawnRate;
+                mobSpeed = Core.GameManager.Instance.EnemyMobSpeed;
             }
 
             // Pre-allocate the pool

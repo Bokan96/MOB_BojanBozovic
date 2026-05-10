@@ -86,8 +86,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorBottom: {r: 0.36445352, g: 0.5944656, b: 0.735849, a: 1}
-    - _ColorTop: {r: 1, g: 0.7725491, b: 0, a: 1}
+    - _ColorBottom: {r: 0.3647059, g: 0.59607846, b: 0.7372549, a: 1}
+    - _ColorTop: {r: 1, g: 0.77254903, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MidTint: {r: 0.9339623, g: 0.5066305, b: 0.5066305, a: 1}
     - _OutlineColor: {r: 0.079999976, g: 0.079999976, b: 0.11999995, a: 1}

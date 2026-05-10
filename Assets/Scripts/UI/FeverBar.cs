@@ -115,6 +115,12 @@ namespace UI
                 barVisualTransform.gameObject.SetActive(false); // Hide during intro
             }
 
+            // Pull A/B testable values from GameManager
+            if (Core.GameManager.Instance != null)
+            {
+                shotsToFill = Core.GameManager.Instance.FeverChargeMeter;
+            }
+
             // Auto-calculate fillPerShot from shotsToFill for convenience
             if (shotsToFill > 0)
             {

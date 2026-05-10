@@ -16,27 +16,66 @@ namespace Core
 
         [SerializeField] private GameObject[] delayedSpawners;
 
-        [Header("Luna Playground Parameters")]
-        [LunaPlaygroundField]
-        public float MobSpeed = 6f;
-        [LunaPlaygroundField]
-        public float SpawnInterval = 1f;
-        [LunaPlaygroundField]
-        public int MultiplierAmount = 2;
-        [LunaPlaygroundField]
-        public int FeverShotsRequired = 20;
-        [LunaPlaygroundField]
+        [Header("Friendly Units")]
+        [LunaPlaygroundField("Friendly Mob Speed", 1, "Friendly Units")]
+        [Range(1f, 8f), LunaPlaygroundFieldStep(0.1f)]
+        public float FriendlyMobSpeed = 4f;
+        [LunaPlaygroundField("Cannon Fire Rate", 2, "Friendly Units")]
+        [Range(0.1f, 1f), LunaPlaygroundFieldStep(0.01f)]
+        public float CannonFireRate = 0.2f;
+        [LunaPlaygroundField("Fever Charge Meter", 3, "Friendly Units")]
+        [Range(5, 40), LunaPlaygroundFieldStep(1)]
+        public int FeverChargeMeter = 20;
+        [LunaPlaygroundField("Big Mob HP", 4, "Friendly Units")]
+        [Range(2, 15), LunaPlaygroundFieldStep(1)]
         public int BigMobHP = 5;
-        [LunaPlaygroundField]
-        public int BlockerHP = 10;
-        [LunaPlaygroundField]
+        [LunaPlaygroundField("Cannon Move Speed", 5, "Friendly Units")]
+        [Range(1f, 10f), LunaPlaygroundFieldStep(0.5f)]
         public float CannonMoveSpeed = 5f;
-        [LunaPlaygroundField]
-        public float FireRate = 0.35f;
-        [LunaPlaygroundField]
-        public int TowerHP = 20;
-        [LunaPlaygroundField]
-        public float EnemySpawnInterval = 1f;
+
+        [Header("Enemy Units")]
+        [LunaPlaygroundField("Enemy Mob Speed", 1, "Enemy Units")]
+        [Range(1f, 8f), LunaPlaygroundFieldStep(0.1f)]
+        public float EnemyMobSpeed = 4f;
+        [LunaPlaygroundField("Enemy Spawn Rate", 2, "Enemy Units")]
+        [Range(0.1f, 1f), LunaPlaygroundFieldStep(0.01f)]
+        public float EnemySpawnRate = 0.2f;
+        [LunaPlaygroundField("Tower HP", 3, "Enemy Units")]
+        [Range(1, 100), LunaPlaygroundFieldStep(1)]
+        public int TowerHP = 50;
+
+        [Header("Level / Obstacles")]
+        [LunaPlaygroundField("Gate Multiplier", 1, "Level / Obstacles")]
+        [Range(2, 10), LunaPlaygroundFieldStep(1)]
+        public int GateMultiplier = 2;
+        [LunaPlaygroundField("Moving Gate Multiplier", 2, "Level / Obstacles")]
+        [Range(2, 10), LunaPlaygroundFieldStep(1)]
+        public int MovingGateMultiplier = 3;
+        [LunaPlaygroundField("Right Blocker HP", 3, "Level / Obstacles")]
+        public int RightBlockerHP = 999;
+
+        [Header("Visuals (A/B Testing)")]
+        [LunaPlaygroundField("Friendly Color", 1, "Visuals")]
+        public Color FriendlyColor = new Color(0.0f, 0.64f, 1.0f); // 00A3FF
+        [LunaPlaygroundField("Friendly Accent Color", 2, "Visuals")]
+        public Color FriendlyAccentColor = new Color(0.0f, 0.31f, 1.0f); // 0050FF
+        [SerializeField] private Material friendlyMaterial;
+        [SerializeField] private Material friendlyMobMaterial;
+
+        [Space]
+        [LunaPlaygroundField("Enemy Color", 3, "Visuals")]
+        public Color EnemyColor = new Color(1.0f, 0.19f, 0.19f); // FF3131
+        [LunaPlaygroundField("Enemy Accent Color", 4, "Visuals")]
+        public Color EnemyAccentColor = new Color(0.61f, 0.0f, 0.0f); // 9B0000
+        [SerializeField] private Material enemyMaterial;
+        [SerializeField] private Material enemyMobMaterial;
+
+        [Space]
+        [LunaPlaygroundField("Ground Color Top", 5, "Visuals")]
+        public Color GroundColorTop = new Color(1.0f, 0.77f, 0.0f); // FFC500
+        [LunaPlaygroundField("Ground Color Bottom", 6, "Visuals")]
+        public Color GroundColorBottom = new Color(0.36f, 0.6f, 0.74f); // 5D98BC
+        [SerializeField] private Material groundMaterial;
 
         private void Awake()
         {
@@ -47,6 +86,35 @@ namespace Core
 
         private void Start()
         {
+            // Apply Playground colors
+            if (friendlyMaterial != null)
+            {
+                friendlyMaterial.SetColor("_ColorTop", FriendlyColor);
+                friendlyMaterial.SetColor("_ColorBottom", FriendlyAccentColor);
+            }
+            if (friendlyMobMaterial != null)
+            {
+                friendlyMobMaterial.SetColor("_ColorTop", FriendlyColor);
+                friendlyMobMaterial.SetColor("_ColorBottom", FriendlyAccentColor);
+            }
+
+            if (enemyMaterial != null)
+            {
+                enemyMaterial.SetColor("_ColorTop", EnemyColor);
+                enemyMaterial.SetColor("_ColorBottom", EnemyAccentColor);
+            }
+            if (enemyMobMaterial != null)
+            {
+                enemyMobMaterial.SetColor("_ColorTop", EnemyColor);
+                enemyMobMaterial.SetColor("_ColorBottom", EnemyAccentColor);
+            }
+
+            if (groundMaterial != null)
+            {
+                groundMaterial.SetColor("_ColorTop", GroundColorTop);
+                groundMaterial.SetColor("_ColorBottom", GroundColorBottom);
+            }
+
             if (delayedSpawners != null)
             {
                 foreach (var spawner in delayedSpawners)
@@ -71,6 +139,7 @@ namespace Core
             if (!hasStarted && Input.GetMouseButtonDown(0))
             {
                 hasStarted = true;
+                TrackGameStarted();
                 
                 if (UI.UIManager.Instance != null)
                 {
@@ -92,6 +161,7 @@ namespace Core
             if (hasEnded) return;
             hasEnded = true;
             isGameWon = true;
+            TrackGameWon();
 
             StartCoroutine(WinSequenceRoutine());
         }
@@ -132,6 +202,7 @@ namespace Core
         {
             if (hasEnded) return;
             hasEnded = true;
+            TrackGameLost();
 
             // Play fail sound immediately
             if (AudioManager.Instance != null)
@@ -212,12 +283,13 @@ namespace Core
 
         public void InstallGame()
         {
+            Luna.Unity.Analytics.LogEvent("cta_click", 0);
             Luna.Unity.Playable.InstallFullGame();
         }
 
         // ── Luna Analytics (Debounced) ──
         private float _lastGatePassedTime;
-        private float _lastMobMultipliedTime;
+        private float _lastGateMovingPassedTime;
         private const float ANALYTICS_COOLDOWN = 0.5f;
 
         public void TrackGatePassed()
@@ -227,16 +299,46 @@ namespace Core
             Luna.Unity.Analytics.LogEvent("gate_passed", 0);
         }
 
-        public void TrackMobMultiplied()
+        public void TrackGateMovingPassed()
         {
-            if (Time.time - _lastMobMultipliedTime < ANALYTICS_COOLDOWN) return;
-            _lastMobMultipliedTime = Time.time;
-            Luna.Unity.Analytics.LogEvent("mob_multiplied", 0);
+            if (Time.time - _lastGateMovingPassedTime < ANALYTICS_COOLDOWN) return;
+            _lastGateMovingPassedTime = Time.time;
+            Luna.Unity.Analytics.LogEvent("gate_moving_passed", 0);
         }
 
         public void TrackTowerDestroyed()
         {
             Luna.Unity.Analytics.LogEvent("tower_destroyed", 0);
+        }
+
+        public void TrackPipeEntered()
+        {
+            Luna.Unity.Analytics.LogEvent("pipe_entered", 0);
+        }
+
+        public void TrackEdgeReached()
+        {
+            Luna.Unity.Analytics.LogEvent("edge_reached", 0);
+        }
+
+        public void TrackGameStarted()
+        {
+            Luna.Unity.Analytics.LogEvent("game_start", 0);
+        }
+
+        public void TrackFeverActivated()
+        {
+            Luna.Unity.Analytics.LogEvent("fever_activated", 0);
+        }
+
+        public void TrackGameWon()
+        {
+            Luna.Unity.Analytics.LogEvent("game_win", 0);
+        }
+
+        public void TrackGameLost()
+        {
+            Luna.Unity.Analytics.LogEvent("game_lose", 0);
         }
 
     }

@@ -86,6 +86,19 @@ namespace Environment
                 // so it never gets drawn over by the transparent pipe geometry.
                 multiplierText.fontSharedMaterial.renderQueue = 3050;
             }
+
+            // Pull A/B testable values from GameManager
+            if (Core.GameManager.Instance != null)
+            {
+                multiplierAmount = isMovable 
+                    ? Core.GameManager.Instance.MovingGateMultiplier 
+                    : Core.GameManager.Instance.GateMultiplier;
+
+                if (multiplierText != null)
+                {
+                    multiplierText.text = "x" + multiplierAmount;
+                }
+            }
         }
 
         protected override void Update()
@@ -155,8 +168,10 @@ namespace Environment
 
             if (Core.GameManager.Instance != null)
             {
-                Core.GameManager.Instance.TrackGatePassed();
-                Core.GameManager.Instance.TrackMobMultiplied();
+                if (isMovable)
+                    Core.GameManager.Instance.TrackGateMovingPassed();
+                else
+                    Core.GameManager.Instance.TrackGatePassed();
             }
             
             bool isBig = mob.IsBigMob;

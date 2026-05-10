@@ -131,6 +131,8 @@ namespace Core
         private Transform _cameraOriginalParent;
         private Vector3 _cameraOriginalWorldPos;
         private Quaternion _cameraOriginalWorldRot;
+        private bool _atLeftEdge;
+        private bool _atRightEdge;
 
         private void Start()
         {
@@ -245,6 +247,34 @@ namespace Core
                     Vector3 pos = transform.position;
                     pos.x = Mathf.Lerp(pos.x, targetX, moveSpeed * Time.deltaTime);
                     transform.position = pos;
+
+                    // --- EDGE TRACKING ---
+                    float edgeThreshold = limitX - 0.1f;
+                    if (pos.x <= -edgeThreshold)
+                    {
+                        if (!_atLeftEdge)
+                        {
+                            _atLeftEdge = true;
+                            if (GameManager.Instance != null) GameManager.Instance.TrackEdgeReached();
+                        }
+                    }
+                    else
+                    {
+                        _atLeftEdge = false;
+                    }
+
+                    if (pos.x >= edgeThreshold)
+                    {
+                        if (!_atRightEdge)
+                        {
+                            _atRightEdge = true;
+                            if (GameManager.Instance != null) GameManager.Instance.TrackEdgeReached();
+                        }
+                    }
+                    else
+                    {
+                        _atRightEdge = false;
+                    }
                 }
 
                 // --- SHOOT ---
@@ -278,6 +308,11 @@ namespace Core
                     if (AudioManager.Instance != null)
                     {
                         AudioManager.Instance.PlayFeverActivate();
+                    }
+
+                    if (GameManager.Instance != null)
+                    {
+                        GameManager.Instance.TrackFeverActivated();
                     }
 
                     // Heavy recoil for the big shot (scale squash)
@@ -684,23 +719,40 @@ namespace Core
                 cam.transform.SetParent(transform, true);
             }
 
-            // Phase 1: Rotate the frame rig 90 degrees
+            // Phase 1: Rotate the frame rig 90 degrees and center camera X
             float elapsed = 0f;
             float rotDuration = 0.5f;
             Quaternion initialFrameRot = cannonFrameRig != null ? cannonFrameRig.localRotation : Quaternion.identity;
             Quaternion targetFrameRot = Quaternion.Euler(0f, 90f, 0f);
 
-            if (cannonFrameRig != null)
+            Vector3 initialCamLocalPos = Vector3.zero;
+            Vector3 targetCamLocalPos = Vector3.zero;
+            if (cam != null)
             {
-                while (elapsed < rotDuration)
-                {
-                    elapsed += Time.deltaTime;
-                    float t = Mathf.SmoothStep(0f, 1f, elapsed / rotDuration);
-                    cannonFrameRig.localRotation = Quaternion.Slerp(initialFrameRot, targetFrameRot, t);
-                    yield return null;
-                }
-                cannonFrameRig.localRotation = targetFrameRot;
+                initialCamLocalPos = cam.transform.localPosition;
+                targetCamLocalPos = new Vector3(0f, initialCamLocalPos.y, initialCamLocalPos.z);
             }
+
+            while (elapsed < rotDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, elapsed / rotDuration);
+                
+                if (cannonFrameRig != null)
+                {
+                    cannonFrameRig.localRotation = Quaternion.Slerp(initialFrameRot, targetFrameRot, t);
+                }
+
+                if (cam != null)
+                {
+                    cam.transform.localPosition = Vector3.Lerp(initialCamLocalPos, targetCamLocalPos, t);
+                }
+
+                yield return null;
+            }
+            
+            if (cannonFrameRig != null) cannonFrameRig.localRotation = targetFrameRot;
+            if (cam != null) cam.transform.localPosition = targetCamLocalPos;
 
             // Phase 2: Slide to final victory destination
             Vector3 startPos = transform.position;

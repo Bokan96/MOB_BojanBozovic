@@ -77,10 +77,6 @@ namespace Mobs
             {
                 if (_activePlayerMobs[i].IsActive) _activePlayerMobs[i].StartCharge();
             }
-            for (int i = 0; i < _activeEnemyMobs.Count; i++)
-            {
-                if (_activeEnemyMobs[i].IsActive) _activeEnemyMobs[i].StartCharge();
-            }
         }
 
 

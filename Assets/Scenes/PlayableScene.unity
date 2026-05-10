@@ -19511,7 +19511,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   winCTA: {fileID: 1028443796}
   loseCTA: {fileID: 1219224877}
-  loseDownloadButton: {fileID: 0}
+  loseDownloadButton: {fileID: 1043522561}
   persistentCTA: {fileID: 240964587}
 --- !u!114 &1565035012
 MonoBehaviour:
@@ -19530,16 +19530,28 @@ MonoBehaviour:
   isGameWon: 0
   delayedSpawners:
   - {fileID: 449383818}
-  MobSpeed: 4
-  SpawnInterval: 1
-  MultiplierAmount: 2
-  FeverShotsRequired: 20
+  FriendlyMobSpeed: 4
+  CannonFireRate: 0.2
+  FeverChargeMeter: 20
   BigMobHP: 5
-  BlockerHP: 350
   CannonMoveSpeed: 5
-  FireRate: 0.2
-  TowerHP: 50
-  EnemySpawnInterval: 0.12
+  EnemyMobSpeed: 4
+  EnemySpawnRate: 0.2
+  TowerHP: 99
+  GateMultiplier: 5
+  MovingGateMultiplier: 6
+  RightBlockerHP: 999
+  FriendlyColor: {r: 0, g: 0.6392157, b: 1, a: 1}
+  FriendlyAccentColor: {r: 0, g: 0.3137255, b: 1, a: 1}
+  friendlyMaterial: {fileID: 2100000, guid: 129a52af527196d47bfedd5a98c12d66, type: 2}
+  friendlyMobMaterial: {fileID: 2100000, guid: a561ce546dfabe3489fa11d1d4ddce81, type: 2}
+  EnemyColor: {r: 1, g: 0.19, b: 0.19, a: 1}
+  EnemyAccentColor: {r: 0.61, g: 0, b: 0, a: 1}
+  enemyMaterial: {fileID: 2100000, guid: 1287e5109f7ee2443aedd70e5fed12fd, type: 2}
+  enemyMobMaterial: {fileID: 2100000, guid: 37b49d0fb55060a47a23248fe51b6c01, type: 2}
+  GroundColorTop: {r: 1, g: 0.77254903, b: 0, a: 1}
+  GroundColorBottom: {r: 0.3647059, g: 0.59607846, b: 0.7372549, a: 1}
+  groundMaterial: {fileID: 2100000, guid: ac5ab2290ab12354e9aeb1e80bcb92c5, type: 2}
 --- !u!1 &1580440641
 GameObject:
   m_ObjectHideFlags: 0

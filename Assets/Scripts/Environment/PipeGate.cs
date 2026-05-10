@@ -118,6 +118,11 @@ namespace Environment
                     Core.AudioManager.Instance.PlayPipeEnter();
                 }
 
+                if (Core.GameManager.Instance != null)
+                {
+                    Core.GameManager.Instance.TrackPipeEntered();
+                }
+
                 // Suck the mob towards the first path point over a short duration
                 mob.EnterPipe(pathPoints[0].position, 0.15f, () => 
                 {
