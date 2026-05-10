@@ -19538,9 +19538,9 @@ MonoBehaviour:
   EnemyMobSpeed: 4
   EnemySpawnRate: 0.2
   TowerHP: 99
-  GateMultiplier: 5
-  MovingGateMultiplier: 6
-  RightBlockerHP: 999
+  GateMultiplier: 2
+  MovingGateMultiplier: 3
+  RightBlockerHP: 350
   FriendlyColor: {r: 0, g: 0.6392157, b: 1, a: 1}
   FriendlyAccentColor: {r: 0, g: 0.3137255, b: 1, a: 1}
   friendlyMaterial: {fileID: 2100000, guid: 129a52af527196d47bfedd5a98c12d66, type: 2}

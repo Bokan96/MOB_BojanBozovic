@@ -29717,16 +29717,12 @@
                         "excluded": false
                     },
                     {
-                        "name": "TrackEdgeReached",
-                        "excluded": false
-                    },
-                    {
                         "name": "TrackGameStarted",
                         "excluded": false
                     },
                     {
                         "name": "TrackFeverActivated",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "TrackGameWon",
@@ -29734,6 +29730,14 @@
                     },
                     {
                         "name": "TrackGameLost",
+                        "excluded": false
+                    },
+                    {
+                        "name": "TrackEdgeLeftReached",
+                        "excluded": false
+                    },
+                    {
+                        "name": "TrackEdgeRightReached",
                         "excluded": false
                     }
                 ]

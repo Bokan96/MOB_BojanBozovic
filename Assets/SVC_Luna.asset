@@ -720,7 +720,7 @@ MonoBehaviour:
       - DIRECTIONAL
       - LIGHTPROBE_SH
       - _EMISSION
-  version: 1068
+  version: 1076
   _shaderParsedShaders:
   - ParsedSubShaders:
     - Index: 0
