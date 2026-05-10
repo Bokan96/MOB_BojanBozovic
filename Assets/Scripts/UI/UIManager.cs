@@ -278,9 +278,6 @@ namespace UI
 
         /// <summary>
         /// Full sequential tutorial intro:
-        /// 1. BG fades in (0.3s)
-        /// 2. Text + Arrows scale in simultaneously (0.3s)
-        /// 3. Hand pops in (scale 0 → overshoot → target) and then immediately starts ping-pong
         /// </summary>
         private IEnumerator TutorialIntroSequence()
         {
@@ -364,7 +361,6 @@ namespace UI
         {
             if (tutorialHand == null) yield break;
 
-            // Phase 1: Slide from current editor pos → pingPongCenter
             // AND scale up from 0 → overshoot → target (halved duration)
             Vector2 startPos = _handOriginalPos;
             float elapsed = 0f;
@@ -408,7 +404,6 @@ namespace UI
             tutorialHand.anchoredPosition = pingPongCenter;
             tutorialHand.localScale = _handOriginalScale;
 
-            // Phase 2: Ping-pong between (+X, Y) and (-X, Y) forever
             Vector2 posRight = pingPongCenter;
             Vector2 posLeft  = new Vector2(-pingPongCenter.x, pingPongCenter.y);
 

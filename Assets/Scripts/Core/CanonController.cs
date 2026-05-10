@@ -235,7 +235,6 @@ namespace Core
 
             if (held)
             {
-                // --- MOVE ---
                 Vector3 screenPos = Input.mousePosition;
                 Plane plane = new Plane(Vector3.up, new Vector3(0, transform.position.y, 0));
                 Ray ray = cam.ScreenPointToRay(screenPos);
@@ -248,7 +247,6 @@ namespace Core
                     pos.x = Mathf.Lerp(pos.x, targetX, moveSpeed * Time.deltaTime);
                     transform.position = pos;
 
-                    // --- EDGE TRACKING ---
                     float edgeThreshold = limitX - 0.5f;
                     if (pos.x <= -edgeThreshold)
                     {
@@ -277,7 +275,6 @@ namespace Core
                     }
                 }
 
-                // --- SHOOT ---
                 if (mobSpawner != null && shootPoint != null)
                 {
                     if (mobSpawner.TryShoot())
@@ -298,7 +295,6 @@ namespace Core
                 }
             }
 
-            // --- BIG MOB ON RELEASE ---
             if (released && UI.FeverBar.Instance != null && UI.FeverBar.Instance.IsFull)
             {
                 if (mobSpawner != null && shootPoint != null)
@@ -332,22 +328,17 @@ namespace Core
                 }
             }
 
-            // --- ANIMATION RECOVERY ---
             if (cannonHead != null)
             {
                 cannonHead.localScale = Vector3.Lerp(cannonHead.localScale, _baseScale, Time.deltaTime * springSpeed);
             }
 
-            // --- MUZZLE FLARE ANIMATION ---
             UpdateMuzzleFlare();
 
-            // --- FEVER READY PARTICLES ---
             UpdateFeverParticles();
 
-            // --- BIG SHOT RECOIL ANIMATION ---
             UpdateBigShotRecoil();
 
-            // --- WHEEL ROTATION ---
             float deltaX = transform.position.x - _prevX;
             _prevX = transform.position.x;
 
@@ -361,7 +352,6 @@ namespace Core
                 }
             }
 
-            // --- MOVEMENT SMOKE ---
             float speed = Mathf.Abs(deltaX) / Time.deltaTime;
             debugCurrentSpeed = speed;
 
@@ -384,7 +374,6 @@ namespace Core
             }
         }
 
-        // ==================== MUZZLE FLARE ====================
 
         private void TriggerMuzzleFlare()
         {
@@ -426,7 +415,6 @@ namespace Core
             }
         }
 
-        // ==================== FEVER READY PARTICLES ====================
 
         private void UpdateFeverParticles()
         {
@@ -479,7 +467,6 @@ namespace Core
             _wasFeverFull = feverFull;
         }
 
-        // ==================== BIG SHOT RECOIL ====================
 
         private void TriggerBigShotRecoil()
         {
@@ -497,7 +484,6 @@ namespace Core
 
             if (!_recoilReturning)
             {
-                // Phase 1: Push backward (fast, punchy)
                 float t = Mathf.Clamp01(_recoilTimer / recoilOutDuration);
                 float eased = 1f - Mathf.Pow(1f - t, 3f); // Cubic ease-out
 
@@ -513,7 +499,6 @@ namespace Core
             }
             else
             {
-                // Phase 2: Spring back with elastic ease-out
                 float t = Mathf.Clamp01(_recoilTimer / recoilReturnDuration);
                 float eased = ElasticEaseOut(t);
 
@@ -539,7 +524,6 @@ namespace Core
             return Mathf.Pow(2f, -10f * t) * Mathf.Sin((t * 10f - 0.75f) * (2f * Mathf.PI / 3f)) + 1f;
         }
 
-        // ==================== BIG SHOT SMOKE ====================
 
         private void TriggerBigShotSmoke()
         {
@@ -548,7 +532,6 @@ namespace Core
             bigShotSmoke.Play();
         }
 
-        // ==================== HOOK ANIMATION ====================
 
         /// <summary>
         /// Intro hook: cannon slides forward along Z while the frame rig
@@ -564,7 +547,6 @@ namespace Core
 
             float elapsed = 0f;
 
-            // Phase 1: Slide forward along Z
             while (elapsed < hookDuration)
             {
                 elapsed += Time.deltaTime;
@@ -597,7 +579,6 @@ namespace Core
                 AudioManager.Instance.StopDriveSound();
             }
 
-            // Phase 2: Rotate the frame rig back (Sequential, only after slide)
             if (cannonFrameRig != null)
             {
                 elapsed = 0f;
@@ -616,7 +597,6 @@ namespace Core
                 cannonFrameRig.localRotation = _hookTargetFrameRot;
             }
 
-            // Phase 3: Smoothly transition camera back to its original position/rotation
             if (hookAttachCamera && cam != null)
             {
                 cam.transform.SetParent(_cameraOriginalParent, true);
@@ -653,7 +633,6 @@ namespace Core
         {
             isDead = true;
             
-            // 1. Always start the shrink animation first so it never freezes
             StartCoroutine(ShrinkAndDestroyRoutine());
 
             if (Core.AudioManager.Instance != null)
@@ -661,7 +640,6 @@ namespace Core
                 Core.AudioManager.Instance.PlayTowerDestroy();
             }
 
-            // 2. Safely attempt to spawn VFX
             if (destructionVfx != null)
             {
                 try 
@@ -719,7 +697,6 @@ namespace Core
                 cam.transform.SetParent(transform, true);
             }
 
-            // Phase 1: Rotate the frame rig 90 degrees and center camera X
             float elapsed = 0f;
             float rotDuration = 0.5f;
             Quaternion initialFrameRot = cannonFrameRig != null ? cannonFrameRig.localRotation : Quaternion.identity;
@@ -754,7 +731,6 @@ namespace Core
             if (cannonFrameRig != null) cannonFrameRig.localRotation = targetFrameRot;
             if (cam != null) cam.transform.localPosition = targetCamLocalPos;
 
-            // Phase 2: Slide to final victory destination
             Vector3 startPos = transform.position;
             Vector3 endPos = new Vector3(0f, startPos.y, 25f); 
             float duration = 2f;
@@ -791,7 +767,6 @@ namespace Core
                 AudioManager.Instance.StopDriveSound();
             }
 
-            // Phase 3: Rotate the frame rig back to initial
             if (cannonFrameRig != null)
             {
                 elapsed = 0f;
@@ -805,7 +780,6 @@ namespace Core
                 cannonFrameRig.localRotation = initialFrameRot;
             }
 
-            // Phase 4: Center the camera's local X
             if (cam != null)
             {
                 elapsed = 0f;

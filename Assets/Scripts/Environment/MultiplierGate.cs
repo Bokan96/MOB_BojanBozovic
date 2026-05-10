@@ -214,7 +214,6 @@ namespace Environment
                 {
                     newMob.ActivateSpread(spawnedXPositions[i]);
 
-                    // CRITICAL: Permanently ignore all freshly spawned mobs so the gate
                     // can never be re-triggered by them, even if nudged backward.
                     IgnoreMob(newMob);
                 }

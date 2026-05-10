@@ -104,7 +104,6 @@ namespace Environment
 
             UpdateHealthText();
 
-            // 3. Play Juicy Hit Animation (Squeeze + Shake)
             if (visualTransform != null)
             {
                 float multiplier = mob.IsBigMob ? 0.75f : hitScaleMultiplier;
@@ -115,13 +114,11 @@ namespace Environment
                 _currentShakeIntensity = mob.IsBigMob ? shakeIntensity * 2.5f : shakeIntensity;
             }
 
-            // 4. Play Damaged Sound
             if (Core.AudioManager.Instance != null)
             {
                 Core.AudioManager.Instance.PlayTowerDamaged();
             }
 
-            // 5. Check for Destruction
             if (health <= 0)
             {
                 DestroyBlocker();

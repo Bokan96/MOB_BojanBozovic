@@ -84,7 +84,6 @@ namespace Mobs
         {
             if (Core.GameManager.Instance != null && Core.GameManager.Instance.hasEnded) return;
 
-            // 1. Check Lose Condition (Iterate over enemies)
             for (int e = _activeEnemyMobs.Count - 1; e >= 0; e--)
             {
                 Mob eMob = _activeEnemyMobs[e];
@@ -100,7 +99,6 @@ namespace Mobs
                 }
             }
 
-            // 2. Collision Detection
             // We iterate backwards because mobs might be removed (recycled) during the loop
             for (int p = _activePlayerMobs.Count - 1; p >= 0; p--)
             {

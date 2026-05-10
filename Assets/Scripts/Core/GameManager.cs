@@ -129,7 +129,6 @@ namespace Core
 
         private void Update()
         {
-            // Lazy-cache cannon reference
             if (_cannon == null)
                 _cannon = FindObjectOfType<CanonController>();
 
@@ -221,11 +220,9 @@ namespace Core
             if (Mobs.BattleManager.Instance != null)
                 Mobs.BattleManager.Instance.FreezeAllMobs();
 
-            // 1. Unregister the offending mob from battle so it stops dying/being hit
             if (offendingMob != null && Mobs.BattleManager.Instance != null)
                 Mobs.BattleManager.Instance.UnregisterMob(offendingMob, isEnemy: true);
 
-            // 2. Drive mob toward the cannon (preserving mob's own Y)
             if (offendingMob != null && _cannon != null)
             {
                 Vector3 cannonPos = _cannon.transform.position;
@@ -248,10 +245,8 @@ namespace Core
                 }
             }
 
-            // 3. Small dramatic pause before the boom
             yield return new WaitForSeconds(0.2f);
 
-            // 4. Explode the cannon
             if (_cannon != null)
             {
                 try 
@@ -269,10 +264,8 @@ namespace Core
                 AudioManager.Instance.StopMusic();
             }
 
-            // 5. Wait for smoke to clear
             yield return new WaitForSeconds(1.5f);
 
-            // 6. Show the Lose CTA
             if (UI.UIManager.Instance != null)
                 UI.UIManager.Instance.ShowLoseCTA();
 

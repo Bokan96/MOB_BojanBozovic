@@ -10,9 +10,6 @@ namespace UI
     /// Setup in Unity:
     /// - Create a Canvas (Screen Space - Overlay).
     /// - Create 3 child Images stacked back-to-front:
-    ///   1. Background (cannon_progressbar_background 1.png) — Image Type: Simple
-    ///   2. Fill (cannon_progressbar_fill.png) — Image Type: Filled, Fill Method: Vertical, Fill Origin: Bottom
-    ///   3. Frame (cannon_progressbar_frame.png) — Image Type: Simple
     /// - Create a child Image for the "Release" text (release_text.png).
     /// - Assign all 4 references in the Inspector.
     /// </summary>
@@ -130,14 +127,12 @@ namespace UI
 
         private void Update()
         {
-            // 1. Check if we should reveal the fever bar (after intro completes)
             if (!_isVisible && Core.GameManager.Instance != null && Core.GameManager.Instance.hasStarted)
             {
                 _isVisible = true;
                 if (barVisualTransform != null) barVisualTransform.gameObject.SetActive(true);
             }
 
-            // 2. Smoothly lerp the fill amount (duration ~0.05s)
             if (_currentFill != _targetFill)
             {
                 // To finish in roughly 0.05s, lerp very fast
@@ -152,7 +147,6 @@ namespace UI
                 }
             }
 
-            // 3. UI Offscreen clamping logic (counteracts cannon movement leftwards)
             if (_cannon != null)
             {
                 float cannonX = _cannon.transform.position.x;
@@ -176,7 +170,6 @@ namespace UI
                 }
             }
 
-            // 4. Juicy pulse animation when the bar is full
             if (_isFull && barVisualTransform != null)
             {
                 // Gentle breathing pulse using a sine wave

@@ -54,7 +54,6 @@ namespace Mobs
             {
                 Mob m = Instantiate(mobPrefab, transform);
                 
-                // CRITICAL for Luna: Strip all colliders and rigidbodies.
                 // We use purely mathematical checks later, saving massive CPU overhead.
                 foreach(var col in m.GetComponentsInChildren<Collider>()) Destroy(col);
                 var rb = m.GetComponent<Rigidbody>();

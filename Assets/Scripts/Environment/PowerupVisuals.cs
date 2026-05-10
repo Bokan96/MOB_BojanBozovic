@@ -29,10 +29,8 @@ namespace Environment
 
         private void Update()
         {
-            // 1. Continuous Y-axis rotation
             _transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f, Space.World);
 
-            // 2. Subtle floating (bobbing) animation using a sine wave
             float newY = _startPosition.y + Mathf.Sin(Time.time * floatFrequency) * floatAmplitude;
             _transform.position = new Vector3(_transform.position.x, newY, _transform.position.z);
         }

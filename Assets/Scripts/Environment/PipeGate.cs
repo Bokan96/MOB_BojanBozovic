@@ -65,7 +65,6 @@ namespace Environment
                         Core.AudioManager.Instance.PlayPipeExit();
                     }
 
-                    // 1. Spawn the mob at the end point
                     if (mobSpawner != null && pathPoints.Count > 0)
                     {
                         Transform endPoint = pathPoints[pathPoints.Count - 1];
@@ -89,7 +88,6 @@ namespace Environment
                         }
                     }
 
-                    // 2. Destroy the circle visual and remove from tracking
                     Destroy(circle.visual);
                     _activeCircles.RemoveAt(i);
                 }
@@ -126,10 +124,8 @@ namespace Environment
                 // Suck the mob towards the first path point over a short duration
                 mob.EnterPipe(pathPoints[0].position, 0.15f, () => 
                 {
-                    // 1. The mob disappears into the pipe (recycle it to the pool)
                     mob.Recycle();
 
-                    // 2. Spawn a circle visual to represent the mob traveling inside
                     if (circlePrefab != null && pathPoints.Count >= 2)
                     {
                         GameObject newCircle = Instantiate(circlePrefab, pathPoints[0].position, pathPoints[0].rotation);

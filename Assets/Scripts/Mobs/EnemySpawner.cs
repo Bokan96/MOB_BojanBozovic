@@ -55,7 +55,6 @@ namespace Mobs
             {
                 Mob m = Instantiate(mobPrefab, transform);
                 
-                // CRITICAL for Luna: Strip all colliders and rigidbodies.
                 foreach(var col in m.GetComponentsInChildren<Collider>()) Destroy(col);
                 var rb = m.GetComponent<Rigidbody>();
                 if (rb != null) Destroy(rb);
@@ -82,7 +81,6 @@ namespace Mobs
             {
                 if (_pool.Count == 0) break; // Pool exhausted
                 
-                // --- Self-balancing weighted random spread with overlap prevention ---
                 float targetX = 0f;
                 bool validPositionFound = false;
                 
@@ -120,8 +118,6 @@ namespace Mobs
 
         /// <summary>
         /// Generates a random X position that:
-        /// 1. Gravitates towards the center (Gaussian-like distribution via centerBias).
-        /// 2. Shifts away from whichever side has been overcrowded recently.
         /// </summary>
         private float GenerateBalancedX(float originX)
         {
