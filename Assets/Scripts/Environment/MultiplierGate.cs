@@ -84,7 +84,7 @@ namespace Environment
                 
                 // Force the text to render after all transparent shaders (Queue 3050)
                 // so it never gets drawn over by the transparent pipe geometry.
-                multiplierText.fontMaterial.renderQueue = 3050;
+                multiplierText.fontSharedMaterial.renderQueue = 3050;
             }
         }
 

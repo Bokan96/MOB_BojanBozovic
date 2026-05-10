@@ -60,6 +60,15 @@ namespace Mobs
             }
         }
 
+        public void TriggerVictoryCelebration()
+        {
+            for (int i = _activePlayerMobs.Count - 1; i >= 0; i--)
+            {
+                _activePlayerMobs[i].CelebrateAndDie();
+            }
+        }
+
+
         private void Update()
         {
             if (Core.GameManager.Instance != null && Core.GameManager.Instance.hasEnded) return;

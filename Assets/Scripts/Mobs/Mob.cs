@@ -24,11 +24,12 @@ namespace Mobs
         private bool _applyBoost;
         private bool _isCharging; // Set true by GameManager during the lose sequence
 
-        // Visual Hit Flash — uses direct material instance (MPB doesn't work with custom sprite shaders)
-        private SpriteRenderer _spriteRenderer;
+        // Visual Hit Flash
+        private Renderer _renderer;
+        private Material _sharedMat;
         private Material _matInstance;
-        private Color _originalTopColor;
-        private Color _originalBottomColor;
+        private Color _originalTopColor = Color.white;
+        private Color _originalBottomColor = Color.white;
         private bool _isFlashing;
         private float _flashTimer;
         private const float FLASH_DURATION = 0.08f; 
@@ -38,35 +39,19 @@ namespace Mobs
             // Capture the prefab's original scale so we don't force it to Vector3.one
             _originalScale = transform.localScale;
             _baseScale = _originalScale;
-        }
 
-        private void EnsureMaterialCached()
-        {
-            if (_matInstance != null) return;
-
-            Renderer targetRenderer = null;
+            _renderer = GetComponentInChildren<SpriteRenderer>(true);
+            if (_renderer == null) _renderer = GetComponentInChildren<MeshRenderer>(true);
             
-            // Search including inactive children
-            _spriteRenderer = GetComponentInChildren<SpriteRenderer>(true);
-            if (_spriteRenderer != null)
+            if (_renderer != null && _renderer.sharedMaterial != null)
             {
-                targetRenderer = _spriteRenderer;
-            }
-            else
-            {
-                // Fallback to MeshRenderer in case it's a Quad/Mesh-based sprite
-                targetRenderer = GetComponentInChildren<MeshRenderer>(true);
-            }
+                _sharedMat = _renderer.sharedMaterial;
+                _sharedMat.renderQueue = 2450; // Explicitly force AlphaTest queue to override any saved asset overrides
 
-            if (targetRenderer != null && targetRenderer.sharedMaterial != null)
-            {
-                _matInstance = targetRenderer.material;
-                _matInstance.renderQueue = 3060;
-
-                if (_matInstance.HasProperty("_ColorTop"))
-                    _originalTopColor = _matInstance.GetColor("_ColorTop");
-                if (_matInstance.HasProperty("_ColorBottom"))
-                    _originalBottomColor = _matInstance.GetColor("_ColorBottom");
+                if (_sharedMat.HasProperty("_ColorTop"))
+                    _originalTopColor = _sharedMat.GetColor("_ColorTop");
+                if (_sharedMat.HasProperty("_ColorBottom"))
+                    _originalBottomColor = _sharedMat.GetColor("_ColorBottom");
             }
         }
 
@@ -97,6 +82,8 @@ namespace Mobs
         // Follow animation state
         private bool _isFollowing;
         private Transform _followTarget;
+        
+        private bool _isCelebrating;
 
         public bool IsActive => _active;
         public bool IsBigMob => _isBigMob;
@@ -132,16 +119,11 @@ namespace Mobs
             _isEnteringPipe = false;
             _isFollowing = false;
             _followTarget = null;
+            _isCelebrating = false;
+            _isCharging = false;
             
             // Reset flash state
             _isFlashing = false;
-            if (_matInstance != null)
-            {
-                if (_matInstance.HasProperty("_ColorTop"))
-                    _matInstance.SetColor("_ColorTop", _originalTopColor);
-                if (_matInstance.HasProperty("_ColorBottom"))
-                    _matInstance.SetColor("_ColorBottom", _originalBottomColor);
-            }
 
             _isLerpingY = doYLerp;
             if (doYLerp)
@@ -208,10 +190,15 @@ namespace Mobs
             
             if (_isBigMob && _hitPoints > 0)
             {
-                EnsureMaterialCached();
                 transform.localScale = _baseScale * 0.8f;
                 _isFlashing = true;
                 _flashTimer = 0f;
+
+                if (_matInstance == null && _renderer != null && _sharedMat != null)
+                {
+                    _matInstance = _renderer.material;
+                    _matInstance.renderQueue = 2450;
+                }
             }
 
             if (_hitPoints <= 0)
@@ -248,6 +235,21 @@ namespace Mobs
             _active = false;
             gameObject.SetActive(false);
 
+            // Cleanup flash material to restore batching
+            if (_isFlashing)
+            {
+                _isFlashing = false;
+                if (_renderer != null && _sharedMat != null)
+                {
+                    _renderer.sharedMaterial = _sharedMat;
+                }
+                if (_matInstance != null)
+                {
+                    Destroy(_matInstance);
+                    _matInstance = null;
+                }
+            }
+
             // Unregister from collision detection (if it wasn't already unregistered by Die())
             if (!_isDying && BattleManager.Instance != null)
             {
@@ -255,8 +257,53 @@ namespace Mobs
             }
 
             Environment.GateBase.ClearMobFromAllGates(this);
+            
+            if (_onRecycle != null)
+            {
+                _onRecycle(this);
+            }
+        }
 
-            _onRecycle?.Invoke(this);
+        public void CelebrateAndDie()
+        {
+            if (!_active || _isCelebrating || _isDying) return;
+            _isCelebrating = true;
+            StartCoroutine(CelebrateRoutine());
+        }
+
+        private System.Collections.IEnumerator CelebrateRoutine()
+        {
+            // Unregister from battle immediately so they don't hit anything
+            if (BattleManager.Instance != null)
+                BattleManager.Instance.UnregisterMob(this, _isEnemy);
+
+            // Wait a random amount of time (0.5 to 2 seconds)
+            yield return new WaitForSeconds(Random.Range(0.5f, 2f));
+
+            // Jump up to Y=1 and back to 0
+            float duration = 0.4f; // Very quick jump
+            float elapsed = 0f;
+            Vector3 startPos = transform.position;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                
+                // Parabola: 4 * t * (1 - t) reaches 1 at t=0.5, and 0 at t=0 and t=1
+                float yOffset = 4f * t * (1f - t); 
+                
+                Vector3 currentPos = startPos;
+                currentPos.y = startPos.y + yOffset;
+                transform.position = currentPos;
+                
+                yield return null;
+            }
+
+            transform.position = startPos;
+
+            // Disappear
+            Recycle();
         }
 
         /// <summary>
@@ -315,6 +362,12 @@ namespace Mobs
         {
             if (!_active) return;
 
+            // Catch missed mobs / newly spawned mobs after win
+            if (!_isCelebrating && !_isDying && !_isEnemy && !_isEnteringPipe && Core.GameManager.Instance != null && Core.GameManager.Instance.isGameWon)
+            {
+                CelebrateAndDie();
+            }
+
             // Recover scale from TakeHit punch if it's a big mob
             if (_isBigMob && !_isDying && !_applyBoost && transform.localScale.x < _baseScale.x)
             {
@@ -322,27 +375,30 @@ namespace Mobs
             }
 
             // Hit flash animation — direct material instance manipulation
-            if (_isFlashing)
+            if (_isFlashing && _matInstance != null)
             {
-                EnsureMaterialCached();
-                if (_matInstance != null)
-                {
-                    _flashTimer += Time.deltaTime;
-                    float t = Mathf.Clamp01(_flashTimer / FLASH_DURATION);
-                    
-                    // Instant red at t=0, smoothly fade back to original
-                    float curve = 1f - t;
-                    Color currentTop = Color.Lerp(_originalTopColor, Color.red, curve);
-                    Color currentBottom = Color.Lerp(_originalBottomColor, Color.red, curve);
-                    
-                    _matInstance.SetColor("_ColorTop", currentTop);
-                    _matInstance.SetColor("_ColorBottom", currentBottom);
+                _flashTimer += Time.deltaTime;
+                float t = Mathf.Clamp01(_flashTimer / FLASH_DURATION);
+                
+                // Instant red at t=0, smoothly fade back to original
+                float curve = 1f - t;
+                Color currentTop = Color.Lerp(_originalTopColor, Color.red, curve);
+                Color currentBottom = Color.Lerp(_originalBottomColor, Color.red, curve);
+                
+                _matInstance.SetColor("_ColorTop", currentTop);
+                _matInstance.SetColor("_ColorBottom", currentBottom);
 
-                    if (t >= 1f)
+                if (t >= 1f)
+                {
+                    _isFlashing = false;
+                    if (_renderer != null && _sharedMat != null)
                     {
-                        _isFlashing = false;
-                        _matInstance.SetColor("_ColorTop", _originalTopColor);
-                        _matInstance.SetColor("_ColorBottom", _originalBottomColor);
+                        _renderer.sharedMaterial = _sharedMat;
+                    }
+                    if (_matInstance != null)
+                    {
+                        Destroy(_matInstance);
+                        _matInstance = null;
                     }
                 }
             }
@@ -454,9 +510,9 @@ namespace Mobs
                 if (spreadT >= 1f) _isSpreading = false;
             }
 
-            if (_isCharging)
+            if (_isCharging || _isCelebrating)
             {
-                // Movement is fully controlled externally — skip everything
+                // Movement is fully controlled externally (or waiting to jump) — skip forward movement
                 return;
             }
 

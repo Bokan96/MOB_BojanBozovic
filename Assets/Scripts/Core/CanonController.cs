@@ -31,7 +31,7 @@ namespace Core
         [Tooltip("One ParticleSystem per wheel pair (e.g. front and rear). All emit together based on speed.")]
         public ParticleSystem[] movementSmokes;
         [Tooltip("Maximum particles-per-second emitted at full speed.")]
-        public float smokeMaxEmission = 40f;
+        public float smokeMaxEmission = 4f; // Reduced for performance
         [Tooltip("Minimum movement speed (units/sec) before smoke starts emitting.")]
         public float smokeMinSpeed = 1f;
 
@@ -123,6 +123,7 @@ namespace Core
         // Hook animation state
         /// <summary>True once the hook intro animation has finished and the player can interact.</summary>
         [HideInInspector] public bool hookComplete = false;
+        [HideInInspector] public bool isDead = false;
         private Vector3 _hookTargetPos;
         private Quaternion _hookTargetFrameRot;
         private Vector3 _hookStartPos;
@@ -218,8 +219,8 @@ namespace Core
 
         private void Update()
         {
-            // Block all player input during the hook intro animation
-            if (!hookComplete) return;
+            // Block all player input during the hook intro animation or if dead
+            if (!hookComplete || isDead) return;
 
             bool held = Input.GetMouseButton(0);
             bool released = Input.GetMouseButtonUp(0);
@@ -599,19 +600,40 @@ namespace Core
 
         public void ExplodeAndDie()
         {
-            if (destructionVfx != null)
-            {
-                ParticleSystem vfxInstance = Instantiate(destructionVfx, transform.position, Quaternion.Euler(-90f, 0f, 0f));
-                vfxInstance.Play();
-                Destroy(vfxInstance.gameObject, 3f);
-            }
+            isDead = true;
+            
+            // 1. Always start the shrink animation first so it never freezes
+            StartCoroutine(ShrinkAndDestroyRoutine());
 
             if (Core.AudioManager.Instance != null)
             {
                 Core.AudioManager.Instance.PlayTowerDestroy();
             }
 
-            StartCoroutine(ShrinkAndDestroyRoutine());
+            // 2. Safely attempt to spawn VFX
+            if (destructionVfx != null)
+            {
+                try 
+                {
+                    GameObject vfxObj = Instantiate(destructionVfx.gameObject, transform.position, Quaternion.Euler(-90f, 0f, 0f));
+                    ParticleSystem vfxInstance = vfxObj.GetComponent<ParticleSystem>();
+                    if (vfxInstance != null)
+                    {
+                        vfxInstance.Play();
+                    }
+                    StartCoroutine(DestroyAfterRoutine(vfxObj, 3f));
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError("Luna VFX Exception: " + e.Message);
+                }
+            }
+        }
+
+        private IEnumerator DestroyAfterRoutine(GameObject obj, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            if (obj != null) Destroy(obj);
         }
 
         private System.Collections.IEnumerator ShrinkAndDestroyRoutine()
@@ -631,6 +653,97 @@ namespace Core
 
             transform.localScale = Vector3.zero;
             gameObject.SetActive(false);
+        }
+
+        public void PlayVictoryAnimation()
+        {
+            StartCoroutine(VictoryAnimationRoutine());
+        }
+
+        private System.Collections.IEnumerator VictoryAnimationRoutine()
+        {
+            // Parent camera to cannon so it follows the victory charge
+            if (cam != null)
+            {
+                cam.transform.SetParent(transform, true);
+            }
+
+            // Phase 1: Rotate the frame rig 90 degrees
+            float elapsed = 0f;
+            float rotDuration = 0.5f;
+            Quaternion initialFrameRot = cannonFrameRig != null ? cannonFrameRig.localRotation : Quaternion.identity;
+            Quaternion targetFrameRot = Quaternion.Euler(0f, 90f, 0f);
+
+            if (cannonFrameRig != null)
+            {
+                while (elapsed < rotDuration)
+                {
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.SmoothStep(0f, 1f, elapsed / rotDuration);
+                    cannonFrameRig.localRotation = Quaternion.Slerp(initialFrameRot, targetFrameRot, t);
+                    yield return null;
+                }
+                cannonFrameRig.localRotation = targetFrameRot;
+            }
+
+            // Phase 2: Slide to final victory destination
+            Vector3 startPos = transform.position;
+            Vector3 endPos = new Vector3(0f, startPos.y, 25f); 
+            float duration = 2f;
+            elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
+                transform.position = Vector3.Lerp(startPos, endPos, t);
+
+                // Spin wheels during the slide
+                if (wheels != null)
+                {
+                    float rotAmount = hookWheelRotationSpeed * Time.deltaTime;
+                    foreach (Transform wheel in wheels)
+                    {
+                        if (wheel != null)
+                            wheel.Rotate(0f, 0f, -rotAmount, Space.Self);
+                    }
+                }
+
+                yield return null;
+            }
+            transform.position = endPos;
+
+            // Phase 3: Rotate the frame rig back to initial
+            if (cannonFrameRig != null)
+            {
+                elapsed = 0f;
+                while (elapsed < rotDuration)
+                {
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.SmoothStep(0f, 1f, elapsed / rotDuration);
+                    cannonFrameRig.localRotation = Quaternion.Slerp(targetFrameRot, initialFrameRot, t);
+                    yield return null;
+                }
+                cannonFrameRig.localRotation = initialFrameRot;
+            }
+
+            // Phase 4: Center the camera's local X
+            if (cam != null)
+            {
+                elapsed = 0f;
+                float camSlideDuration = 0.5f;
+                Vector3 startCamLocalPos = cam.transform.localPosition;
+                Vector3 endCamLocalPos = new Vector3(0f, startCamLocalPos.y, startCamLocalPos.z);
+
+                while (elapsed < camSlideDuration)
+                {
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.SmoothStep(0f, 1f, elapsed / camSlideDuration);
+                    cam.transform.localPosition = Vector3.Lerp(startCamLocalPos, endCamLocalPos, t);
+                    yield return null;
+                }
+                cam.transform.localPosition = endCamLocalPos;
+            }
         }
 
 #if UNITY_EDITOR

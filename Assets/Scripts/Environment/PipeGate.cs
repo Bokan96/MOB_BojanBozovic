@@ -133,9 +133,9 @@ namespace Environment
                         // This prevents it from popping in front of the pipe based on distance sorting.
                         foreach(var renderer in newCircle.GetComponentsInChildren<Renderer>())
                         {
-                            if (renderer != null && renderer.material != null)
+                            if (renderer != null && renderer.sharedMaterial != null)
                             {
-                                renderer.material.renderQueue = 2999;
+                                renderer.sharedMaterial.renderQueue = 2999;
                             }
                         }
 

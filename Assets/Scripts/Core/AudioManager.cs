@@ -9,7 +9,7 @@ namespace Core
 
         [Header("Audio Pool")]
         [Tooltip("Number of concurrent audio sources to handle overlapping sounds")]
-        public int sourcePoolSize = 5;
+        public int sourcePoolSize = 8;
         private AudioSource[] _sources;
         private int _currentSourceIndex = 0;
         private AudioSource _musicSource;
@@ -121,7 +121,26 @@ namespace Core
         public void PlayFeverActivate() { PlaySound(feverActivateClip, 1f, 1.1f, 1.2f); }
         
 
-        public void PlayLoseSound() { PlaySound(loseClip, 1f, 1f, 1f); }
+        public void PlayLoseSound() 
+        { 
+            if (_musicSource != null)
+            {
+                _musicSource.Stop();
+                _musicSource.loop = false;
+                _musicSource.clip = loseClip;
+                _musicSource.volume = 1f;
+                _musicSource.pitch = 1f;
+                _musicSource.Play();
+            }
+        }
+        
+        public void StopMusic()
+        {
+            if (_musicSource != null && _musicSource.isPlaying)
+            {
+                _musicSource.Stop();
+            }
+        }
         
         public void PlayBlockDestroy() 
         { 

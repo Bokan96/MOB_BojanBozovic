@@ -44,6 +44,7 @@ namespace UI
         [Header("End Screens")]
         public GameObject winCTA;
         public GameObject loseCTA;
+        public GameObject persistentCTA;
 
         private Coroutine _handRoutine;
 
@@ -66,6 +67,7 @@ namespace UI
 
             if (winCTA != null) winCTA.SetActive(false);
             if (loseCTA != null) loseCTA.SetActive(false);
+            if (persistentCTA != null) persistentCTA.SetActive(true);
 
             if (tutorialArrowLeft != null) _originalArrowLeftPos = tutorialArrowLeft.anchoredPosition;
             if (tutorialArrowRight != null) _originalArrowRightPos = tutorialArrowRight.anchoredPosition;
@@ -139,7 +141,32 @@ namespace UI
 
         public void ShowWinCTA()
         {
-            if (winCTA != null) winCTA.SetActive(true);
+            if (winCTA != null)
+            {
+                StartCoroutine(ScalePopInRoutine(winCTA));
+            }
+        }
+
+        private IEnumerator ScalePopInRoutine(GameObject ctaObject)
+        {
+            ctaObject.SetActive(true);
+            ctaObject.transform.localScale = Vector3.zero;
+            float elapsed = 0f;
+            float duration = 0.4f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                
+                // Pop in with slight overshoot
+                float c = t - 1f;
+                float eased = c * c * ((1.70158f + 1f) * c + 1.70158f) + 1f;
+
+                ctaObject.transform.localScale = Vector3.one * eased;
+                yield return null;
+            }
+            ctaObject.transform.localScale = Vector3.one;
         }
 
         public void ShowLoseCTA()

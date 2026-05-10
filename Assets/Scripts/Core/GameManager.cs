@@ -9,12 +9,11 @@ namespace Core
         [Header("State")]
         public bool hasStarted = false;
         public bool hasEnded = false;
+        public bool isGameWon = false;
 
         [Header("Spawners")]
         [Tooltip("These game objects will be disabled on start and enabled once the player interacts with the game.")]
-        #if LUNA_PLAYWORKS
-        [Luna.Unity.HideInPlayground]
-        #endif
+
         [SerializeField] private GameObject[] delayedSpawners;
 
         [Header("Luna Playground Parameters")]
@@ -42,10 +41,8 @@ namespace Core
                 }
             }
 
-            #if LUNA_PLAYWORKS
             Luna.Unity.LifeCycle.GameStarted();
-            Luna.Unity.LifeCycle.LevelStarted();
-            #endif
+
         }
 
         private void Update()
@@ -80,22 +77,39 @@ namespace Core
         {
             if (hasEnded) return;
             hasEnded = true;
+            isGameWon = true;
 
-            #if LUNA_PLAYWORKS
-            Luna.Unity.LifeCycle.GameEnded();
-            #endif
+            StartCoroutine(WinSequenceRoutine());
+        }
 
-            if (UI.UIManager.Instance != null)
+        private System.Collections.IEnumerator WinSequenceRoutine()
+        {
+            // Trigger mob celebration jumps
+            if (Mobs.BattleManager.Instance != null)
             {
-                UI.UIManager.Instance.ShowWinCTA();
+                Mobs.BattleManager.Instance.TriggerVictoryCelebration();
             }
-            
-            // Cannon lerp forward
+
+            // Wait a moment for the victory to sink in
+            yield return new WaitForSeconds(1f);
+
+            // Cannon Victory Sequence
             if (_cannon != null)
             {
-                _cannon.enabled = false; // Stop player from shooting/moving
-                StartCoroutine(LerpCannonForward(_cannon.transform));
+                _cannon.isDead = true; // Stop player from shooting/moving
+                _cannon.PlayVictoryAnimation();
             }
+
+            // Wait for cannon animation to finish (1s delay + 3.5s animation)
+            yield return new WaitForSeconds(3.5f);
+
+            // Win CTA is no longer shown at the end, relying on persistent CTA instead.
+            // if (UI.UIManager.Instance != null)
+            // {
+            //     UI.UIManager.Instance.ShowWinCTA();
+            // }
+
+            Luna.Unity.LifeCycle.GameEnded();
         }
 
         public void LoseGame(Mobs.Mob offendingMob = null)
@@ -103,17 +117,13 @@ namespace Core
             if (hasEnded) return;
             hasEnded = true;
 
-            #if LUNA_PLAYWORKS
-            Luna.Unity.LifeCycle.GameEnded();
-            #endif
-
             // Play fail sound immediately
             if (AudioManager.Instance != null)
                 AudioManager.Instance.PlayLoseSound();
 
             // Stop cannon input straight away
             if (_cannon != null)
-                _cannon.enabled = false;
+                _cannon.isDead = true;
 
             StartCoroutine(LoseSequenceRoutine(offendingMob));
         }
@@ -152,7 +162,21 @@ namespace Core
 
             // 4. Explode the cannon
             if (_cannon != null)
-                _cannon.ExplodeAndDie();
+            {
+                try 
+                {
+                    _cannon.ExplodeAndDie();
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError("Cannon explosion error: " + e.Message);
+                }
+            }
+
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.StopMusic();
+            }
 
             // 5. Wait for smoke to clear
             yield return new WaitForSeconds(1.5f);
@@ -160,54 +184,31 @@ namespace Core
             // 6. Show the Lose CTA
             if (UI.UIManager.Instance != null)
                 UI.UIManager.Instance.ShowLoseCTA();
+
+            Luna.Unity.LifeCycle.GameEnded();
         }
 
 
 
         public void InstallGame()
         {
-            #if LUNA_PLAYWORKS
             Luna.Unity.Playable.InstallFullGame();
-            #else
-            Debug.Log("CTA Clicked! Redirect to app store.");
-            #endif
         }
 
         public void TrackGatePassed()
         {
-            #if LUNA_PLAYWORKS
             Luna.Unity.Analytics.LogEvent("gate_passed", 0);
-            #endif
         }
 
         public void TrackMobMultiplied()
         {
-            #if LUNA_PLAYWORKS
             Luna.Unity.Analytics.LogEvent("mob_multiplied", 0);
-            #endif
         }
 
         public void TrackTowerDestroyed()
         {
-            #if LUNA_PLAYWORKS
             Luna.Unity.Analytics.LogEvent("tower_destroyed", 0);
-            #endif
         }
 
-        private System.Collections.IEnumerator LerpCannonForward(Transform cannon)
-        {
-            Vector3 startPos = cannon.position;
-            Vector3 endPos = startPos + new Vector3(0, 0, 15f); // Move forward along Z
-            float duration = 2f;
-            float elapsed = 0f;
-
-            while (elapsed < duration)
-            {
-                elapsed += Time.deltaTime;
-                float t = Mathf.SmoothStep(0f, 1f, elapsed / duration);
-                cannon.position = Vector3.Lerp(startPos, endPos, t);
-                yield return null;
-            }
-        }
     }
 }

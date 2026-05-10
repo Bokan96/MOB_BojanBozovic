@@ -47,6 +47,78 @@ MonoBehaviour:
     keywords:
       "\L\u2025": []
   - shaderCompilerPlatform: 9
+    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 4
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025":
+      - DIRECTIONAL
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 4
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025":
+      - DIRECTIONAL
+      - LIGHTPROBE_SH
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 5
+    passId: 1
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025":
+      - DIRECTIONAL
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 4
+    passId: 0
+    subShaderIndex: 1
+    upToDate: 0
+    keywords:
+      "\L\u2025":
+      - DIRECTIONAL
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 4
+    passId: 0
+    subShaderIndex: 1
+    upToDate: 0
+    keywords:
+      "\L\u2025":
+      - DIRECTIONAL
+      - LIGHTPROBE_SH
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 5
+    passId: 1
+    subShaderIndex: 1
+    upToDate: 0
+    keywords:
+      "\L\u2025":
+      - DIRECTIONAL
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 1
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
+    passType: 2
+    passId: 1
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 9
     shader: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
     passType: 8
     passId: 1
@@ -72,22 +144,6 @@ MonoBehaviour:
     keywords:
       "\L\u2025":
       - _ALPHABLEND_ON
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
-    passType: 1
-    passId: 0
-    subShaderIndex: 0
-    upToDate: 0
-    keywords:
-      "\L\u2025": []
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
-    passType: 2
-    passId: 1
-    subShaderIndex: 0
-    upToDate: 0
-    keywords:
-      "\L\u2025": []
   - shaderCompilerPlatform: 9
     shader: {fileID: 4800000, guid: 9e7ac9c0f4c7ebb43b0f3d79993b11d3, type: 3}
     passType: 4
@@ -186,6 +242,42 @@ MonoBehaviour:
     keywords:
       "\L\u2025": []
   - shaderCompilerPlatform: 9
+    shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025":
+      - UNITY_UI_ALPHACLIP
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025":
+      - UNITY_UI_CLIP_RECT
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025":
+      - UNITY_UI_ALPHACLIP
+      - UNITY_UI_CLIP_RECT
+  - shaderCompilerPlatform: 9
     shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
     passType: 0
     passId: 0
@@ -219,46 +311,6 @@ MonoBehaviour:
     upToDate: 0
     keywords:
       "\L\u2025":
-      - UNITY_UI_ALPHACLIP
-      - UNITY_UI_CLIP_RECT
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-    passType: 0
-    passId: 0
-    subShaderIndex: 0
-    upToDate: 0
-    keywords:
-      "\L\u2025":
-      - OUTLINE_ON
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-    passType: 0
-    passId: 0
-    subShaderIndex: 0
-    upToDate: 0
-    keywords:
-      "\L\u2025":
-      - OUTLINE_ON
-      - UNITY_UI_ALPHACLIP
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-    passType: 0
-    passId: 0
-    subShaderIndex: 0
-    upToDate: 0
-    keywords:
-      "\L\u2025":
-      - OUTLINE_ON
-      - UNITY_UI_CLIP_RECT
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-    passType: 0
-    passId: 0
-    subShaderIndex: 0
-    upToDate: 0
-    keywords:
-      "\L\u2025":
-      - OUTLINE_ON
       - UNITY_UI_ALPHACLIP
       - UNITY_UI_CLIP_RECT
   - shaderCompilerPlatform: 9
@@ -269,62 +321,6 @@ MonoBehaviour:
     upToDate: 0
     keywords:
       "\L\u2025": []
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    passType: 4
-    passId: 0
-    subShaderIndex: 0
-    upToDate: 0
-    keywords:
-      "\L\u2025":
-      - DIRECTIONAL
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    passType: 4
-    passId: 0
-    subShaderIndex: 0
-    upToDate: 0
-    keywords:
-      "\L\u2025":
-      - DIRECTIONAL
-      - LIGHTPROBE_SH
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    passType: 5
-    passId: 1
-    subShaderIndex: 0
-    upToDate: 0
-    keywords:
-      "\L\u2025":
-      - DIRECTIONAL
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    passType: 4
-    passId: 0
-    subShaderIndex: 1
-    upToDate: 0
-    keywords:
-      "\L\u2025":
-      - DIRECTIONAL
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    passType: 4
-    passId: 0
-    subShaderIndex: 1
-    upToDate: 0
-    keywords:
-      "\L\u2025":
-      - DIRECTIONAL
-      - LIGHTPROBE_SH
-  - shaderCompilerPlatform: 9
-    shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    passType: 5
-    passId: 1
-    subShaderIndex: 1
-    upToDate: 0
-    keywords:
-      "\L\u2025":
-      - DIRECTIONAL
   - shaderCompilerPlatform: 9
     shader: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
     passType: 0
@@ -590,9 +586,89 @@ MonoBehaviour:
     upToDate: 0
     keywords:
       "\L\u2025": []
+  - shaderCompilerPlatform: 5
+    shader: {fileID: 4800000, guid: 9e7ac9c0f4c7ebb43b0f3d79993b11d3, type: 3}
+    passType: 0
+    passId: 1
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 4800000, guid: 9e7ac9c0f4c7ebb43b0f3d79993b11d3, type: 3}
+    passType: 0
+    passId: 1
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 5
+    shader: {fileID: 4800000, guid: 9e7ac9c0f4c7ebb43b0f3d79993b11d3, type: 3}
+    passType: 4
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 4800000, guid: 9e7ac9c0f4c7ebb43b0f3d79993b11d3, type: 3}
+    passType: 4
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 5
+    shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 5
+    shader: {fileID: 4800000, guid: b39916e1f71c2024899dada8ff57b6b7, type: 3}
+    passType: 4
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 4800000, guid: b39916e1f71c2024899dada8ff57b6b7, type: 3}
+    passType: 4
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 5
+    shader: {fileID: 4800000, guid: f81fed398512df34689b4f45296479b0, type: 3}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
+  - shaderCompilerPlatform: 9
+    shader: {fileID: 4800000, guid: f81fed398512df34689b4f45296479b0, type: 3}
+    passType: 0
+    passId: 0
+    subShaderIndex: 0
+    upToDate: 0
+    keywords:
+      "\L\u2025": []
   _includedShaderVariants: []
   _excludedShaderVariants: []
-  version: 341
+  version: 660
   _shaderParsedShaders:
   - ParsedSubShaders:
     - Index: 0
@@ -5621,6 +5697,767 @@ MonoBehaviour:
   - ParsedSubShaders:
     - Index: 0
       Passes:
+      - Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+        ShaderVariants:
+        - ShaderCompilerPlatform: 9
+          NoShaderVariant: 0
+          VertexProgram: "\n#version 300 es\n\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS
+            0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define UNITY_UNIFORM\n#else\n#define
+            UNITY_UNIFORM uniform\n#endif\n#define UNITY_SUPPORTS_UNIFORM_LOCATION
+            0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define UNITY_LOCATION(x) layout(location
+            = x)\n#define UNITY_BINDING(x) layout(binding = x, std140)\n#else\n#define
+            UNITY_LOCATION(x)\n#define UNITY_BINDING(x) layout(std140)\n#endif\nuniform
+            \tvec3 _WorldSpaceCameraPos;\nuniform \tvec4 _ScreenParams;\nuniform
+            \tvec4 hlslcc_mtx4x4unity_ObjectToWorld[4];\nuniform \tvec4 hlslcc_mtx4x4unity_WorldToObject[4];\nuniform
+            \tvec4 hlslcc_mtx4x4glstate_matrix_projection[4];\nuniform \tvec4 hlslcc_mtx4x4unity_MatrixVP[4];\nuniform
+            \tfloat _FaceDilate;\nuniform \tfloat _OutlineSoftness;\nuniform \tfloat
+            _OutlineWidth;\nuniform \tvec4 hlslcc_mtx4x4_EnvMatrix[4];\nuniform \tfloat
+            _WeightNormal;\nuniform \tfloat _WeightBold;\nuniform \tfloat _ScaleRatioA;\nuniform
+            \tfloat _VertexOffsetX;\nuniform \tfloat _VertexOffsetY;\nuniform \tvec4
+            _ClipRect;\nuniform \tfloat _MaskSoftnessX;\nuniform \tfloat _MaskSoftnessY;\nuniform
+            \tfloat _GradientScale;\nuniform \tfloat _ScaleX;\nuniform \tfloat _ScaleY;\nuniform
+            \tfloat _PerspectiveFilter;\nuniform \tfloat _Sharpness;\nuniform \tvec4
+            _FaceTex_ST;\nuniform \tvec4 _OutlineTex_ST;\nuniform \tfloat _UIMaskSoftnessX;\nuniform
+            \tfloat _UIMaskSoftnessY;\nuniform \tint _UIVertexColorAlwaysGammaSpace;\nin
+            highp vec4 in_POSITION0;\nin highp vec3 in_NORMAL0;\nin mediump vec4
+            in_COLOR0;\nin highp vec4 in_TEXCOORD0;\nin highp vec2 in_TEXCOORD1;\nout
+            mediump vec4 vs_COLOR0;\nout highp vec2 vs_TEXCOORD0;\nout highp vec4
+            vs_TEXCOORD1;\nhighp vec4 vs_TEXCOORD2;\nhighp vec3 vs_TEXCOORD3;\nout
+            highp vec4 vs_TEXCOORD5;\nvec3 u_xlat0;\nvec4 u_xlat1;\nvec4 u_xlat2;\nbvec3
+            u_xlatb2;\nvec4 u_xlat3;\nmediump vec3 u_xlat16_4;\nmediump vec3 u_xlat16_5;\nvec3
+            u_xlat6;\nvec3 u_xlat9;\nvec2 u_xlat14;\nfloat u_xlat16;\nfloat u_xlat22;\nbool
+            u_xlatb22;\nvoid main()\n{\n    u_xlat0.xy = in_POSITION0.xy + vec2(_VertexOffsetX,
+            _VertexOffsetY);\n    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];\n   
+            u_xlat1 = hlslcc_mtx4x4unity_ObjectToWorld[0] * u_xlat0.xxxx + u_xlat1;\n   
+            u_xlat1 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat1;\n   
+            u_xlat2 = u_xlat1 + hlslcc_mtx4x4unity_ObjectToWorld[3];\n    u_xlat1.xyz
+            = hlslcc_mtx4x4unity_ObjectToWorld[3].xyz * in_POSITION0.www + u_xlat1.xyz;\n   
+            u_xlat1.xyz = (-u_xlat1.xyz) + _WorldSpaceCameraPos.xyz;\n    u_xlat3
+            = u_xlat2.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];\n    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[0]
+            * u_xlat2.xxxx + u_xlat3;\n    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[2]
+            * u_xlat2.zzzz + u_xlat3;\n    u_xlat2 = hlslcc_mtx4x4unity_MatrixVP[3]
+            * u_xlat2.wwww + u_xlat3;\n    gl_Position = u_xlat2;\n    u_xlat16_4.xyz
+            = in_COLOR0.xyz * vec3(0.265884995, 0.265884995, 0.265884995) + vec3(0.736584008,
+            0.736584008, 0.736584008);\n    u_xlat16_4.xyz = in_COLOR0.xyz * u_xlat16_4.xyz
+            + vec3(-0.00980184041, -0.00980184041, -0.00980184041);\n    u_xlat16_4.xyz
+            = in_COLOR0.xyz * u_xlat16_4.xyz + vec3(0.00319697009, 0.00319697009,
+            0.00319697009);\n    u_xlat16_5.xyz = in_COLOR0.xyz * vec3(0.0849710032,
+            0.0849710032, 0.0849710032) + vec3(-0.000163029006, -0.000163029006,
+            -0.000163029006);\n    u_xlatb2.xyz = lessThan(in_COLOR0.xyzx, vec4(0.0725490004,
+            0.0725490004, 0.0725490004, 0.0)).xyz;\n    {\n        vec3 hlslcc_movcTemp
+            = u_xlat16_4;\n        hlslcc_movcTemp.x = (u_xlatb2.x) ? u_xlat16_5.x
+            : u_xlat16_4.x;\n        hlslcc_movcTemp.y = (u_xlatb2.y) ? u_xlat16_5.y
+            : u_xlat16_4.y;\n        hlslcc_movcTemp.z = (u_xlatb2.z) ? u_xlat16_5.z
+            : u_xlat16_4.z;\n        u_xlat16_4 = hlslcc_movcTemp;\n    }\n    vs_COLOR0.xyz
+            = (int(_UIVertexColorAlwaysGammaSpace) != 0) ? u_xlat16_4.xyz : in_COLOR0.xyz;\n   
+            vs_COLOR0.w = in_COLOR0.w;\n    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;\n   
+            u_xlat14.xy = _ScreenParams.yy * hlslcc_mtx4x4glstate_matrix_projection[1].xy;\n   
+            u_xlat14.xy = hlslcc_mtx4x4glstate_matrix_projection[0].xy * _ScreenParams.xx
+            + u_xlat14.xy;\n    u_xlat14.xy = abs(u_xlat14.xy) * vec2(_ScaleX, _ScaleY);\n   
+            u_xlat14.xy = u_xlat2.ww / u_xlat14.xy;\n    u_xlat22 = dot(u_xlat14.xy,
+            u_xlat14.xy);\n    u_xlat22 = inversesqrt(u_xlat22);\n    u_xlat2.x =
+            abs(in_TEXCOORD0.w) * _GradientScale;\n    u_xlat9.x = _Sharpness + 1.0;\n   
+            u_xlat2.x = u_xlat9.x * u_xlat2.x;\n    u_xlat9.x = u_xlat22 * u_xlat2.x;\n   
+            u_xlat16 = (-_PerspectiveFilter) + 1.0;\n    u_xlat16 = u_xlat16 * abs(u_xlat9.x);\n   
+            u_xlat22 = u_xlat22 * u_xlat2.x + (-u_xlat16);\n    u_xlat3.x = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[0].xyz);\n    u_xlat3.y = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[1].xyz);\n    u_xlat3.z = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[2].xyz);\n    u_xlat2.x = dot(u_xlat3.xyz,
+            u_xlat3.xyz);\n    u_xlat2.x = inversesqrt(u_xlat2.x);\n    u_xlat3.xyz
+            = u_xlat2.xxx * u_xlat3.xyz;\n    u_xlat2.x = dot(u_xlat1.xyz, u_xlat1.xyz);\n   
+            u_xlat2.x = inversesqrt(u_xlat2.x);\n    u_xlat6.xyz = u_xlat1.xyz *
+            u_xlat2.xxx;\n    u_xlat2.x = dot(u_xlat3.xyz, u_xlat6.xyz);\n    u_xlat22
+            = abs(u_xlat2.x) * u_xlat22 + u_xlat16;\n    u_xlatb2.x = hlslcc_mtx4x4glstate_matrix_projection[3].w==0.0;\n   
+            u_xlat9.x = (u_xlatb2.x) ? u_xlat22 : u_xlat9.x;\n    u_xlatb22 = 0.0>=in_TEXCOORD0.w;\n   
+            u_xlat22 = u_xlatb22 ? 1.0 : float(0.0);\n    u_xlat2.x = (-_WeightNormal)
+            + _WeightBold;\n    u_xlat22 = u_xlat22 * u_xlat2.x + _WeightNormal;\n   
+            u_xlat22 = u_xlat22 * 0.25 + _FaceDilate;\n    u_xlat22 = u_xlat22 *
+            _ScaleRatioA;\n    u_xlat9.z = u_xlat22 * 0.5;\n    vs_TEXCOORD1.yw =
+            u_xlat9.xz;\n    u_xlat2.x = 0.5 / u_xlat9.x;\n    u_xlat9.x = (-_OutlineWidth)
+            * _ScaleRatioA + 1.0;\n    u_xlat9.x = (-_OutlineSoftness) * _ScaleRatioA
+            + u_xlat9.x;\n    u_xlat9.x = u_xlat9.x * 0.5 + (-u_xlat2.x);\n    vs_TEXCOORD1.x
+            = (-u_xlat22) * 0.5 + u_xlat9.x;\n    u_xlat22 = (-u_xlat22) * 0.5 +
+            0.5;\n    vs_TEXCOORD1.z = u_xlat2.x + u_xlat22;\n    u_xlat2 = max(_ClipRect,
+            vec4(-2e+10, -2e+10, -2e+10, -2e+10));\n    u_xlat2 = min(u_xlat2, vec4(2e+10,
+            2e+10, 2e+10, 2e+10));\n    u_xlat0.xy = u_xlat0.xy * vec2(2.0, 2.0)
+            + (-u_xlat2.xy);\n    vs_TEXCOORD2.xy = (-u_xlat2.zw) + u_xlat0.xy;\n   
+            u_xlat0.xy = max(vec2(_MaskSoftnessX, _MaskSoftnessY), vec2(_UIMaskSoftnessX,
+            _UIMaskSoftnessY));\n    u_xlat0.xy = u_xlat0.xy * vec2(0.25, 0.25) +
+            u_xlat14.xy;\n    vs_TEXCOORD2.zw = vec2(0.25, 0.25) / u_xlat0.xy;\n   
+            u_xlat0.xyz = u_xlat1.yyy * hlslcc_mtx4x4_EnvMatrix[1].xyz;\n    u_xlat0.xyz
+            = hlslcc_mtx4x4_EnvMatrix[0].xyz * u_xlat1.xxx + u_xlat0.xyz;\n    vs_TEXCOORD3.xyz
+            = hlslcc_mtx4x4_EnvMatrix[2].xyz * u_xlat1.zzz + u_xlat0.xyz;\n    vs_TEXCOORD5.xy
+            = in_TEXCOORD1.xy * _FaceTex_ST.xy + _FaceTex_ST.zw;\n    vs_TEXCOORD5.zw
+            = in_TEXCOORD1.xy * _OutlineTex_ST.xy + _OutlineTex_ST.zw;\n    return;\n}\n\n"
+          FragmentProgram: "\n#version 300 es\n\nprecision highp float;\nprecision
+            highp int;\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS 0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define
+            UNITY_UNIFORM\n#else\n#define UNITY_UNIFORM uniform\n#endif\n#define
+            UNITY_SUPPORTS_UNIFORM_LOCATION 0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define
+            UNITY_LOCATION(x) layout(location = x)\n#define UNITY_BINDING(x) layout(binding
+            = x, std140)\n#else\n#define UNITY_LOCATION(x)\n#define UNITY_BINDING(x)
+            layout(std140)\n#endif\nuniform \tvec4 _Time;\nuniform \tfloat _FaceUVSpeedX;\nuniform
+            \tfloat _FaceUVSpeedY;\nuniform \tmediump vec4 _FaceColor;\nuniform \tfloat
+            _OutlineSoftness;\nuniform \tfloat _OutlineUVSpeedX;\nuniform \tfloat
+            _OutlineUVSpeedY;\nuniform \tmediump vec4 _OutlineColor;\nuniform \tfloat
+            _OutlineWidth;\nuniform \tfloat _ScaleRatioA;\nUNITY_LOCATION(0) uniform
+            mediump sampler2D _MainTex;\nUNITY_LOCATION(1) uniform mediump sampler2D
+            _FaceTex;\nUNITY_LOCATION(2) uniform mediump sampler2D _OutlineTex;\nin
+            mediump  vec4 vs_COLOR0;\nin highp  vec2 vs_TEXCOORD0;\nin highp  vec4
+            vs_TEXCOORD1;\nin highp  vec4 vs_TEXCOORD5;\nlayout(location = 0) out
+            mediump vec4 SV_Target0;\nvec3 u_xlat0;\nmediump vec4 u_xlat16_0;\nmediump
+            float u_xlat16_1;\nvec4 u_xlat2;\nmediump vec4 u_xlat16_2;\nmediump vec3
+            u_xlat16_3;\nfloat u_xlat4;\nmediump vec4 u_xlat16_4;\nfloat u_xlat5;\nbool
+            u_xlatb5;\nmediump float u_xlat16_6;\nfloat u_xlat9;\nmediump float u_xlat16_11;\nvoid
+            main()\n{\n    u_xlat16_0.x = texture(_MainTex, vs_TEXCOORD0.xy).w;\n   
+            u_xlat5 = u_xlat16_0.x + (-vs_TEXCOORD1.x);\n    u_xlat0.x = (-u_xlat16_0.x)
+            + vs_TEXCOORD1.z;\n    u_xlatb5 = u_xlat5<0.0;\n    if(u_xlatb5){discard;}\n   
+            u_xlat5 = _OutlineWidth * _ScaleRatioA;\n    u_xlat5 = u_xlat5 * vs_TEXCOORD1.y;\n   
+            u_xlat16_1 = min(u_xlat5, 1.0);\n    u_xlat16_6 = u_xlat5 * 0.5;\n   
+            u_xlat16_1 = sqrt(u_xlat16_1);\n    u_xlat16_11 = u_xlat0.x * vs_TEXCOORD1.y
+            + u_xlat16_6;\n    u_xlat16_11 = clamp(u_xlat16_11, 0.0, 1.0);\n    u_xlat16_6
+            = u_xlat0.x * vs_TEXCOORD1.y + (-u_xlat16_6);\n    u_xlat16_1 = u_xlat16_1
+            * u_xlat16_11;\n    u_xlat0.xy = vec2(_OutlineUVSpeedX, _OutlineUVSpeedY)
+            * _Time.yy + vs_TEXCOORD5.zw;\n    u_xlat16_0 = texture(_OutlineTex,
+            u_xlat0.xy);\n    u_xlat2 = u_xlat16_0 * _OutlineColor;\n    u_xlat16_3.xyz
+            = vs_COLOR0.xyz * _FaceColor.xyz;\n    u_xlat0.xy = vec2(_FaceUVSpeedX,
+            _FaceUVSpeedY) * _Time.yy + vs_TEXCOORD5.xy;\n    u_xlat16_4 = texture(_FaceTex,
+            u_xlat0.xy);\n    u_xlat0.xyz = u_xlat16_3.xyz * u_xlat16_4.xyz;\n   
+            u_xlat4 = u_xlat16_4.w * _FaceColor.w;\n    u_xlat16_3.xyz = u_xlat0.xyz
+            * vec3(u_xlat4);\n    u_xlat16_2.xyz = u_xlat2.xyz * u_xlat2.www + (-u_xlat16_3.xyz);\n   
+            u_xlat16_2.w = _OutlineColor.w * u_xlat16_0.w + (-u_xlat4);\n    u_xlat16_2
+            = vec4(u_xlat16_1) * u_xlat16_2;\n    u_xlat16_0.xyz = u_xlat0.xyz *
+            vec3(u_xlat4) + u_xlat16_2.xyz;\n    u_xlat16_0.w = _FaceColor.w * u_xlat16_4.w
+            + u_xlat16_2.w;\n    u_xlat4 = _OutlineSoftness * _ScaleRatioA;\n   
+            u_xlat9 = u_xlat4 * vs_TEXCOORD1.y;\n    u_xlat16_1 = u_xlat4 * vs_TEXCOORD1.y
+            + 1.0;\n    u_xlat16_6 = u_xlat9 * 0.5 + u_xlat16_6;\n    u_xlat16_1
+            = u_xlat16_6 / u_xlat16_1;\n    u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);\n   
+            u_xlat16_1 = (-u_xlat16_1) + 1.0;\n    u_xlat16_0 = u_xlat16_0 * vec4(u_xlat16_1);\n   
+            SV_Target0 = u_xlat16_0 * vs_COLOR0.wwww;\n    return;\n}\n\n"
+          LOD: 0
+          readDepth: 0
+          PassId: 0
+          SubShaderIndex: 0
+          Keywords:
+            "\L\u2025": []
+          Tags:
+          - Key: IGNOREPROJECTOR
+            Value: true
+          - Key: QUEUE
+            Value: Transparent
+          - Key: RenderType
+            Value: Transparent
+        - ShaderCompilerPlatform: 9
+          NoShaderVariant: 0
+          VertexProgram: "\n#version 300 es\n\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS
+            0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define UNITY_UNIFORM\n#else\n#define
+            UNITY_UNIFORM uniform\n#endif\n#define UNITY_SUPPORTS_UNIFORM_LOCATION
+            0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define UNITY_LOCATION(x) layout(location
+            = x)\n#define UNITY_BINDING(x) layout(binding = x, std140)\n#else\n#define
+            UNITY_LOCATION(x)\n#define UNITY_BINDING(x) layout(std140)\n#endif\nuniform
+            \tvec3 _WorldSpaceCameraPos;\nuniform \tvec4 _ScreenParams;\nuniform
+            \tvec4 hlslcc_mtx4x4unity_ObjectToWorld[4];\nuniform \tvec4 hlslcc_mtx4x4unity_WorldToObject[4];\nuniform
+            \tvec4 hlslcc_mtx4x4glstate_matrix_projection[4];\nuniform \tvec4 hlslcc_mtx4x4unity_MatrixVP[4];\nuniform
+            \tfloat _FaceDilate;\nuniform \tfloat _OutlineSoftness;\nuniform \tfloat
+            _OutlineWidth;\nuniform \tvec4 hlslcc_mtx4x4_EnvMatrix[4];\nuniform \tfloat
+            _WeightNormal;\nuniform \tfloat _WeightBold;\nuniform \tfloat _ScaleRatioA;\nuniform
+            \tfloat _VertexOffsetX;\nuniform \tfloat _VertexOffsetY;\nuniform \tvec4
+            _ClipRect;\nuniform \tfloat _MaskSoftnessX;\nuniform \tfloat _MaskSoftnessY;\nuniform
+            \tfloat _GradientScale;\nuniform \tfloat _ScaleX;\nuniform \tfloat _ScaleY;\nuniform
+            \tfloat _PerspectiveFilter;\nuniform \tfloat _Sharpness;\nuniform \tvec4
+            _FaceTex_ST;\nuniform \tvec4 _OutlineTex_ST;\nuniform \tfloat _UIMaskSoftnessX;\nuniform
+            \tfloat _UIMaskSoftnessY;\nuniform \tint _UIVertexColorAlwaysGammaSpace;\nin
+            highp vec4 in_POSITION0;\nin highp vec3 in_NORMAL0;\nin mediump vec4
+            in_COLOR0;\nin highp vec4 in_TEXCOORD0;\nin highp vec2 in_TEXCOORD1;\nout
+            mediump vec4 vs_COLOR0;\nout highp vec2 vs_TEXCOORD0;\nout highp vec4
+            vs_TEXCOORD1;\nhighp vec4 vs_TEXCOORD2;\nhighp vec3 vs_TEXCOORD3;\nout
+            highp vec4 vs_TEXCOORD5;\nvec3 u_xlat0;\nvec4 u_xlat1;\nvec4 u_xlat2;\nbvec3
+            u_xlatb2;\nvec4 u_xlat3;\nmediump vec3 u_xlat16_4;\nmediump vec3 u_xlat16_5;\nvec3
+            u_xlat6;\nvec3 u_xlat9;\nvec2 u_xlat14;\nfloat u_xlat16;\nfloat u_xlat22;\nbool
+            u_xlatb22;\nvoid main()\n{\n    u_xlat0.xy = in_POSITION0.xy + vec2(_VertexOffsetX,
+            _VertexOffsetY);\n    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];\n   
+            u_xlat1 = hlslcc_mtx4x4unity_ObjectToWorld[0] * u_xlat0.xxxx + u_xlat1;\n   
+            u_xlat1 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat1;\n   
+            u_xlat2 = u_xlat1 + hlslcc_mtx4x4unity_ObjectToWorld[3];\n    u_xlat1.xyz
+            = hlslcc_mtx4x4unity_ObjectToWorld[3].xyz * in_POSITION0.www + u_xlat1.xyz;\n   
+            u_xlat1.xyz = (-u_xlat1.xyz) + _WorldSpaceCameraPos.xyz;\n    u_xlat3
+            = u_xlat2.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];\n    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[0]
+            * u_xlat2.xxxx + u_xlat3;\n    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[2]
+            * u_xlat2.zzzz + u_xlat3;\n    u_xlat2 = hlslcc_mtx4x4unity_MatrixVP[3]
+            * u_xlat2.wwww + u_xlat3;\n    gl_Position = u_xlat2;\n    u_xlat16_4.xyz
+            = in_COLOR0.xyz * vec3(0.265884995, 0.265884995, 0.265884995) + vec3(0.736584008,
+            0.736584008, 0.736584008);\n    u_xlat16_4.xyz = in_COLOR0.xyz * u_xlat16_4.xyz
+            + vec3(-0.00980184041, -0.00980184041, -0.00980184041);\n    u_xlat16_4.xyz
+            = in_COLOR0.xyz * u_xlat16_4.xyz + vec3(0.00319697009, 0.00319697009,
+            0.00319697009);\n    u_xlat16_5.xyz = in_COLOR0.xyz * vec3(0.0849710032,
+            0.0849710032, 0.0849710032) + vec3(-0.000163029006, -0.000163029006,
+            -0.000163029006);\n    u_xlatb2.xyz = lessThan(in_COLOR0.xyzx, vec4(0.0725490004,
+            0.0725490004, 0.0725490004, 0.0)).xyz;\n    {\n        vec3 hlslcc_movcTemp
+            = u_xlat16_4;\n        hlslcc_movcTemp.x = (u_xlatb2.x) ? u_xlat16_5.x
+            : u_xlat16_4.x;\n        hlslcc_movcTemp.y = (u_xlatb2.y) ? u_xlat16_5.y
+            : u_xlat16_4.y;\n        hlslcc_movcTemp.z = (u_xlatb2.z) ? u_xlat16_5.z
+            : u_xlat16_4.z;\n        u_xlat16_4 = hlslcc_movcTemp;\n    }\n    vs_COLOR0.xyz
+            = (int(_UIVertexColorAlwaysGammaSpace) != 0) ? u_xlat16_4.xyz : in_COLOR0.xyz;\n   
+            vs_COLOR0.w = in_COLOR0.w;\n    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;\n   
+            u_xlat14.xy = _ScreenParams.yy * hlslcc_mtx4x4glstate_matrix_projection[1].xy;\n   
+            u_xlat14.xy = hlslcc_mtx4x4glstate_matrix_projection[0].xy * _ScreenParams.xx
+            + u_xlat14.xy;\n    u_xlat14.xy = abs(u_xlat14.xy) * vec2(_ScaleX, _ScaleY);\n   
+            u_xlat14.xy = u_xlat2.ww / u_xlat14.xy;\n    u_xlat22 = dot(u_xlat14.xy,
+            u_xlat14.xy);\n    u_xlat22 = inversesqrt(u_xlat22);\n    u_xlat2.x =
+            abs(in_TEXCOORD0.w) * _GradientScale;\n    u_xlat9.x = _Sharpness + 1.0;\n   
+            u_xlat2.x = u_xlat9.x * u_xlat2.x;\n    u_xlat9.x = u_xlat22 * u_xlat2.x;\n   
+            u_xlat16 = (-_PerspectiveFilter) + 1.0;\n    u_xlat16 = u_xlat16 * abs(u_xlat9.x);\n   
+            u_xlat22 = u_xlat22 * u_xlat2.x + (-u_xlat16);\n    u_xlat3.x = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[0].xyz);\n    u_xlat3.y = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[1].xyz);\n    u_xlat3.z = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[2].xyz);\n    u_xlat2.x = dot(u_xlat3.xyz,
+            u_xlat3.xyz);\n    u_xlat2.x = inversesqrt(u_xlat2.x);\n    u_xlat3.xyz
+            = u_xlat2.xxx * u_xlat3.xyz;\n    u_xlat2.x = dot(u_xlat1.xyz, u_xlat1.xyz);\n   
+            u_xlat2.x = inversesqrt(u_xlat2.x);\n    u_xlat6.xyz = u_xlat1.xyz *
+            u_xlat2.xxx;\n    u_xlat2.x = dot(u_xlat3.xyz, u_xlat6.xyz);\n    u_xlat22
+            = abs(u_xlat2.x) * u_xlat22 + u_xlat16;\n    u_xlatb2.x = hlslcc_mtx4x4glstate_matrix_projection[3].w==0.0;\n   
+            u_xlat9.x = (u_xlatb2.x) ? u_xlat22 : u_xlat9.x;\n    u_xlatb22 = 0.0>=in_TEXCOORD0.w;\n   
+            u_xlat22 = u_xlatb22 ? 1.0 : float(0.0);\n    u_xlat2.x = (-_WeightNormal)
+            + _WeightBold;\n    u_xlat22 = u_xlat22 * u_xlat2.x + _WeightNormal;\n   
+            u_xlat22 = u_xlat22 * 0.25 + _FaceDilate;\n    u_xlat22 = u_xlat22 *
+            _ScaleRatioA;\n    u_xlat9.z = u_xlat22 * 0.5;\n    vs_TEXCOORD1.yw =
+            u_xlat9.xz;\n    u_xlat2.x = 0.5 / u_xlat9.x;\n    u_xlat9.x = (-_OutlineWidth)
+            * _ScaleRatioA + 1.0;\n    u_xlat9.x = (-_OutlineSoftness) * _ScaleRatioA
+            + u_xlat9.x;\n    u_xlat9.x = u_xlat9.x * 0.5 + (-u_xlat2.x);\n    vs_TEXCOORD1.x
+            = (-u_xlat22) * 0.5 + u_xlat9.x;\n    u_xlat22 = (-u_xlat22) * 0.5 +
+            0.5;\n    vs_TEXCOORD1.z = u_xlat2.x + u_xlat22;\n    u_xlat2 = max(_ClipRect,
+            vec4(-2e+10, -2e+10, -2e+10, -2e+10));\n    u_xlat2 = min(u_xlat2, vec4(2e+10,
+            2e+10, 2e+10, 2e+10));\n    u_xlat0.xy = u_xlat0.xy * vec2(2.0, 2.0)
+            + (-u_xlat2.xy);\n    vs_TEXCOORD2.xy = (-u_xlat2.zw) + u_xlat0.xy;\n   
+            u_xlat0.xy = max(vec2(_MaskSoftnessX, _MaskSoftnessY), vec2(_UIMaskSoftnessX,
+            _UIMaskSoftnessY));\n    u_xlat0.xy = u_xlat0.xy * vec2(0.25, 0.25) +
+            u_xlat14.xy;\n    vs_TEXCOORD2.zw = vec2(0.25, 0.25) / u_xlat0.xy;\n   
+            u_xlat0.xyz = u_xlat1.yyy * hlslcc_mtx4x4_EnvMatrix[1].xyz;\n    u_xlat0.xyz
+            = hlslcc_mtx4x4_EnvMatrix[0].xyz * u_xlat1.xxx + u_xlat0.xyz;\n    vs_TEXCOORD3.xyz
+            = hlslcc_mtx4x4_EnvMatrix[2].xyz * u_xlat1.zzz + u_xlat0.xyz;\n    vs_TEXCOORD5.xy
+            = in_TEXCOORD1.xy * _FaceTex_ST.xy + _FaceTex_ST.zw;\n    vs_TEXCOORD5.zw
+            = in_TEXCOORD1.xy * _OutlineTex_ST.xy + _OutlineTex_ST.zw;\n    return;\n}\n\n"
+          FragmentProgram: "\n#version 300 es\n\nprecision highp float;\nprecision
+            highp int;\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS 0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define
+            UNITY_UNIFORM\n#else\n#define UNITY_UNIFORM uniform\n#endif\n#define
+            UNITY_SUPPORTS_UNIFORM_LOCATION 0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define
+            UNITY_LOCATION(x) layout(location = x)\n#define UNITY_BINDING(x) layout(binding
+            = x, std140)\n#else\n#define UNITY_LOCATION(x)\n#define UNITY_BINDING(x)
+            layout(std140)\n#endif\nuniform \tvec4 _Time;\nuniform \tfloat _FaceUVSpeedX;\nuniform
+            \tfloat _FaceUVSpeedY;\nuniform \tmediump vec4 _FaceColor;\nuniform \tfloat
+            _OutlineSoftness;\nuniform \tfloat _OutlineUVSpeedX;\nuniform \tfloat
+            _OutlineUVSpeedY;\nuniform \tmediump vec4 _OutlineColor;\nuniform \tfloat
+            _OutlineWidth;\nuniform \tfloat _ScaleRatioA;\nUNITY_LOCATION(0) uniform
+            mediump sampler2D _MainTex;\nUNITY_LOCATION(1) uniform mediump sampler2D
+            _FaceTex;\nUNITY_LOCATION(2) uniform mediump sampler2D _OutlineTex;\nin
+            mediump  vec4 vs_COLOR0;\nin highp  vec2 vs_TEXCOORD0;\nin highp  vec4
+            vs_TEXCOORD1;\nin highp  vec4 vs_TEXCOORD5;\nlayout(location = 0) out
+            mediump vec4 SV_Target0;\nvec3 u_xlat0;\nmediump vec4 u_xlat16_0;\nmediump
+            float u_xlat16_1;\nvec4 u_xlat2;\nmediump vec4 u_xlat16_2;\nmediump vec4
+            u_xlat16_3;\nfloat u_xlat4;\nmediump vec4 u_xlat16_4;\nbool u_xlatb4;\nfloat
+            u_xlat5;\nbool u_xlatb5;\nmediump float u_xlat16_6;\nmediump float u_xlat16_11;\nvoid
+            main()\n{\n    u_xlat16_0.x = texture(_MainTex, vs_TEXCOORD0.xy).w;\n   
+            u_xlat5 = u_xlat16_0.x + (-vs_TEXCOORD1.x);\n    u_xlat0.x = (-u_xlat16_0.x)
+            + vs_TEXCOORD1.z;\n    u_xlatb5 = u_xlat5<0.0;\n    if(u_xlatb5){discard;}\n   
+            u_xlat5 = _OutlineWidth * _ScaleRatioA;\n    u_xlat5 = u_xlat5 * vs_TEXCOORD1.y;\n   
+            u_xlat16_1 = min(u_xlat5, 1.0);\n    u_xlat16_6 = u_xlat5 * 0.5;\n   
+            u_xlat16_1 = sqrt(u_xlat16_1);\n    u_xlat16_11 = u_xlat0.x * vs_TEXCOORD1.y
+            + u_xlat16_6;\n    u_xlat16_11 = clamp(u_xlat16_11, 0.0, 1.0);\n    u_xlat16_6
+            = u_xlat0.x * vs_TEXCOORD1.y + (-u_xlat16_6);\n    u_xlat16_1 = u_xlat16_1
+            * u_xlat16_11;\n    u_xlat0.xy = vec2(_OutlineUVSpeedX, _OutlineUVSpeedY)
+            * _Time.yy + vs_TEXCOORD5.zw;\n    u_xlat16_0 = texture(_OutlineTex,
+            u_xlat0.xy);\n    u_xlat2 = u_xlat16_0 * _OutlineColor;\n    u_xlat16_3.xyz
+            = vs_COLOR0.xyz * _FaceColor.xyz;\n    u_xlat0.xy = vec2(_FaceUVSpeedX,
+            _FaceUVSpeedY) * _Time.yy + vs_TEXCOORD5.xy;\n    u_xlat16_4 = texture(_FaceTex,
+            u_xlat0.xy);\n    u_xlat0.xyz = u_xlat16_3.xyz * u_xlat16_4.xyz;\n   
+            u_xlat4 = u_xlat16_4.w * _FaceColor.w;\n    u_xlat16_3.xyz = u_xlat0.xyz
+            * vec3(u_xlat4);\n    u_xlat16_2.xyz = u_xlat2.xyz * u_xlat2.www + (-u_xlat16_3.xyz);\n   
+            u_xlat16_2.w = _OutlineColor.w * u_xlat16_0.w + (-u_xlat4);\n    u_xlat16_2
+            = vec4(u_xlat16_1) * u_xlat16_2;\n    u_xlat16_3.w = _FaceColor.w * u_xlat16_4.w
+            + u_xlat16_2.w;\n    u_xlat16_3.xyz = u_xlat0.xyz * vec3(u_xlat4) + u_xlat16_2.xyz;\n   
+            u_xlat0.x = _OutlineSoftness * _ScaleRatioA;\n    u_xlat5 = u_xlat0.x
+            * vs_TEXCOORD1.y;\n    u_xlat16_1 = u_xlat0.x * vs_TEXCOORD1.y + 1.0;\n   
+            u_xlat16_6 = u_xlat5 * 0.5 + u_xlat16_6;\n    u_xlat16_1 = u_xlat16_6
+            / u_xlat16_1;\n    u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);\n    u_xlat16_1
+            = (-u_xlat16_1) + 1.0;\n    u_xlat16_6 = u_xlat16_3.w * u_xlat16_1 +
+            -0.00100000005;\n    u_xlat16_0 = vec4(u_xlat16_1) * u_xlat16_3;\n   
+            SV_Target0 = u_xlat16_0 * vs_COLOR0.wwww;\n    u_xlatb4 = u_xlat16_6<0.0;\n   
+            if(u_xlatb4){discard;}\n    return;\n}\n\n"
+          LOD: 0
+          readDepth: 0
+          PassId: 0
+          SubShaderIndex: 0
+          Keywords:
+            "\L\u2025":
+            - UNITY_UI_ALPHACLIP
+          Tags:
+          - Key: IGNOREPROJECTOR
+            Value: true
+          - Key: QUEUE
+            Value: Transparent
+          - Key: RenderType
+            Value: Transparent
+        - ShaderCompilerPlatform: 9
+          NoShaderVariant: 0
+          VertexProgram: "\n#version 300 es\n\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS
+            0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define UNITY_UNIFORM\n#else\n#define
+            UNITY_UNIFORM uniform\n#endif\n#define UNITY_SUPPORTS_UNIFORM_LOCATION
+            0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define UNITY_LOCATION(x) layout(location
+            = x)\n#define UNITY_BINDING(x) layout(binding = x, std140)\n#else\n#define
+            UNITY_LOCATION(x)\n#define UNITY_BINDING(x) layout(std140)\n#endif\nuniform
+            \tvec3 _WorldSpaceCameraPos;\nuniform \tvec4 _ScreenParams;\nuniform
+            \tvec4 hlslcc_mtx4x4unity_ObjectToWorld[4];\nuniform \tvec4 hlslcc_mtx4x4unity_WorldToObject[4];\nuniform
+            \tvec4 hlslcc_mtx4x4glstate_matrix_projection[4];\nuniform \tvec4 hlslcc_mtx4x4unity_MatrixVP[4];\nuniform
+            \tfloat _FaceDilate;\nuniform \tfloat _OutlineSoftness;\nuniform \tfloat
+            _OutlineWidth;\nuniform \tvec4 hlslcc_mtx4x4_EnvMatrix[4];\nuniform \tfloat
+            _WeightNormal;\nuniform \tfloat _WeightBold;\nuniform \tfloat _ScaleRatioA;\nuniform
+            \tfloat _VertexOffsetX;\nuniform \tfloat _VertexOffsetY;\nuniform \tvec4
+            _ClipRect;\nuniform \tfloat _MaskSoftnessX;\nuniform \tfloat _MaskSoftnessY;\nuniform
+            \tfloat _GradientScale;\nuniform \tfloat _ScaleX;\nuniform \tfloat _ScaleY;\nuniform
+            \tfloat _PerspectiveFilter;\nuniform \tfloat _Sharpness;\nuniform \tvec4
+            _FaceTex_ST;\nuniform \tvec4 _OutlineTex_ST;\nuniform \tfloat _UIMaskSoftnessX;\nuniform
+            \tfloat _UIMaskSoftnessY;\nuniform \tint _UIVertexColorAlwaysGammaSpace;\nin
+            highp vec4 in_POSITION0;\nin highp vec3 in_NORMAL0;\nin mediump vec4
+            in_COLOR0;\nin highp vec4 in_TEXCOORD0;\nin highp vec2 in_TEXCOORD1;\nout
+            mediump vec4 vs_COLOR0;\nout highp vec2 vs_TEXCOORD0;\nout highp vec4
+            vs_TEXCOORD1;\nout highp vec4 vs_TEXCOORD2;\nhighp vec3 vs_TEXCOORD3;\nout
+            highp vec4 vs_TEXCOORD5;\nvec3 u_xlat0;\nvec4 u_xlat1;\nvec4 u_xlat2;\nbvec3
+            u_xlatb2;\nvec4 u_xlat3;\nmediump vec3 u_xlat16_4;\nmediump vec3 u_xlat16_5;\nvec3
+            u_xlat6;\nvec3 u_xlat9;\nvec2 u_xlat14;\nfloat u_xlat16;\nfloat u_xlat22;\nbool
+            u_xlatb22;\nvoid main()\n{\n    u_xlat0.xy = in_POSITION0.xy + vec2(_VertexOffsetX,
+            _VertexOffsetY);\n    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];\n   
+            u_xlat1 = hlslcc_mtx4x4unity_ObjectToWorld[0] * u_xlat0.xxxx + u_xlat1;\n   
+            u_xlat1 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat1;\n   
+            u_xlat2 = u_xlat1 + hlslcc_mtx4x4unity_ObjectToWorld[3];\n    u_xlat1.xyz
+            = hlslcc_mtx4x4unity_ObjectToWorld[3].xyz * in_POSITION0.www + u_xlat1.xyz;\n   
+            u_xlat1.xyz = (-u_xlat1.xyz) + _WorldSpaceCameraPos.xyz;\n    u_xlat3
+            = u_xlat2.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];\n    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[0]
+            * u_xlat2.xxxx + u_xlat3;\n    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[2]
+            * u_xlat2.zzzz + u_xlat3;\n    u_xlat2 = hlslcc_mtx4x4unity_MatrixVP[3]
+            * u_xlat2.wwww + u_xlat3;\n    gl_Position = u_xlat2;\n    u_xlat16_4.xyz
+            = in_COLOR0.xyz * vec3(0.265884995, 0.265884995, 0.265884995) + vec3(0.736584008,
+            0.736584008, 0.736584008);\n    u_xlat16_4.xyz = in_COLOR0.xyz * u_xlat16_4.xyz
+            + vec3(-0.00980184041, -0.00980184041, -0.00980184041);\n    u_xlat16_4.xyz
+            = in_COLOR0.xyz * u_xlat16_4.xyz + vec3(0.00319697009, 0.00319697009,
+            0.00319697009);\n    u_xlat16_5.xyz = in_COLOR0.xyz * vec3(0.0849710032,
+            0.0849710032, 0.0849710032) + vec3(-0.000163029006, -0.000163029006,
+            -0.000163029006);\n    u_xlatb2.xyz = lessThan(in_COLOR0.xyzx, vec4(0.0725490004,
+            0.0725490004, 0.0725490004, 0.0)).xyz;\n    {\n        vec3 hlslcc_movcTemp
+            = u_xlat16_4;\n        hlslcc_movcTemp.x = (u_xlatb2.x) ? u_xlat16_5.x
+            : u_xlat16_4.x;\n        hlslcc_movcTemp.y = (u_xlatb2.y) ? u_xlat16_5.y
+            : u_xlat16_4.y;\n        hlslcc_movcTemp.z = (u_xlatb2.z) ? u_xlat16_5.z
+            : u_xlat16_4.z;\n        u_xlat16_4 = hlslcc_movcTemp;\n    }\n    vs_COLOR0.xyz
+            = (int(_UIVertexColorAlwaysGammaSpace) != 0) ? u_xlat16_4.xyz : in_COLOR0.xyz;\n   
+            vs_COLOR0.w = in_COLOR0.w;\n    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;\n   
+            u_xlat14.xy = _ScreenParams.yy * hlslcc_mtx4x4glstate_matrix_projection[1].xy;\n   
+            u_xlat14.xy = hlslcc_mtx4x4glstate_matrix_projection[0].xy * _ScreenParams.xx
+            + u_xlat14.xy;\n    u_xlat14.xy = abs(u_xlat14.xy) * vec2(_ScaleX, _ScaleY);\n   
+            u_xlat14.xy = u_xlat2.ww / u_xlat14.xy;\n    u_xlat22 = dot(u_xlat14.xy,
+            u_xlat14.xy);\n    u_xlat22 = inversesqrt(u_xlat22);\n    u_xlat2.x =
+            abs(in_TEXCOORD0.w) * _GradientScale;\n    u_xlat9.x = _Sharpness + 1.0;\n   
+            u_xlat2.x = u_xlat9.x * u_xlat2.x;\n    u_xlat9.x = u_xlat22 * u_xlat2.x;\n   
+            u_xlat16 = (-_PerspectiveFilter) + 1.0;\n    u_xlat16 = u_xlat16 * abs(u_xlat9.x);\n   
+            u_xlat22 = u_xlat22 * u_xlat2.x + (-u_xlat16);\n    u_xlat3.x = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[0].xyz);\n    u_xlat3.y = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[1].xyz);\n    u_xlat3.z = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[2].xyz);\n    u_xlat2.x = dot(u_xlat3.xyz,
+            u_xlat3.xyz);\n    u_xlat2.x = inversesqrt(u_xlat2.x);\n    u_xlat3.xyz
+            = u_xlat2.xxx * u_xlat3.xyz;\n    u_xlat2.x = dot(u_xlat1.xyz, u_xlat1.xyz);\n   
+            u_xlat2.x = inversesqrt(u_xlat2.x);\n    u_xlat6.xyz = u_xlat1.xyz *
+            u_xlat2.xxx;\n    u_xlat2.x = dot(u_xlat3.xyz, u_xlat6.xyz);\n    u_xlat22
+            = abs(u_xlat2.x) * u_xlat22 + u_xlat16;\n    u_xlatb2.x = hlslcc_mtx4x4glstate_matrix_projection[3].w==0.0;\n   
+            u_xlat9.x = (u_xlatb2.x) ? u_xlat22 : u_xlat9.x;\n    u_xlatb22 = 0.0>=in_TEXCOORD0.w;\n   
+            u_xlat22 = u_xlatb22 ? 1.0 : float(0.0);\n    u_xlat2.x = (-_WeightNormal)
+            + _WeightBold;\n    u_xlat22 = u_xlat22 * u_xlat2.x + _WeightNormal;\n   
+            u_xlat22 = u_xlat22 * 0.25 + _FaceDilate;\n    u_xlat22 = u_xlat22 *
+            _ScaleRatioA;\n    u_xlat9.z = u_xlat22 * 0.5;\n    vs_TEXCOORD1.yw =
+            u_xlat9.xz;\n    u_xlat2.x = 0.5 / u_xlat9.x;\n    u_xlat9.x = (-_OutlineWidth)
+            * _ScaleRatioA + 1.0;\n    u_xlat9.x = (-_OutlineSoftness) * _ScaleRatioA
+            + u_xlat9.x;\n    u_xlat9.x = u_xlat9.x * 0.5 + (-u_xlat2.x);\n    vs_TEXCOORD1.x
+            = (-u_xlat22) * 0.5 + u_xlat9.x;\n    u_xlat22 = (-u_xlat22) * 0.5 +
+            0.5;\n    vs_TEXCOORD1.z = u_xlat2.x + u_xlat22;\n    u_xlat2 = max(_ClipRect,
+            vec4(-2e+10, -2e+10, -2e+10, -2e+10));\n    u_xlat2 = min(u_xlat2, vec4(2e+10,
+            2e+10, 2e+10, 2e+10));\n    u_xlat0.xy = u_xlat0.xy * vec2(2.0, 2.0)
+            + (-u_xlat2.xy);\n    vs_TEXCOORD2.xy = (-u_xlat2.zw) + u_xlat0.xy;\n   
+            u_xlat0.xy = max(vec2(_MaskSoftnessX, _MaskSoftnessY), vec2(_UIMaskSoftnessX,
+            _UIMaskSoftnessY));\n    u_xlat0.xy = u_xlat0.xy * vec2(0.25, 0.25) +
+            u_xlat14.xy;\n    vs_TEXCOORD2.zw = vec2(0.25, 0.25) / u_xlat0.xy;\n   
+            u_xlat0.xyz = u_xlat1.yyy * hlslcc_mtx4x4_EnvMatrix[1].xyz;\n    u_xlat0.xyz
+            = hlslcc_mtx4x4_EnvMatrix[0].xyz * u_xlat1.xxx + u_xlat0.xyz;\n    vs_TEXCOORD3.xyz
+            = hlslcc_mtx4x4_EnvMatrix[2].xyz * u_xlat1.zzz + u_xlat0.xyz;\n    vs_TEXCOORD5.xy
+            = in_TEXCOORD1.xy * _FaceTex_ST.xy + _FaceTex_ST.zw;\n    vs_TEXCOORD5.zw
+            = in_TEXCOORD1.xy * _OutlineTex_ST.xy + _OutlineTex_ST.zw;\n    return;\n}\n\n"
+          FragmentProgram: "\n#version 300 es\n\nprecision highp float;\nprecision
+            highp int;\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS 0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define
+            UNITY_UNIFORM\n#else\n#define UNITY_UNIFORM uniform\n#endif\n#define
+            UNITY_SUPPORTS_UNIFORM_LOCATION 0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define
+            UNITY_LOCATION(x) layout(location = x)\n#define UNITY_BINDING(x) layout(binding
+            = x, std140)\n#else\n#define UNITY_LOCATION(x)\n#define UNITY_BINDING(x)
+            layout(std140)\n#endif\nuniform \tvec4 _Time;\nuniform \tfloat _FaceUVSpeedX;\nuniform
+            \tfloat _FaceUVSpeedY;\nuniform \tmediump vec4 _FaceColor;\nuniform \tfloat
+            _OutlineSoftness;\nuniform \tfloat _OutlineUVSpeedX;\nuniform \tfloat
+            _OutlineUVSpeedY;\nuniform \tmediump vec4 _OutlineColor;\nuniform \tfloat
+            _OutlineWidth;\nuniform \tfloat _ScaleRatioA;\nuniform \tvec4 _ClipRect;\nUNITY_LOCATION(0)
+            uniform mediump sampler2D _MainTex;\nUNITY_LOCATION(1) uniform mediump
+            sampler2D _FaceTex;\nUNITY_LOCATION(2) uniform mediump sampler2D _OutlineTex;\nin
+            mediump  vec4 vs_COLOR0;\nin highp  vec2 vs_TEXCOORD0;\nin highp  vec4
+            vs_TEXCOORD1;\nin highp  vec4 vs_TEXCOORD2;\nin highp  vec4 vs_TEXCOORD5;\nlayout(location
+            = 0) out mediump vec4 SV_Target0;\nvec3 u_xlat0;\nmediump vec4 u_xlat16_0;\nmediump
+            float u_xlat16_1;\nvec4 u_xlat2;\nmediump vec4 u_xlat16_2;\nmediump vec3
+            u_xlat16_3;\nvec2 u_xlat4;\nmediump vec4 u_xlat16_4;\nfloat u_xlat5;\nbool
+            u_xlatb5;\nmediump float u_xlat16_6;\nfloat u_xlat9;\nmediump float u_xlat16_11;\nvoid
+            main()\n{\n    u_xlat16_0.x = texture(_MainTex, vs_TEXCOORD0.xy).w;\n   
+            u_xlat5 = u_xlat16_0.x + (-vs_TEXCOORD1.x);\n    u_xlat0.x = (-u_xlat16_0.x)
+            + vs_TEXCOORD1.z;\n    u_xlatb5 = u_xlat5<0.0;\n    if(u_xlatb5){discard;}\n   
+            u_xlat5 = _OutlineWidth * _ScaleRatioA;\n    u_xlat5 = u_xlat5 * vs_TEXCOORD1.y;\n   
+            u_xlat16_1 = min(u_xlat5, 1.0);\n    u_xlat16_6 = u_xlat5 * 0.5;\n   
+            u_xlat16_1 = sqrt(u_xlat16_1);\n    u_xlat16_11 = u_xlat0.x * vs_TEXCOORD1.y
+            + u_xlat16_6;\n    u_xlat16_11 = clamp(u_xlat16_11, 0.0, 1.0);\n    u_xlat16_6
+            = u_xlat0.x * vs_TEXCOORD1.y + (-u_xlat16_6);\n    u_xlat16_1 = u_xlat16_1
+            * u_xlat16_11;\n    u_xlat0.xy = vec2(_OutlineUVSpeedX, _OutlineUVSpeedY)
+            * _Time.yy + vs_TEXCOORD5.zw;\n    u_xlat16_0 = texture(_OutlineTex,
+            u_xlat0.xy);\n    u_xlat2 = u_xlat16_0 * _OutlineColor;\n    u_xlat16_3.xyz
+            = vs_COLOR0.xyz * _FaceColor.xyz;\n    u_xlat0.xy = vec2(_FaceUVSpeedX,
+            _FaceUVSpeedY) * _Time.yy + vs_TEXCOORD5.xy;\n    u_xlat16_4 = texture(_FaceTex,
+            u_xlat0.xy);\n    u_xlat0.xyz = u_xlat16_3.xyz * u_xlat16_4.xyz;\n   
+            u_xlat4.x = u_xlat16_4.w * _FaceColor.w;\n    u_xlat16_3.xyz = u_xlat0.xyz
+            * u_xlat4.xxx;\n    u_xlat16_2.xyz = u_xlat2.xyz * u_xlat2.www + (-u_xlat16_3.xyz);\n   
+            u_xlat16_2.w = _OutlineColor.w * u_xlat16_0.w + (-u_xlat4.x);\n    u_xlat16_2
+            = vec4(u_xlat16_1) * u_xlat16_2;\n    u_xlat16_0.xyz = u_xlat0.xyz *
+            u_xlat4.xxx + u_xlat16_2.xyz;\n    u_xlat16_0.w = _FaceColor.w * u_xlat16_4.w
+            + u_xlat16_2.w;\n    u_xlat4.x = _OutlineSoftness * _ScaleRatioA;\n   
+            u_xlat9 = u_xlat4.x * vs_TEXCOORD1.y;\n    u_xlat16_1 = u_xlat4.x * vs_TEXCOORD1.y
+            + 1.0;\n    u_xlat16_6 = u_xlat9 * 0.5 + u_xlat16_6;\n    u_xlat16_1
+            = u_xlat16_6 / u_xlat16_1;\n    u_xlat16_1 = clamp(u_xlat16_1, 0.0, 1.0);\n   
+            u_xlat16_1 = (-u_xlat16_1) + 1.0;\n    u_xlat16_0 = u_xlat16_0 * vec4(u_xlat16_1);\n   
+            u_xlat4.xy = (-_ClipRect.xy) + _ClipRect.zw;\n    u_xlat4.xy = u_xlat4.xy
+            + -abs(vs_TEXCOORD2.xy);\n    u_xlat4.xy = u_xlat4.xy * vs_TEXCOORD2.zw;\n   
+            u_xlat4.xy = clamp(u_xlat4.xy, 0.0, 1.0);\n    u_xlat16_1 = u_xlat4.y
+            * u_xlat4.x;\n    u_xlat16_0 = u_xlat16_0 * vec4(u_xlat16_1);\n    SV_Target0
+            = u_xlat16_0 * vs_COLOR0.wwww;\n    return;\n}\n\n"
+          LOD: 0
+          readDepth: 0
+          PassId: 0
+          SubShaderIndex: 0
+          Keywords:
+            "\L\u2025":
+            - UNITY_UI_CLIP_RECT
+          Tags:
+          - Key: IGNOREPROJECTOR
+            Value: true
+          - Key: QUEUE
+            Value: Transparent
+          - Key: RenderType
+            Value: Transparent
+        - ShaderCompilerPlatform: 9
+          NoShaderVariant: 0
+          VertexProgram: "\n#version 300 es\n\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS
+            0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define UNITY_UNIFORM\n#else\n#define
+            UNITY_UNIFORM uniform\n#endif\n#define UNITY_SUPPORTS_UNIFORM_LOCATION
+            0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define UNITY_LOCATION(x) layout(location
+            = x)\n#define UNITY_BINDING(x) layout(binding = x, std140)\n#else\n#define
+            UNITY_LOCATION(x)\n#define UNITY_BINDING(x) layout(std140)\n#endif\nuniform
+            \tvec3 _WorldSpaceCameraPos;\nuniform \tvec4 _ScreenParams;\nuniform
+            \tvec4 hlslcc_mtx4x4unity_ObjectToWorld[4];\nuniform \tvec4 hlslcc_mtx4x4unity_WorldToObject[4];\nuniform
+            \tvec4 hlslcc_mtx4x4glstate_matrix_projection[4];\nuniform \tvec4 hlslcc_mtx4x4unity_MatrixVP[4];\nuniform
+            \tfloat _FaceDilate;\nuniform \tfloat _OutlineSoftness;\nuniform \tfloat
+            _OutlineWidth;\nuniform \tvec4 hlslcc_mtx4x4_EnvMatrix[4];\nuniform \tfloat
+            _WeightNormal;\nuniform \tfloat _WeightBold;\nuniform \tfloat _ScaleRatioA;\nuniform
+            \tfloat _VertexOffsetX;\nuniform \tfloat _VertexOffsetY;\nuniform \tvec4
+            _ClipRect;\nuniform \tfloat _MaskSoftnessX;\nuniform \tfloat _MaskSoftnessY;\nuniform
+            \tfloat _GradientScale;\nuniform \tfloat _ScaleX;\nuniform \tfloat _ScaleY;\nuniform
+            \tfloat _PerspectiveFilter;\nuniform \tfloat _Sharpness;\nuniform \tvec4
+            _FaceTex_ST;\nuniform \tvec4 _OutlineTex_ST;\nuniform \tfloat _UIMaskSoftnessX;\nuniform
+            \tfloat _UIMaskSoftnessY;\nuniform \tint _UIVertexColorAlwaysGammaSpace;\nin
+            highp vec4 in_POSITION0;\nin highp vec3 in_NORMAL0;\nin mediump vec4
+            in_COLOR0;\nin highp vec4 in_TEXCOORD0;\nin highp vec2 in_TEXCOORD1;\nout
+            mediump vec4 vs_COLOR0;\nout highp vec2 vs_TEXCOORD0;\nout highp vec4
+            vs_TEXCOORD1;\nout highp vec4 vs_TEXCOORD2;\nhighp vec3 vs_TEXCOORD3;\nout
+            highp vec4 vs_TEXCOORD5;\nvec3 u_xlat0;\nvec4 u_xlat1;\nvec4 u_xlat2;\nbvec3
+            u_xlatb2;\nvec4 u_xlat3;\nmediump vec3 u_xlat16_4;\nmediump vec3 u_xlat16_5;\nvec3
+            u_xlat6;\nvec3 u_xlat9;\nvec2 u_xlat14;\nfloat u_xlat16;\nfloat u_xlat22;\nbool
+            u_xlatb22;\nvoid main()\n{\n    u_xlat0.xy = in_POSITION0.xy + vec2(_VertexOffsetX,
+            _VertexOffsetY);\n    u_xlat1 = u_xlat0.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];\n   
+            u_xlat1 = hlslcc_mtx4x4unity_ObjectToWorld[0] * u_xlat0.xxxx + u_xlat1;\n   
+            u_xlat1 = hlslcc_mtx4x4unity_ObjectToWorld[2] * in_POSITION0.zzzz + u_xlat1;\n   
+            u_xlat2 = u_xlat1 + hlslcc_mtx4x4unity_ObjectToWorld[3];\n    u_xlat1.xyz
+            = hlslcc_mtx4x4unity_ObjectToWorld[3].xyz * in_POSITION0.www + u_xlat1.xyz;\n   
+            u_xlat1.xyz = (-u_xlat1.xyz) + _WorldSpaceCameraPos.xyz;\n    u_xlat3
+            = u_xlat2.yyyy * hlslcc_mtx4x4unity_MatrixVP[1];\n    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[0]
+            * u_xlat2.xxxx + u_xlat3;\n    u_xlat3 = hlslcc_mtx4x4unity_MatrixVP[2]
+            * u_xlat2.zzzz + u_xlat3;\n    u_xlat2 = hlslcc_mtx4x4unity_MatrixVP[3]
+            * u_xlat2.wwww + u_xlat3;\n    gl_Position = u_xlat2;\n    u_xlat16_4.xyz
+            = in_COLOR0.xyz * vec3(0.265884995, 0.265884995, 0.265884995) + vec3(0.736584008,
+            0.736584008, 0.736584008);\n    u_xlat16_4.xyz = in_COLOR0.xyz * u_xlat16_4.xyz
+            + vec3(-0.00980184041, -0.00980184041, -0.00980184041);\n    u_xlat16_4.xyz
+            = in_COLOR0.xyz * u_xlat16_4.xyz + vec3(0.00319697009, 0.00319697009,
+            0.00319697009);\n    u_xlat16_5.xyz = in_COLOR0.xyz * vec3(0.0849710032,
+            0.0849710032, 0.0849710032) + vec3(-0.000163029006, -0.000163029006,
+            -0.000163029006);\n    u_xlatb2.xyz = lessThan(in_COLOR0.xyzx, vec4(0.0725490004,
+            0.0725490004, 0.0725490004, 0.0)).xyz;\n    {\n        vec3 hlslcc_movcTemp
+            = u_xlat16_4;\n        hlslcc_movcTemp.x = (u_xlatb2.x) ? u_xlat16_5.x
+            : u_xlat16_4.x;\n        hlslcc_movcTemp.y = (u_xlatb2.y) ? u_xlat16_5.y
+            : u_xlat16_4.y;\n        hlslcc_movcTemp.z = (u_xlatb2.z) ? u_xlat16_5.z
+            : u_xlat16_4.z;\n        u_xlat16_4 = hlslcc_movcTemp;\n    }\n    vs_COLOR0.xyz
+            = (int(_UIVertexColorAlwaysGammaSpace) != 0) ? u_xlat16_4.xyz : in_COLOR0.xyz;\n   
+            vs_COLOR0.w = in_COLOR0.w;\n    vs_TEXCOORD0.xy = in_TEXCOORD0.xy;\n   
+            u_xlat14.xy = _ScreenParams.yy * hlslcc_mtx4x4glstate_matrix_projection[1].xy;\n   
+            u_xlat14.xy = hlslcc_mtx4x4glstate_matrix_projection[0].xy * _ScreenParams.xx
+            + u_xlat14.xy;\n    u_xlat14.xy = abs(u_xlat14.xy) * vec2(_ScaleX, _ScaleY);\n   
+            u_xlat14.xy = u_xlat2.ww / u_xlat14.xy;\n    u_xlat22 = dot(u_xlat14.xy,
+            u_xlat14.xy);\n    u_xlat22 = inversesqrt(u_xlat22);\n    u_xlat2.x =
+            abs(in_TEXCOORD0.w) * _GradientScale;\n    u_xlat9.x = _Sharpness + 1.0;\n   
+            u_xlat2.x = u_xlat9.x * u_xlat2.x;\n    u_xlat9.x = u_xlat22 * u_xlat2.x;\n   
+            u_xlat16 = (-_PerspectiveFilter) + 1.0;\n    u_xlat16 = u_xlat16 * abs(u_xlat9.x);\n   
+            u_xlat22 = u_xlat22 * u_xlat2.x + (-u_xlat16);\n    u_xlat3.x = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[0].xyz);\n    u_xlat3.y = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[1].xyz);\n    u_xlat3.z = dot(in_NORMAL0.xyz,
+            hlslcc_mtx4x4unity_WorldToObject[2].xyz);\n    u_xlat2.x = dot(u_xlat3.xyz,
+            u_xlat3.xyz);\n    u_xlat2.x = inversesqrt(u_xlat2.x);\n    u_xlat3.xyz
+            = u_xlat2.xxx * u_xlat3.xyz;\n    u_xlat2.x = dot(u_xlat1.xyz, u_xlat1.xyz);\n   
+            u_xlat2.x = inversesqrt(u_xlat2.x);\n    u_xlat6.xyz = u_xlat1.xyz *
+            u_xlat2.xxx;\n    u_xlat2.x = dot(u_xlat3.xyz, u_xlat6.xyz);\n    u_xlat22
+            = abs(u_xlat2.x) * u_xlat22 + u_xlat16;\n    u_xlatb2.x = hlslcc_mtx4x4glstate_matrix_projection[3].w==0.0;\n   
+            u_xlat9.x = (u_xlatb2.x) ? u_xlat22 : u_xlat9.x;\n    u_xlatb22 = 0.0>=in_TEXCOORD0.w;\n   
+            u_xlat22 = u_xlatb22 ? 1.0 : float(0.0);\n    u_xlat2.x = (-_WeightNormal)
+            + _WeightBold;\n    u_xlat22 = u_xlat22 * u_xlat2.x + _WeightNormal;\n   
+            u_xlat22 = u_xlat22 * 0.25 + _FaceDilate;\n    u_xlat22 = u_xlat22 *
+            _ScaleRatioA;\n    u_xlat9.z = u_xlat22 * 0.5;\n    vs_TEXCOORD1.yw =
+            u_xlat9.xz;\n    u_xlat2.x = 0.5 / u_xlat9.x;\n    u_xlat9.x = (-_OutlineWidth)
+            * _ScaleRatioA + 1.0;\n    u_xlat9.x = (-_OutlineSoftness) * _ScaleRatioA
+            + u_xlat9.x;\n    u_xlat9.x = u_xlat9.x * 0.5 + (-u_xlat2.x);\n    vs_TEXCOORD1.x
+            = (-u_xlat22) * 0.5 + u_xlat9.x;\n    u_xlat22 = (-u_xlat22) * 0.5 +
+            0.5;\n    vs_TEXCOORD1.z = u_xlat2.x + u_xlat22;\n    u_xlat2 = max(_ClipRect,
+            vec4(-2e+10, -2e+10, -2e+10, -2e+10));\n    u_xlat2 = min(u_xlat2, vec4(2e+10,
+            2e+10, 2e+10, 2e+10));\n    u_xlat0.xy = u_xlat0.xy * vec2(2.0, 2.0)
+            + (-u_xlat2.xy);\n    vs_TEXCOORD2.xy = (-u_xlat2.zw) + u_xlat0.xy;\n   
+            u_xlat0.xy = max(vec2(_MaskSoftnessX, _MaskSoftnessY), vec2(_UIMaskSoftnessX,
+            _UIMaskSoftnessY));\n    u_xlat0.xy = u_xlat0.xy * vec2(0.25, 0.25) +
+            u_xlat14.xy;\n    vs_TEXCOORD2.zw = vec2(0.25, 0.25) / u_xlat0.xy;\n   
+            u_xlat0.xyz = u_xlat1.yyy * hlslcc_mtx4x4_EnvMatrix[1].xyz;\n    u_xlat0.xyz
+            = hlslcc_mtx4x4_EnvMatrix[0].xyz * u_xlat1.xxx + u_xlat0.xyz;\n    vs_TEXCOORD3.xyz
+            = hlslcc_mtx4x4_EnvMatrix[2].xyz * u_xlat1.zzz + u_xlat0.xyz;\n    vs_TEXCOORD5.xy
+            = in_TEXCOORD1.xy * _FaceTex_ST.xy + _FaceTex_ST.zw;\n    vs_TEXCOORD5.zw
+            = in_TEXCOORD1.xy * _OutlineTex_ST.xy + _OutlineTex_ST.zw;\n    return;\n}\n\n"
+          FragmentProgram: "\n#version 300 es\n\nprecision highp float;\nprecision
+            highp int;\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS 0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define
+            UNITY_UNIFORM\n#else\n#define UNITY_UNIFORM uniform\n#endif\n#define
+            UNITY_SUPPORTS_UNIFORM_LOCATION 0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define
+            UNITY_LOCATION(x) layout(location = x)\n#define UNITY_BINDING(x) layout(binding
+            = x, std140)\n#else\n#define UNITY_LOCATION(x)\n#define UNITY_BINDING(x)
+            layout(std140)\n#endif\nuniform \tvec4 _Time;\nuniform \tfloat _FaceUVSpeedX;\nuniform
+            \tfloat _FaceUVSpeedY;\nuniform \tmediump vec4 _FaceColor;\nuniform \tfloat
+            _OutlineSoftness;\nuniform \tfloat _OutlineUVSpeedX;\nuniform \tfloat
+            _OutlineUVSpeedY;\nuniform \tmediump vec4 _OutlineColor;\nuniform \tfloat
+            _OutlineWidth;\nuniform \tfloat _ScaleRatioA;\nuniform \tvec4 _ClipRect;\nUNITY_LOCATION(0)
+            uniform mediump sampler2D _MainTex;\nUNITY_LOCATION(1) uniform mediump
+            sampler2D _FaceTex;\nUNITY_LOCATION(2) uniform mediump sampler2D _OutlineTex;\nin
+            mediump  vec4 vs_COLOR0;\nin highp  vec2 vs_TEXCOORD0;\nin highp  vec4
+            vs_TEXCOORD1;\nin highp  vec4 vs_TEXCOORD2;\nin highp  vec4 vs_TEXCOORD5;\nlayout(location
+            = 0) out mediump vec4 SV_Target0;\nvec3 u_xlat0;\nmediump vec4 u_xlat16_0;\nmediump
+            float u_xlat16_1;\nvec4 u_xlat2;\nmediump vec4 u_xlat16_2;\nmediump vec3
+            u_xlat16_3;\nvec2 u_xlat4;\nmediump vec4 u_xlat16_4;\nbool u_xlatb4;\nfloat
+            u_xlat5;\nbool u_xlatb5;\nmediump float u_xlat16_6;\nfloat u_xlat9;\nmediump
+            float u_xlat16_11;\nvoid main()\n{\n    u_xlat16_0.x = texture(_MainTex,
+            vs_TEXCOORD0.xy).w;\n    u_xlat5 = u_xlat16_0.x + (-vs_TEXCOORD1.x);\n   
+            u_xlat0.x = (-u_xlat16_0.x) + vs_TEXCOORD1.z;\n    u_xlatb5 = u_xlat5<0.0;\n   
+            if(u_xlatb5){discard;}\n    u_xlat5 = _OutlineWidth * _ScaleRatioA;\n   
+            u_xlat5 = u_xlat5 * vs_TEXCOORD1.y;\n    u_xlat16_1 = min(u_xlat5, 1.0);\n   
+            u_xlat16_6 = u_xlat5 * 0.5;\n    u_xlat16_1 = sqrt(u_xlat16_1);\n   
+            u_xlat16_11 = u_xlat0.x * vs_TEXCOORD1.y + u_xlat16_6;\n    u_xlat16_11
+            = clamp(u_xlat16_11, 0.0, 1.0);\n    u_xlat16_6 = u_xlat0.x * vs_TEXCOORD1.y
+            + (-u_xlat16_6);\n    u_xlat16_1 = u_xlat16_1 * u_xlat16_11;\n    u_xlat0.xy
+            = vec2(_OutlineUVSpeedX, _OutlineUVSpeedY) * _Time.yy + vs_TEXCOORD5.zw;\n   
+            u_xlat16_0 = texture(_OutlineTex, u_xlat0.xy);\n    u_xlat2 = u_xlat16_0
+            * _OutlineColor;\n    u_xlat16_3.xyz = vs_COLOR0.xyz * _FaceColor.xyz;\n   
+            u_xlat0.xy = vec2(_FaceUVSpeedX, _FaceUVSpeedY) * _Time.yy + vs_TEXCOORD5.xy;\n   
+            u_xlat16_4 = texture(_FaceTex, u_xlat0.xy);\n    u_xlat0.xyz = u_xlat16_3.xyz
+            * u_xlat16_4.xyz;\n    u_xlat4.x = u_xlat16_4.w * _FaceColor.w;\n   
+            u_xlat16_3.xyz = u_xlat0.xyz * u_xlat4.xxx;\n    u_xlat16_2.xyz = u_xlat2.xyz
+            * u_xlat2.www + (-u_xlat16_3.xyz);\n    u_xlat16_2.w = _OutlineColor.w
+            * u_xlat16_0.w + (-u_xlat4.x);\n    u_xlat16_2 = vec4(u_xlat16_1) * u_xlat16_2;\n   
+            u_xlat16_0.xyz = u_xlat0.xyz * u_xlat4.xxx + u_xlat16_2.xyz;\n    u_xlat16_0.w
+            = _FaceColor.w * u_xlat16_4.w + u_xlat16_2.w;\n    u_xlat4.x = _OutlineSoftness
+            * _ScaleRatioA;\n    u_xlat9 = u_xlat4.x * vs_TEXCOORD1.y;\n    u_xlat16_1
+            = u_xlat4.x * vs_TEXCOORD1.y + 1.0;\n    u_xlat16_6 = u_xlat9 * 0.5 +
+            u_xlat16_6;\n    u_xlat16_1 = u_xlat16_6 / u_xlat16_1;\n    u_xlat16_1
+            = clamp(u_xlat16_1, 0.0, 1.0);\n    u_xlat16_1 = (-u_xlat16_1) + 1.0;\n   
+            u_xlat16_0 = u_xlat16_0 * vec4(u_xlat16_1);\n    u_xlat4.xy = (-_ClipRect.xy)
+            + _ClipRect.zw;\n    u_xlat4.xy = u_xlat4.xy + -abs(vs_TEXCOORD2.xy);\n   
+            u_xlat4.xy = u_xlat4.xy * vs_TEXCOORD2.zw;\n    u_xlat4.xy = clamp(u_xlat4.xy,
+            0.0, 1.0);\n    u_xlat16_1 = u_xlat4.y * u_xlat4.x;\n    u_xlat16_6 =
+            u_xlat16_0.w * u_xlat16_1 + -0.00100000005;\n    u_xlat16_0 = u_xlat16_0
+            * vec4(u_xlat16_1);\n    SV_Target0 = u_xlat16_0 * vs_COLOR0.wwww;\n   
+            u_xlatb4 = u_xlat16_6<0.0;\n    if(u_xlatb4){discard;}\n    return;\n}\n\n"
+          LOD: 0
+          readDepth: 0
+          PassId: 0
+          SubShaderIndex: 0
+          Keywords:
+            "\L\u2025":
+            - UNITY_UI_ALPHACLIP
+            - UNITY_UI_CLIP_RECT
+          Tags:
+          - Key: IGNOREPROJECTOR
+            Value: true
+          - Key: QUEUE
+            Value: Transparent
+          - Key: RenderType
+            Value: Transparent
+        DefinedKeywords:
+          "\L\u2025":
+          - BEVEL_ON
+          - GLOW_ON
+          - STEREO_CUBEMAP_RENDER_ON
+          - STEREO_INSTANCING_ON
+          - STEREO_MULTIVIEW_ON
+          - UNDERLAY_INNER
+          - UNDERLAY_ON
+          - UNITY_SINGLE_PASS_STEREO
+          - UNITY_UI_ALPHACLIP
+          - UNITY_UI_CLIP_RECT
+          - __
+        KeywordGroups:
+        - Keywords:
+          - __
+          - BEVEL_ON
+          hasDiscard: 1
+        - Keywords:
+          - __
+          - UNDERLAY_ON
+          - UNDERLAY_INNER
+          hasDiscard: 1
+        - Keywords:
+          - __
+          - GLOW_ON
+          hasDiscard: 1
+        - Keywords:
+          - __
+          - UNITY_UI_CLIP_RECT
+          hasDiscard: 1
+        - Keywords:
+          - __
+          - UNITY_UI_ALPHACLIP
+          hasDiscard: 1
+        KeywordsMinimalCardinality: 0
+        ContainsInvalidVariant: 0
+        VariantStructures:
+        - shaderCompilerPlatform: 9
+          shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+          passType: 0
+          passId: 0
+          subShaderIndex: 0
+          upToDate: 0
+          keywords:
+            "\L\u2025": []
+        - shaderCompilerPlatform: 9
+          shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+          passType: 0
+          passId: 0
+          subShaderIndex: 0
+          upToDate: 0
+          keywords:
+            "\L\u2025":
+            - UNITY_UI_ALPHACLIP
+        - shaderCompilerPlatform: 9
+          shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+          passType: 0
+          passId: 0
+          subShaderIndex: 0
+          upToDate: 0
+          keywords:
+            "\L\u2025":
+            - UNITY_UI_CLIP_RECT
+        - shaderCompilerPlatform: 9
+          shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+          passType: 0
+          passId: 0
+          subShaderIndex: 0
+          upToDate: 0
+          keywords:
+            "\L\u2025":
+            - UNITY_UI_ALPHACLIP
+            - UNITY_UI_CLIP_RECT
+        CompilationErrors: []
+        HasDepthReader: 0
+        Id: 0
+        SubShaderIndex: 0
+        SerializedObjectId: 0
+        Tags:
+        - Key: IGNOREPROJECTOR
+          Value: true
+        - Key: QUEUE
+          Value: Transparent
+        - Key: RenderType
+          Value: Transparent
+        UsePass:
+          shader: 
+          pass: 
+        GrabPassTextureName: 
+        PlatformMask: -1
+      Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+      Tags:
+      - Key: IGNOREPROJECTOR
+        Value: true
+      - Key: QUEUE
+        Value: Transparent
+      - Key: RenderType
+        Value: Transparent
+    Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    ShaderPath: Assets/TextMesh Pro/Shaders/TMP_SDF.shader
+    ShaderDefinedKeywords:
+    - BEVEL_ON
+    - GLOW_ON
+    - UNDERLAY_INNER
+    - UNDERLAY_ON
+    - UNITY_UI_ALPHACLIP
+    - UNITY_UI_CLIP_RECT
+    - STEREO_CUBEMAP_RENDER_ON
+    - STEREO_INSTANCING_ON
+    - STEREO_MULTIVIEW_ON
+    - UNITY_SINGLE_PASS_STEREO
+    - __
+    fallbackShader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+    CompilationErrors: []
+    Variants:
+    - shaderCompilerPlatform: 9
+      shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+      passType: 0
+      passId: 0
+      subShaderIndex: 0
+      upToDate: 0
+      keywords:
+        "\L\u2025": []
+    - shaderCompilerPlatform: 9
+      shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+      passType: 0
+      passId: 0
+      subShaderIndex: 0
+      upToDate: 0
+      keywords:
+        "\L\u2025":
+        - UNITY_UI_ALPHACLIP
+    - shaderCompilerPlatform: 9
+      shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+      passType: 0
+      passId: 0
+      subShaderIndex: 0
+      upToDate: 0
+      keywords:
+        "\L\u2025":
+        - UNITY_UI_CLIP_RECT
+    - shaderCompilerPlatform: 9
+      shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+      passType: 0
+      passId: 0
+      subShaderIndex: 0
+      upToDate: 0
+      keywords:
+        "\L\u2025":
+        - UNITY_UI_ALPHACLIP
+        - UNITY_UI_CLIP_RECT
+  - ParsedSubShaders:
+    - Index: 0
+      Passes:
       - Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
         ShaderVariants:
         - ShaderCompilerPlatform: 9
@@ -6383,791 +7220,6 @@ MonoBehaviour:
             Value: Transparent
           - Key: RenderType
             Value: Transparent
-        - ShaderCompilerPlatform: 9
-          NoShaderVariant: 0
-          VertexProgram: "\n#version 300 es\n\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS
-            0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define UNITY_UNIFORM\n#else\n#define
-            UNITY_UNIFORM uniform\n#endif\n#define UNITY_SUPPORTS_UNIFORM_LOCATION
-            0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define UNITY_LOCATION(x) layout(location
-            = x)\n#define UNITY_BINDING(x) layout(binding = x, std140)\n#else\n#define
-            UNITY_LOCATION(x)\n#define UNITY_BINDING(x) layout(std140)\n#endif\nuniform
-            \tvec3 _WorldSpaceCameraPos;\nuniform \tvec4 _ScreenParams;\nuniform
-            \tvec4 hlslcc_mtx4x4unity_ObjectToWorld[4];\nuniform \tvec4 hlslcc_mtx4x4unity_WorldToObject[4];\nuniform
-            \tvec4 hlslcc_mtx4x4glstate_matrix_projection[4];\nuniform \tvec4 hlslcc_mtx4x4unity_MatrixVP[4];\nuniform
-            \tmediump vec4 _FaceColor;\nuniform \tfloat _FaceDilate;\nuniform \tfloat
-            _OutlineSoftness;\nuniform \tmediump vec4 _OutlineColor;\nuniform \tfloat
-            _OutlineWidth;\nuniform \tfloat _WeightNormal;\nuniform \tfloat _WeightBold;\nuniform
-            \tfloat _ScaleRatioA;\nuniform \tfloat _VertexOffsetX;\nuniform \tfloat
-            _VertexOffsetY;\nuniform \tvec4 _ClipRect;\nuniform \tfloat _MaskSoftnessX;\nuniform
-            \tfloat _MaskSoftnessY;\nuniform \tfloat _GradientScale;\nuniform \tfloat
-            _ScaleX;\nuniform \tfloat _ScaleY;\nuniform \tfloat _PerspectiveFilter;\nuniform
-            \tfloat _Sharpness;\nuniform \tfloat _UIMaskSoftnessX;\nuniform \tfloat
-            _UIMaskSoftnessY;\nuniform \tint _UIVertexColorAlwaysGammaSpace;\nin
-            highp vec4 in_POSITION0;\nin highp vec3 in_NORMAL0;\nin mediump vec4
-            in_COLOR0;\nin highp vec4 in_TEXCOORD0;\nout mediump vec4 vs_COLOR0;\nout
-            mediump vec4 vs_COLOR1;\nout highp vec4 vs_TEXCOORD0;\nout mediump vec4
-            vs_TEXCOORD1;\nmediump vec4 vs_TEXCOORD2;\nfloat u_xlat0;\nbool u_xlatb0;\nvec4
-            u_xlat1;\nmediump vec4 u_xlat16_1;\nvec3 u_xlat2;\nvec4 u_xlat3;\nvec4
-            u_xlat4;\nmediump vec4 u_xlat16_4;\nvec4 u_xlat5;\nmediump vec4 u_xlat16_5;\nvec4
-            u_xlat6;\nmediump vec4 u_xlat16_6;\nvec4 u_xlat7;\nmediump vec4 u_xlat16_7;\nmediump
-            vec4 u_xlat16_8;\nvec2 u_xlat9;\nmediump vec3 u_xlat16_9;\nmediump vec3
-            u_xlat16_10;\nvec2 u_xlat11;\nvec2 u_xlat12;\nfloat u_xlat13;\nint u_xlati13;\nbvec3
-            u_xlatb13;\nfloat u_xlat14;\nfloat u_xlat18;\nvec2 u_xlat25;\nint u_xlati25;\nbool
-            u_xlatb25;\nvec2 u_xlat26;\nmediump vec2 u_xlat16_26;\nfloat u_xlat30;\nvec2
-            u_xlat31;\nvec2 u_xlat35;\nfloat u_xlat36;\nfloat u_xlat37;\nfloat u_xlat38;\nfloat
-            u_xlat40;\nmediump float u_xlat16_40;\nint op_not(int value) { return
-            -value - 1; }\nivec2 op_not(ivec2 a) { a.x = op_not(a.x); a.y = op_not(a.y);
-            return a; }\nivec3 op_not(ivec3 a) { a.x = op_not(a.x); a.y = op_not(a.y);
-            a.z = op_not(a.z); return a; }\nivec4 op_not(ivec4 a) { a.x = op_not(a.x);
-            a.y = op_not(a.y); a.z = op_not(a.z); a.w = op_not(a.w); return a; }\n\nvoid
-            main()\n{\n    u_xlat0 = float(0);\n    u_xlatb0 = u_xlat0>=in_TEXCOORD0.w;\n   
-            u_xlat0 = (u_xlatb0) ? 1.0 : 0.0;\n    u_xlat1 = in_POSITION0.zwxy;\n   
-            u_xlat2.x = u_xlat1.z + _VertexOffsetX;\n    u_xlat14 = u_xlat1.w + _VertexOffsetY;\n   
-            u_xlat2.x = u_xlat2.x;\n    u_xlat2.y = u_xlat14;\n    u_xlat2.z = u_xlat1.x;\n   
-            u_xlat2.xyz = u_xlat2.xyz;\n    u_xlat3 = u_xlat2.xxxx * hlslcc_mtx4x4unity_ObjectToWorld[0];\n   
-            u_xlat4 = u_xlat2.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];\n    u_xlat3
-            = u_xlat3 + u_xlat4;\n    u_xlat4 = u_xlat2.zzzz * hlslcc_mtx4x4unity_ObjectToWorld[2];\n   
-            u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat4 = hlslcc_mtx4x4unity_ObjectToWorld[3]
-            * vec4(1.0, 1.0, 1.0, 1.0);\n    u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat4
-            = u_xlat3.xxxx * hlslcc_mtx4x4unity_MatrixVP[0];\n    u_xlat5 = u_xlat3.yyyy
-            * hlslcc_mtx4x4unity_MatrixVP[1];\n    u_xlat4 = u_xlat4 + u_xlat5;\n   
-            u_xlat5 = u_xlat3.zzzz * hlslcc_mtx4x4unity_MatrixVP[2];\n    u_xlat4
-            = u_xlat4 + u_xlat5;\n    u_xlat3 = u_xlat3.wwww * hlslcc_mtx4x4unity_MatrixVP[3];\n   
-            u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat3 = u_xlat3;\n    u_xlat3 = u_xlat3;\n   
-            u_xlat12.xy = u_xlat3.ww;\n    u_xlat25.xy = _ScreenParams.xx * hlslcc_mtx4x4glstate_matrix_projection[0].xy;\n   
-            u_xlat26.xy = _ScreenParams.yy * hlslcc_mtx4x4glstate_matrix_projection[1].xy;\n   
-            u_xlat25.xy = u_xlat25.xy + u_xlat26.xy;\n    u_xlat26.xy = (-u_xlat25.xy);\n   
-            u_xlat25.xy = max(u_xlat25.xy, u_xlat26.xy);\n    u_xlat25.xy = u_xlat25.xy
-            * vec2(_ScaleX, _ScaleY);\n    u_xlat12.xy = u_xlat12.xy / u_xlat25.xy;\n   
-            u_xlat36 = dot(u_xlat12.xy, u_xlat12.xy);\n    u_xlat36 = inversesqrt(u_xlat36);\n   
-            u_xlat25.x = (-in_TEXCOORD0.w);\n    u_xlat25.x = max(u_xlat25.x, in_TEXCOORD0.w);\n   
-            u_xlat25.x = u_xlat25.x * _GradientScale;\n    u_xlat37 = float(1);\n   
-            u_xlat37 = u_xlat37 + _Sharpness;\n    u_xlat25.x = u_xlat37 * u_xlat25.x;\n   
-            u_xlat36 = u_xlat36 * u_xlat25.x;\n    u_xlat25.x = float(0);\n    u_xlatb25
-            = u_xlat25.x==hlslcc_mtx4x4glstate_matrix_projection[3].w;\n    if(u_xlatb25){\n       
-            u_xlat25.x = (-u_xlat36);\n        u_xlat25.x = max(u_xlat36, u_xlat25.x);\n       
-            u_xlat37 = float(1);\n        u_xlat26.x = (-_PerspectiveFilter);\n       
-            u_xlat37 = u_xlat37 + u_xlat26.x;\n        u_xlat25.x = u_xlat37 * u_xlat25.x;\n       
-            u_xlat4.xyz = in_NORMAL0.xyz;\n        u_xlat5.x = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[0].xyz);\n       
-            u_xlat5.y = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[1].xyz);\n       
-            u_xlat5.z = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[2].xyz);\n       
-            u_xlat37 = dot(u_xlat5.xyz, u_xlat5.xyz);\n        u_xlat37 = inversesqrt(u_xlat37);\n       
-            u_xlat4.xyz = vec3(u_xlat37) * u_xlat5.xyz;\n        u_xlat2.x = u_xlat2.x;\n       
-            u_xlat2.y = u_xlat2.y;\n        u_xlat1.xy = u_xlat1.xy;\n        u_xlat5.xyz
-            = u_xlat2.xxx * hlslcc_mtx4x4unity_ObjectToWorld[0].xyz;\n        u_xlat6.xyz
-            = u_xlat2.yyy * hlslcc_mtx4x4unity_ObjectToWorld[1].xyz;\n        u_xlat5.xyz
-            = u_xlat5.xyz + u_xlat6.xyz;\n        u_xlat6.xyz = u_xlat1.xxx * hlslcc_mtx4x4unity_ObjectToWorld[2].xyz;\n       
-            u_xlat5.xyz = u_xlat5.xyz + u_xlat6.xyz;\n        u_xlat1.xyw = u_xlat1.yyy
-            * hlslcc_mtx4x4unity_ObjectToWorld[3].xyz;\n        u_xlat1.xyw = u_xlat1.xyw
-            + u_xlat5.xyz;\n        u_xlat1.xyw = u_xlat1.xyw;\n        u_xlat1.xyw
-            = (-u_xlat1.xyw);\n        u_xlat1.xyw = u_xlat1.xyw + _WorldSpaceCameraPos.xyz;\n       
-            u_xlat1.xyw = u_xlat1.xyw;\n        u_xlat26.x = dot(u_xlat1.xyw, u_xlat1.xyw);\n       
-            u_xlat26.x = inversesqrt(u_xlat26.x);\n        u_xlat1.xyw = u_xlat1.xyw
-            * u_xlat26.xxx;\n        u_xlat1.x = dot(u_xlat4.xyz, u_xlat1.xyw);\n       
-            u_xlat13 = (-u_xlat1.x);\n        u_xlat1.x = max(u_xlat13, u_xlat1.x);\n       
-            u_xlat13 = (-u_xlat25.x);\n        u_xlat13 = u_xlat36 + u_xlat13;\n       
-            u_xlat1.x = u_xlat13 * u_xlat1.x;\n        u_xlat36 = u_xlat1.x + u_xlat25.x;\n   
-            }\n    u_xlat1.x = (-_WeightNormal);\n    u_xlat1.x = u_xlat1.x + _WeightBold;\n   
-            u_xlat0 = u_xlat0 * u_xlat1.x;\n    u_xlat0 = u_xlat0 + _WeightNormal;\n   
-            u_xlat0 = u_xlat0 / 4.0;\n    u_xlat0 = u_xlat0 + _FaceDilate;\n    u_xlat0
-            = u_xlat0 * _ScaleRatioA;\n    u_xlat0 = u_xlat0 * 0.5;\n    u_xlat1.x
-            = float(1);\n    u_xlat13 = _OutlineSoftness * _ScaleRatioA;\n    u_xlat13
-            = u_xlat36 * u_xlat13;\n    u_xlat1.x = u_xlat13 + u_xlat1.x;\n    u_xlat36
-            = u_xlat36 / u_xlat1.x;\n    u_xlat0 = (-u_xlat0);\n    u_xlat0 = u_xlat0
-            + 0.5;\n    u_xlat0 = u_xlat36 * u_xlat0;\n    u_xlat1.x = -0.5;\n   
-            u_xlat0 = u_xlat0 + u_xlat1.x;\n    u_xlat1.x = _OutlineWidth * _ScaleRatioA;\n   
-            u_xlat1.x = u_xlat1.x * 0.5;\n    u_xlat1.x = u_xlat36 * u_xlat1.x;\n   
-            u_xlatb13.x = ivec4(0, 0, 0, 0)!=ivec4(_UIVertexColorAlwaysGammaSpace);\n   
-            u_xlati25 = 0;\n    u_xlati25 = op_not(u_xlati25);\n    u_xlati13 = u_xlatb13.x
-            ? u_xlati25 : int(0);\n    if(u_xlati13 != 0) {\n        u_xlat16_7.xyz
-            = in_COLOR0.xyz;\n        u_xlat16_8.x = float(0.0849710032);\n       
-            u_xlat16_8.y = float(0.0849710032);\n        u_xlat16_8.z = float(0.0849710032);\n       
-            u_xlat16_8.xyz = u_xlat16_7.xyz * u_xlat16_8.xyz;\n        u_xlat16_9.x
-            = float(0.000163029006);\n        u_xlat16_9.y = float(0.000163029006);\n       
-            u_xlat16_9.z = float(0.000163029006);\n        u_xlat16_9.xyz = (-u_xlat16_9.xyz);\n       
-            u_xlat16_8.xyz = u_xlat16_8.xyz + u_xlat16_9.xyz;\n        u_xlat16_9.x
-            = float(0.265884995);\n        u_xlat16_9.y = float(0.265884995);\n       
-            u_xlat16_9.z = float(0.265884995);\n        u_xlat16_9.xyz = u_xlat16_7.xyz
-            * u_xlat16_9.xyz;\n        u_xlat16_10.x = float(0.736584008);\n       
-            u_xlat16_10.y = float(0.736584008);\n        u_xlat16_10.z = float(0.736584008);\n       
-            u_xlat16_9.xyz = u_xlat16_9.xyz + u_xlat16_10.xyz;\n        u_xlat16_9.xyz
-            = u_xlat16_7.xyz * u_xlat16_9.xyz;\n        u_xlat16_10.x = float(0.00980184041);\n       
-            u_xlat16_10.y = float(0.00980184041);\n        u_xlat16_10.z = float(0.00980184041);\n       
-            u_xlat16_10.xyz = (-u_xlat16_10.xyz);\n        u_xlat16_9.xyz = u_xlat16_9.xyz
-            + u_xlat16_10.xyz;\n        u_xlat16_9.xyz = u_xlat16_7.xyz * u_xlat16_9.xyz;\n       
-            u_xlat16_10.x = float(0.00319697009);\n        u_xlat16_10.y = float(0.00319697009);\n       
-            u_xlat16_10.z = float(0.00319697009);\n        u_xlat16_9.xyz = u_xlat16_9.xyz
-            + u_xlat16_10.xyz;\n        u_xlat16_10.x = float(0.0725490004);\n       
-            u_xlat16_10.y = float(0.0725490004);\n        u_xlat16_10.z = float(0.0725490004);\n       
-            u_xlatb13.xyz = lessThan(u_xlat16_7.xyzz, u_xlat16_10.xyzz).xyz;\n       
-            u_xlat16_4.x = (u_xlatb13.x) ? u_xlat16_8.x : u_xlat16_9.x;\n       
-            u_xlat16_4.y = (u_xlatb13.y) ? u_xlat16_8.y : u_xlat16_9.y;\n       
-            u_xlat16_4.z = (u_xlatb13.z) ? u_xlat16_8.z : u_xlat16_9.z;\n       
-            u_xlat16_4.xyz = u_xlat16_4.xyz;\n    } else {\n        u_xlat16_4.xyz
-            = in_COLOR0.xyz;\n    }\n    u_xlat40 = in_COLOR0.w;\n    u_xlat16_4.w
-            = u_xlat40;\n    u_xlat16_5 = u_xlat16_4 * _FaceColor;\n    u_xlat16_6.xyz
-            = u_xlat16_5.www * u_xlat16_5.xyz;\n    u_xlat16_7 = _OutlineColor;\n   
-            u_xlat26.x = u_xlat16_7.w;\n    u_xlat40 = u_xlat16_4.w * u_xlat26.x;\n   
-            u_xlat16_40 = u_xlat40;\n    u_xlat16_4.xyz = vec3(u_xlat16_40) * u_xlat16_7.xyz;\n   
-            u_xlat6.xyz = u_xlat16_6.xyz;\n    u_xlat6.w = u_xlat16_5.w;\n    u_xlat4.xyz
-            = u_xlat16_4.xyz;\n    u_xlat4.w = u_xlat16_40;\n    u_xlat26.x = float(2);\n   
-            u_xlat26.x = u_xlat1.x * u_xlat26.x;\n    u_xlat26.x = min(u_xlat26.x,
-            1.0);\n    u_xlat26.x = sqrt(u_xlat26.x);\n    u_xlat5 = (-u_xlat6);\n   
-            u_xlat4 = u_xlat4 + u_xlat5;\n    u_xlat4 = u_xlat26.xxxx * u_xlat4;\n   
-            u_xlat4 = u_xlat4 + u_xlat6;\n    u_xlat16_4 = u_xlat4;\n    u_xlat5
-            = max(_ClipRect, vec4(-2e+10, -2e+10, -2e+10, -2e+10));\n    u_xlat5
-            = min(u_xlat5, vec4(2e+10, 2e+10, 2e+10, 2e+10));\n    u_xlat26.xy =
-            (-u_xlat5.xy);\n    u_xlat26.xy = u_xlat26.xy + u_xlat2.xy;\n    u_xlat11.xy
-            = (-u_xlat5.xy);\n    u_xlat11.xy = u_xlat5.zw + u_xlat11.xy;\n    u_xlat31.xy
-            = u_xlat26.xy / u_xlat11.xy;\n    u_xlat3 = u_xlat3;\n    u_xlat16_8.xyz
-            = u_xlat6.xyz;\n    u_xlat16_8.w = u_xlat6.w;\n    u_xlat16_4 = u_xlat16_4;\n   
-            u_xlat7.xy = in_TEXCOORD0.xy;\n    u_xlat7.zw = u_xlat31.xy;\n    u_xlat26.x
-            = (-u_xlat1.x);\n    u_xlat18 = u_xlat0 + u_xlat26.x;\n    u_xlat30 =
-            u_xlat0 + u_xlat1.x;\n    u_xlat16_6.x = u_xlat36;\n    u_xlat16_6.y
-            = u_xlat18;\n    u_xlat16_6.z = u_xlat30;\n    u_xlat16_6.w = u_xlat0;\n   
-            u_xlat26.x = max(_MaskSoftnessX, _UIMaskSoftnessX);\n    u_xlat38 = max(_MaskSoftnessY,
-            _UIMaskSoftnessY);\n    u_xlat16_26.x = u_xlat26.x;\n    u_xlat16_26.y
-            = u_xlat38;\n    u_xlat11.xy = vec2(ivec2(2, 2));\n    u_xlat11.xy =
-            u_xlat2.xy * u_xlat11.xy;\n    u_xlat35.xy = (-u_xlat5.xy);\n    u_xlat11.xy
-            = u_xlat35.xy + u_xlat11.xy;\n    u_xlat35.xy = (-u_xlat5.zw);\n    u_xlat1.xy
-            = u_xlat35.xy + u_xlat11.xy;\n    u_xlat16_9.x = float(0.25);\n    u_xlat16_9.y
-            = float(0.25);\n    u_xlat16_9.xy = u_xlat16_26.xy * u_xlat16_9.xy;\n   
-            u_xlat9.xy = u_xlat16_9.xy;\n    u_xlat11.xy = u_xlat12.xy + u_xlat9.xy;\n   
-            u_xlat25.xy = vec2(0.25, 0.25) / u_xlat11.xy;\n    u_xlat16_1.xy = u_xlat1.xy;\n   
-            u_xlat16_1.zw = u_xlat25.xy;\n    gl_Position = u_xlat3;\n    vs_COLOR0
-            = u_xlat16_8;\n    vs_COLOR1 = u_xlat16_4;\n    vs_TEXCOORD0 = u_xlat7;\n   
-            vs_TEXCOORD1 = u_xlat16_6;\n    vs_TEXCOORD2 = u_xlat16_1;\n    return;\n}\n\n"
-          FragmentProgram: "\n#version 300 es\n\nprecision highp float;\nprecision
-            highp int;\n#define UNITY_SUPPORTS_UNIFORM_LOCATION 0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define
-            UNITY_LOCATION(x) layout(location = x)\n#define UNITY_BINDING(x) layout(binding
-            = x, std140)\n#else\n#define UNITY_LOCATION(x)\n#define UNITY_BINDING(x)
-            layout(std140)\n#endif\nUNITY_LOCATION(0) uniform mediump sampler2D _MainTex;\nin
-            mediump  vec4 vs_COLOR0;\nin mediump  vec4 vs_COLOR1;\nin highp  vec4
-            vs_TEXCOORD0;\nin mediump  vec4 vs_TEXCOORD1;\nlayout(location = 0) out
-            mediump vec4 SV_Target0;\nfloat u_xlat0;\nmediump vec4 u_xlat16_0;\nmediump
-            vec4 u_xlat16_1;\nmediump vec4 u_xlat16_2;\nfloat u_xlat3;\nvoid main()\n{\n   
-            u_xlat16_0.x = texture(_MainTex, vs_TEXCOORD0.xy).w;\n    u_xlat3 = vs_TEXCOORD1.x;\n   
-            u_xlat0 = u_xlat3 * u_xlat16_0.x;\n    u_xlat16_0.x = u_xlat0;\n    u_xlat16_1.x
-            = (-vs_TEXCOORD1.z);\n    u_xlat16_1.x = u_xlat16_0.x + u_xlat16_1.x;\n   
-            u_xlat16_1.x = max(u_xlat16_1.x, 0.0);\n    u_xlat16_1.x = min(u_xlat16_1.x,
-            1.0);\n    u_xlat16_2 = (-vs_COLOR1);\n    u_xlat16_2 = u_xlat16_2 +
-            vs_COLOR0;\n    u_xlat16_1 = u_xlat16_1.xxxx * u_xlat16_2;\n    u_xlat16_1
-            = u_xlat16_1 + vs_COLOR1;\n    u_xlat16_2.x = (-vs_TEXCOORD1.y);\n   
-            u_xlat16_2.x = u_xlat16_0.x + u_xlat16_2.x;\n    u_xlat16_2.x = max(u_xlat16_2.x,
-            0.0);\n    u_xlat16_2.x = min(u_xlat16_2.x, 1.0);\n    u_xlat16_0 = u_xlat16_1
-            * u_xlat16_2.xxxx;\n    SV_Target0 = u_xlat16_0;\n    return;\n}\n\n"
-          LOD: 0
-          readDepth: 0
-          PassId: 0
-          SubShaderIndex: 0
-          Keywords:
-            "\L\u2025":
-            - OUTLINE_ON
-          Tags:
-          - Key: IGNOREPROJECTOR
-            Value: true
-          - Key: QUEUE
-            Value: Transparent
-          - Key: RenderType
-            Value: Transparent
-        - ShaderCompilerPlatform: 9
-          NoShaderVariant: 0
-          VertexProgram: "\n#version 300 es\n\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS
-            0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define UNITY_UNIFORM\n#else\n#define
-            UNITY_UNIFORM uniform\n#endif\n#define UNITY_SUPPORTS_UNIFORM_LOCATION
-            0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define UNITY_LOCATION(x) layout(location
-            = x)\n#define UNITY_BINDING(x) layout(binding = x, std140)\n#else\n#define
-            UNITY_LOCATION(x)\n#define UNITY_BINDING(x) layout(std140)\n#endif\nuniform
-            \tvec3 _WorldSpaceCameraPos;\nuniform \tvec4 _ScreenParams;\nuniform
-            \tvec4 hlslcc_mtx4x4unity_ObjectToWorld[4];\nuniform \tvec4 hlslcc_mtx4x4unity_WorldToObject[4];\nuniform
-            \tvec4 hlslcc_mtx4x4glstate_matrix_projection[4];\nuniform \tvec4 hlslcc_mtx4x4unity_MatrixVP[4];\nuniform
-            \tmediump vec4 _FaceColor;\nuniform \tfloat _FaceDilate;\nuniform \tfloat
-            _OutlineSoftness;\nuniform \tmediump vec4 _OutlineColor;\nuniform \tfloat
-            _OutlineWidth;\nuniform \tfloat _WeightNormal;\nuniform \tfloat _WeightBold;\nuniform
-            \tfloat _ScaleRatioA;\nuniform \tfloat _VertexOffsetX;\nuniform \tfloat
-            _VertexOffsetY;\nuniform \tvec4 _ClipRect;\nuniform \tfloat _MaskSoftnessX;\nuniform
-            \tfloat _MaskSoftnessY;\nuniform \tfloat _GradientScale;\nuniform \tfloat
-            _ScaleX;\nuniform \tfloat _ScaleY;\nuniform \tfloat _PerspectiveFilter;\nuniform
-            \tfloat _Sharpness;\nuniform \tfloat _UIMaskSoftnessX;\nuniform \tfloat
-            _UIMaskSoftnessY;\nuniform \tint _UIVertexColorAlwaysGammaSpace;\nin
-            highp vec4 in_POSITION0;\nin highp vec3 in_NORMAL0;\nin mediump vec4
-            in_COLOR0;\nin highp vec4 in_TEXCOORD0;\nout mediump vec4 vs_COLOR0;\nout
-            mediump vec4 vs_COLOR1;\nout highp vec4 vs_TEXCOORD0;\nout mediump vec4
-            vs_TEXCOORD1;\nmediump vec4 vs_TEXCOORD2;\nfloat u_xlat0;\nbool u_xlatb0;\nvec4
-            u_xlat1;\nmediump vec4 u_xlat16_1;\nvec3 u_xlat2;\nvec4 u_xlat3;\nvec4
-            u_xlat4;\nmediump vec4 u_xlat16_4;\nvec4 u_xlat5;\nmediump vec4 u_xlat16_5;\nvec4
-            u_xlat6;\nmediump vec4 u_xlat16_6;\nvec4 u_xlat7;\nmediump vec4 u_xlat16_7;\nmediump
-            vec4 u_xlat16_8;\nvec2 u_xlat9;\nmediump vec3 u_xlat16_9;\nmediump vec3
-            u_xlat16_10;\nvec2 u_xlat11;\nvec2 u_xlat12;\nfloat u_xlat13;\nint u_xlati13;\nbvec3
-            u_xlatb13;\nfloat u_xlat14;\nfloat u_xlat18;\nvec2 u_xlat25;\nint u_xlati25;\nbool
-            u_xlatb25;\nvec2 u_xlat26;\nmediump vec2 u_xlat16_26;\nfloat u_xlat30;\nvec2
-            u_xlat31;\nvec2 u_xlat35;\nfloat u_xlat36;\nfloat u_xlat37;\nfloat u_xlat38;\nfloat
-            u_xlat40;\nmediump float u_xlat16_40;\nint op_not(int value) { return
-            -value - 1; }\nivec2 op_not(ivec2 a) { a.x = op_not(a.x); a.y = op_not(a.y);
-            return a; }\nivec3 op_not(ivec3 a) { a.x = op_not(a.x); a.y = op_not(a.y);
-            a.z = op_not(a.z); return a; }\nivec4 op_not(ivec4 a) { a.x = op_not(a.x);
-            a.y = op_not(a.y); a.z = op_not(a.z); a.w = op_not(a.w); return a; }\n\nvoid
-            main()\n{\n    u_xlat0 = float(0);\n    u_xlatb0 = u_xlat0>=in_TEXCOORD0.w;\n   
-            u_xlat0 = (u_xlatb0) ? 1.0 : 0.0;\n    u_xlat1 = in_POSITION0.zwxy;\n   
-            u_xlat2.x = u_xlat1.z + _VertexOffsetX;\n    u_xlat14 = u_xlat1.w + _VertexOffsetY;\n   
-            u_xlat2.x = u_xlat2.x;\n    u_xlat2.y = u_xlat14;\n    u_xlat2.z = u_xlat1.x;\n   
-            u_xlat2.xyz = u_xlat2.xyz;\n    u_xlat3 = u_xlat2.xxxx * hlslcc_mtx4x4unity_ObjectToWorld[0];\n   
-            u_xlat4 = u_xlat2.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];\n    u_xlat3
-            = u_xlat3 + u_xlat4;\n    u_xlat4 = u_xlat2.zzzz * hlslcc_mtx4x4unity_ObjectToWorld[2];\n   
-            u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat4 = hlslcc_mtx4x4unity_ObjectToWorld[3]
-            * vec4(1.0, 1.0, 1.0, 1.0);\n    u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat4
-            = u_xlat3.xxxx * hlslcc_mtx4x4unity_MatrixVP[0];\n    u_xlat5 = u_xlat3.yyyy
-            * hlslcc_mtx4x4unity_MatrixVP[1];\n    u_xlat4 = u_xlat4 + u_xlat5;\n   
-            u_xlat5 = u_xlat3.zzzz * hlslcc_mtx4x4unity_MatrixVP[2];\n    u_xlat4
-            = u_xlat4 + u_xlat5;\n    u_xlat3 = u_xlat3.wwww * hlslcc_mtx4x4unity_MatrixVP[3];\n   
-            u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat3 = u_xlat3;\n    u_xlat3 = u_xlat3;\n   
-            u_xlat12.xy = u_xlat3.ww;\n    u_xlat25.xy = _ScreenParams.xx * hlslcc_mtx4x4glstate_matrix_projection[0].xy;\n   
-            u_xlat26.xy = _ScreenParams.yy * hlslcc_mtx4x4glstate_matrix_projection[1].xy;\n   
-            u_xlat25.xy = u_xlat25.xy + u_xlat26.xy;\n    u_xlat26.xy = (-u_xlat25.xy);\n   
-            u_xlat25.xy = max(u_xlat25.xy, u_xlat26.xy);\n    u_xlat25.xy = u_xlat25.xy
-            * vec2(_ScaleX, _ScaleY);\n    u_xlat12.xy = u_xlat12.xy / u_xlat25.xy;\n   
-            u_xlat36 = dot(u_xlat12.xy, u_xlat12.xy);\n    u_xlat36 = inversesqrt(u_xlat36);\n   
-            u_xlat25.x = (-in_TEXCOORD0.w);\n    u_xlat25.x = max(u_xlat25.x, in_TEXCOORD0.w);\n   
-            u_xlat25.x = u_xlat25.x * _GradientScale;\n    u_xlat37 = float(1);\n   
-            u_xlat37 = u_xlat37 + _Sharpness;\n    u_xlat25.x = u_xlat37 * u_xlat25.x;\n   
-            u_xlat36 = u_xlat36 * u_xlat25.x;\n    u_xlat25.x = float(0);\n    u_xlatb25
-            = u_xlat25.x==hlslcc_mtx4x4glstate_matrix_projection[3].w;\n    if(u_xlatb25){\n       
-            u_xlat25.x = (-u_xlat36);\n        u_xlat25.x = max(u_xlat36, u_xlat25.x);\n       
-            u_xlat37 = float(1);\n        u_xlat26.x = (-_PerspectiveFilter);\n       
-            u_xlat37 = u_xlat37 + u_xlat26.x;\n        u_xlat25.x = u_xlat37 * u_xlat25.x;\n       
-            u_xlat4.xyz = in_NORMAL0.xyz;\n        u_xlat5.x = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[0].xyz);\n       
-            u_xlat5.y = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[1].xyz);\n       
-            u_xlat5.z = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[2].xyz);\n       
-            u_xlat37 = dot(u_xlat5.xyz, u_xlat5.xyz);\n        u_xlat37 = inversesqrt(u_xlat37);\n       
-            u_xlat4.xyz = vec3(u_xlat37) * u_xlat5.xyz;\n        u_xlat2.x = u_xlat2.x;\n       
-            u_xlat2.y = u_xlat2.y;\n        u_xlat1.xy = u_xlat1.xy;\n        u_xlat5.xyz
-            = u_xlat2.xxx * hlslcc_mtx4x4unity_ObjectToWorld[0].xyz;\n        u_xlat6.xyz
-            = u_xlat2.yyy * hlslcc_mtx4x4unity_ObjectToWorld[1].xyz;\n        u_xlat5.xyz
-            = u_xlat5.xyz + u_xlat6.xyz;\n        u_xlat6.xyz = u_xlat1.xxx * hlslcc_mtx4x4unity_ObjectToWorld[2].xyz;\n       
-            u_xlat5.xyz = u_xlat5.xyz + u_xlat6.xyz;\n        u_xlat1.xyw = u_xlat1.yyy
-            * hlslcc_mtx4x4unity_ObjectToWorld[3].xyz;\n        u_xlat1.xyw = u_xlat1.xyw
-            + u_xlat5.xyz;\n        u_xlat1.xyw = u_xlat1.xyw;\n        u_xlat1.xyw
-            = (-u_xlat1.xyw);\n        u_xlat1.xyw = u_xlat1.xyw + _WorldSpaceCameraPos.xyz;\n       
-            u_xlat1.xyw = u_xlat1.xyw;\n        u_xlat26.x = dot(u_xlat1.xyw, u_xlat1.xyw);\n       
-            u_xlat26.x = inversesqrt(u_xlat26.x);\n        u_xlat1.xyw = u_xlat1.xyw
-            * u_xlat26.xxx;\n        u_xlat1.x = dot(u_xlat4.xyz, u_xlat1.xyw);\n       
-            u_xlat13 = (-u_xlat1.x);\n        u_xlat1.x = max(u_xlat13, u_xlat1.x);\n       
-            u_xlat13 = (-u_xlat25.x);\n        u_xlat13 = u_xlat36 + u_xlat13;\n       
-            u_xlat1.x = u_xlat13 * u_xlat1.x;\n        u_xlat36 = u_xlat1.x + u_xlat25.x;\n   
-            }\n    u_xlat1.x = (-_WeightNormal);\n    u_xlat1.x = u_xlat1.x + _WeightBold;\n   
-            u_xlat0 = u_xlat0 * u_xlat1.x;\n    u_xlat0 = u_xlat0 + _WeightNormal;\n   
-            u_xlat0 = u_xlat0 / 4.0;\n    u_xlat0 = u_xlat0 + _FaceDilate;\n    u_xlat0
-            = u_xlat0 * _ScaleRatioA;\n    u_xlat0 = u_xlat0 * 0.5;\n    u_xlat1.x
-            = float(1);\n    u_xlat13 = _OutlineSoftness * _ScaleRatioA;\n    u_xlat13
-            = u_xlat36 * u_xlat13;\n    u_xlat1.x = u_xlat13 + u_xlat1.x;\n    u_xlat36
-            = u_xlat36 / u_xlat1.x;\n    u_xlat0 = (-u_xlat0);\n    u_xlat0 = u_xlat0
-            + 0.5;\n    u_xlat0 = u_xlat36 * u_xlat0;\n    u_xlat1.x = -0.5;\n   
-            u_xlat0 = u_xlat0 + u_xlat1.x;\n    u_xlat1.x = _OutlineWidth * _ScaleRatioA;\n   
-            u_xlat1.x = u_xlat1.x * 0.5;\n    u_xlat1.x = u_xlat36 * u_xlat1.x;\n   
-            u_xlatb13.x = ivec4(0, 0, 0, 0)!=ivec4(_UIVertexColorAlwaysGammaSpace);\n   
-            u_xlati25 = 0;\n    u_xlati25 = op_not(u_xlati25);\n    u_xlati13 = u_xlatb13.x
-            ? u_xlati25 : int(0);\n    if(u_xlati13 != 0) {\n        u_xlat16_7.xyz
-            = in_COLOR0.xyz;\n        u_xlat16_8.x = float(0.0849710032);\n       
-            u_xlat16_8.y = float(0.0849710032);\n        u_xlat16_8.z = float(0.0849710032);\n       
-            u_xlat16_8.xyz = u_xlat16_7.xyz * u_xlat16_8.xyz;\n        u_xlat16_9.x
-            = float(0.000163029006);\n        u_xlat16_9.y = float(0.000163029006);\n       
-            u_xlat16_9.z = float(0.000163029006);\n        u_xlat16_9.xyz = (-u_xlat16_9.xyz);\n       
-            u_xlat16_8.xyz = u_xlat16_8.xyz + u_xlat16_9.xyz;\n        u_xlat16_9.x
-            = float(0.265884995);\n        u_xlat16_9.y = float(0.265884995);\n       
-            u_xlat16_9.z = float(0.265884995);\n        u_xlat16_9.xyz = u_xlat16_7.xyz
-            * u_xlat16_9.xyz;\n        u_xlat16_10.x = float(0.736584008);\n       
-            u_xlat16_10.y = float(0.736584008);\n        u_xlat16_10.z = float(0.736584008);\n       
-            u_xlat16_9.xyz = u_xlat16_9.xyz + u_xlat16_10.xyz;\n        u_xlat16_9.xyz
-            = u_xlat16_7.xyz * u_xlat16_9.xyz;\n        u_xlat16_10.x = float(0.00980184041);\n       
-            u_xlat16_10.y = float(0.00980184041);\n        u_xlat16_10.z = float(0.00980184041);\n       
-            u_xlat16_10.xyz = (-u_xlat16_10.xyz);\n        u_xlat16_9.xyz = u_xlat16_9.xyz
-            + u_xlat16_10.xyz;\n        u_xlat16_9.xyz = u_xlat16_7.xyz * u_xlat16_9.xyz;\n       
-            u_xlat16_10.x = float(0.00319697009);\n        u_xlat16_10.y = float(0.00319697009);\n       
-            u_xlat16_10.z = float(0.00319697009);\n        u_xlat16_9.xyz = u_xlat16_9.xyz
-            + u_xlat16_10.xyz;\n        u_xlat16_10.x = float(0.0725490004);\n       
-            u_xlat16_10.y = float(0.0725490004);\n        u_xlat16_10.z = float(0.0725490004);\n       
-            u_xlatb13.xyz = lessThan(u_xlat16_7.xyzz, u_xlat16_10.xyzz).xyz;\n       
-            u_xlat16_4.x = (u_xlatb13.x) ? u_xlat16_8.x : u_xlat16_9.x;\n       
-            u_xlat16_4.y = (u_xlatb13.y) ? u_xlat16_8.y : u_xlat16_9.y;\n       
-            u_xlat16_4.z = (u_xlatb13.z) ? u_xlat16_8.z : u_xlat16_9.z;\n       
-            u_xlat16_4.xyz = u_xlat16_4.xyz;\n    } else {\n        u_xlat16_4.xyz
-            = in_COLOR0.xyz;\n    }\n    u_xlat40 = in_COLOR0.w;\n    u_xlat16_4.w
-            = u_xlat40;\n    u_xlat16_5 = u_xlat16_4 * _FaceColor;\n    u_xlat16_6.xyz
-            = u_xlat16_5.www * u_xlat16_5.xyz;\n    u_xlat16_7 = _OutlineColor;\n   
-            u_xlat26.x = u_xlat16_7.w;\n    u_xlat40 = u_xlat16_4.w * u_xlat26.x;\n   
-            u_xlat16_40 = u_xlat40;\n    u_xlat16_4.xyz = vec3(u_xlat16_40) * u_xlat16_7.xyz;\n   
-            u_xlat6.xyz = u_xlat16_6.xyz;\n    u_xlat6.w = u_xlat16_5.w;\n    u_xlat4.xyz
-            = u_xlat16_4.xyz;\n    u_xlat4.w = u_xlat16_40;\n    u_xlat26.x = float(2);\n   
-            u_xlat26.x = u_xlat1.x * u_xlat26.x;\n    u_xlat26.x = min(u_xlat26.x,
-            1.0);\n    u_xlat26.x = sqrt(u_xlat26.x);\n    u_xlat5 = (-u_xlat6);\n   
-            u_xlat4 = u_xlat4 + u_xlat5;\n    u_xlat4 = u_xlat26.xxxx * u_xlat4;\n   
-            u_xlat4 = u_xlat4 + u_xlat6;\n    u_xlat16_4 = u_xlat4;\n    u_xlat5
-            = max(_ClipRect, vec4(-2e+10, -2e+10, -2e+10, -2e+10));\n    u_xlat5
-            = min(u_xlat5, vec4(2e+10, 2e+10, 2e+10, 2e+10));\n    u_xlat26.xy =
-            (-u_xlat5.xy);\n    u_xlat26.xy = u_xlat26.xy + u_xlat2.xy;\n    u_xlat11.xy
-            = (-u_xlat5.xy);\n    u_xlat11.xy = u_xlat5.zw + u_xlat11.xy;\n    u_xlat31.xy
-            = u_xlat26.xy / u_xlat11.xy;\n    u_xlat3 = u_xlat3;\n    u_xlat16_8.xyz
-            = u_xlat6.xyz;\n    u_xlat16_8.w = u_xlat6.w;\n    u_xlat16_4 = u_xlat16_4;\n   
-            u_xlat7.xy = in_TEXCOORD0.xy;\n    u_xlat7.zw = u_xlat31.xy;\n    u_xlat26.x
-            = (-u_xlat1.x);\n    u_xlat18 = u_xlat0 + u_xlat26.x;\n    u_xlat30 =
-            u_xlat0 + u_xlat1.x;\n    u_xlat16_6.x = u_xlat36;\n    u_xlat16_6.y
-            = u_xlat18;\n    u_xlat16_6.z = u_xlat30;\n    u_xlat16_6.w = u_xlat0;\n   
-            u_xlat26.x = max(_MaskSoftnessX, _UIMaskSoftnessX);\n    u_xlat38 = max(_MaskSoftnessY,
-            _UIMaskSoftnessY);\n    u_xlat16_26.x = u_xlat26.x;\n    u_xlat16_26.y
-            = u_xlat38;\n    u_xlat11.xy = vec2(ivec2(2, 2));\n    u_xlat11.xy =
-            u_xlat2.xy * u_xlat11.xy;\n    u_xlat35.xy = (-u_xlat5.xy);\n    u_xlat11.xy
-            = u_xlat35.xy + u_xlat11.xy;\n    u_xlat35.xy = (-u_xlat5.zw);\n    u_xlat1.xy
-            = u_xlat35.xy + u_xlat11.xy;\n    u_xlat16_9.x = float(0.25);\n    u_xlat16_9.y
-            = float(0.25);\n    u_xlat16_9.xy = u_xlat16_26.xy * u_xlat16_9.xy;\n   
-            u_xlat9.xy = u_xlat16_9.xy;\n    u_xlat11.xy = u_xlat12.xy + u_xlat9.xy;\n   
-            u_xlat25.xy = vec2(0.25, 0.25) / u_xlat11.xy;\n    u_xlat16_1.xy = u_xlat1.xy;\n   
-            u_xlat16_1.zw = u_xlat25.xy;\n    gl_Position = u_xlat3;\n    vs_COLOR0
-            = u_xlat16_8;\n    vs_COLOR1 = u_xlat16_4;\n    vs_TEXCOORD0 = u_xlat7;\n   
-            vs_TEXCOORD1 = u_xlat16_6;\n    vs_TEXCOORD2 = u_xlat16_1;\n    return;\n}\n\n"
-          FragmentProgram: "\n#version 300 es\n\nprecision highp float;\nprecision
-            highp int;\n#define UNITY_SUPPORTS_UNIFORM_LOCATION 0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define
-            UNITY_LOCATION(x) layout(location = x)\n#define UNITY_BINDING(x) layout(binding
-            = x, std140)\n#else\n#define UNITY_LOCATION(x)\n#define UNITY_BINDING(x)
-            layout(std140)\n#endif\nUNITY_LOCATION(0) uniform mediump sampler2D _MainTex;\nin
-            mediump  vec4 vs_COLOR0;\nin mediump  vec4 vs_COLOR1;\nin highp  vec4
-            vs_TEXCOORD0;\nin mediump  vec4 vs_TEXCOORD1;\nlayout(location = 0) out
-            mediump vec4 SV_Target0;\nfloat u_xlat0;\nmediump vec4 u_xlat16_0;\nfloat
-            u_xlat1;\nmediump vec4 u_xlat16_1;\nmediump vec4 u_xlat16_2;\nint u_xlati3;\nbool
-            u_xlatb3;\nfloat u_xlat4;\nvoid main()\n{\n    u_xlat16_0.x = texture(_MainTex,
-            vs_TEXCOORD0.xy).w;\n    u_xlat4 = vs_TEXCOORD1.x;\n    u_xlat0 = u_xlat4
-            * u_xlat16_0.x;\n    u_xlat16_0.x = u_xlat0;\n    u_xlat16_1.x = (-vs_TEXCOORD1.z);\n   
-            u_xlat16_1.x = u_xlat16_0.x + u_xlat16_1.x;\n    u_xlat16_1.x = max(u_xlat16_1.x,
-            0.0);\n    u_xlat16_1.x = min(u_xlat16_1.x, 1.0);\n    u_xlat16_2 = (-vs_COLOR1);\n   
-            u_xlat16_2 = u_xlat16_2 + vs_COLOR0;\n    u_xlat16_1 = u_xlat16_1.xxxx
-            * u_xlat16_2;\n    u_xlat16_1 = u_xlat16_1 + vs_COLOR1;\n    u_xlat16_2.x
-            = (-vs_TEXCOORD1.y);\n    u_xlat16_2.x = u_xlat16_0.x + u_xlat16_2.x;\n   
-            u_xlat16_2.x = max(u_xlat16_2.x, 0.0);\n    u_xlat16_2.x = min(u_xlat16_2.x,
-            1.0);\n    u_xlat16_0 = u_xlat16_1 * u_xlat16_2.xxxx;\n    u_xlat16_1.x
-            = 0.00100000005;\n    u_xlat16_1.x = (-u_xlat16_1.x);\n    u_xlat16_1.x
-            = u_xlat16_0.w + u_xlat16_1.x;\n    u_xlat1 = u_xlat16_1.x;\n    u_xlatb3
-            = u_xlat1<0.0;\n    u_xlati3 = u_xlatb3 ? int(0xFFFFFFFFu) : int(0);\n   
-            if((u_xlati3)!=0){discard;}\n    SV_Target0 = u_xlat16_0;\n    return;\n}\n\n"
-          LOD: 0
-          readDepth: 0
-          PassId: 0
-          SubShaderIndex: 0
-          Keywords:
-            "\L\u2025":
-            - OUTLINE_ON
-            - UNITY_UI_ALPHACLIP
-          Tags:
-          - Key: IGNOREPROJECTOR
-            Value: true
-          - Key: QUEUE
-            Value: Transparent
-          - Key: RenderType
-            Value: Transparent
-        - ShaderCompilerPlatform: 9
-          NoShaderVariant: 0
-          VertexProgram: "\n#version 300 es\n\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS
-            0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define UNITY_UNIFORM\n#else\n#define
-            UNITY_UNIFORM uniform\n#endif\n#define UNITY_SUPPORTS_UNIFORM_LOCATION
-            0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define UNITY_LOCATION(x) layout(location
-            = x)\n#define UNITY_BINDING(x) layout(binding = x, std140)\n#else\n#define
-            UNITY_LOCATION(x)\n#define UNITY_BINDING(x) layout(std140)\n#endif\nuniform
-            \tvec3 _WorldSpaceCameraPos;\nuniform \tvec4 _ScreenParams;\nuniform
-            \tvec4 hlslcc_mtx4x4unity_ObjectToWorld[4];\nuniform \tvec4 hlslcc_mtx4x4unity_WorldToObject[4];\nuniform
-            \tvec4 hlslcc_mtx4x4glstate_matrix_projection[4];\nuniform \tvec4 hlslcc_mtx4x4unity_MatrixVP[4];\nuniform
-            \tmediump vec4 _FaceColor;\nuniform \tfloat _FaceDilate;\nuniform \tfloat
-            _OutlineSoftness;\nuniform \tmediump vec4 _OutlineColor;\nuniform \tfloat
-            _OutlineWidth;\nuniform \tfloat _WeightNormal;\nuniform \tfloat _WeightBold;\nuniform
-            \tfloat _ScaleRatioA;\nuniform \tfloat _VertexOffsetX;\nuniform \tfloat
-            _VertexOffsetY;\nuniform \tvec4 _ClipRect;\nuniform \tfloat _MaskSoftnessX;\nuniform
-            \tfloat _MaskSoftnessY;\nuniform \tfloat _GradientScale;\nuniform \tfloat
-            _ScaleX;\nuniform \tfloat _ScaleY;\nuniform \tfloat _PerspectiveFilter;\nuniform
-            \tfloat _Sharpness;\nuniform \tfloat _UIMaskSoftnessX;\nuniform \tfloat
-            _UIMaskSoftnessY;\nuniform \tint _UIVertexColorAlwaysGammaSpace;\nin
-            highp vec4 in_POSITION0;\nin highp vec3 in_NORMAL0;\nin mediump vec4
-            in_COLOR0;\nin highp vec4 in_TEXCOORD0;\nout mediump vec4 vs_COLOR0;\nout
-            mediump vec4 vs_COLOR1;\nout highp vec4 vs_TEXCOORD0;\nout mediump vec4
-            vs_TEXCOORD1;\nout mediump vec4 vs_TEXCOORD2;\nfloat u_xlat0;\nbool u_xlatb0;\nvec4
-            u_xlat1;\nmediump vec4 u_xlat16_1;\nvec3 u_xlat2;\nvec4 u_xlat3;\nvec4
-            u_xlat4;\nmediump vec4 u_xlat16_4;\nvec4 u_xlat5;\nmediump vec4 u_xlat16_5;\nvec4
-            u_xlat6;\nmediump vec4 u_xlat16_6;\nvec4 u_xlat7;\nmediump vec4 u_xlat16_7;\nmediump
-            vec4 u_xlat16_8;\nvec2 u_xlat9;\nmediump vec3 u_xlat16_9;\nmediump vec3
-            u_xlat16_10;\nvec2 u_xlat11;\nvec2 u_xlat12;\nfloat u_xlat13;\nint u_xlati13;\nbvec3
-            u_xlatb13;\nfloat u_xlat14;\nfloat u_xlat18;\nvec2 u_xlat25;\nint u_xlati25;\nbool
-            u_xlatb25;\nvec2 u_xlat26;\nmediump vec2 u_xlat16_26;\nfloat u_xlat30;\nvec2
-            u_xlat31;\nvec2 u_xlat35;\nfloat u_xlat36;\nfloat u_xlat37;\nfloat u_xlat38;\nfloat
-            u_xlat40;\nmediump float u_xlat16_40;\nint op_not(int value) { return
-            -value - 1; }\nivec2 op_not(ivec2 a) { a.x = op_not(a.x); a.y = op_not(a.y);
-            return a; }\nivec3 op_not(ivec3 a) { a.x = op_not(a.x); a.y = op_not(a.y);
-            a.z = op_not(a.z); return a; }\nivec4 op_not(ivec4 a) { a.x = op_not(a.x);
-            a.y = op_not(a.y); a.z = op_not(a.z); a.w = op_not(a.w); return a; }\n\nvoid
-            main()\n{\n    u_xlat0 = float(0);\n    u_xlatb0 = u_xlat0>=in_TEXCOORD0.w;\n   
-            u_xlat0 = (u_xlatb0) ? 1.0 : 0.0;\n    u_xlat1 = in_POSITION0.zwxy;\n   
-            u_xlat2.x = u_xlat1.z + _VertexOffsetX;\n    u_xlat14 = u_xlat1.w + _VertexOffsetY;\n   
-            u_xlat2.x = u_xlat2.x;\n    u_xlat2.y = u_xlat14;\n    u_xlat2.z = u_xlat1.x;\n   
-            u_xlat2.xyz = u_xlat2.xyz;\n    u_xlat3 = u_xlat2.xxxx * hlslcc_mtx4x4unity_ObjectToWorld[0];\n   
-            u_xlat4 = u_xlat2.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];\n    u_xlat3
-            = u_xlat3 + u_xlat4;\n    u_xlat4 = u_xlat2.zzzz * hlslcc_mtx4x4unity_ObjectToWorld[2];\n   
-            u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat4 = hlslcc_mtx4x4unity_ObjectToWorld[3]
-            * vec4(1.0, 1.0, 1.0, 1.0);\n    u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat4
-            = u_xlat3.xxxx * hlslcc_mtx4x4unity_MatrixVP[0];\n    u_xlat5 = u_xlat3.yyyy
-            * hlslcc_mtx4x4unity_MatrixVP[1];\n    u_xlat4 = u_xlat4 + u_xlat5;\n   
-            u_xlat5 = u_xlat3.zzzz * hlslcc_mtx4x4unity_MatrixVP[2];\n    u_xlat4
-            = u_xlat4 + u_xlat5;\n    u_xlat3 = u_xlat3.wwww * hlslcc_mtx4x4unity_MatrixVP[3];\n   
-            u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat3 = u_xlat3;\n    u_xlat3 = u_xlat3;\n   
-            u_xlat12.xy = u_xlat3.ww;\n    u_xlat25.xy = _ScreenParams.xx * hlslcc_mtx4x4glstate_matrix_projection[0].xy;\n   
-            u_xlat26.xy = _ScreenParams.yy * hlslcc_mtx4x4glstate_matrix_projection[1].xy;\n   
-            u_xlat25.xy = u_xlat25.xy + u_xlat26.xy;\n    u_xlat26.xy = (-u_xlat25.xy);\n   
-            u_xlat25.xy = max(u_xlat25.xy, u_xlat26.xy);\n    u_xlat25.xy = u_xlat25.xy
-            * vec2(_ScaleX, _ScaleY);\n    u_xlat12.xy = u_xlat12.xy / u_xlat25.xy;\n   
-            u_xlat36 = dot(u_xlat12.xy, u_xlat12.xy);\n    u_xlat36 = inversesqrt(u_xlat36);\n   
-            u_xlat25.x = (-in_TEXCOORD0.w);\n    u_xlat25.x = max(u_xlat25.x, in_TEXCOORD0.w);\n   
-            u_xlat25.x = u_xlat25.x * _GradientScale;\n    u_xlat37 = float(1);\n   
-            u_xlat37 = u_xlat37 + _Sharpness;\n    u_xlat25.x = u_xlat37 * u_xlat25.x;\n   
-            u_xlat36 = u_xlat36 * u_xlat25.x;\n    u_xlat25.x = float(0);\n    u_xlatb25
-            = u_xlat25.x==hlslcc_mtx4x4glstate_matrix_projection[3].w;\n    if(u_xlatb25){\n       
-            u_xlat25.x = (-u_xlat36);\n        u_xlat25.x = max(u_xlat36, u_xlat25.x);\n       
-            u_xlat37 = float(1);\n        u_xlat26.x = (-_PerspectiveFilter);\n       
-            u_xlat37 = u_xlat37 + u_xlat26.x;\n        u_xlat25.x = u_xlat37 * u_xlat25.x;\n       
-            u_xlat4.xyz = in_NORMAL0.xyz;\n        u_xlat5.x = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[0].xyz);\n       
-            u_xlat5.y = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[1].xyz);\n       
-            u_xlat5.z = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[2].xyz);\n       
-            u_xlat37 = dot(u_xlat5.xyz, u_xlat5.xyz);\n        u_xlat37 = inversesqrt(u_xlat37);\n       
-            u_xlat4.xyz = vec3(u_xlat37) * u_xlat5.xyz;\n        u_xlat2.x = u_xlat2.x;\n       
-            u_xlat2.y = u_xlat2.y;\n        u_xlat1.xy = u_xlat1.xy;\n        u_xlat5.xyz
-            = u_xlat2.xxx * hlslcc_mtx4x4unity_ObjectToWorld[0].xyz;\n        u_xlat6.xyz
-            = u_xlat2.yyy * hlslcc_mtx4x4unity_ObjectToWorld[1].xyz;\n        u_xlat5.xyz
-            = u_xlat5.xyz + u_xlat6.xyz;\n        u_xlat6.xyz = u_xlat1.xxx * hlslcc_mtx4x4unity_ObjectToWorld[2].xyz;\n       
-            u_xlat5.xyz = u_xlat5.xyz + u_xlat6.xyz;\n        u_xlat1.xyw = u_xlat1.yyy
-            * hlslcc_mtx4x4unity_ObjectToWorld[3].xyz;\n        u_xlat1.xyw = u_xlat1.xyw
-            + u_xlat5.xyz;\n        u_xlat1.xyw = u_xlat1.xyw;\n        u_xlat1.xyw
-            = (-u_xlat1.xyw);\n        u_xlat1.xyw = u_xlat1.xyw + _WorldSpaceCameraPos.xyz;\n       
-            u_xlat1.xyw = u_xlat1.xyw;\n        u_xlat26.x = dot(u_xlat1.xyw, u_xlat1.xyw);\n       
-            u_xlat26.x = inversesqrt(u_xlat26.x);\n        u_xlat1.xyw = u_xlat1.xyw
-            * u_xlat26.xxx;\n        u_xlat1.x = dot(u_xlat4.xyz, u_xlat1.xyw);\n       
-            u_xlat13 = (-u_xlat1.x);\n        u_xlat1.x = max(u_xlat13, u_xlat1.x);\n       
-            u_xlat13 = (-u_xlat25.x);\n        u_xlat13 = u_xlat36 + u_xlat13;\n       
-            u_xlat1.x = u_xlat13 * u_xlat1.x;\n        u_xlat36 = u_xlat1.x + u_xlat25.x;\n   
-            }\n    u_xlat1.x = (-_WeightNormal);\n    u_xlat1.x = u_xlat1.x + _WeightBold;\n   
-            u_xlat0 = u_xlat0 * u_xlat1.x;\n    u_xlat0 = u_xlat0 + _WeightNormal;\n   
-            u_xlat0 = u_xlat0 / 4.0;\n    u_xlat0 = u_xlat0 + _FaceDilate;\n    u_xlat0
-            = u_xlat0 * _ScaleRatioA;\n    u_xlat0 = u_xlat0 * 0.5;\n    u_xlat1.x
-            = float(1);\n    u_xlat13 = _OutlineSoftness * _ScaleRatioA;\n    u_xlat13
-            = u_xlat36 * u_xlat13;\n    u_xlat1.x = u_xlat13 + u_xlat1.x;\n    u_xlat36
-            = u_xlat36 / u_xlat1.x;\n    u_xlat0 = (-u_xlat0);\n    u_xlat0 = u_xlat0
-            + 0.5;\n    u_xlat0 = u_xlat36 * u_xlat0;\n    u_xlat1.x = -0.5;\n   
-            u_xlat0 = u_xlat0 + u_xlat1.x;\n    u_xlat1.x = _OutlineWidth * _ScaleRatioA;\n   
-            u_xlat1.x = u_xlat1.x * 0.5;\n    u_xlat1.x = u_xlat36 * u_xlat1.x;\n   
-            u_xlatb13.x = ivec4(0, 0, 0, 0)!=ivec4(_UIVertexColorAlwaysGammaSpace);\n   
-            u_xlati25 = 0;\n    u_xlati25 = op_not(u_xlati25);\n    u_xlati13 = u_xlatb13.x
-            ? u_xlati25 : int(0);\n    if(u_xlati13 != 0) {\n        u_xlat16_7.xyz
-            = in_COLOR0.xyz;\n        u_xlat16_8.x = float(0.0849710032);\n       
-            u_xlat16_8.y = float(0.0849710032);\n        u_xlat16_8.z = float(0.0849710032);\n       
-            u_xlat16_8.xyz = u_xlat16_7.xyz * u_xlat16_8.xyz;\n        u_xlat16_9.x
-            = float(0.000163029006);\n        u_xlat16_9.y = float(0.000163029006);\n       
-            u_xlat16_9.z = float(0.000163029006);\n        u_xlat16_9.xyz = (-u_xlat16_9.xyz);\n       
-            u_xlat16_8.xyz = u_xlat16_8.xyz + u_xlat16_9.xyz;\n        u_xlat16_9.x
-            = float(0.265884995);\n        u_xlat16_9.y = float(0.265884995);\n       
-            u_xlat16_9.z = float(0.265884995);\n        u_xlat16_9.xyz = u_xlat16_7.xyz
-            * u_xlat16_9.xyz;\n        u_xlat16_10.x = float(0.736584008);\n       
-            u_xlat16_10.y = float(0.736584008);\n        u_xlat16_10.z = float(0.736584008);\n       
-            u_xlat16_9.xyz = u_xlat16_9.xyz + u_xlat16_10.xyz;\n        u_xlat16_9.xyz
-            = u_xlat16_7.xyz * u_xlat16_9.xyz;\n        u_xlat16_10.x = float(0.00980184041);\n       
-            u_xlat16_10.y = float(0.00980184041);\n        u_xlat16_10.z = float(0.00980184041);\n       
-            u_xlat16_10.xyz = (-u_xlat16_10.xyz);\n        u_xlat16_9.xyz = u_xlat16_9.xyz
-            + u_xlat16_10.xyz;\n        u_xlat16_9.xyz = u_xlat16_7.xyz * u_xlat16_9.xyz;\n       
-            u_xlat16_10.x = float(0.00319697009);\n        u_xlat16_10.y = float(0.00319697009);\n       
-            u_xlat16_10.z = float(0.00319697009);\n        u_xlat16_9.xyz = u_xlat16_9.xyz
-            + u_xlat16_10.xyz;\n        u_xlat16_10.x = float(0.0725490004);\n       
-            u_xlat16_10.y = float(0.0725490004);\n        u_xlat16_10.z = float(0.0725490004);\n       
-            u_xlatb13.xyz = lessThan(u_xlat16_7.xyzz, u_xlat16_10.xyzz).xyz;\n       
-            u_xlat16_4.x = (u_xlatb13.x) ? u_xlat16_8.x : u_xlat16_9.x;\n       
-            u_xlat16_4.y = (u_xlatb13.y) ? u_xlat16_8.y : u_xlat16_9.y;\n       
-            u_xlat16_4.z = (u_xlatb13.z) ? u_xlat16_8.z : u_xlat16_9.z;\n       
-            u_xlat16_4.xyz = u_xlat16_4.xyz;\n    } else {\n        u_xlat16_4.xyz
-            = in_COLOR0.xyz;\n    }\n    u_xlat40 = in_COLOR0.w;\n    u_xlat16_4.w
-            = u_xlat40;\n    u_xlat16_5 = u_xlat16_4 * _FaceColor;\n    u_xlat16_6.xyz
-            = u_xlat16_5.www * u_xlat16_5.xyz;\n    u_xlat16_7 = _OutlineColor;\n   
-            u_xlat26.x = u_xlat16_7.w;\n    u_xlat40 = u_xlat16_4.w * u_xlat26.x;\n   
-            u_xlat16_40 = u_xlat40;\n    u_xlat16_4.xyz = vec3(u_xlat16_40) * u_xlat16_7.xyz;\n   
-            u_xlat6.xyz = u_xlat16_6.xyz;\n    u_xlat6.w = u_xlat16_5.w;\n    u_xlat4.xyz
-            = u_xlat16_4.xyz;\n    u_xlat4.w = u_xlat16_40;\n    u_xlat26.x = float(2);\n   
-            u_xlat26.x = u_xlat1.x * u_xlat26.x;\n    u_xlat26.x = min(u_xlat26.x,
-            1.0);\n    u_xlat26.x = sqrt(u_xlat26.x);\n    u_xlat5 = (-u_xlat6);\n   
-            u_xlat4 = u_xlat4 + u_xlat5;\n    u_xlat4 = u_xlat26.xxxx * u_xlat4;\n   
-            u_xlat4 = u_xlat4 + u_xlat6;\n    u_xlat16_4 = u_xlat4;\n    u_xlat5
-            = max(_ClipRect, vec4(-2e+10, -2e+10, -2e+10, -2e+10));\n    u_xlat5
-            = min(u_xlat5, vec4(2e+10, 2e+10, 2e+10, 2e+10));\n    u_xlat26.xy =
-            (-u_xlat5.xy);\n    u_xlat26.xy = u_xlat26.xy + u_xlat2.xy;\n    u_xlat11.xy
-            = (-u_xlat5.xy);\n    u_xlat11.xy = u_xlat5.zw + u_xlat11.xy;\n    u_xlat31.xy
-            = u_xlat26.xy / u_xlat11.xy;\n    u_xlat3 = u_xlat3;\n    u_xlat16_8.xyz
-            = u_xlat6.xyz;\n    u_xlat16_8.w = u_xlat6.w;\n    u_xlat16_4 = u_xlat16_4;\n   
-            u_xlat7.xy = in_TEXCOORD0.xy;\n    u_xlat7.zw = u_xlat31.xy;\n    u_xlat26.x
-            = (-u_xlat1.x);\n    u_xlat18 = u_xlat0 + u_xlat26.x;\n    u_xlat30 =
-            u_xlat0 + u_xlat1.x;\n    u_xlat16_6.x = u_xlat36;\n    u_xlat16_6.y
-            = u_xlat18;\n    u_xlat16_6.z = u_xlat30;\n    u_xlat16_6.w = u_xlat0;\n   
-            u_xlat26.x = max(_MaskSoftnessX, _UIMaskSoftnessX);\n    u_xlat38 = max(_MaskSoftnessY,
-            _UIMaskSoftnessY);\n    u_xlat16_26.x = u_xlat26.x;\n    u_xlat16_26.y
-            = u_xlat38;\n    u_xlat11.xy = vec2(ivec2(2, 2));\n    u_xlat11.xy =
-            u_xlat2.xy * u_xlat11.xy;\n    u_xlat35.xy = (-u_xlat5.xy);\n    u_xlat11.xy
-            = u_xlat35.xy + u_xlat11.xy;\n    u_xlat35.xy = (-u_xlat5.zw);\n    u_xlat1.xy
-            = u_xlat35.xy + u_xlat11.xy;\n    u_xlat16_9.x = float(0.25);\n    u_xlat16_9.y
-            = float(0.25);\n    u_xlat16_9.xy = u_xlat16_26.xy * u_xlat16_9.xy;\n   
-            u_xlat9.xy = u_xlat16_9.xy;\n    u_xlat11.xy = u_xlat12.xy + u_xlat9.xy;\n   
-            u_xlat25.xy = vec2(0.25, 0.25) / u_xlat11.xy;\n    u_xlat16_1.xy = u_xlat1.xy;\n   
-            u_xlat16_1.zw = u_xlat25.xy;\n    gl_Position = u_xlat3;\n    vs_COLOR0
-            = u_xlat16_8;\n    vs_COLOR1 = u_xlat16_4;\n    vs_TEXCOORD0 = u_xlat7;\n   
-            vs_TEXCOORD1 = u_xlat16_6;\n    vs_TEXCOORD2 = u_xlat16_1;\n    return;\n}\n\n"
-          FragmentProgram: "\n#version 300 es\n\nprecision highp float;\nprecision
-            highp int;\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS 0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define
-            UNITY_UNIFORM\n#else\n#define UNITY_UNIFORM uniform\n#endif\n#define
-            UNITY_SUPPORTS_UNIFORM_LOCATION 0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define
-            UNITY_LOCATION(x) layout(location = x)\n#define UNITY_BINDING(x) layout(binding
-            = x, std140)\n#else\n#define UNITY_LOCATION(x)\n#define UNITY_BINDING(x)
-            layout(std140)\n#endif\nuniform \tvec4 _ClipRect;\nUNITY_LOCATION(0)
-            uniform mediump sampler2D _MainTex;\nin mediump  vec4 vs_COLOR0;\nin
-            mediump  vec4 vs_COLOR1;\nin highp  vec4 vs_TEXCOORD0;\nin mediump  vec4
-            vs_TEXCOORD1;\nin mediump  vec4 vs_TEXCOORD2;\nlayout(location = 0) out
-            mediump vec4 SV_Target0;\nfloat u_xlat0;\nmediump vec4 u_xlat16_0;\nvec2
-            u_xlat1;\nmediump vec4 u_xlat16_1;\nmediump vec4 u_xlat16_2;\nvec2 u_xlat3;\nmediump
-            vec2 u_xlat16_3;\nfloat u_xlat4;\nvec2 u_xlat11;\nvoid main()\n{\n   
-            u_xlat16_0.x = texture(_MainTex, vs_TEXCOORD0.xy).w;\n    u_xlat4 = vs_TEXCOORD1.x;\n   
-            u_xlat0 = u_xlat4 * u_xlat16_0.x;\n    u_xlat16_0.x = u_xlat0;\n    u_xlat16_1.x
-            = (-vs_TEXCOORD1.z);\n    u_xlat16_1.x = u_xlat16_0.x + u_xlat16_1.x;\n   
-            u_xlat16_1.x = max(u_xlat16_1.x, 0.0);\n    u_xlat16_1.x = min(u_xlat16_1.x,
-            1.0);\n    u_xlat16_2 = (-vs_COLOR1);\n    u_xlat16_2 = u_xlat16_2 +
-            vs_COLOR0;\n    u_xlat16_1 = u_xlat16_1.xxxx * u_xlat16_2;\n    u_xlat16_1
-            = u_xlat16_1 + vs_COLOR1;\n    u_xlat16_2.x = (-vs_TEXCOORD1.y);\n   
-            u_xlat16_2.x = u_xlat16_0.x + u_xlat16_2.x;\n    u_xlat16_2.x = max(u_xlat16_2.x,
-            0.0);\n    u_xlat16_2.x = min(u_xlat16_2.x, 1.0);\n    u_xlat16_0 = u_xlat16_1
-            * u_xlat16_2.xxxx;\n    u_xlat3.xy = (-_ClipRect.xy);\n    u_xlat3.xy
-            = u_xlat3.xy + _ClipRect.zw;\n    u_xlat16_1.xy = (-vs_TEXCOORD2.xy);\n   
-            u_xlat16_1.xy = max(u_xlat16_1.xy, vs_TEXCOORD2.xy);\n    u_xlat1.xy
-            = u_xlat16_1.xy;\n    u_xlat11.xy = (-u_xlat1.xy);\n    u_xlat3.xy =
-            u_xlat11.xy + u_xlat3.xy;\n    u_xlat11.xy = vs_TEXCOORD2.zw;\n    u_xlat3.xy
-            = u_xlat11.xy * u_xlat3.xy;\n    u_xlat3.xy = max(u_xlat3.xy, vec2(0.0,
-            0.0));\n    u_xlat3.xy = min(u_xlat3.xy, vec2(1.0, 1.0));\n    u_xlat16_3.xy
-            = u_xlat3.xy;\n    u_xlat16_2.x = u_xlat16_3.y * u_xlat16_3.x;\n    u_xlat16_0
-            = u_xlat16_0 * u_xlat16_2.xxxx;\n    SV_Target0 = u_xlat16_0;\n    return;\n}\n\n"
-          LOD: 0
-          readDepth: 0
-          PassId: 0
-          SubShaderIndex: 0
-          Keywords:
-            "\L\u2025":
-            - OUTLINE_ON
-            - UNITY_UI_CLIP_RECT
-          Tags:
-          - Key: IGNOREPROJECTOR
-            Value: true
-          - Key: QUEUE
-            Value: Transparent
-          - Key: RenderType
-            Value: Transparent
-        - ShaderCompilerPlatform: 9
-          NoShaderVariant: 0
-          VertexProgram: "\n#version 300 es\n\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS
-            0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define UNITY_UNIFORM\n#else\n#define
-            UNITY_UNIFORM uniform\n#endif\n#define UNITY_SUPPORTS_UNIFORM_LOCATION
-            0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define UNITY_LOCATION(x) layout(location
-            = x)\n#define UNITY_BINDING(x) layout(binding = x, std140)\n#else\n#define
-            UNITY_LOCATION(x)\n#define UNITY_BINDING(x) layout(std140)\n#endif\nuniform
-            \tvec3 _WorldSpaceCameraPos;\nuniform \tvec4 _ScreenParams;\nuniform
-            \tvec4 hlslcc_mtx4x4unity_ObjectToWorld[4];\nuniform \tvec4 hlslcc_mtx4x4unity_WorldToObject[4];\nuniform
-            \tvec4 hlslcc_mtx4x4glstate_matrix_projection[4];\nuniform \tvec4 hlslcc_mtx4x4unity_MatrixVP[4];\nuniform
-            \tmediump vec4 _FaceColor;\nuniform \tfloat _FaceDilate;\nuniform \tfloat
-            _OutlineSoftness;\nuniform \tmediump vec4 _OutlineColor;\nuniform \tfloat
-            _OutlineWidth;\nuniform \tfloat _WeightNormal;\nuniform \tfloat _WeightBold;\nuniform
-            \tfloat _ScaleRatioA;\nuniform \tfloat _VertexOffsetX;\nuniform \tfloat
-            _VertexOffsetY;\nuniform \tvec4 _ClipRect;\nuniform \tfloat _MaskSoftnessX;\nuniform
-            \tfloat _MaskSoftnessY;\nuniform \tfloat _GradientScale;\nuniform \tfloat
-            _ScaleX;\nuniform \tfloat _ScaleY;\nuniform \tfloat _PerspectiveFilter;\nuniform
-            \tfloat _Sharpness;\nuniform \tfloat _UIMaskSoftnessX;\nuniform \tfloat
-            _UIMaskSoftnessY;\nuniform \tint _UIVertexColorAlwaysGammaSpace;\nin
-            highp vec4 in_POSITION0;\nin highp vec3 in_NORMAL0;\nin mediump vec4
-            in_COLOR0;\nin highp vec4 in_TEXCOORD0;\nout mediump vec4 vs_COLOR0;\nout
-            mediump vec4 vs_COLOR1;\nout highp vec4 vs_TEXCOORD0;\nout mediump vec4
-            vs_TEXCOORD1;\nout mediump vec4 vs_TEXCOORD2;\nfloat u_xlat0;\nbool u_xlatb0;\nvec4
-            u_xlat1;\nmediump vec4 u_xlat16_1;\nvec3 u_xlat2;\nvec4 u_xlat3;\nvec4
-            u_xlat4;\nmediump vec4 u_xlat16_4;\nvec4 u_xlat5;\nmediump vec4 u_xlat16_5;\nvec4
-            u_xlat6;\nmediump vec4 u_xlat16_6;\nvec4 u_xlat7;\nmediump vec4 u_xlat16_7;\nmediump
-            vec4 u_xlat16_8;\nvec2 u_xlat9;\nmediump vec3 u_xlat16_9;\nmediump vec3
-            u_xlat16_10;\nvec2 u_xlat11;\nvec2 u_xlat12;\nfloat u_xlat13;\nint u_xlati13;\nbvec3
-            u_xlatb13;\nfloat u_xlat14;\nfloat u_xlat18;\nvec2 u_xlat25;\nint u_xlati25;\nbool
-            u_xlatb25;\nvec2 u_xlat26;\nmediump vec2 u_xlat16_26;\nfloat u_xlat30;\nvec2
-            u_xlat31;\nvec2 u_xlat35;\nfloat u_xlat36;\nfloat u_xlat37;\nfloat u_xlat38;\nfloat
-            u_xlat40;\nmediump float u_xlat16_40;\nint op_not(int value) { return
-            -value - 1; }\nivec2 op_not(ivec2 a) { a.x = op_not(a.x); a.y = op_not(a.y);
-            return a; }\nivec3 op_not(ivec3 a) { a.x = op_not(a.x); a.y = op_not(a.y);
-            a.z = op_not(a.z); return a; }\nivec4 op_not(ivec4 a) { a.x = op_not(a.x);
-            a.y = op_not(a.y); a.z = op_not(a.z); a.w = op_not(a.w); return a; }\n\nvoid
-            main()\n{\n    u_xlat0 = float(0);\n    u_xlatb0 = u_xlat0>=in_TEXCOORD0.w;\n   
-            u_xlat0 = (u_xlatb0) ? 1.0 : 0.0;\n    u_xlat1 = in_POSITION0.zwxy;\n   
-            u_xlat2.x = u_xlat1.z + _VertexOffsetX;\n    u_xlat14 = u_xlat1.w + _VertexOffsetY;\n   
-            u_xlat2.x = u_xlat2.x;\n    u_xlat2.y = u_xlat14;\n    u_xlat2.z = u_xlat1.x;\n   
-            u_xlat2.xyz = u_xlat2.xyz;\n    u_xlat3 = u_xlat2.xxxx * hlslcc_mtx4x4unity_ObjectToWorld[0];\n   
-            u_xlat4 = u_xlat2.yyyy * hlslcc_mtx4x4unity_ObjectToWorld[1];\n    u_xlat3
-            = u_xlat3 + u_xlat4;\n    u_xlat4 = u_xlat2.zzzz * hlslcc_mtx4x4unity_ObjectToWorld[2];\n   
-            u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat4 = hlslcc_mtx4x4unity_ObjectToWorld[3]
-            * vec4(1.0, 1.0, 1.0, 1.0);\n    u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat4
-            = u_xlat3.xxxx * hlslcc_mtx4x4unity_MatrixVP[0];\n    u_xlat5 = u_xlat3.yyyy
-            * hlslcc_mtx4x4unity_MatrixVP[1];\n    u_xlat4 = u_xlat4 + u_xlat5;\n   
-            u_xlat5 = u_xlat3.zzzz * hlslcc_mtx4x4unity_MatrixVP[2];\n    u_xlat4
-            = u_xlat4 + u_xlat5;\n    u_xlat3 = u_xlat3.wwww * hlslcc_mtx4x4unity_MatrixVP[3];\n   
-            u_xlat3 = u_xlat3 + u_xlat4;\n    u_xlat3 = u_xlat3;\n    u_xlat3 = u_xlat3;\n   
-            u_xlat12.xy = u_xlat3.ww;\n    u_xlat25.xy = _ScreenParams.xx * hlslcc_mtx4x4glstate_matrix_projection[0].xy;\n   
-            u_xlat26.xy = _ScreenParams.yy * hlslcc_mtx4x4glstate_matrix_projection[1].xy;\n   
-            u_xlat25.xy = u_xlat25.xy + u_xlat26.xy;\n    u_xlat26.xy = (-u_xlat25.xy);\n   
-            u_xlat25.xy = max(u_xlat25.xy, u_xlat26.xy);\n    u_xlat25.xy = u_xlat25.xy
-            * vec2(_ScaleX, _ScaleY);\n    u_xlat12.xy = u_xlat12.xy / u_xlat25.xy;\n   
-            u_xlat36 = dot(u_xlat12.xy, u_xlat12.xy);\n    u_xlat36 = inversesqrt(u_xlat36);\n   
-            u_xlat25.x = (-in_TEXCOORD0.w);\n    u_xlat25.x = max(u_xlat25.x, in_TEXCOORD0.w);\n   
-            u_xlat25.x = u_xlat25.x * _GradientScale;\n    u_xlat37 = float(1);\n   
-            u_xlat37 = u_xlat37 + _Sharpness;\n    u_xlat25.x = u_xlat37 * u_xlat25.x;\n   
-            u_xlat36 = u_xlat36 * u_xlat25.x;\n    u_xlat25.x = float(0);\n    u_xlatb25
-            = u_xlat25.x==hlslcc_mtx4x4glstate_matrix_projection[3].w;\n    if(u_xlatb25){\n       
-            u_xlat25.x = (-u_xlat36);\n        u_xlat25.x = max(u_xlat36, u_xlat25.x);\n       
-            u_xlat37 = float(1);\n        u_xlat26.x = (-_PerspectiveFilter);\n       
-            u_xlat37 = u_xlat37 + u_xlat26.x;\n        u_xlat25.x = u_xlat37 * u_xlat25.x;\n       
-            u_xlat4.xyz = in_NORMAL0.xyz;\n        u_xlat5.x = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[0].xyz);\n       
-            u_xlat5.y = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[1].xyz);\n       
-            u_xlat5.z = dot(u_xlat4.xyz, hlslcc_mtx4x4unity_WorldToObject[2].xyz);\n       
-            u_xlat37 = dot(u_xlat5.xyz, u_xlat5.xyz);\n        u_xlat37 = inversesqrt(u_xlat37);\n       
-            u_xlat4.xyz = vec3(u_xlat37) * u_xlat5.xyz;\n        u_xlat2.x = u_xlat2.x;\n       
-            u_xlat2.y = u_xlat2.y;\n        u_xlat1.xy = u_xlat1.xy;\n        u_xlat5.xyz
-            = u_xlat2.xxx * hlslcc_mtx4x4unity_ObjectToWorld[0].xyz;\n        u_xlat6.xyz
-            = u_xlat2.yyy * hlslcc_mtx4x4unity_ObjectToWorld[1].xyz;\n        u_xlat5.xyz
-            = u_xlat5.xyz + u_xlat6.xyz;\n        u_xlat6.xyz = u_xlat1.xxx * hlslcc_mtx4x4unity_ObjectToWorld[2].xyz;\n       
-            u_xlat5.xyz = u_xlat5.xyz + u_xlat6.xyz;\n        u_xlat1.xyw = u_xlat1.yyy
-            * hlslcc_mtx4x4unity_ObjectToWorld[3].xyz;\n        u_xlat1.xyw = u_xlat1.xyw
-            + u_xlat5.xyz;\n        u_xlat1.xyw = u_xlat1.xyw;\n        u_xlat1.xyw
-            = (-u_xlat1.xyw);\n        u_xlat1.xyw = u_xlat1.xyw + _WorldSpaceCameraPos.xyz;\n       
-            u_xlat1.xyw = u_xlat1.xyw;\n        u_xlat26.x = dot(u_xlat1.xyw, u_xlat1.xyw);\n       
-            u_xlat26.x = inversesqrt(u_xlat26.x);\n        u_xlat1.xyw = u_xlat1.xyw
-            * u_xlat26.xxx;\n        u_xlat1.x = dot(u_xlat4.xyz, u_xlat1.xyw);\n       
-            u_xlat13 = (-u_xlat1.x);\n        u_xlat1.x = max(u_xlat13, u_xlat1.x);\n       
-            u_xlat13 = (-u_xlat25.x);\n        u_xlat13 = u_xlat36 + u_xlat13;\n       
-            u_xlat1.x = u_xlat13 * u_xlat1.x;\n        u_xlat36 = u_xlat1.x + u_xlat25.x;\n   
-            }\n    u_xlat1.x = (-_WeightNormal);\n    u_xlat1.x = u_xlat1.x + _WeightBold;\n   
-            u_xlat0 = u_xlat0 * u_xlat1.x;\n    u_xlat0 = u_xlat0 + _WeightNormal;\n   
-            u_xlat0 = u_xlat0 / 4.0;\n    u_xlat0 = u_xlat0 + _FaceDilate;\n    u_xlat0
-            = u_xlat0 * _ScaleRatioA;\n    u_xlat0 = u_xlat0 * 0.5;\n    u_xlat1.x
-            = float(1);\n    u_xlat13 = _OutlineSoftness * _ScaleRatioA;\n    u_xlat13
-            = u_xlat36 * u_xlat13;\n    u_xlat1.x = u_xlat13 + u_xlat1.x;\n    u_xlat36
-            = u_xlat36 / u_xlat1.x;\n    u_xlat0 = (-u_xlat0);\n    u_xlat0 = u_xlat0
-            + 0.5;\n    u_xlat0 = u_xlat36 * u_xlat0;\n    u_xlat1.x = -0.5;\n   
-            u_xlat0 = u_xlat0 + u_xlat1.x;\n    u_xlat1.x = _OutlineWidth * _ScaleRatioA;\n   
-            u_xlat1.x = u_xlat1.x * 0.5;\n    u_xlat1.x = u_xlat36 * u_xlat1.x;\n   
-            u_xlatb13.x = ivec4(0, 0, 0, 0)!=ivec4(_UIVertexColorAlwaysGammaSpace);\n   
-            u_xlati25 = 0;\n    u_xlati25 = op_not(u_xlati25);\n    u_xlati13 = u_xlatb13.x
-            ? u_xlati25 : int(0);\n    if(u_xlati13 != 0) {\n        u_xlat16_7.xyz
-            = in_COLOR0.xyz;\n        u_xlat16_8.x = float(0.0849710032);\n       
-            u_xlat16_8.y = float(0.0849710032);\n        u_xlat16_8.z = float(0.0849710032);\n       
-            u_xlat16_8.xyz = u_xlat16_7.xyz * u_xlat16_8.xyz;\n        u_xlat16_9.x
-            = float(0.000163029006);\n        u_xlat16_9.y = float(0.000163029006);\n       
-            u_xlat16_9.z = float(0.000163029006);\n        u_xlat16_9.xyz = (-u_xlat16_9.xyz);\n       
-            u_xlat16_8.xyz = u_xlat16_8.xyz + u_xlat16_9.xyz;\n        u_xlat16_9.x
-            = float(0.265884995);\n        u_xlat16_9.y = float(0.265884995);\n       
-            u_xlat16_9.z = float(0.265884995);\n        u_xlat16_9.xyz = u_xlat16_7.xyz
-            * u_xlat16_9.xyz;\n        u_xlat16_10.x = float(0.736584008);\n       
-            u_xlat16_10.y = float(0.736584008);\n        u_xlat16_10.z = float(0.736584008);\n       
-            u_xlat16_9.xyz = u_xlat16_9.xyz + u_xlat16_10.xyz;\n        u_xlat16_9.xyz
-            = u_xlat16_7.xyz * u_xlat16_9.xyz;\n        u_xlat16_10.x = float(0.00980184041);\n       
-            u_xlat16_10.y = float(0.00980184041);\n        u_xlat16_10.z = float(0.00980184041);\n       
-            u_xlat16_10.xyz = (-u_xlat16_10.xyz);\n        u_xlat16_9.xyz = u_xlat16_9.xyz
-            + u_xlat16_10.xyz;\n        u_xlat16_9.xyz = u_xlat16_7.xyz * u_xlat16_9.xyz;\n       
-            u_xlat16_10.x = float(0.00319697009);\n        u_xlat16_10.y = float(0.00319697009);\n       
-            u_xlat16_10.z = float(0.00319697009);\n        u_xlat16_9.xyz = u_xlat16_9.xyz
-            + u_xlat16_10.xyz;\n        u_xlat16_10.x = float(0.0725490004);\n       
-            u_xlat16_10.y = float(0.0725490004);\n        u_xlat16_10.z = float(0.0725490004);\n       
-            u_xlatb13.xyz = lessThan(u_xlat16_7.xyzz, u_xlat16_10.xyzz).xyz;\n       
-            u_xlat16_4.x = (u_xlatb13.x) ? u_xlat16_8.x : u_xlat16_9.x;\n       
-            u_xlat16_4.y = (u_xlatb13.y) ? u_xlat16_8.y : u_xlat16_9.y;\n       
-            u_xlat16_4.z = (u_xlatb13.z) ? u_xlat16_8.z : u_xlat16_9.z;\n       
-            u_xlat16_4.xyz = u_xlat16_4.xyz;\n    } else {\n        u_xlat16_4.xyz
-            = in_COLOR0.xyz;\n    }\n    u_xlat40 = in_COLOR0.w;\n    u_xlat16_4.w
-            = u_xlat40;\n    u_xlat16_5 = u_xlat16_4 * _FaceColor;\n    u_xlat16_6.xyz
-            = u_xlat16_5.www * u_xlat16_5.xyz;\n    u_xlat16_7 = _OutlineColor;\n   
-            u_xlat26.x = u_xlat16_7.w;\n    u_xlat40 = u_xlat16_4.w * u_xlat26.x;\n   
-            u_xlat16_40 = u_xlat40;\n    u_xlat16_4.xyz = vec3(u_xlat16_40) * u_xlat16_7.xyz;\n   
-            u_xlat6.xyz = u_xlat16_6.xyz;\n    u_xlat6.w = u_xlat16_5.w;\n    u_xlat4.xyz
-            = u_xlat16_4.xyz;\n    u_xlat4.w = u_xlat16_40;\n    u_xlat26.x = float(2);\n   
-            u_xlat26.x = u_xlat1.x * u_xlat26.x;\n    u_xlat26.x = min(u_xlat26.x,
-            1.0);\n    u_xlat26.x = sqrt(u_xlat26.x);\n    u_xlat5 = (-u_xlat6);\n   
-            u_xlat4 = u_xlat4 + u_xlat5;\n    u_xlat4 = u_xlat26.xxxx * u_xlat4;\n   
-            u_xlat4 = u_xlat4 + u_xlat6;\n    u_xlat16_4 = u_xlat4;\n    u_xlat5
-            = max(_ClipRect, vec4(-2e+10, -2e+10, -2e+10, -2e+10));\n    u_xlat5
-            = min(u_xlat5, vec4(2e+10, 2e+10, 2e+10, 2e+10));\n    u_xlat26.xy =
-            (-u_xlat5.xy);\n    u_xlat26.xy = u_xlat26.xy + u_xlat2.xy;\n    u_xlat11.xy
-            = (-u_xlat5.xy);\n    u_xlat11.xy = u_xlat5.zw + u_xlat11.xy;\n    u_xlat31.xy
-            = u_xlat26.xy / u_xlat11.xy;\n    u_xlat3 = u_xlat3;\n    u_xlat16_8.xyz
-            = u_xlat6.xyz;\n    u_xlat16_8.w = u_xlat6.w;\n    u_xlat16_4 = u_xlat16_4;\n   
-            u_xlat7.xy = in_TEXCOORD0.xy;\n    u_xlat7.zw = u_xlat31.xy;\n    u_xlat26.x
-            = (-u_xlat1.x);\n    u_xlat18 = u_xlat0 + u_xlat26.x;\n    u_xlat30 =
-            u_xlat0 + u_xlat1.x;\n    u_xlat16_6.x = u_xlat36;\n    u_xlat16_6.y
-            = u_xlat18;\n    u_xlat16_6.z = u_xlat30;\n    u_xlat16_6.w = u_xlat0;\n   
-            u_xlat26.x = max(_MaskSoftnessX, _UIMaskSoftnessX);\n    u_xlat38 = max(_MaskSoftnessY,
-            _UIMaskSoftnessY);\n    u_xlat16_26.x = u_xlat26.x;\n    u_xlat16_26.y
-            = u_xlat38;\n    u_xlat11.xy = vec2(ivec2(2, 2));\n    u_xlat11.xy =
-            u_xlat2.xy * u_xlat11.xy;\n    u_xlat35.xy = (-u_xlat5.xy);\n    u_xlat11.xy
-            = u_xlat35.xy + u_xlat11.xy;\n    u_xlat35.xy = (-u_xlat5.zw);\n    u_xlat1.xy
-            = u_xlat35.xy + u_xlat11.xy;\n    u_xlat16_9.x = float(0.25);\n    u_xlat16_9.y
-            = float(0.25);\n    u_xlat16_9.xy = u_xlat16_26.xy * u_xlat16_9.xy;\n   
-            u_xlat9.xy = u_xlat16_9.xy;\n    u_xlat11.xy = u_xlat12.xy + u_xlat9.xy;\n   
-            u_xlat25.xy = vec2(0.25, 0.25) / u_xlat11.xy;\n    u_xlat16_1.xy = u_xlat1.xy;\n   
-            u_xlat16_1.zw = u_xlat25.xy;\n    gl_Position = u_xlat3;\n    vs_COLOR0
-            = u_xlat16_8;\n    vs_COLOR1 = u_xlat16_4;\n    vs_TEXCOORD0 = u_xlat7;\n   
-            vs_TEXCOORD1 = u_xlat16_6;\n    vs_TEXCOORD2 = u_xlat16_1;\n    return;\n}\n\n"
-          FragmentProgram: "\n#version 300 es\n\nprecision highp float;\nprecision
-            highp int;\n#define HLSLCC_ENABLE_UNIFORM_BUFFERS 0\n#if HLSLCC_ENABLE_UNIFORM_BUFFERS\n#define
-            UNITY_UNIFORM\n#else\n#define UNITY_UNIFORM uniform\n#endif\n#define
-            UNITY_SUPPORTS_UNIFORM_LOCATION 0\n#if UNITY_SUPPORTS_UNIFORM_LOCATION\n#define
-            UNITY_LOCATION(x) layout(location = x)\n#define UNITY_BINDING(x) layout(binding
-            = x, std140)\n#else\n#define UNITY_LOCATION(x)\n#define UNITY_BINDING(x)
-            layout(std140)\n#endif\nuniform \tvec4 _ClipRect;\nUNITY_LOCATION(0)
-            uniform mediump sampler2D _MainTex;\nin mediump  vec4 vs_COLOR0;\nin
-            mediump  vec4 vs_COLOR1;\nin highp  vec4 vs_TEXCOORD0;\nin mediump  vec4
-            vs_TEXCOORD1;\nin mediump  vec4 vs_TEXCOORD2;\nlayout(location = 0) out
-            mediump vec4 SV_Target0;\nfloat u_xlat0;\nmediump vec4 u_xlat16_0;\nvec2
-            u_xlat1;\nmediump vec4 u_xlat16_1;\nfloat u_xlat2;\nmediump vec4 u_xlat16_2;\nvec2
-            u_xlat3;\nmediump vec2 u_xlat16_3;\nint u_xlati4;\nbool u_xlatb4;\nfloat
-            u_xlat5;\nvec2 u_xlat13;\nvoid main()\n{\n    u_xlat16_0.x = texture(_MainTex,
-            vs_TEXCOORD0.xy).w;\n    u_xlat5 = vs_TEXCOORD1.x;\n    u_xlat0 = u_xlat5
-            * u_xlat16_0.x;\n    u_xlat16_0.x = u_xlat0;\n    u_xlat16_1.x = (-vs_TEXCOORD1.z);\n   
-            u_xlat16_1.x = u_xlat16_0.x + u_xlat16_1.x;\n    u_xlat16_1.x = max(u_xlat16_1.x,
-            0.0);\n    u_xlat16_1.x = min(u_xlat16_1.x, 1.0);\n    u_xlat16_2 = (-vs_COLOR1);\n   
-            u_xlat16_2 = u_xlat16_2 + vs_COLOR0;\n    u_xlat16_1 = u_xlat16_1.xxxx
-            * u_xlat16_2;\n    u_xlat16_1 = u_xlat16_1 + vs_COLOR1;\n    u_xlat16_2.x
-            = (-vs_TEXCOORD1.y);\n    u_xlat16_2.x = u_xlat16_0.x + u_xlat16_2.x;\n   
-            u_xlat16_2.x = max(u_xlat16_2.x, 0.0);\n    u_xlat16_2.x = min(u_xlat16_2.x,
-            1.0);\n    u_xlat16_0 = u_xlat16_1 * u_xlat16_2.xxxx;\n    u_xlat3.xy
-            = (-_ClipRect.xy);\n    u_xlat3.xy = u_xlat3.xy + _ClipRect.zw;\n   
-            u_xlat16_1.xy = (-vs_TEXCOORD2.xy);\n    u_xlat16_1.xy = max(u_xlat16_1.xy,
-            vs_TEXCOORD2.xy);\n    u_xlat1.xy = u_xlat16_1.xy;\n    u_xlat13.xy =
-            (-u_xlat1.xy);\n    u_xlat3.xy = u_xlat13.xy + u_xlat3.xy;\n    u_xlat13.xy
-            = vs_TEXCOORD2.zw;\n    u_xlat3.xy = u_xlat13.xy * u_xlat3.xy;\n    u_xlat3.xy
-            = max(u_xlat3.xy, vec2(0.0, 0.0));\n    u_xlat3.xy = min(u_xlat3.xy,
-            vec2(1.0, 1.0));\n    u_xlat16_3.xy = u_xlat3.xy;\n    u_xlat16_2.x =
-            u_xlat16_3.y * u_xlat16_3.x;\n    u_xlat16_0 = u_xlat16_0 * u_xlat16_2.xxxx;\n   
-            u_xlat16_2.x = 0.00100000005;\n    u_xlat16_2.x = (-u_xlat16_2.x);\n   
-            u_xlat16_2.x = u_xlat16_0.w + u_xlat16_2.x;\n    u_xlat2 = u_xlat16_2.x;\n   
-            u_xlatb4 = u_xlat2<0.0;\n    u_xlati4 = u_xlatb4 ? int(0xFFFFFFFFu) :
-            int(0);\n    if((u_xlati4)!=0){discard;}\n    SV_Target0 = u_xlat16_0;\n   
-            return;\n}\n\n"
-          LOD: 0
-          readDepth: 0
-          PassId: 0
-          SubShaderIndex: 0
-          Keywords:
-            "\L\u2025":
-            - OUTLINE_ON
-            - UNITY_UI_ALPHACLIP
-            - UNITY_UI_CLIP_RECT
-          Tags:
-          - Key: IGNOREPROJECTOR
-            Value: true
-          - Key: QUEUE
-            Value: Transparent
-          - Key: RenderType
-            Value: Transparent
         DefinedKeywords:
           "\L\u2025":
           - OUTLINE_ON
@@ -7235,46 +7287,6 @@ MonoBehaviour:
           upToDate: 0
           keywords:
             "\L\u2025":
-            - UNITY_UI_ALPHACLIP
-            - UNITY_UI_CLIP_RECT
-        - shaderCompilerPlatform: 9
-          shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-          passType: 0
-          passId: 0
-          subShaderIndex: 0
-          upToDate: 0
-          keywords:
-            "\L\u2025":
-            - OUTLINE_ON
-        - shaderCompilerPlatform: 9
-          shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-          passType: 0
-          passId: 0
-          subShaderIndex: 0
-          upToDate: 0
-          keywords:
-            "\L\u2025":
-            - OUTLINE_ON
-            - UNITY_UI_ALPHACLIP
-        - shaderCompilerPlatform: 9
-          shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-          passType: 0
-          passId: 0
-          subShaderIndex: 0
-          upToDate: 0
-          keywords:
-            "\L\u2025":
-            - OUTLINE_ON
-            - UNITY_UI_CLIP_RECT
-        - shaderCompilerPlatform: 9
-          shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-          passType: 0
-          passId: 0
-          subShaderIndex: 0
-          upToDate: 0
-          keywords:
-            "\L\u2025":
-            - OUTLINE_ON
             - UNITY_UI_ALPHACLIP
             - UNITY_UI_CLIP_RECT
         CompilationErrors: []
@@ -7352,46 +7364,6 @@ MonoBehaviour:
       upToDate: 0
       keywords:
         "\L\u2025":
-        - UNITY_UI_ALPHACLIP
-        - UNITY_UI_CLIP_RECT
-    - shaderCompilerPlatform: 9
-      shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-      passType: 0
-      passId: 0
-      subShaderIndex: 0
-      upToDate: 0
-      keywords:
-        "\L\u2025":
-        - OUTLINE_ON
-    - shaderCompilerPlatform: 9
-      shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-      passType: 0
-      passId: 0
-      subShaderIndex: 0
-      upToDate: 0
-      keywords:
-        "\L\u2025":
-        - OUTLINE_ON
-        - UNITY_UI_ALPHACLIP
-    - shaderCompilerPlatform: 9
-      shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-      passType: 0
-      passId: 0
-      subShaderIndex: 0
-      upToDate: 0
-      keywords:
-        "\L\u2025":
-        - OUTLINE_ON
-        - UNITY_UI_CLIP_RECT
-    - shaderCompilerPlatform: 9
-      shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
-      passType: 0
-      passId: 0
-      subShaderIndex: 0
-      upToDate: 0
-      keywords:
-        "\L\u2025":
-        - OUTLINE_ON
         - UNITY_UI_ALPHACLIP
         - UNITY_UI_CLIP_RECT
   - ParsedSubShaders:
@@ -8716,4 +8688,4 @@ MonoBehaviour:
       keywords:
         "\L\u2025": []
   _modifiedShaders: []
-  invalidShaders: 1
+  invalidShaders: 0
