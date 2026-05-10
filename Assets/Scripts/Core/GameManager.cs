@@ -17,15 +17,25 @@ namespace Core
         [SerializeField] private GameObject[] delayedSpawners;
 
         [Header("Luna Playground Parameters")]
+        [LunaPlaygroundField]
         public float MobSpeed = 6f;
+        [LunaPlaygroundField]
         public float SpawnInterval = 1f;
+        [LunaPlaygroundField]
         public int MultiplierAmount = 2;
+        [LunaPlaygroundField]
         public int FeverShotsRequired = 20;
+        [LunaPlaygroundField]
         public int BigMobHP = 5;
+        [LunaPlaygroundField]
         public int BlockerHP = 10;
+        [LunaPlaygroundField]
         public float CannonMoveSpeed = 5f;
+        [LunaPlaygroundField]
         public float FireRate = 0.35f;
+        [LunaPlaygroundField]
         public int TowerHP = 20;
+        [LunaPlaygroundField]
         public float EnemySpawnInterval = 1f;
 
         private void Awake()

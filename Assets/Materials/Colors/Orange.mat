@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyrMob
-  m_Shader: {fileID: 4800000, guid: f81fed398512df34689b4f45296479b0, type: 3}
+  m_Name: Orange
+  m_Shader: {fileID: 4800000, guid: 9e7ac9c0f4c7ebb43b0f3d79993b11d3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -16,7 +16,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8aea0d25ae1051e44a602b00515a52a2, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -68,14 +68,17 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _GradientShift: 0
+    - _GradientOffset: 0.5
+    - _GradientScale: 1.5
+    - _HighlightThreshold: 0.5
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineThickness: 0.004
+    - _OutlineWidth: 0.0147
     - _Parallax: 0.02
-    - _ShadowOffset: 0.3
-    - _ShadowStrength: 0.25
+    - _RimIntensity: 0.191
+    - _RimPower: 3
+    - _ShadowThreshold: 0.353
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -83,9 +86,12 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorBottom: {r: 0.83137256, g: 0.35686275, b: 0.35686275, a: 1}
-    - _ColorTop: {r: 1, g: 0.49411762, b: 0.55129653, a: 1}
+    - _ColorBottom: {r: 0.7924528, g: 0.2633824, b: 0.056069765, a: 1}
+    - _ColorTop: {r: 1, g: 0.7725491, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0.049999982, g: 0.049999982, b: 0.079999976, a: 1}
+    - _MidTint: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
+    - _OutlineColor: {r: 0.079999976, g: 0.079999976, b: 0.11999995, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowTint: {r: 0.41224635, g: 0.41224635, b: 0.4528302, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

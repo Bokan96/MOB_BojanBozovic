@@ -27,6 +27,7 @@ namespace Core
         public AudioClip backgroundMusicClip;
         public AudioClip loseClip;
         public AudioClip introDriveClip;
+        public AudioClip feverLoopClip;
 
         [Header("Pitch Variation (Juice)")]
         [Tooltip("Random pitch variation for cannon fire")]
@@ -55,6 +56,7 @@ namespace Core
         private float _lastPipeExitTime;
 
         private AudioSource _driveSource;
+        private AudioSource _feverSource;
 
         private void Awake()
         {
@@ -84,8 +86,17 @@ namespace Core
                 _driveSource = gameObject.AddComponent<AudioSource>();
                 _driveSource.clip = introDriveClip;
                 _driveSource.loop = true;
-                _driveSource.volume = 0.6f;
+                _driveSource.volume = 0.9f;
                 _driveSource.playOnAwake = false;
+            }
+
+            if (feverLoopClip != null)
+            {
+                _feverSource = gameObject.AddComponent<AudioSource>();
+                _feverSource.clip = feverLoopClip;
+                _feverSource.loop = true;
+                _feverSource.volume = 2.0f;
+                _feverSource.playOnAwake = false;
             }
         }
 
@@ -191,6 +202,22 @@ namespace Core
             if (_driveSource != null && _driveSource.isPlaying)
             {
                 _driveSource.Stop();
+            }
+        }
+
+        public void StartFeverLoop()
+        {
+            if (_feverSource != null && !_feverSource.isPlaying)
+            {
+                _feverSource.Play();
+            }
+        }
+
+        public void StopFeverLoop()
+        {
+            if (_feverSource != null && _feverSource.isPlaying)
+            {
+                _feverSource.Stop();
             }
         }
     }

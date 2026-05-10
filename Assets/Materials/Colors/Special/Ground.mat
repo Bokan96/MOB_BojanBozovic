@@ -74,7 +74,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineWidth: 0.0147
+    - _OutlineWidth: 0.0078
     - _Parallax: 0.02
     - _RimIntensity: 0.191
     - _RimPower: 3
@@ -87,7 +87,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorBottom: {r: 0.36445352, g: 0.5944656, b: 0.735849, a: 1}
-    - _ColorTop: {r: 0.0993236, g: 0.6792453, b: 0.10614624, a: 1}
+    - _ColorTop: {r: 1, g: 0.7725491, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MidTint: {r: 0.9339623, g: 0.5066305, b: 0.5066305, a: 1}
     - _OutlineColor: {r: 0.079999976, g: 0.079999976, b: 0.11999995, a: 1}

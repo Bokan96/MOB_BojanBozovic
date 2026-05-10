@@ -5284,7 +5284,7 @@
             },
             {
                 "name": "UnityEngine.SpriteTileMode",
-                "excluded": true
+                "excluded": false
             },
             {
                 "name": "UnityEngine.StackTraceLogType",
@@ -14860,7 +14860,7 @@
                     },
                     {
                         "name": "InternalErrorShaderMaterial#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "Blit",
@@ -16952,7 +16952,7 @@
                     },
                     {
                         "name": "shader#set",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "passCount#get",
@@ -17000,7 +17000,7 @@
                     },
                     {
                         "name": "$ctor2",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "CopyPropertiesFromMaterial",
@@ -18936,7 +18936,7 @@
                     },
                     {
                         "name": "size#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "size#set",
@@ -18944,7 +18944,7 @@
                     },
                     {
                         "name": "tileMode#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "tileMode#set",
@@ -18952,7 +18952,7 @@
                     },
                     {
                         "name": "adaptiveModeThreshold#get",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "adaptiveModeThreshold#set",
@@ -25092,7 +25092,7 @@
                     },
                     {
                         "name": "Get9TiledMesh",
-                        "excluded": true
+                        "excluded": false
                     }
                 ]
             },
@@ -29653,6 +29653,14 @@
                     {
                         "name": "StopDriveSound",
                         "excluded": false
+                    },
+                    {
+                        "name": "StartFeverLoop",
+                        "excluded": false
+                    },
+                    {
+                        "name": "StopFeverLoop",
+                        "excluded": false
                     }
                 ]
             },
@@ -29754,11 +29762,11 @@
                     },
                     {
                         "name": "ShowWinCTA",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ScalePopInRoutine",
-                        "excluded": true
+                        "excluded": false
                     },
                     {
                         "name": "ShowLoseCTA",

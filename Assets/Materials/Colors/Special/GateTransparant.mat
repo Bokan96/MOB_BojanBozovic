@@ -61,7 +61,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.5
+    - _Alpha: 0.713
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -76,9 +76,9 @@ Material:
     - _OcclusionStrength: 1
     - _OutlineWidth: 0.025
     - _Parallax: 0.02
-    - _RimIntensity: 0.2
-    - _RimPower: 3
-    - _ShadowStrength: 0.35
+    - _RimIntensity: 0.277
+    - _RimPower: 0.9
+    - _ShadowStrength: 0
     - _ShadowThreshold: 0.1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -87,8 +87,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorBottom: {r: 0.8392157, g: 0.42352942, b: 0.7674091, a: 1}
-    - _ColorTop: {r: 0.93333334, g: 0.47843137, b: 0.8080485, a: 1}
+    - _ColorBottom: {r: 0.8392157, g: 0.42352942, b: 0.5243, a: 1}
+    - _ColorTop: {r: 1, g: 0, b: 0.2145834, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0.079999976, g: 0.079999976, b: 0.11999995, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}

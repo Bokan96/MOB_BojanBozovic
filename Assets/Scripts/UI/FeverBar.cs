@@ -76,6 +76,11 @@ namespace UI
         private void OnDisable()
         {
             Mobs.MobSpawner.OnPlayerMobShot -= HandlePlayerShot;
+            
+            if (Core.AudioManager.Instance != null)
+            {
+                Core.AudioManager.Instance.StopFeverLoop();
+            }
         }
 
         private Vector3 _barOriginalLocalPos;
@@ -190,6 +195,11 @@ namespace UI
             {
                 _isFull = true;
 
+                if (Core.AudioManager.Instance != null)
+                {
+                    Core.AudioManager.Instance.StartFeverLoop();
+                }
+
                 if (releaseTextObject != null)
                 {
                     releaseTextObject.SetActive(true);
@@ -216,6 +226,11 @@ namespace UI
             if (releaseTextObject != null)
             {
                 releaseTextObject.SetActive(false);
+            }
+
+            if (Core.AudioManager.Instance != null)
+            {
+                Core.AudioManager.Instance.StopFeverLoop();
             }
         }
     }
