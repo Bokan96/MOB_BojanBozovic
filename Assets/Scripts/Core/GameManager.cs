@@ -136,7 +136,7 @@ namespace Core
             // Don't allow game start until the hook intro animation is done
             if (_cannon != null && !_cannon.hookComplete) return;
 
-            if (!hasStarted && Input.GetMouseButtonDown(0))
+            if (!hasStarted && Input.GetMouseButton(0))
             {
                 hasStarted = true;
                 TrackGameStarted();
@@ -311,14 +311,22 @@ namespace Core
             Luna.Unity.Analytics.LogEvent("tower_destroyed", 0);
         }
 
+        private float _lastPipeEnteredTime;
         public void TrackPipeEntered()
         {
+            if (Time.time - _lastPipeEnteredTime < ANALYTICS_COOLDOWN) return;
+            _lastPipeEnteredTime = Time.time;
             Luna.Unity.Analytics.LogEvent("pipe_entered", 0);
         }
 
-        public void TrackEdgeReached()
+        public void TrackEdgeLeftReached()
         {
-            Luna.Unity.Analytics.LogEvent("edge_reached", 0);
+            Luna.Unity.Analytics.LogEvent("edge_left_reached", 0);
+        }
+
+        public void TrackEdgeRightReached()
+        {
+            Luna.Unity.Analytics.LogEvent("edge_right_reached", 0);
         }
 
         public void TrackGameStarted()

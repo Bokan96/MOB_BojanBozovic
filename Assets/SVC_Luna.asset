@@ -720,7 +720,7 @@ MonoBehaviour:
       - DIRECTIONAL
       - LIGHTPROBE_SH
       - _EMISSION
-  version: 983
+  version: 1068
   _shaderParsedShaders:
   - ParsedSubShaders:
     - Index: 0
@@ -8661,4 +8661,4 @@ MonoBehaviour:
       keywords:
         "\L\u2025": []
   _modifiedShaders: []
-  invalidShaders: 1
+  invalidShaders: 0

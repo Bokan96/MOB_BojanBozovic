@@ -29705,11 +29705,35 @@
                         "excluded": false
                     },
                     {
-                        "name": "TrackMobMultiplied",
+                        "name": "TrackTowerDestroyed",
                         "excluded": false
                     },
                     {
-                        "name": "TrackTowerDestroyed",
+                        "name": "TrackGateMovingPassed",
+                        "excluded": false
+                    },
+                    {
+                        "name": "TrackPipeEntered",
+                        "excluded": false
+                    },
+                    {
+                        "name": "TrackEdgeReached",
+                        "excluded": false
+                    },
+                    {
+                        "name": "TrackGameStarted",
+                        "excluded": false
+                    },
+                    {
+                        "name": "TrackFeverActivated",
+                        "excluded": true
+                    },
+                    {
+                        "name": "TrackGameWon",
+                        "excluded": true
+                    },
+                    {
+                        "name": "TrackGameLost",
                         "excluded": false
                     }
                 ]

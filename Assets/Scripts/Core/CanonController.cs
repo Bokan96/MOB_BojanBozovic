@@ -249,13 +249,13 @@ namespace Core
                     transform.position = pos;
 
                     // --- EDGE TRACKING ---
-                    float edgeThreshold = limitX - 0.1f;
+                    float edgeThreshold = limitX - 0.5f;
                     if (pos.x <= -edgeThreshold)
                     {
                         if (!_atLeftEdge)
                         {
                             _atLeftEdge = true;
-                            if (GameManager.Instance != null) GameManager.Instance.TrackEdgeReached();
+                            if (GameManager.Instance != null) GameManager.Instance.TrackEdgeLeftReached();
                         }
                     }
                     else
@@ -268,7 +268,7 @@ namespace Core
                         if (!_atRightEdge)
                         {
                             _atRightEdge = true;
-                            if (GameManager.Instance != null) GameManager.Instance.TrackEdgeReached();
+                            if (GameManager.Instance != null) GameManager.Instance.TrackEdgeRightReached();
                         }
                     }
                     else
