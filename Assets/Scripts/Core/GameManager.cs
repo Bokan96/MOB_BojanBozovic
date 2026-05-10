@@ -161,7 +161,10 @@ namespace Core
             if (hasEnded) return;
             hasEnded = true;
             isGameWon = true;
-            TrackGameWon();
+
+            if (_cannon != null) _cannon.isDead = true;
+
+            try { TrackGameWon(); } catch (System.Exception e) { Debug.LogError("Analytics Error: " + e.Message); }
 
             StartCoroutine(WinSequenceRoutine());
         }
@@ -202,7 +205,10 @@ namespace Core
         {
             if (hasEnded) return;
             hasEnded = true;
-            TrackGameLost();
+
+            if (_cannon != null) _cannon.isDead = true;
+
+            try { TrackGameLost(); } catch (System.Exception e) { Debug.LogError("Analytics Error: " + e.Message); }
 
             // Play fail sound immediately
             if (AudioManager.Instance != null)
@@ -296,19 +302,19 @@ namespace Core
         {
             if (Time.time - _lastGatePassedTime < ANALYTICS_COOLDOWN) return;
             _lastGatePassedTime = Time.time;
-            Luna.Unity.Analytics.LogEvent("gate_passed", 0);
+            try { Luna.Unity.Analytics.LogEvent("gate_passed", 0); } catch {}
         }
 
         public void TrackGateMovingPassed()
         {
             if (Time.time - _lastGateMovingPassedTime < ANALYTICS_COOLDOWN) return;
             _lastGateMovingPassedTime = Time.time;
-            Luna.Unity.Analytics.LogEvent("gate_moving_passed", 0);
+            try { Luna.Unity.Analytics.LogEvent("gate_moving_passed", 0); } catch {}
         }
 
         public void TrackTowerDestroyed()
         {
-            Luna.Unity.Analytics.LogEvent("tower_destroyed", 0);
+            try { Luna.Unity.Analytics.LogEvent("tower_destroyed", 0); } catch {}
         }
 
         private float _lastPipeEnteredTime;
@@ -316,37 +322,37 @@ namespace Core
         {
             if (Time.time - _lastPipeEnteredTime < ANALYTICS_COOLDOWN) return;
             _lastPipeEnteredTime = Time.time;
-            Luna.Unity.Analytics.LogEvent("pipe_entered", 0);
+            try { Luna.Unity.Analytics.LogEvent("pipe_entered", 0); } catch {}
         }
 
         public void TrackEdgeLeftReached()
         {
-            Luna.Unity.Analytics.LogEvent("edge_left_reached", 0);
+            try { Luna.Unity.Analytics.LogEvent("edge_left_reached", 0); } catch {}
         }
 
         public void TrackEdgeRightReached()
         {
-            Luna.Unity.Analytics.LogEvent("edge_right_reached", 0);
+            try { Luna.Unity.Analytics.LogEvent("edge_right_reached", 0); } catch {}
         }
 
         public void TrackGameStarted()
         {
-            Luna.Unity.Analytics.LogEvent("game_start", 0);
+            try { Luna.Unity.Analytics.LogEvent("game_start", 0); } catch {}
         }
 
         public void TrackFeverActivated()
         {
-            Luna.Unity.Analytics.LogEvent("fever_activated", 0);
+            try { Luna.Unity.Analytics.LogEvent("fever_activated", 0); } catch {}
         }
 
         public void TrackGameWon()
         {
-            Luna.Unity.Analytics.LogEvent("game_win", 0);
+            try { Luna.Unity.Analytics.LogEvent("game_win", 0); } catch {}
         }
 
         public void TrackGameLost()
         {
-            Luna.Unity.Analytics.LogEvent("game_lose", 0);
+            try { Luna.Unity.Analytics.LogEvent("game_lose", 0); } catch {}
         }
 
     }

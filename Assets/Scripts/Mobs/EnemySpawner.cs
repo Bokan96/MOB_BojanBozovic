@@ -67,6 +67,8 @@ namespace Mobs
 
         private void Update()
         {
+            if (Core.GameManager.Instance != null && Core.GameManager.Instance.hasEnded) return;
+
             if (Time.time >= _nextSpawnTime)
             {
                 _nextSpawnTime = Time.time + spawnInterval;

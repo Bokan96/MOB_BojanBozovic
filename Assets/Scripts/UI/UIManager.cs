@@ -364,7 +364,11 @@ namespace UI
         {
             if (tutorialHand == null) yield break;
 
-            // Phase 1: Slide from current editor pos → pingPongCenter
+            // Reduce right limit by 50 as requested, left limit stays the same
+            Vector2 posRight = new Vector2(pingPongCenter.x, pingPongCenter.y);
+            Vector2 posLeft  = new Vector2(-pingPongCenter.x - 100f, pingPongCenter.y);
+
+            // Phase 1: Slide from current editor pos → posRight
             // AND scale up from 0 → overshoot → target (halved duration)
             Vector2 startPos = _handOriginalPos;
             float elapsed = 0f;
@@ -384,7 +388,7 @@ namespace UI
                 
                 // Position movement
                 float easedPos = 1f - Mathf.Pow(1f - t, 3f);
-                tutorialHand.anchoredPosition = Vector2.Lerp(startPos, pingPongCenter, easedPos);
+                tutorialHand.anchoredPosition = Vector2.Lerp(startPos, posRight, easedPos);
 
                 // Scale pop-in (0 -> overshoot -> target)
                 Vector3 scale;
@@ -405,13 +409,10 @@ namespace UI
                 yield return null;
             }
 
-            tutorialHand.anchoredPosition = pingPongCenter;
+            tutorialHand.anchoredPosition = posRight;
             tutorialHand.localScale = _handOriginalScale;
 
-            // Phase 2: Ping-pong between (+X, Y) and (-X, Y) forever
-            Vector2 posRight = pingPongCenter;
-            Vector2 posLeft  = new Vector2(-pingPongCenter.x, pingPongCenter.y);
-
+            // Phase 2: Ping-pong between posRight and posLeft forever
             float pingPongTimer = 0f;
             bool goingLeft = true;
 
